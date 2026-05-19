@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import UseCaseLayout from '../../layouts/UseCaseLayout.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('use-cases');
+  return cases.map((entry) => ({
+    params: { slug: entry.id.replace(/\/BRIEF$/, '') },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'use-cases'>;
+}
+
+const { entry } = Astro.props;
+---
+
+<UseCaseLayout entry={entry} />

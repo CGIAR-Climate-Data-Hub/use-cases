@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-cdh-blue: #1955A6;
+  --color-cdh-blue-light: #63A9FE;
+  --font-display: "Times New Roman", Times, serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-gray-900);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+}

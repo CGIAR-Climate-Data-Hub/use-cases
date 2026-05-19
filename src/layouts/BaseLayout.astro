@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content={description ?? 'CGIAR Climate Data Hub — Use Cases'}
+    />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900">
+    <header class="border-b border-gray-200">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <a
+          href={`${base}/`}
+          class="font-display text-xl text-[var(--color-cdh-blue)]"
+        >
+          CGIAR Climate Data Hub
+          <span class="text-gray-500">— Use Cases</span>
+        </a>
+        <nav class="space-x-4 text-sm text-gray-600">
+          <a
+            href={`${base}/`}
+            class="hover:text-[var(--color-cdh-blue)]"
+          >Portfolio</a>
+          <a
+            href="https://github.com/CGIAR-Climate-Data-Hub/use-cases"
+            class="hover:text-[var(--color-cdh-blue)]"
+          >GitHub</a>
+        </nav>
+      </div>
+    </header>
+    <main class="mx-auto max-w-5xl px-6 py-10">
+      <slot />
+    </main>
+    <footer class="mt-16 border-t border-gray-200">
+      <div class="mx-auto max-w-5xl px-6 py-6 text-sm text-gray-500">
+        CGIAR Climate Action · Climate Data Hub · MIT licensed
+      </div>
+    </footer>
+  </body>
+</html>
