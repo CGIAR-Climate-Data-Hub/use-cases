@@ -1,0 +1,85 @@
+name: New use-case proposal
+description: Propose a new use-case for the CDH portfolio
+title: "[Use-case] <title>"
+labels: ["new-use-case"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to propose a new use-case for the CGIAR Climate Data Hub portfolio.
+        After acceptance, a champion + coordinator will be assigned and the brief drafted in `<slug>/BRIEF.md`.
+        See [GUIDELINES.md](../../GUIDELINES.md) for the full development process.
+
+  - type: input
+    id: title
+    attributes:
+      label: Proposed title
+      placeholder: e.g. Pastoral Early Warning
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Use-case type
+      description: |
+        - **new**: CDH team works with a partner to discover and implement
+        - **existing**: a CAP bilateral asset to be showcased in the Hub
+      options:
+        - new
+        - existing
+    validations:
+      required: true
+
+  - type: dropdown
+    id: origin
+    attributes:
+      label: Origin
+      options:
+        - ongoing-project
+        - funding-pipeline
+        - data-gap
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this addresses
+      description: What is the demand signal? Who is feeling the pain?
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome
+      description: What will this enable (decision, analysis, proposal, etc.)?
+    validations:
+      required: true
+
+  - type: input
+    id: champion
+    attributes:
+      label: Proposed champion
+      description: Single named person who will own the domain.
+      placeholder: e.g. Cesare Scartozzi
+
+  - type: input
+    id: aow
+    attributes:
+      label: Primary AoW
+      description: Which Climate Action Area of Work does this sit under?
+      placeholder: e.g. AoW5-Finance
+
+  - type: textarea
+    id: data
+    attributes:
+      label: Initial data needs
+      description: What data is required? What exists vs what is missing?
+
+  - type: textarea
+    id: materials
+    attributes:
+      label: Existing materials
+      description: Links to proposals, slides, notebooks, or related work.

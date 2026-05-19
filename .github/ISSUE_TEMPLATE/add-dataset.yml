@@ -1,0 +1,61 @@
+name: Add a dataset to a use-case
+description: Propose adding a dataset to a use-case's "Data assets for the hub" table
+title: "[Dataset] <use-case>: <dataset name>"
+labels: ["dataset"]
+body:
+  - type: input
+    id: slug
+    attributes:
+      label: Use-case slug
+      placeholder: e.g. gcf-preparation-facility
+    validations:
+      required: true
+
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset name
+      placeholder: e.g. NEX-GDDP-CMIP6
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What the dataset is, who produces it, what variables / coverage.
+
+  - type: input
+    id: link
+    attributes:
+      label: Source URL / DOI
+
+  - type: dropdown
+    id: hub_status
+    attributes:
+      label: Proposed Hub status
+      options:
+        - scoped
+        - planned
+        - in-progress
+        - published
+    validations:
+      required: true
+
+  - type: input
+    id: feasibility
+    attributes:
+      label: Feasibility (1=easy → 5=hard)
+      placeholder: "1, 2, 3, 4, or 5"
+
+  - type: textarea
+    id: serves
+    attributes:
+      label: What sections / outputs this serves
+      description: e.g. "GCF CN C.1, FP B.1 — climate trends section"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Licensing, access constraints, related datasets, blockers.

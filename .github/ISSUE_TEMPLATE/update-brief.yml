@@ -1,0 +1,48 @@
+name: Update an existing brief
+description: Propose a change to an existing use-case brief
+title: "[Brief update] <use-case> — <change>"
+labels: ["brief-update"]
+body:
+  - type: input
+    id: slug
+    attributes:
+      label: Use-case slug
+      placeholder: e.g. gcf-preparation-facility
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of update
+      options:
+        - Lifecycle status change
+        - Go / No-Go decision recorded
+        - Owners / task-group change
+        - Action plan additions or completions
+        - Risks / open questions
+        - Meetings & decisions log
+        - Outputs (status reached piloting+)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs to change
+      description: Specific section, field, or content. Quote current value if relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: Decision, meeting outcome, new information, etc.
+
+  - type: input
+    id: source
+    attributes:
+      label: Source / evidence
+      description: Link to meeting transcript, decision log, email, etc.
