@@ -32,9 +32,7 @@ tags: []                             # short keywords, kebab-case
 updated: 2026-05-19                  # YYYY-MM-DD of last meaningful change
 ---
 
-# Title
-
-> _One-line summary visible at the top of the rendered page. Repeat or expand the `description:` field as prose._
+> _One-line summary visible at the top of the rendered page. Repeat or expand the `description:` field as prose. The page H1 is rendered from the frontmatter `title` field — do not add an H1 here._
 
 ## Brief
 
@@ -54,14 +52,14 @@ _Bullet list of concrete objectives. What does success look like?_
 _Champion, coordinator, task group, and external contributors. Roles are explicit._
 
 | Name | Organisation | Role |
-| --- | --- | --- |
-|  |  |  |
+| ---- | ------------ | ---- |
+|      |              |      |
 
 ### Key dates
 
 | Date | Milestone |
-| --- | --- |
-|  |  |
+| ---- | --------- |
+|      |           |
 
 ### Background materials
 
@@ -94,8 +92,8 @@ _GitHub-flavoured task list. Each item names an owner. Mark `[x]` when done._
 _Datasets this use case needs in (or federated with) the CDH catalog._
 
 | Dataset | Hub status | Hub catalog | Feasibility (1=easy, 5=hard) | Serves | Notes |
-| --- | --- | --- | --- | --- | --- |
-|  | scoped | _pending_ |  |  |  |
+| ------- | ---------- | ----------- | ---------------------------- | ------ | ----- |
+|         | scoped     | _pending_   |                              |        |       |
 
 _Hub status: `scoped → planned → in-progress → published`. The Hub catalog column becomes a live link once the STAC entry exists._
 
@@ -119,8 +117,8 @@ _Where the output lives and how users get to it (notebook, portal, training, API
 ## Meetings & decisions
 
 | Date | Attendees | Summary | Decisions | Recording / transcript |
-| --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| ---- | --------- | ------- | --------- | ---------------------- |
+|      |           |         |           |                        |
 
 _Source of truth for transcripts: `Climate_data_hub/meetings/` in OneDrive. Link out by relative path._
 

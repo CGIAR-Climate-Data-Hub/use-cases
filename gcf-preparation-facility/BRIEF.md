@@ -39,8 +39,6 @@ tags:
 updated: 2026-05-19
 ---
 
-# GCF Preparation Facility
-
 > A Climate Rationale notebook that auto-generates evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries to support Green Climate Fund (GCF) proposal writers. Existing CAP bilateral asset being showcased through the CGIAR Climate Data Hub.
 
 ## Brief

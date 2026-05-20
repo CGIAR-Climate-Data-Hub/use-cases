@@ -2,7 +2,7 @@
 
 This repository tracks the CGIAR Climate Data Hub (CDH) use-case portfolio. Each use-case has its own folder containing a canonical **`BRIEF.md`** — what it is, who's involved, current status, action plan, and the materials behind it.
 
-Briefs render to a static site at https://cgiar-climate-data-hub.github.io/use-cases/ (planned), built with [Astro](https://astro.build).
+Briefs render to a static site at <https://cgiar-climate-data-hub.github.io/use-cases/> (planned), built with [Astro](https://astro.build).
 
 ## Master list
 
