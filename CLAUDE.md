@@ -12,7 +12,7 @@ A private working store lives in OneDrive at `Climate_data_hub/use_cases/` — t
 
 - **Folder names**: lowercase kebab-case. Examples: `gcf-preparation-facility`, `b4t`, `livestock-emissions`, `user-needs-assessment`.
 - **Canonical file per use-case**: `<slug>/BRIEF.md`. Use-case-specific code or notebooks may live alongside (in `<slug>/code/`, `<slug>/notebooks/`, etc.).
-- **Frontmatter schema**: see [`BRIEF_TEMPLATE.md`](./BRIEF_TEMPLATE.md) for the canonical field list. Formal validation rules live in [`src/content/config.ts`](./src/content/config.ts) (Zod).
+- **Frontmatter schema**: see [`BRIEF_TEMPLATE.md`](./BRIEF_TEMPLATE.md) for the canonical field list. Formal validation rules live in [`src/content.config.ts`](./src/content.config.ts) (Zod).
 - **No meeting note duplicates here** — source of truth is `Climate_data_hub/meetings/` in OneDrive.
 - **Status vocabulary**: `idea` → `brief` → `active-development` → `piloting` → `handover` → `complete`. Terminal off-ramps: `on-hold`, `no-go`.
 
@@ -41,7 +41,7 @@ See [`GUIDELINES.md`](./GUIDELINES.md) for the 8-step development process. Summa
 1. **Ask before creating new files.** Default to extending existing files. Announce intent before writing so it can be redirected.
 2. **Never invent facts.** When you don't know — owner, date, dataset link, decision — write `_TBC_` and explain what's missing. Half-correct content is worse than visible gaps.
 3. **Use the template.** New use-cases: copy `BRIEF_TEMPLATE.md` into a new kebab-case folder as `BRIEF.md`. Don't freelance the structure.
-4. **Frontmatter is load-bearing.** Astro validates against the Zod schema in `src/content/config.ts`. The build fails on invalid frontmatter — keep it clean.
+4. **Frontmatter is load-bearing.** Astro validates against the Zod schema in `src/content.config.ts`. The build fails on invalid frontmatter — keep it clean.
 5. **Don't reach into OneDrive from this repo.** Briefs may link to OneDrive paths (relative); reading or writing those paths from this repo's working tree is out of scope.
 6. **Quote stakeholders verbatim where possible.** Titles, decisions, and key phrasing from source documents should be reproduced — not paraphrased.
 7. **Each PR should reference the use-case it serves** — use the PR template at `.github/PULL_REQUEST_TEMPLATE.md`.

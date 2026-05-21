@@ -8,6 +8,6 @@ export default defineConfig({
   base: '/use-cases',
   trailingSlash: 'always',
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [/** @type {any} */ (tailwindcss())],
   },
 });
