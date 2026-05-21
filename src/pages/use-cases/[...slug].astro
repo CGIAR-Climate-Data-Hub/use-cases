@@ -6,7 +6,7 @@ import UseCaseLayout from '../../layouts/UseCaseLayout.astro';
 export async function getStaticPaths() {
   const cases = await getCollection('use-cases');
   return cases.map((entry) => ({
-    params: { slug: entry.id.replace(/\/BRIEF$/, '') },
+    params: { slug: entry.id.replace(/\/brief$/i, '') },
     props: { entry },
   }));
 }

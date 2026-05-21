@@ -20,7 +20,7 @@ const statusColor: Record<string, string> = {
 };
 
 function slugFromId(id: string) {
-  return id.replace(/\/BRIEF$/, '');
+  return id.replace(/\/brief$/i, '');
 }
 ---
 
