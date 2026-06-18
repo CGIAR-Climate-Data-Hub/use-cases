@@ -18,5 +18,7 @@ jobs:
             --no-progress
             --exclude '^\.\./\.\./use_cases/'
             --exclude 'localhost'
+            --exclude 'cgiar\.sharepoint\.com'
+            --exclude-path 'BRIEF_TEMPLATE.md'
             '**/*.md'
           fail: true

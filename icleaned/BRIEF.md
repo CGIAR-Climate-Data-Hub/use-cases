@@ -97,7 +97,7 @@ How the CDH can support iCLEANED is to be explored in an upcoming call.
 
 ### Delivery mechanism
 
-_TBD_
+TBD
 
 ## Meetings & decisions
 

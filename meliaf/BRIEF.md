@@ -98,7 +98,7 @@ The scope of CDH support is to be explored in an upcoming conversation with Andr
 
 ### Delivery mechanism
 
-_TBD_
+TBD
 
 ## Meetings & decisions
 

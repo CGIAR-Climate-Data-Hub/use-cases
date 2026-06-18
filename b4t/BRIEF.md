@@ -127,7 +127,7 @@ The CDH team has proposed to work with the CRI team not to redesign the system, 
 
 ### Delivery mechanism
 
-_TBD_
+TBD
 
 ## Meetings & decisions
 

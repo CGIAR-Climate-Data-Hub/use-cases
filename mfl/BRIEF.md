@@ -101,7 +101,7 @@ The nature and scope of CDH involvement is yet to be defined.
 
 ### Delivery mechanism
 
-_TBD_
+TBD
 
 ## Meetings & decisions
 

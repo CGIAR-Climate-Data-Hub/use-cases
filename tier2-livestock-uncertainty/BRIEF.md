@@ -95,7 +95,7 @@ There is an opportunity to apply this calculator to national GHG inventories in 
 
 ### Delivery mechanism
 
-_TBD_
+TBD
 
 ## Meetings & decisions
 
