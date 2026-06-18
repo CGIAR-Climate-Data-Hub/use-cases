@@ -22,6 +22,18 @@ const statusColor: Record<string, string> = {
 function slugFromId(id: string) {
   return id.replace(/\/brief$/i, '');
 }
+
+function splitPrograms(sp?: string): string[] {
+  if (!sp) return [];
+  return sp
+    .split(';')
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+const allPrograms = Array.from(
+  new Set(useCases.flatMap((uc) => splitPrograms(uc.data.science_program))),
+).sort();
 ---
 
 <BaseLayout title="CDH Use Cases — Portfolio">
@@ -36,9 +48,33 @@ function slugFromId(id: string) {
     </p>
   </header>
 
+  {allPrograms.length > 0 && (
+    <div id="program-filter" class="mb-6 flex flex-wrap gap-2">
+      <button
+        type="button"
+        data-filter="all"
+        class="filter-btn rounded border border-transparent bg-[var(--color-cdh-blue)] px-3 py-1 text-sm text-white"
+      >
+        All
+      </button>
+      {allPrograms.map((p) => (
+        <button
+          type="button"
+          data-filter={p}
+          class="filter-btn rounded border border-gray-300 px-3 py-1 text-sm text-gray-700"
+        >
+          {p}
+        </button>
+      ))}
+    </div>
+  )}
+
   <ul class="grid gap-4 md:grid-cols-2">
     {useCases.map((uc) => (
-      <li class="rounded-lg border border-gray-200 p-5 transition-colors hover:border-[var(--color-cdh-blue)]">
+      <li
+        data-programs={splitPrograms(uc.data.science_program).join('||')}
+        class="rounded-lg border border-gray-200 p-5 transition-colors hover:border-[var(--color-cdh-blue)]"
+      >
         <a
           href={`${base}/use-cases/${slugFromId(uc.id)}/`}
           class="block"
@@ -53,6 +89,9 @@ function slugFromId(id: string) {
                 {uc.data.primary_aow}
               </span>
             )}
+            {splitPrograms(uc.data.science_program).map((p) => (
+              <span class="rounded bg-indigo-100 px-2 py-0.5 text-indigo-800">{p}</span>
+            ))}
           </div>
           <h2 class="font-display text-xl text-[var(--color-cdh-blue)]">
             {uc.data.title}
@@ -73,4 +112,30 @@ function slugFromId(id: string) {
       kebab-case folder as <code>BRIEF.md</code> to add one.
     </div>
   )}
+
+  <script>
+    const ACTIVE = ['bg-[var(--color-cdh-blue)]', 'text-white', 'border-transparent'];
+    const INACTIVE = ['border-gray-300', 'text-gray-700'];
+    const buttons = document.querySelectorAll<HTMLButtonElement>('#program-filter .filter-btn');
+    const cards = document.querySelectorAll<HTMLLIElement>('ul li[data-programs]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter ?? 'all';
+
+        buttons.forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle('border', !on || true);
+          ACTIVE.forEach((c) => b.classList.toggle(c, on));
+          INACTIVE.forEach((c) => b.classList.toggle(c, !on));
+        });
+
+        cards.forEach((card) => {
+          const progs = (card.dataset.programs ?? '').split('||').filter(Boolean);
+          const show = filter === 'all' || progs.includes(filter);
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
 </BaseLayout>
