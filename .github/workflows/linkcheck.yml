@@ -16,7 +16,6 @@ jobs:
         with:
           args: >-
             --no-progress
-            --exclude-mail
             --exclude '^\.\./\.\./use_cases/'
             --exclude 'localhost'
             '**/*.md'
