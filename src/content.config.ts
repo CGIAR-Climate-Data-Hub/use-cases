@@ -9,6 +9,7 @@ const useCases = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    science_program: z.string().optional(),
     type: z.enum(['new', 'existing']),
     origin: z.enum(['ongoing-project', 'funding-pipeline', 'data-gap']),
     status: z.enum([
@@ -43,6 +44,7 @@ const useCases = defineCollection({
         'AoW4-Transition',
         'AoW5-Finance',
       ])
+      .nullable()
       .optional(),
     related_aows: z.array(z.string()).default([]),
     ca_os_packages: z.array(z.string()).default([]),
