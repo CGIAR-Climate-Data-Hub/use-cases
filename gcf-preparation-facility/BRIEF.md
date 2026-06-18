@@ -1,6 +1,7 @@
 ---
 title: GCF Preparation Facility
 description: Climate Rationale notebook auto-generating evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries for Green Climate Fund proposal writers.
+science_program: Critical Capacity (CACC1)
 
 type: existing
 origin: ongoing-project
