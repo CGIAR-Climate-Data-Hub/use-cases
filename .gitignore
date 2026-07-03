@@ -36,3 +36,7 @@ coverage/
 
 # Misc
 *.log
+
+# R session history
+.Rhistory
+*.Rhistory
