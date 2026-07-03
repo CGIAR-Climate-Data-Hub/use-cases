@@ -17,7 +17,7 @@ Reviews the 23 hazard/vulnerability datasets in Appendix Table 1 of the CRI docu
 
 ## 1. Executive summary
 
-*(Fills as rows complete. Current shape, from the §3 interrogation:)*
+Fills as rows complete. Current shape, from the §3 interrogation:
 
 - **The problem is mixed lineage, not uniform age.** The 23 inputs span several eras in one score. The CCAFS/Thornton future layers (R-01, R-02, T-02, T-03) are **CMIP5 / RCP8.5** — 17 GCMs, Jones & Thornton (2009/2013/2015), 2050s, per Philip Thornton's account (provenance not fully confirmed; possibly older in part). The historic layers are observational (drought = **WASP at a coarse 2.5°**, 1980–2000; Dartmouth floods 1985–2003; rainfall CV historic). The **WRI Aqueduct family** (D-03/04/05, R-04/05, F-02/03) *may* be running on **CMIP5-era Aqueduct**, not the CMIP6 Aqueduct 4.0 the doc cites — to verify.
 - **Horizons are mixed:** historic (drought 1980–2000, floods 1985–2003), 2030 (Aqueduct), 2050s (CCAFS/Thornton) — averaged 50-50 present/future in one index.
@@ -28,7 +28,7 @@ Reviews the 23 hazard/vulnerability datasets in Appendix Table 1 of the CRI docu
 
 **Table 1.** Verdict (about the CRI) and CDH action (about the Hub) for all 23 datasets.
 
-**Temporal** reflects the CRI's 50-50 present/future design: _Future_ = already carries projections; _Historic + future (ready/derive)_ = present-climate now, with a future element off-the-shelf or via a CDH build; _Historic (static)_ = observational, no meaningful future.
+**Temporal** reflects the CRI's 50-50 present/future design: *Future* = already carries projections; *Historic + future (ready/derive)* = present-climate now, with a future element off-the-shelf or via a CDH build; *Historic (static)* = observational, no meaningful future.
 
 | Code | Variable | Hazard | Temporal | Verdict | CDH action | Effort |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -238,7 +238,7 @@ The rest of this row is the full worked example (present-data conflict, SPEI spe
 
 **Measures:** WRI Aqueduct Floods (Ward et al. 2020) — a **1-in-10-year** flood hazard, no protection assumed. Two layers: F-02 river, F-03 coastal.
 
-**F-02 — river flood hazard**
+#### F-02 — river flood hazard
 
 | Field | Present | Recommended |
 | --- | --- | --- |
@@ -250,7 +250,7 @@ The rest of this row is the full worked example (present-data conflict, SPEI spe
 | Access · licence | WRI · GEE | giri.unepgrid.ch (registration) · non-commercial + attribution (non-profit OK) |
 | CDH action / status | CMIP5-obsolete | Ingest · effort Med · trade-off: single-GCM vs Aqueduct multi-model (CMIP5) |
 
-**F-03 — coastal flood hazard**
+#### F-03 — coastal flood hazard
 
 | Field | Present | Recommended (driver only) |
 | --- | --- | --- |
@@ -345,7 +345,7 @@ The rest of this row is the full worked example (present-data conflict, SPEI spe
 
 **Sources.** CDH NEX-GDDP-CMIP6 v2; FAO GAEZ v5 — [evidence/sources.md](./evidence/sources.md).
 
-_(T-03 is covered under the LGP-flips block — likely a verbatim duplicate of R-01; Clarify with Bert, drop or merge.)_
+Note: T-03 is covered under the LGP-flips block — likely a verbatim duplicate of R-01; Clarify with Bert, drop or merge.
 
 ### Salinity, soil water & irrigation (off-the-shelf) — S-01/02, W-01–04, I-01
 

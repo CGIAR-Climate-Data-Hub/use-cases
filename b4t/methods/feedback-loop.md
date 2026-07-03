@@ -4,7 +4,7 @@
 
 **Stack:** Microsoft Forms (no-account entry, matches CGIAR M365) → Power Automate (native GitHub connector) → GitHub issue in `CGIAR-Climate-Data-Hub/use-cases`.
 
-```
+```text
 Reader → MS Form (linked from the rendered report; "💬 Feedback" button)
              ↓  "When a new response is submitted"
         Power Automate → "Get response details"
@@ -37,7 +37,7 @@ Create **one** form in the CGIAR M365 tenant (owner = coordinator / a shared mai
 
 Paste into Word → **Save As `.docx`** → Forms **New Form → Quick Import → upload**. Quick Import detects Choice (Q1/Q2) and Text (Q3/Q4/Q5); it does **not** set *required*, *dropdown*, or *long-answer* — fix those after (Q1 → dropdown; Q1/Q2/Q3 → required; Q3 → long answer).
 
-```
+```text
 B4T Crop Risk Index review — feedback
 
 1. Which section?
@@ -78,7 +78,8 @@ Cloud flow owned by the same account as the form.
    - **Title:** `[<Q1 section>] <Q2 type> — <first ~60 chars of Q3>`
    - **Labels:** `review-feedback` (add a second label per type if desired — see §3)
    - **Body:** (markdown)
-     ```
+
+     ```text
      **Section:** <Q1>
      **Type:** <Q2>
 
@@ -89,6 +90,7 @@ Cloud flow owned by the same account as the form.
      *From: <Q4 name or "anonymous"> · <Q5 email or "no email">*
      *Submitted: <trigger submission time>*
      ```
+
 4. *(Optional)* **Action:** Office 365 Outlook — *Send an email* to Q5 confirming receipt, if an email was given (guard with a condition on Q5 non-empty).
 
 The GitHub connector authenticates once via OAuth (an org member or a machine account with issue-write on the repo) — **no personal access token stored in code.**
