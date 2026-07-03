@@ -109,9 +109,9 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 - [Ericksen 2011 CCAFS report (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/ccafsreport5-climate_hotspots_final.pdf?csf=1&web=1&e=KVBdit) — Mapping hotspots of climate change and food insecurity in the global tropics
 - [HII scoring matrix (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/HII-scoring%20matrix.pdf?csf=1&web=1&e=rGr7fr) — Hazard Intensity and Interactions scoring matrix
 - Crop x region priority- 2025.xlsx — B4T working prioritization workbook linking country, crop, and value-proposition relevance; shareable link _TBC_
-- [Current CRI formulation note](./methods/current-cri-formulation.md) — Public-safe summary of current CRI workflow reconstructed from source documents
-- [Dataset inventory](./methods/dataset-inventory.csv) — Hazard, soil-water, and irrigation input inventory with time horizons and upgrade flags
-- [HII evidence audit seed](./methods/hii-evidence-audit.csv) — First-pass structured audit of selected HII rows by evidence type
+- [Dataset review & CDH recommendations](./methods/dataset-review.md) — 23-input audit (current vs recommended), CDH integration + licences
+- [Current CRI formulation note](./methods/cri-formulation.md) — public-safe reconstruction of the current CRI method
+- [Methods folder](./methods/README.md) — backing CSVs (current-state lineage, recommended options), evidence log, feedback loop
 
 ## Go / No Go
 

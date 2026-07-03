@@ -16,9 +16,12 @@ jobs:
         with:
           args: >-
             --no-progress
+            --timeout 30
+            --max-retries 3
             --exclude '^\.\./\.\./use_cases/'
             --exclude 'localhost'
             --exclude 'cgiar\.sharepoint\.com'
             --exclude-path 'BRIEF_TEMPLATE.md'
+            --exclude-path 'b4t/archive'
             '**/*.md'
           fail: true

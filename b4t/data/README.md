@@ -26,12 +26,13 @@ Canonical background files remain in:
 
 Repo currently carries derivatives in:
 
-- [current-cri-formulation.md](../methods/current-cri-formulation.md)
-- [dataset-inventory.csv](../methods/dataset-inventory.csv)
-- [hii-evidence-audit.csv](../methods/hii-evidence-audit.csv)
-- [modern-open-dataset-research-strategy.md](../methods/modern-open-dataset-research-strategy.md)
-- [modern-open-dataset-review-template.csv](../methods/modern-open-dataset-review-template.csv)
-- [appendix-table-1-modernization-review.md](../methods/appendix-table-1-modernization-review.md)
+- [dataset-review.md](../methods/dataset-review.md) — the deliverable (23-input audit + recommendations)
+- [cri-formulation.md](../methods/cri-formulation.md) — current-method reconstruction
+- [current-datasets.csv](../methods/current-datasets.csv) — current-state lineage (12 axes)
+- [improved-options.csv](../methods/improved-options.csv) — recommended open alternatives
+- [appendix-table-1.csv](../methods/appendix-table-1.csv) — the 23 canonical dataset rows
+- [evidence/sources.md](../methods/evidence/sources.md) — verified source + licence log
+- [feedback-loop.md](../methods/feedback-loop.md) — reviewer feedback loop
 
 ## Open items
 
