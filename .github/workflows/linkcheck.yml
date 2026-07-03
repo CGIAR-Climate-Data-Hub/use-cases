@@ -21,6 +21,8 @@ jobs:
             --exclude '^\.\./\.\./use_cases/'
             --exclude 'localhost'
             --exclude 'cgiar\.sharepoint\.com'
+            --exclude 'spei\.csic\.es'
+            --exclude 'earthdata\.nasa\.gov'
             --exclude-path 'BRIEF_TEMPLATE.md'
             --exclude-path 'b4t/archive'
             '**/*.md'
