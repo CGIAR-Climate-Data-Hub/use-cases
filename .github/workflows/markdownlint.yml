@@ -16,5 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DavidAnson/markdownlint-cli2-action@v17
         with:
-          globs: '**/*.md'
+          globs: |
+            **/*.md
+            !**/archive/**
           config: '.markdownlint.json'
