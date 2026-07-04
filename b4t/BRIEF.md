@@ -28,7 +28,7 @@ ca_os_packages: []
 
 # === Metadata ===
 tags: [crop-risk-index, climate-hazard, breeding]
-updated: 2026-06-30
+updated: 2026-07-04
 ---
 
 > Review and support refinement of the Climate and Environmental Crop Risk Index (CRI), including its current hazard formulation, source datasets, and role in B4T crop-country-market prioritization.
@@ -124,16 +124,25 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 
 ## Action plan
 
-> _To be developed once status reaches `active-development`._
+### Progress to date (July 2026)
+
+CDH has completed a **Phase-1 dataset review** and a public-safe method reconstruction. A draft, shareable page presents both:
+
+- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) _(live once merged to `main`)_
+- **Dataset review & CDH recommendations:** [methods/dataset-review.md](./methods/dataset-review.md) — all 23 hazard/vulnerability inputs audited (current lineage vs recommended modern **open** alternative on identical axes), with a CDH integration + **licence** plan.
+- **Method reconstruction:** [methods/cri-formulation.md](./methods/cri-formulation.md) — the current CRI workflow, with Bert's email corrections that supersede the source doc.
+- **Backing data + evidence:** [methods folder](./methods/README.md) — 12-axis current-state lineage, recommended-options table, verified source/licence log.
+
+What was done: reconstructed the current method (hazard processing, HII, CCC, yield step); interrogated each input's lineage and corrected it against Bert's 2026-04-29/30 emails; researched and adversarially verified modern open replacements against steward pages; cleared licences for non-profit use; and stood up a no-account reviewer **feedback loop** (MS Form → GitHub issue). Phase-2 (methodology review) not yet started.
 
 ### Actions
 
-- [ ] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — establish exact baseline before proposing updates
-- [ ] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — focus first on D/F/R/T/S inputs
-- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — prioritize high-impact combinations and entries used in active crop geographies
-- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — connect CRI revision work to actual decisions
-- [ ] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — frame decision for Go / No-Go discussion
-- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — only after baseline and scope are agreed
+- [x] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — _done: [cri-formulation.md](./methods/cri-formulation.md)_
+- [x] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — _done: [dataset-review.md](./methods/dataset-review.md) + backing CSVs_
+- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — _Phase 2 (methodology)_
+- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — _partly documented (cri-formulation "Where it feeds"); confirm with B4T_
+- [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — _done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)_
+- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — _pending scope agreement + Go/No-Go_
 
 ### Data assets for the hub
 

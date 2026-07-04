@@ -20,6 +20,7 @@ jobs:
             --max-retries 3
             --exclude '^\.\./\.\./use_cases/'
             --exclude 'localhost'
+            --exclude 'cgiar-climate-data-hub\.github\.io'
             --exclude 'cgiar\.sharepoint\.com'
             --exclude 'spei\.csic\.es'
             --exclude 'earthdata\.nasa\.gov'
