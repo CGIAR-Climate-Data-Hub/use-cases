@@ -128,7 +128,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 
 CDH has completed a **Phase-1 dataset review** and a public-safe method reconstruction. A draft, shareable page presents both:
 
-- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) *(live once merged to `main`)*
+- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) _(live once merged to `main`)_
 - **Dataset review & CDH recommendations:** [methods/dataset-review.md](./methods/dataset-review.md) — all 23 hazard/vulnerability inputs audited (current lineage vs recommended modern **open** alternative on identical axes), with a CDH integration + **licence** plan.
 - **Method reconstruction:** [methods/cri-formulation.md](./methods/cri-formulation.md) — the current CRI workflow, with Bert's email corrections that supersede the source doc.
 - **Backing data + evidence:** [methods folder](./methods/README.md) — 12-axis current-state lineage, recommended-options table, verified source/licence log.
@@ -137,12 +137,12 @@ What was done: reconstructed the current method (hazard processing, HII, CCC, yi
 
 ### Actions
 
-- [x] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — *done: [cri-formulation.md](./methods/cri-formulation.md)*
-- [x] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — *done: [dataset-review.md](./methods/dataset-review.md) + backing CSVs*
-- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — *Phase 2 (methodology)*
-- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — *partly documented (cri-formulation "Where it feeds"); confirm with B4T*
-- [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — *done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)*
-- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — *pending scope agreement + Go/No-Go*
+- [x] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — _done: [cri-formulation.md](./methods/cri-formulation.md)_
+- [x] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — _done: [dataset-review.md](./methods/dataset-review.md) + backing CSVs_
+- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — _Phase 2 (methodology)_
+- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — _partly documented (cri-formulation "Where it feeds"); confirm with B4T_
+- [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — _done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)_
+- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — _pending scope agreement + Go/No-Go_
 
 ### Data assets for the hub
 
