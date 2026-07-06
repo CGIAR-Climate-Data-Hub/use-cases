@@ -107,11 +107,11 @@
   .t-hist{color:#8b98a3}
   .t-opt{color:#a85f13;font-weight:700}
   .tcell{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
-  .tchip{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:3px;line-height:1.55;white-space:nowrap}
-  .tchip.hist{background:#eef0f2;color:#5b6773}
-  .tchip.fut{background:#e4f2ea;color:#2e7d5b}
-  .tchip.base{background:#eef0f2;color:#5b6773}
-  .tchip.chg{background:#f6e9d8;color:#a85f13}
+  .tchip{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:3px;line-height:1.5;white-space:nowrap;background:#eef3fb;border:1px solid #c4d3e8;color:#1e5aa8}
+  .tchip.hist{background:#eef3fb;color:#1e5aa8}
+  .tchip.fut{background:#eef3fb;color:#1e5aa8}
+  .tchip.base{background:#eef3fb;color:#1e5aa8}
+  .tchip.chg{background:#eef3fb;color:#1e5aa8}
   .legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 
   /* controls */
@@ -226,14 +226,8 @@
 
     <section id="decisions">
       <h2>Decisions at a glance</h2>
-      <p class="cap"><b>Table 1.</b> Verdict and CDH action for all 23 CRI datasets. <em>Verdict</em> concerns the risk index; <em>CDH action</em> concerns the Hub. Sortable (click a header) and filterable; click a code to jump to its detail.</p>
-      <p class="sub"><strong>Verdict</strong> = what the CRI should do; <strong>CDH action</strong> = what the Hub should do. <strong>How used</strong> — how the variable enters the CRI: <span class="tchip base">Baseline</span> a historic/observed value; <span class="tchip chg">Change</span> the baseline→future difference (threshold flips); <span class="tchip fut">Future</span> a future projection value. Each hazard blends these (the CRI’s 50-50 present/future design). Click a code for detail; click a header to sort; use the box to filter.</p>
-      <div class="legend">
-        <span class="pill p-keep">Keep — already modern &amp; open</span>
-        <span class="pill p-mod">Replace / Re-derive — modernize</span>
-        <span class="pill p-clarify">Clarify — need B4T input</span>
-        <span class="pill p-legacy">Legacy CMIP5 / RCP8.5</span>
-      </div>
+      <p class="cap"><b>Table 1.</b> Verdict and CDH action for all 23 CRI datasets. Sortable (click a header) and filterable; click a code to jump to its detail.</p>
+      <p class="sub"><strong>Verdict</strong> (what the CRI should do): <span class="pill p-keep">Keep</span> already modern &amp; open · <span class="pill p-mod">Replace / Re-derive</span> modernize · <span class="pill p-clarify">Clarify</span> need B4T input · <span class="pill p-legacy">Legacy</span> CMIP5 / RCP8.5. &nbsp; <strong>CDH action</strong> = what the Hub should do. &nbsp; <strong>How used</strong> — how the variable enters the CRI (a neutral category, not a judgement): <span class="tchip base">Baseline</span> a historic/observed value · <span class="tchip chg">Change</span> the baseline→future difference (threshold flips) · <span class="tchip fut">Future</span> a future projection value — each hazard blends these (the CRI’s 50-50 present/future design). Click a code for detail; click a header to sort; use the box to filter.</p>
       <div class="controls">
         <input id="q-dec" type="search" placeholder="Filter datasets…" oninput="applyFilter('dec')" aria-label="Filter decisions table">
         <select id="hz-dec" onchange="applyFilter('dec')" aria-label="Filter by hazard">
