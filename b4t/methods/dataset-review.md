@@ -28,41 +28,41 @@ Fills as rows complete. Current shape, from the §3 interrogation:
 
 **Table 1.** Verdict (about the CRI) and CDH action (about the Hub) for all 23 datasets.
 
-**Temporal** (the CRI's 50-50 present/future design): *Historic* = observational; *Future* = carries climate projections; *Historic + Future* = both. Recommendations are in the Verdict / CDH-action columns and §6 — not the Temporal column.
+**How used** — how each variable enters the CRI (its 50-50 present/future design): *Baseline* = a historic/observed value; *Change* = the baseline→future difference (threshold flips); *Future* = a future projection value. A dataset may have a reference period yet be used as *Future* (e.g. the Aqueduct rows).
 
-| Code | Variable | Hazard | Temporal | Verdict | CDH action | Effort |
+| Code | Variable | Hazard | How used | Verdict | CDH action | Effort |
 | --- | --- | --- | --- | --- | --- | --- |
-| D-01 | SPI/WASP (drought-event frequency) | Drought | Historic + Future | **Adopt SPEI** — extend CDH pipeline global | Re-run CDH SPEI pipeline globally; ASI complementary | Low–med |
-| D-02 | Failed season | Drought | Historic + Future | **Clarify** — confirm source &amp; role | Confirm w/ Bert; WRSI if retained | — |
+| D-01 | SPI/WASP (drought-event frequency) | Drought | Baseline | **Adopt SPEI** — extend CDH pipeline global | Re-run CDH SPEI pipeline globally; ASI complementary | Low–med |
+| D-02 | Failed season | Drought | Baseline | **Clarify** — confirm source &amp; role | Confirm w/ Bert; WRSI if retained | — |
 | D-03 | Available blue water | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
 | D-04 | Gross water demand / net consumption | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
 | D-05 | Baseline water stress | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| F-01 | Dartmouth flood frequency | Flooding | Historic | **Replace** — Global Flood Database | Ingest GFD (satellite-observed, GEE) | Low |
+| F-01 | Dartmouth flood frequency | Flooding | Baseline | **Replace** — Global Flood Database | Ingest GFD (satellite-observed, GEE) | Low |
 | F-02 | River flood hazard | Flooding | Future | **Modernize** → GIRI (CMIP6) | Ingest GIRI; Aqueduct Floods = CMIP5 alt | Med |
 | F-03 | Coastal flood hazard | Flooding | Future | **Modernize pending** — coastal gap | No open CMIP6 *inundation* layer; open CMIP6 *driver* exists (Copernicus CDS sea-level indicators) → build, not off-the-shelf; keep Aqueduct Floods coastal meanwhile | Med |
-| R-01 | LGP flip over 120 days | Changed rainfall | Future | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
-| R-02 | LGP flip over 90 days | Changed rainfall | Future | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
-| R-03 | Annual rainfall CV | Changed rainfall | Historic + Future | **Re-derive** on CHIRPS v3 | CHIRPS-derived annual CV (SPEI stack) | Low |
+| R-01 | LGP flip over 120 days | Changed rainfall | Change | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
+| R-02 | LGP flip over 90 days | Changed rainfall | Change | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
+| R-03 | Annual rainfall CV | Changed rainfall | Baseline | **Re-derive** on CHIRPS v3 | CHIRPS-derived annual CV (SPEI stack) | Low |
 | R-04 | Intra-annual variability | Changed rainfall | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
 | R-05 | Seasonal variability | Changed rainfall | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| T-01 | Extreme humid heat days | High temperature | Historic + Future | **Keep** — GEHE (modern, open) | Catalogue-as-is; pair CMIP6 future | Low |
-| T-03 | LGP-linked temperature stress | High temperature | Future | **Clarify** — duplicate of R-01 (drop/merge) | Confirm w/ Bert; drop or merge | — |
-| T-02 | Growing-season Tmax flip 30C | High temperature | Future | **Modernize** → NEX-GDDP v2 (CMIP6) | Derive growing-season Tmax flip; GAEZ v5 alt | Med |
-| S-01 | Salt-affected soils map | Salinity | Historic | **Keep** — FAO GSASmap | Catalogue-as-is | Low |
-| S-02 | Global soil salinity | Salinity | Historic | **Keep** — ISRIC | Catalogue; clarify overlap w/ S-01 | Low |
-| W-01 | Water retention 1500 kPa | Soil water | Historic | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
-| W-02 | Available water capacity | Soil water | Historic | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
-| W-03 | Rooting zone water storage | Soil water | Historic | **Keep** — Stocker 2023 | Catalogue (Zenodo); consolidate | Low |
-| W-04 | Plant-available soil water | Soil water | Historic | **Keep** — Gupta 2023 | Catalogue (Zenodo 6777126, CC-BY); consolidate | Low |
-| I-01 | Area equipped with irrigation | Irrigation | Historic + Future | **Keep** — Mehta 2024 | Catalogue (Zenodo); projected AEI for future | Low |
+| T-01 | Extreme humid heat days | High temperature | Baseline | **Keep** — GEHE (modern, open) | Catalogue-as-is; pair CMIP6 future | Low |
+| T-03 | LGP-linked temperature stress | High temperature | Change | **Clarify** — duplicate of R-01 (drop/merge) | Confirm w/ Bert; drop or merge | — |
+| T-02 | Growing-season Tmax flip 30C | High temperature | Change | **Modernize** → NEX-GDDP v2 (CMIP6) | Derive growing-season Tmax flip; GAEZ v5 alt | Med |
+| S-01 | Salt-affected soils map | Salinity | Baseline | **Keep** — FAO GSASmap | Catalogue-as-is | Low |
+| S-02 | Global soil salinity | Salinity | Baseline | **Keep** — ISRIC | Catalogue; clarify overlap w/ S-01 | Low |
+| W-01 | Water retention 1500 kPa | Soil water | Baseline | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
+| W-02 | Available water capacity | Soil water | Baseline | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
+| W-03 | Rooting zone water storage | Soil water | Baseline | **Keep** — Stocker 2023 | Catalogue (Zenodo); consolidate | Low |
+| W-04 | Plant-available soil water | Soil water | Baseline | **Keep** — Gupta 2023 | Catalogue (Zenodo 6777126, CC-BY); consolidate | Low |
+| I-01 | Area equipped with irrigation | Irrigation | Baseline | **Keep** — Mehta 2024 | Catalogue (Zenodo); projected AEI for future | Low |
 
 ## 3. Current inputs
 
 What B4T uses **now**, on 12 lineage axes — **current inputs only; recommendations are in §2 and §6**, not here. Populated from primary sources and **corrected against Bert's emails** (which describe the actual data; the CRI doc lags). `conflicted` = sources disagree; `not stated` = a lineage detail the source doesn't give (a gap in the record, **not** an incomplete review — every dataset has a verdict in §2/§6). Rendered from [current-datasets.csv](./current-datasets.csv).
 
-**Table 2.** Current-state lineage of the 23 inputs on twelve axes, from B4T source documents and corrected against Bert's emails. In *Downscaling / bias*: a named technique (delta, quantile-mapping, neural-net) where known; `present (…)` = a step was applied but technique not stated; `none` = no climate downscaling/bias; `N/A` = not applicable (historical/observational); `not stated` = detail not given in the source. `CMIP5*` = provenance not fully confirmed. Specifics: R-01/02, T-02/03 use Jones-&-Thornton downscaling + bias-correction, exact technique unstated; F-02 = rainfall bias-correction only; W-01's random-forest pedotransfer is soil modelling, not a climate step → `none`.
+**Table 2.** Current-state lineage of the 23 inputs on twelve axes, from B4T source documents and corrected against Bert's emails. In *Downscaling / bias*: a named technique (delta, quantile-mapping, neural-net) where known; `present (…)` = a step was applied but technique not stated; `none` = no climate downscaling/bias; `N/A` = not applicable (historical/observational); `not stated` = detail not given in the source. `CMIP5*` = provenance not fully confirmed. Specifics: R-01/02, T-02/03 use Jones-&-Thornton downscaling + bias-correction, exact technique unstated; F-02 = rainfall bias-correction only; W-01's random-forest pedotransfer is soil modelling, not a climate step → `none`. **Dataset reference (provenance)** = the dataset's own history used to build the layer — not necessarily what the CRI ingests. How the CRI *uses* each variable (**Baseline** = historic value · **Change** = baseline→future difference · **Future** = future projection) is the *How used* column in Table 1; so a row can carry a reference period yet be used as **Future** (e.g. the Aqueduct rows D-03/04/05, R-04/05, F-02/03).
 
-| Hazard | Code | Variable | Resolution | Baseline dataset | Baseline period | Future dataset | Future period | Scenario | CMIP | Downscaling / bias | GCM ensemble |
+| Hazard | Code | Variable | Resolution | Dataset reference (provenance) | Ref. period | Future dataset | Future period | Scenario | CMIP | Downscaling / bias | GCM ensemble |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Drought | D-01 | SPI/WASP (event freq.) | 2.5° → 0.05° grid | WASP (IRI); Dilley 2005 — *doc says SPI/Ericksen* | 1980–2000 *(doc: 1974–2004)* | N/A | N/A | N/A | N/A | N/A | N/A |
 | Drought | D-02 | Failed season | not stated | Hyman et al. 2025 | 100 years | N/A | N/A | N/A | N/A | not stated | N/A |
@@ -355,13 +355,13 @@ For these seven the recommendation is to **keep the current dataset and catalogu
 
 | Row | Present — current dataset (CRI now) | Recommended | Resolution | Temporal | Licence · access |
 | --- | --- | --- | --- | --- | --- |
-| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | **Keep** — same dataset, catalogue as-is | — | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform |
-| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | **Keep** — same; overlaps S-01 (clarify) | — | 1986–2016 | open · ISRIC file server |
-| W-01 | ISRIC **WoSIS** (Batjes 2024) — water retention 1500 kPa | **Update → SoilGrids 2.0** (newer version) | 250 m | 1918–2013 | CC-BY 4.0 · ISRIC |
-| W-02 | **SoilGrids250m** (Hengl 2017) — available water capacity | **Update → SoilGrids 2.0** (FC−WP) | 250 m | 1950–2016 | CC-BY 4.0 · ISRIC |
-| W-03 | Stocker 2023 — rooting-zone water storage | **Keep** — same dataset | — | 2003–2018 | open · Zenodo |
-| W-04 | Gupta 2023 — plant-available soil water | **Keep** — same dataset | 1 km | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 |
-| I-01 | Mehta 2024 — area equipped for irrigation | **Keep** — same; + projected AEI (Gao, SSP) for future | — | 2000–2015 | open · Zenodo |
+| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | **Keep** — same dataset, catalogue as-is | Baseline | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform |
+| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | **Keep** — same; overlaps S-01 (clarify) | Baseline | 1986–2016 | open · ISRIC file server |
+| W-01 | ISRIC **WoSIS** (Batjes 2024) — water retention 1500 kPa | **Update → SoilGrids 2.0** (newer version) | Baseline | 1918–2013 | CC-BY 4.0 · ISRIC |
+| W-02 | **SoilGrids250m** (Hengl 2017) — available water capacity | **Update → SoilGrids 2.0** (FC−WP) | Baseline | 1950–2016 | CC-BY 4.0 · ISRIC |
+| W-03 | Stocker 2023 — rooting-zone water storage | **Keep** — same dataset | Baseline | 2003–2018 | open · Zenodo |
+| W-04 | Gupta 2023 — plant-available soil water | **Keep** — same dataset | Baseline | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 |
+| I-01 | Mehta 2024 — area equipped for irrigation | **Keep** — same; + projected AEI (Gao, SSP) for future | Baseline | 2000–2015 | open · Zenodo |
 
 **Consolidation flags (Phase 2).** Two salinity products (S-01 vs S-02) and four soil-water products (W-01/02/03/04) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. Bert also notes the crop **coping-capacity (CCC)** soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).
 
