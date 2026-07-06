@@ -351,17 +351,17 @@ Note: T-03 is covered under the LGP-flips block — likely a verbatim duplicate 
 
 **Verdict: Keep — off-the-shelf.** All seven are modern, open, ready products from authoritative stewards; no build needed. The work is cataloguing + consolidation, not replacement.
 
-Seven ready open datasets to **catalogue as-is** (no build). Present ≈ Recommended, except W-01/W-02 (update to SoilGrids 2.0).
+For these seven the recommendation is to **keep the current dataset and catalogue it as-is** — so *Present and Recommended are the same dataset* — **except W-01 / W-02**, where we recommend updating to the current **SoilGrids 2.0**. No CDH build. (The "Present" column is what the CRI uses now.)
 
-| Row | Recommended dataset | Resolution | Temporal | Licence · access | CDH action |
+| Row | Present — current dataset (CRI now) | Recommended | Resolution | Temporal | Licence · access |
 | --- | --- | --- | --- | --- | --- |
-| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | — | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform | Keep · catalogue |
-| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | — | 1986–2016 | open · ISRIC file server | Keep · overlaps S-01 |
-| W-01 | Water retention 1500 kPa → **SoilGrids 2.0** (from WoSIS, Batjes 2024) | 250 m | 1918–2013 | CC-BY 4.0 · ISRIC | Update to 2.0 |
-| W-02 | Available water capacity → **SoilGrids 2.0** (FC−WP; from SoilGrids250m, Hengl 2017) | 250 m | 1950–2016 | CC-BY 4.0 · ISRIC | Update to 2.0 |
-| W-03 | Rooting-zone water storage (Stocker 2023) | — | 2003–2018 | open · Zenodo | Keep · catalogue |
-| W-04 | Plant-available soil water (Gupta 2023) | 1 km | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 | Keep · catalogue |
-| I-01 | Area equipped for irrigation (Mehta 2024) | — | 2000–2015 | open · Zenodo | Keep · + projected AEI (Gao, SSP) for future |
+| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | **Keep** — same dataset, catalogue as-is | — | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform |
+| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | **Keep** — same; overlaps S-01 (clarify) | — | 1986–2016 | open · ISRIC file server |
+| W-01 | ISRIC **WoSIS** (Batjes 2024) — water retention 1500 kPa | **Update → SoilGrids 2.0** (newer version) | 250 m | 1918–2013 | CC-BY 4.0 · ISRIC |
+| W-02 | **SoilGrids250m** (Hengl 2017) — available water capacity | **Update → SoilGrids 2.0** (FC−WP) | 250 m | 1950–2016 | CC-BY 4.0 · ISRIC |
+| W-03 | Stocker 2023 — rooting-zone water storage | **Keep** — same dataset | — | 2003–2018 | open · Zenodo |
+| W-04 | Gupta 2023 — plant-available soil water | **Keep** — same dataset | 1 km | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 |
+| I-01 | Mehta 2024 — area equipped for irrigation | **Keep** — same; + projected AEI (Gao, SSP) for future | — | 2000–2015 | open · Zenodo |
 
 **Consolidation flags (Phase 2).** Two salinity products (S-01 vs S-02) and four soil-water products (W-01/02/03/04) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. Bert also notes the crop **coping-capacity (CCC)** soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).
 
