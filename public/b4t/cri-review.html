@@ -68,8 +68,10 @@
   .side-meta{border-top:1px solid var(--line);padding-top:16px;font-size:12.5px;color:var(--muted)}
   .side-meta div{margin:7px 0}
   .side-meta b{color:var(--ink);font-weight:700;display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
-  .side-links{margin-top:16px;display:flex;flex-direction:column;gap:7px;font-size:13px}
+  .side-links{margin-top:12px;display:flex;flex-direction:column;gap:7px;font-size:13px}
   .side-links a{color:var(--brand);font-weight:700}
+  .side-note{margin-top:8px;font-size:11.5px;line-height:1.45;color:var(--muted);font-style:italic}
+  .side-links-2{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 
   /* content */
   .content{flex:1 1 auto;min-width:0;padding:30px 40px 90px}
@@ -195,11 +197,23 @@
     </ul>
     <div class="side-meta">
       <div><b>B4T — where to comment</b></div>
+      <div class="side-note">Each question has its own comment box — expand “💬 Answer / discuss this question” under it (GitHub sign-in).</div>
       <div class="side-links">
-        <a href="#m-clarify" data-jump="methods:m-clarify">→ Clarifications for B4T (main Q&amp;A thread)</a>
-        <a href="#m-frame" data-jump="methods:m-frame">→ Comment on a method section</a>
-        <a href="#feedback">→ Open the feedback form (no GitHub needed)</a>
-        <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/BRIEF.md">→ Read the use-case brief</a>
+        <a href="#q-drought" data-jump="data:q-drought">→ Drought (D-01)</a>
+        <a href="#q-failed" data-jump="data:q-failed">→ Failed season (D-02)</a>
+        <a href="#q-aqueduct" data-jump="data:q-aqueduct">→ Aqueduct water (D-03/04/05)</a>
+        <a href="#q-flood-proxy" data-jump="data:q-flood-proxy">→ Flooding — proxy (F-01)</a>
+        <a href="#q-flood-rp" data-jump="data:q-flood-rp">→ Flooding — return period (F-02/03)</a>
+        <a href="#q-lgp" data-jump="data:q-lgp">→ LGP (T-02 / R-01)</a>
+        <a href="#q-cv" data-jump="data:q-cv">→ Rainfall CV (R-03)</a>
+        <a href="#q-heat" data-jump="data:q-heat">→ Heat window (T-01)</a>
+        <a href="#q-heatgs" data-jump="data:q-heatgs">→ Heat growing season (T-03)</a>
+        <a href="#q-soil" data-jump="data:q-soil">→ Salinity / soil water (S, W)</a>
+      </div>
+      <div class="side-links side-links-2">
+        <a href="#m-clarify" data-jump="methods:m-clarify">→ All clarifications + method (§10)</a>
+        <a href="#feedback" data-jump="data:feedback">→ Feedback form (no GitHub needed)</a>
+        <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/BRIEF.md">→ Use-case brief</a>
       </div>
     </div>
   </aside>
@@ -432,7 +446,8 @@
 
         <p><strong>Recommended baseline (decision).</strong> Adopt <strong>SPEI</strong> as the drought-hazard index. <em>Why SPEI and not ASI/CDI:</em> the CRI's drought slot is a <strong>hazard</strong> layer, and the CRI already scores the crop's response separately as coping capacity — so the hazard should be the <em>climatic</em> water deficit (SPEI), not a realised-stress index like ASI/CDI, which risks double-counting the crop's response. (This is a defensible default rather than an absolute rule — it holds insofar as the coping-capacity layer is structural/socioeconomic and independent of vegetation stress; if it is, ASI/CDI could carry extra hazard information. Worth confirming against how CCC is actually built.) SPEI is also temperature-aware, which matters under warming. <strong>Deliver it by extending CDH's existing SPEI pipeline to global 0.05°</strong> (CHIRPS-CHIRTS-ERA5) — a re-run of a proven pipeline, not a new indicator, and within capacity. Coverage is bounded by CHIRPS to <strong>60°N–60°S</strong>, which covers essentially all B4T crop areas (the practical availability caveat; a modest compute/storage cost for the global run). Keep <strong>FAO ASI</strong> (global, 1 km, crop-masked, open) as a complementary agriculture-specific / validation layer, with <strong>SPEIbase</strong> as an independent global cross-check. Get B4T sign-off on moving from the current precipitation-deficit count to SPEI, and stop calling it “SPI.”</p>
 
-        <div class="note"><b>Questions for B4T.</b> Is temperature-aware <strong>SPEI</strong> acceptable for the drought hazard in place of the precip-only WASP layer (and does it overlap the heat hazard)? What covers the <strong>non-Africa</strong> footprint? And is the current layer WASP (2.5°, 1980–2000) or the document’s “SPI 1974–2004”?</div>
+        <div class="note" id="q-drought"><b>Questions for B4T.</b> Is temperature-aware <strong>SPEI</strong> acceptable for the drought hazard in place of the precip-only WASP layer (and does it overlap the heat hazard)? What covers the <strong>non-Africa</strong> footprint? And is the current layer WASP (2.5°, 1980–2000) or the document’s “SPI 1974–2004”?</div>
+        <details class="cmts" data-term="B4T Q — Drought (D-01)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: internal CDH SPEI product spec (CDH team, July 2026); CHIRPS v3 / SPEIbase steward pages — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
       <div class="card" id="row-d02" style="margin-top:18px">
@@ -469,7 +484,8 @@
         </div>
         <p><strong>Alternatives:</strong> FAO GAEZ growing-period / reliability (open, ~9–10 km, historical + future); CDH internal <strong>water-balance v2</strong> (NDWS/NDWL). <strong>Overlap (Phase 2):</strong> failed-season overlaps the LGP-flip rows and drought — confirm it is a distinct, needed input (double-count risk). Keep the production cost-vs-value test as a B4T economic assumption, separate from the climate layer.</p>
 
-        <div class="note"><b>Questions for B4T.</b> What is the correct source for the failed-season method? Is it active in the production CRI? How does it relate to the LGP rows and the drought layer (overlap)?</div>
+        <div class="note" id="q-failed"><b>Questions for B4T.</b> What is the correct source for the failed-season method? Is it active in the production CRI? How does it relate to the LGP rows and the drought layer (overlap)?</div>
+        <details class="cmts" data-term="B4T Q — Failed season (D-02)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO/USGS WRSI &amp; CHC GeoWRSI; FAO GAEZ v4 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -495,7 +511,8 @@
           </div>
         </div>
 
-        <div class="note"><b>Questions for B4T.</b> Confirm the Aqueduct version (4.0/CMIP6, not CMIP5-era); which scenario + period; 5-GCM ensemble vs single model; exact indicator layers used; and harmonise the 2030 horizon with the CRI's other future layers.</div>
+        <div class="note" id="q-aqueduct"><b>Questions for B4T.</b> Confirm the Aqueduct version (4.0/CMIP6, not CMIP5-era); which scenario + period; 5-GCM ensemble vs single model; exact indicator layers used; and harmonise the 2030 horizon with the CRI's other future layers.</div>
+        <details class="cmts" data-term="B4T Q — Aqueduct water (D-03/04/05)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: WRI Aqueduct 4.0 (Kuzma et al. 2023) technical note + data page — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -531,7 +548,8 @@
           </div>
         </div>
         <p><strong>Secondary option:</strong> Google Flood Hub <em>“Inundation History”</em> — per-pixel <em>frequency</em> of inundation (<strong>1999–2020, 128 m</strong>, wet ≥5 / ≥1 / ≥0.5% = High/Med/Low), Google Cloud Storage, <strong>CC-BY 4.0</strong>. Its README confirms it is a <strong>repackaging of the GLAD Global Surface Water Dynamics dataset</strong> (Pickens et al. 2020, UMD; <strong>Landsat 5/7/8</strong>, 30 m native → 128 m, smoothed) — i.e. a <strong>surface-water-occurrence</strong> product (peer of JRC Global Surface Water), <strong>not a flood-event catalogue</strong>, coverage band excludes far north/south. Useful context; <em>complements</em> GFD, doesn't replace it. (Distinct from Flood Hub's operational Sentinel-1/2 nowcast model.)</p>
-        <div class="note"><b>Question for B4T.</b> Keep an observed flood-frequency proxy, or move the flood hazard entirely to a modelled return-period product (GIRI / Aqueduct Floods)?</div>
+        <div class="note" id="q-flood-proxy"><b>Question for B4T.</b> Keep an observed flood-frequency proxy, or move the flood hazard entirely to a modelled return-period product (GIRI / Aqueduct Floods)?</div>
+        <details class="cmts" data-term="B4T Q — Flooding: observed proxy (F-01)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: Global Flood Database (Tellman et al. 2021) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -596,7 +614,8 @@
           </div>
         </div>
         <p style="font-size:13px;color:var(--muted);margin:2px 0 0">Cross-checks: Kirezci 2020 is CMIP5/RCP and not openly packaged; GIRI is riverine-only. Harmonise the return-period/horizon with the rest of the CRI.</p>
-        <div class="note"><b>Questions for B4T.</b> Which return period does the CRI use (1-in-10)? Is CMIP6 currency (GIRI) or multi-model breadth (Aqueduct Floods) the priority? Confirm the current Aqueduct Floods version/scenario in use.</div>
+        <div class="note" id="q-flood-rp"><b>Questions for B4T.</b> Which return period does the CRI use (1-in-10)? Is CMIP6 currency (GIRI) or multi-model breadth (Aqueduct Floods) the priority? Confirm the current Aqueduct Floods version/scenario in use.</div>
+        <details class="cmts" data-term="B4T Q — Flooding: return period (F-02/03)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: WRI Aqueduct Floods (Ward et al. 2020); GIRI global flood hazard model (CIMA/UNEP-GRID) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -633,7 +652,8 @@
         </div>
         <p><strong>Why GAEZ v5:</strong> it computes LGP directly from an agro-climatic water balance — the exact construct — as a ready CMIP6 product. (Thermal LGPt Ta&gt;5/10/20/30&nbsp;°C are separate layers.)</p>
         <p><strong>Note — likely duplicate + overlap.</strong> T-03 (under High temperature) is word-for-word the R-01 LGP-flip — resolve before implementing. LGP adequacy also overlaps failed-season (D-02) and drought — a Phase-2 consolidation question.</p>
-        <div class="note"><b>Questions for B4T.</b> Confirm the LGP definition/threshold in production; is T-03 the same layer as R-01? Is coarser GAEZ (~9 km) acceptable, or derive at finer resolution from NEX-GDDP v2?</div>
+        <div class="note" id="q-lgp"><b>Questions for B4T.</b> Confirm the LGP definition/threshold in production; is T-03 the same layer as R-01? Is coarser GAEZ (~9 km) acceptable, or derive at finer resolution from NEX-GDDP v2?</div>
+        <details class="cmts" data-term="B4T Q — LGP (T-02 / R-01)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO GAEZ v5 (CMIP6/ISIMIP3b); CDH NEX-GDDP-CMIP6 v2 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -668,7 +688,8 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Question for B4T.</b> Keep the historic-CV-as-future-proxy design, or move to a CMIP6 future-variability metric?</div>
+        <div class="note" id="q-cv"><b>Question for B4T.</b> Keep the historic-CV-as-future-proxy design, or move to a CMIP6 future-variability metric?</div>
+        <details class="cmts" data-term="B4T Q — Rainfall CV (R-03)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: CHIRPS v3 (CHC/UCSB) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -691,7 +712,8 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Question for B4T.</b> Is the 1983–2016 window acceptable, or is an update-to-present / future-heat pairing wanted?</div>
+        <div class="note" id="q-heat"><b>Question for B4T.</b> Is the 1983–2016 window acceptable, or is an update-to-present / future-heat pairing wanted?</div>
+        <details class="cmts" data-term="B4T Q — Heat window (T-01)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: GEHE (Tuholske et al. 2023, NASA SEDAC) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -726,7 +748,8 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Questions for B4T.</b> Confirm the growing-season definition + 30 °C threshold in production; internal NEX-GDDP derivation vs ready GAEZ v5 thermal?</div>
+        <div class="note" id="q-heatgs"><b>Questions for B4T.</b> Confirm the growing-season definition + 30 °C threshold in production; internal NEX-GDDP derivation vs ready GAEZ v5 thermal?</div>
+        <details class="cmts" data-term="B4T Q — Heat growing season (T-03)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: CDH NEX-GDDP-CMIP6 v2; FAO GAEZ v5 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -750,7 +773,8 @@
         </div>
         <p><strong>Consolidation flags (Phase 2).</strong> Two overlaps to resolve: <strong>two salinity products</strong> (S-01 vs S-02) and <strong>four soil-water products</strong> (W-01 retention, W-02 AWC, W-03 rooting-zone, W-04 PASW) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. B4T also notes the crop <strong>coping-capacity (CCC)</strong> soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).</p>
         <p><strong>Recommendation.</strong> Keep all seven off-the-shelf (catalogue; update W-01/W-02 to SoilGrids 2.0; verify W-04's dataset link). No CDH build required. In Phase 2, consolidate the salinity pair and the soil-water quartet to what the index actually uses; add the projected AEI (SSP) if a future irrigation layer is needed.</p>
-        <div class="note"><b>Questions for B4T.</b> Are both salinity products needed (S-01 vs S-02)? Which of the four soil-water layers are actually used? Is a future irrigation layer (projected AEI) wanted?</div>
+        <div class="note" id="q-soil"><b>Questions for B4T.</b> Are both salinity products needed (S-01 vs S-02)? Which of the four soil-water layers are actually used? Is a future irrigation layer (projected AEI) wanted?</div>
+        <details class="cmts" data-term="B4T Q — Salinity / soil water (S, W)"><summary>💬 Answer / discuss this question</summary><div class="giscus-slot"></div></details>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO GSASmap; ISRIC SoilGrids 2.0 / salinity; Stocker 2023 (Zenodo); Gupta 2023; Mehta 2024 (Zenodo) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
