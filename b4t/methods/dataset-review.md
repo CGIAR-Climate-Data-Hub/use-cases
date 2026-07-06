@@ -28,33 +28,33 @@ Fills as rows complete. Current shape, from the §3 interrogation:
 
 **Table 1.** Verdict (about the CRI) and CDH action (about the Hub) for all 23 datasets.
 
-**Temporal** reflects the CRI's 50-50 present/future design: *Future* = already carries projections; *Historic + future (ready/derive)* = present-climate now, with a future element off-the-shelf or via a CDH build; *Historic (static)* = observational, no meaningful future.
+**Temporal** (the CRI's 50-50 present/future design): *Historic* = observational; *Future* = carries climate projections; *Historic + Future* = both. Recommendations are in the Verdict / CDH-action columns and §6 — not the Temporal column.
 
 | Code | Variable | Hazard | Temporal | Verdict | CDH action | Effort |
 | --- | --- | --- | --- | --- | --- | --- |
-| D-01 | SPI/WASP (drought-event frequency) | Drought | Historic + future (derive) | **Adopt SPEI** — extend CDH pipeline global | Re-run CDH SPEI pipeline globally; ASI complementary | Low–med |
-| D-02 | Failed season | Drought | Historic + future (derive) | **Clarify** — confirm source &amp; role | Confirm w/ Bert; WRSI if retained | — |
-| D-03 | Available blue water | Drought | Future (CMIP6) | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| D-04 | Gross water demand / net consumption | Drought | Future (CMIP6) | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| D-05 | Baseline water stress | Drought | Future (CMIP6) | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| F-01 | Dartmouth flood frequency | Flooding | Historic (observed) | **Replace** — Global Flood Database | Ingest GFD (satellite-observed, GEE) | Low |
-| F-02 | River flood hazard | Flooding | Future (CMIP5→6) | **Modernize** → GIRI (CMIP6) | Ingest GIRI; Aqueduct Floods = CMIP5 alt | Med |
-| F-03 | Coastal flood hazard | Flooding | Future (CMIP5→6) | **Modernize pending** — coastal gap | No open CMIP6 *inundation* layer; open CMIP6 *driver* exists (Copernicus CDS sea-level indicators) → build, not off-the-shelf; keep Aqueduct Floods coastal meanwhile | Med |
-| R-01 | LGP flip over 120 days | Changed rainfall | Future (CMIP5→6) | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
-| R-02 | LGP flip over 90 days | Changed rainfall | Future (CMIP5→6) | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
-| R-03 | Annual rainfall CV | Changed rainfall | Historic + future (derive) | **Re-derive** on CHIRPS v3 | CHIRPS-derived annual CV (SPEI stack) | Low |
-| R-04 | Intra-annual variability | Changed rainfall | Future (CMIP6) | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| R-05 | Seasonal variability | Changed rainfall | Future (CMIP6) | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
-| T-01 | Extreme humid heat days | High temperature | Historic + future (derive) | **Keep** — GEHE (modern, open) | Catalogue-as-is; pair CMIP6 future | Low |
-| T-03 | LGP-linked temperature stress | High temperature | Future (CMIP5→6) | **Clarify** — duplicate of R-01 (drop/merge) | Confirm w/ Bert; drop or merge | — |
-| T-02 | Growing-season Tmax flip 30C | High temperature | Future (CMIP5→6) | **Modernize** → NEX-GDDP v2 (CMIP6) | Derive growing-season Tmax flip; GAEZ v5 alt | Med |
-| S-01 | Salt-affected soils map | Salinity | Historic (static) | **Keep** — FAO GSASmap (off-the-shelf) | Catalogue-as-is | Low |
-| S-02 | Global soil salinity | Salinity | Historic (static) | **Keep** — ISRIC (off-the-shelf) | Catalogue; clarify overlap w/ S-01 | Low |
-| W-01 | Water retention 1500 kPa | Soil water | Historic (static) | **Keep** — SoilGrids 2.0 (off-the-shelf) | Update to SoilGrids 2.0 | Low |
-| W-02 | Available water capacity | Soil water | Historic (static) | **Keep** — SoilGrids 2.0 (off-the-shelf) | Update to SoilGrids 2.0 | Low |
-| W-03 | Rooting zone water storage | Soil water | Historic (static) | **Keep** — Stocker 2023 (off-the-shelf) | Catalogue (Zenodo); consolidate | Low |
-| W-04 | Plant-available soil water | Soil water | Historic (static) | **Keep** — Gupta 2023 (off-the-shelf) | Catalogue (Zenodo 6777126, CC-BY); consolidate | Low |
-| I-01 | Area equipped with irrigation | Irrigation | Historic + future (ready) | **Keep** — Mehta 2024 (off-the-shelf) | Catalogue (Zenodo); projected AEI for future | Low |
+| D-01 | SPI/WASP (drought-event frequency) | Drought | Historic + Future | **Adopt SPEI** — extend CDH pipeline global | Re-run CDH SPEI pipeline globally; ASI complementary | Low–med |
+| D-02 | Failed season | Drought | Historic + Future | **Clarify** — confirm source &amp; role | Confirm w/ Bert; WRSI if retained | — |
+| D-03 | Available blue water | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
+| D-04 | Gross water demand / net consumption | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
+| D-05 | Baseline water stress | Drought | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
+| F-01 | Dartmouth flood frequency | Flooding | Historic | **Replace** — Global Flood Database | Ingest GFD (satellite-observed, GEE) | Low |
+| F-02 | River flood hazard | Flooding | Future | **Modernize** → GIRI (CMIP6) | Ingest GIRI; Aqueduct Floods = CMIP5 alt | Med |
+| F-03 | Coastal flood hazard | Flooding | Future | **Modernize pending** — coastal gap | No open CMIP6 *inundation* layer; open CMIP6 *driver* exists (Copernicus CDS sea-level indicators) → build, not off-the-shelf; keep Aqueduct Floods coastal meanwhile | Med |
+| R-01 | LGP flip over 120 days | Changed rainfall | Future | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
+| R-02 | LGP flip over 90 days | Changed rainfall | Future | **Modernize** → GAEZ v5 (CMIP6) | GAEZ v5 LGP; or derive from NEX-GDDP v2 | Med |
+| R-03 | Annual rainfall CV | Changed rainfall | Historic + Future | **Re-derive** on CHIRPS v3 | CHIRPS-derived annual CV (SPEI stack) | Low |
+| R-04 | Intra-annual variability | Changed rainfall | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
+| R-05 | Seasonal variability | Changed rainfall | Future | **Keep** — Aqueduct 4.0 (CMIP6) | Catalogue-as-is; confirm version + slice | Low |
+| T-01 | Extreme humid heat days | High temperature | Historic + Future | **Keep** — GEHE (modern, open) | Catalogue-as-is; pair CMIP6 future | Low |
+| T-03 | LGP-linked temperature stress | High temperature | Future | **Clarify** — duplicate of R-01 (drop/merge) | Confirm w/ Bert; drop or merge | — |
+| T-02 | Growing-season Tmax flip 30C | High temperature | Future | **Modernize** → NEX-GDDP v2 (CMIP6) | Derive growing-season Tmax flip; GAEZ v5 alt | Med |
+| S-01 | Salt-affected soils map | Salinity | Historic | **Keep** — FAO GSASmap | Catalogue-as-is | Low |
+| S-02 | Global soil salinity | Salinity | Historic | **Keep** — ISRIC | Catalogue; clarify overlap w/ S-01 | Low |
+| W-01 | Water retention 1500 kPa | Soil water | Historic | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
+| W-02 | Available water capacity | Soil water | Historic | **Keep** — SoilGrids 2.0 | Update to SoilGrids 2.0 | Low |
+| W-03 | Rooting zone water storage | Soil water | Historic | **Keep** — Stocker 2023 | Catalogue (Zenodo); consolidate | Low |
+| W-04 | Plant-available soil water | Soil water | Historic | **Keep** — Gupta 2023 | Catalogue (Zenodo 6777126, CC-BY); consolidate | Low |
+| I-01 | Area equipped with irrigation | Irrigation | Historic + Future | **Keep** — Mehta 2024 | Catalogue (Zenodo); projected AEI for future | Low |
 
 ## 3. Current inputs
 
@@ -347,7 +347,7 @@ The rest of this row is the full worked example (present-data conflict, SPEI spe
 
 Note: T-03 is covered under the LGP-flips block — likely a verbatim duplicate of R-01; Clarify with Bert, drop or merge.
 
-### Salinity, soil water & irrigation (off-the-shelf) — S-01/02, W-01–04, I-01
+### Salinity, soil water & irrigation — S-01/02, W-01–04, I-01
 
 **Verdict: Keep — off-the-shelf.** All seven are modern, open, ready products from authoritative stewards; no build needed. The work is cataloguing + consolidation, not replacement.
 
