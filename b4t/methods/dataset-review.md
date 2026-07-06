@@ -2,12 +2,12 @@
 
 Reviews the 23 hazard/vulnerability datasets in Appendix Table 1 of the CRI documentation, recommends modern **open** alternatives feasible for CDH integration, and flags what belongs to the Phase-2 methodology review. Method context: [cri-formulation.md](./cri-formulation.md). Canonical dataset list: [appendix-table-1.csv](./appendix-table-1.csv).
 
-**How to read.** §1 headline; §2 decisions at a glance; §3 current vs recommended (identical axes — the core comparison); §4 what CDH should ingest; §5 what this does *not* fix; §6 per-row audit detail. Backing data: [current-datasets.csv](./current-datasets.csv), [improved-options.csv](./improved-options.csv), sources: [evidence/sources.md](./evidence/sources.md).
+**How to read.** §1 headline; §2 decisions at a glance; §3 current inputs (what the CRI uses now — no recommendations); §4 what CDH should ingest; §5 what this does *not* fix; §6 per-row audit detail (current vs recommended). Backing data: [current-datasets.csv](./current-datasets.csv), [improved-options.csv](./improved-options.csv), sources: [evidence/sources.md](./evidence/sources.md).
 
 **Verdict** (about the CRI): **Keep** · **Replace** (swap in a ready open layer) · **Re-derive** (recompute the metric on a modern open input) · **Clarify** (need B4T input) · **No open replacement confirmed**.
 **CDH action** (about the hub): **Catalogue-as-is** · **Ingest-new** · **Derive-in-pipeline** · **No-action**.
 
-**Evidence rule.** Current facts come only from B4T source documents; candidate facts only from steward pages, verified live and adversarially re-checked. **Where Bert's emails (2026-04-29/30) and the CRI documentation disagree, the emails describe the *actual* data used and take precedence — the published doc is not fully up to date.** Such disagreements are marked `conflicted`. Unknowns are written as unknowns (`pending`).
+**Evidence rule.** Current facts come only from B4T source documents; candidate facts only from steward pages, verified live and adversarially re-checked. **Where Bert's emails (2026-04-29/30) and the CRI documentation disagree, the emails describe the *actual* data used and take precedence — the published doc is not fully up to date.** Such disagreements are marked `conflicted`; a lineage detail the source doesn't give is marked `not stated` (a gap in the record, not an incomplete review).
 
 **Reuse rule.** Recommendations **build on datasets the Hub already produces or can catalogue**, so they are ready to adopt. Internal assets to draw on first: the **CHIRPS-CHIRTS-ERA5 SPEI** observational track (drought/rainfall, Africa), the **NASA NEX-GDDP-CMIP6 v2** projections track (CMIP6/SSP source for future rows), and the **water-balance v2** track (NDWS/NDWL, FAO-56 Penman-Monteith ET₀) for soil-water/water-stress rows. New datasets can follow as later enhancements where needed.
 
@@ -58,37 +58,37 @@ Fills as rows complete. Current shape, from the §3 interrogation:
 
 ## 3. Current inputs
 
-What B4T uses **now**, on 12 lineage axes. Populated from primary sources and **corrected against Bert's emails** (which describe the actual data; the CRI doc lags). `conflicted` = sources disagree; `pending` = not yet verified. Rendered from [current-datasets.csv](./current-datasets.csv).
+What B4T uses **now**, on 12 lineage axes — **current inputs only; recommendations are in §2 and §6**, not here. Populated from primary sources and **corrected against Bert's emails** (which describe the actual data; the CRI doc lags). `conflicted` = sources disagree; `not stated` = a lineage detail the source doesn't give (a gap in the record, **not** an incomplete review — every dataset has a verdict in §2/§6). Rendered from [current-datasets.csv](./current-datasets.csv).
 
-**Table 2.** Current-state lineage of the 23 inputs on twelve axes, from B4T source documents and corrected against Bert's emails. In *Downscaling / bias*: a named technique (delta, quantile-mapping, neural-net) where known; `present (…)` = a step was applied but technique not stated; `none` = no climate downscaling/bias; `N/A` = not applicable (historical/observational); `pending` = unverified. `CMIP5*` = provenance not fully confirmed. Specifics: R-01/02, T-02/03 use Jones-&-Thornton downscaling + bias-correction, exact technique unstated; F-02 = rainfall bias-correction only; W-01's random-forest pedotransfer is soil modelling, not a climate step → `none`.
+**Table 2.** Current-state lineage of the 23 inputs on twelve axes, from B4T source documents and corrected against Bert's emails. In *Downscaling / bias*: a named technique (delta, quantile-mapping, neural-net) where known; `present (…)` = a step was applied but technique not stated; `none` = no climate downscaling/bias; `N/A` = not applicable (historical/observational); `not stated` = detail not given in the source. `CMIP5*` = provenance not fully confirmed. Specifics: R-01/02, T-02/03 use Jones-&-Thornton downscaling + bias-correction, exact technique unstated; F-02 = rainfall bias-correction only; W-01's random-forest pedotransfer is soil modelling, not a climate step → `none`.
 
 | Hazard | Code | Variable | Resolution | Baseline dataset | Baseline period | Future dataset | Future period | Scenario | CMIP | Downscaling / bias | GCM ensemble |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Drought | D-01 | SPI/WASP (event freq.) | 2.5° → 0.05° grid | WASP (IRI); Dilley 2005 — *doc says SPI/Ericksen* | 1980–2000 *(doc: 1974–2004)* | N/A | N/A | N/A | N/A | N/A | N/A |
-| Drought | D-02 | Failed season | pending | Hyman et al. 2025 | 100 years | N/A | N/A | N/A | N/A | pending | N/A |
-| Drought | D-03 | Available blue water | pending | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | pending | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | pending | pending |
-| Drought | D-04 | Gross water demand | pending | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | pending | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | pending | pending |
-| Drought | D-05 | Baseline water stress | pending | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | pending | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | pending | pending |
+| Drought | D-02 | Failed season | not stated | Hyman et al. 2025 | 100 years | N/A | N/A | N/A | N/A | not stated | N/A |
+| Drought | D-03 | Available blue water | not stated | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | not stated | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | not stated | not stated |
+| Drought | D-04 | Gross water demand | not stated | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | not stated | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | not stated | not stated |
+| Drought | D-05 | Baseline water stress | not stated | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | not stated | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | not stated | not stated |
 | Flooding | F-01 | Dartmouth flood freq. | ~1° → 0.05° | Dartmouth Flood Obs. (Dilley 2005) | 1985–2003 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Flooding | F-02 | River flood hazard | pending | ISI-MIP forcing | — | ISI-MIP (GCM×RCP) | 2030 (2010–49) | RCP8.5 | CMIP5-era | present | pending |
-| Flooding | F-03 | Coastal flood hazard | MERIT 30″ → 0.05° | GTSR water levels | 1979–2014 | SLR projection | 2030 | RCP | CMIP5-era | pending | pending |
+| Flooding | F-02 | River flood hazard | not stated | ISI-MIP forcing | — | ISI-MIP (GCM×RCP) | 2030 (2010–49) | RCP8.5 | CMIP5-era | present | not stated |
+| Flooding | F-03 | Coastal flood hazard | MERIT 30″ → 0.05° | GTSR water levels | 1979–2014 | SLR projection | 2030 | RCP | CMIP5-era | not stated | not stated |
 | Changed rainfall | R-01 | LGP flip >120d | 0.05° | Thornton baseline (Jones & Thornton) | ~2000s | Downscaled CMIP5 (Jones & Thornton 2009/13/15) | 2050s | **RCP8.5** | **CMIP5** *(uncertain)* | present | 17 CMIP5 GCMs *(Thornton pers. comm.)* |
 | Changed rainfall | R-02 | LGP flip >90d | 0.05° | Thornton baseline | ~2000s | Downscaled CMIP5 (Jones & Thornton) | 2050s | **RCP8.5** | **CMIP5** *(uncertain)* | present | 17 CMIP5 GCMs |
 | Changed rainfall | R-03 | Annual rainfall CV | 0.05° | Observed rainfall (Dilley 2005 / Thornton) | Historic | current used as future proxy | N/A | N/A | N/A | N/A | N/A |
-| Changed rainfall | R-04 | Intra-annual variability | pending | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | pending | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | pending | pending |
-| Changed rainfall | R-05 | Seasonal variability | pending | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | pending | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | pending | pending |
-| High temperature | T-01 | Extreme humid heat days | 0.05° (~5 km) | Tuholske 2023 GEHE | 1983–2016 | N/A | N/A | N/A | N/A | pending | N/A |
+| Changed rainfall | R-04 | Intra-annual variability | not stated | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | not stated | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | not stated | not stated |
+| Changed rainfall | R-05 | Seasonal variability | not stated | Aqueduct (version?) | 1960–2019 | Aqueduct | 2030 | not stated | doc: 4.0/CMIP6 · Bert: maybe CMIP5-era | not stated | not stated |
+| High temperature | T-01 | Extreme humid heat days | 0.05° (~5 km) | Tuholske 2023 GEHE | 1983–2016 | N/A | N/A | N/A | N/A | not stated | N/A |
 | High temperature | T-03 | LGP-linked temp stress | 0.05° | Thornton baseline | ~2000s | Downscaled CMIP5 (Jones & Thornton) | 2050s | **RCP8.5** | **CMIP5** *(uncertain)* | present | 17 CMIP5 GCMs · likely duplicate of R-01 |
 | High temperature | T-02 | Tmax flip >30C | 0.05° | Thornton baseline | ~2000s | Downscaled CMIP5 (Jones & Thornton) | 2050s | **RCP8.5** | **CMIP5** *(uncertain)* | present | 17 CMIP5 GCMs |
-| Salinity | S-01 | Salt-affected soils | pending | FAO GSASmap (Omuto 2020) | 1970–2005 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Salinity | S-02 | Global soil salinity | pending | ISRIC (Ivushkin 2019) | 1986–2016 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Soil water | W-01 | Water retention 1500 kPa | pending | ISRIC WoSIS (Batjes 2024) | 1918–2013 | N/A | N/A | N/A | N/A | none | N/A |
+| Salinity | S-01 | Salt-affected soils | not stated | FAO GSASmap (Omuto 2020) | 1970–2005 | N/A | N/A | N/A | N/A | N/A | N/A |
+| Salinity | S-02 | Global soil salinity | not stated | ISRIC (Ivushkin 2019) | 1986–2016 | N/A | N/A | N/A | N/A | N/A | N/A |
+| Soil water | W-01 | Water retention 1500 kPa | not stated | ISRIC WoSIS (Batjes 2024) | 1918–2013 | N/A | N/A | N/A | N/A | none | N/A |
 | Soil water | W-02 | Available water capacity | 250 m | SoilGrids250m (Hengl 2017) | 1950–2016 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Soil water | W-03 | Rooting zone storage | pending | Stocker et al. 2023 | 2003–2018 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Soil water | W-04 | Plant-available soil water | pending | Gupta et al. 2023 | 1979–2016 | N/A | N/A | N/A | N/A | N/A | N/A |
-| Irrigation | I-01 | Area equipped w/ irrigation | pending | Mehta et al. 2024 | 2000–2015 | N/A | N/A | N/A | N/A | N/A | N/A |
+| Soil water | W-03 | Rooting zone storage | not stated | Stocker et al. 2023 | 2003–2018 | N/A | N/A | N/A | N/A | N/A | N/A |
+| Soil water | W-04 | Plant-available soil water | not stated | Gupta et al. 2023 | 1979–2016 | N/A | N/A | N/A | N/A | N/A | N/A |
+| Irrigation | I-01 | Area equipped w/ irrigation | not stated | Mehta et al. 2024 | 2000–2015 | N/A | N/A | N/A | N/A | N/A | N/A |
 
-> **Recommended alternatives** are held in [improved-options.csv](./improved-options.csv) and shown inline (as shaded → rows) in the rendered report. So far only D-01 is reviewed → **CDH SPEI-03** (existing CDH product: CHIRPS v3 + CHIRTS-ERA5, 0.05°, Africa; SPEI = precipitation − PET). The CMIP5/pre-CMIP6 layers are replaced by default (via the internal NEX-GDDP-CMIP6 v2 track); other rows carry no recommendation until reviewed.
+> **Recommended alternatives** are held in [improved-options.csv](./improved-options.csv); the recommendation per row is in [§2 Decisions](#2-decisions-at-a-glance) and [§6 Dataset details](#6-dataset-details-per-row-audit-layer) — deliberately **not** in this current-inputs table. The CMIP5/pre-CMIP6 layers are replaced by default (via the internal NEX-GDDP-CMIP6 v2 track); Aqueduct rows depend on confirming the version.
 
 ## 4. CDH integration plan
 
@@ -351,17 +351,17 @@ Note: T-03 is covered under the LGP-flips block — likely a verbatim duplicate 
 
 **Verdict: Keep — off-the-shelf.** All seven are modern, open, ready products from authoritative stewards; no build needed. The work is cataloguing + consolidation, not replacement.
 
-Seven ready open datasets to **catalogue as-is** (no build). Present ≈ Recommended, except W-01/W-02 (update to SoilGrids 2.0).
+For these seven the recommendation is to **keep the current dataset and catalogue it as-is** — so *Present and Recommended are the same dataset* — **except W-01 / W-02**, where we recommend updating to the current **SoilGrids 2.0**. No CDH build. (The "Present" column is what the CRI uses now.)
 
-| Row | Recommended dataset | Resolution | Temporal | Licence · access | CDH action |
+| Row | Present — current dataset (CRI now) | Recommended | Resolution | Temporal | Licence · access |
 | --- | --- | --- | --- | --- | --- |
-| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | — | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform | Keep · catalogue |
-| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | — | 1986–2016 | open · ISRIC file server | Keep · overlaps S-01 |
-| W-01 | Water retention 1500 kPa → **SoilGrids 2.0** (from WoSIS, Batjes 2024) | 250 m | 1918–2013 | CC-BY 4.0 · ISRIC | Update to 2.0 |
-| W-02 | Available water capacity → **SoilGrids 2.0** (FC−WP; from SoilGrids250m, Hengl 2017) | 250 m | 1950–2016 | CC-BY 4.0 · ISRIC | Update to 2.0 |
-| W-03 | Rooting-zone water storage (Stocker 2023) | — | 2003–2018 | open · Zenodo | Keep · catalogue |
-| W-04 | Plant-available soil water (Gupta 2023) | 1 km | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 | Keep · catalogue |
-| I-01 | Area equipped for irrigation (Mehta 2024) | — | 2000–2015 | open · Zenodo | Keep · + projected AEI (Gao, SSP) for future |
+| S-01 | FAO **GSASmap** (Omuto 2020) — salt-affected soils (ECe/ESP/pH) | **Keep** — same dataset, catalogue as-is | — | 1970–2005 | CC-BY 4.0 by FAO default *(confirm)* · GloSIS platform |
+| S-02 | ISRIC Global Soil Salinity (Ivushkin 2019) | **Keep** — same; overlaps S-01 (clarify) | — | 1986–2016 | open · ISRIC file server |
+| W-01 | ISRIC **WoSIS** (Batjes 2024) — water retention 1500 kPa | **Update → SoilGrids 2.0** (newer version) | 250 m | 1918–2013 | CC-BY 4.0 · ISRIC |
+| W-02 | **SoilGrids250m** (Hengl 2017) — available water capacity | **Update → SoilGrids 2.0** (FC−WP) | 250 m | 1950–2016 | CC-BY 4.0 · ISRIC |
+| W-03 | Stocker 2023 — rooting-zone water storage | **Keep** — same dataset | — | 2003–2018 | open · Zenodo |
+| W-04 | Gupta 2023 — plant-available soil water | **Keep** — same dataset | 1 km | 1979–2016 | CC-BY 4.0 · Zenodo 6777126 |
+| I-01 | Mehta 2024 — area equipped for irrigation | **Keep** — same; + projected AEI (Gao, SSP) for future | — | 2000–2015 | open · Zenodo |
 
 **Consolidation flags (Phase 2).** Two salinity products (S-01 vs S-02) and four soil-water products (W-01/02/03/04) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. Bert also notes the crop **coping-capacity (CCC)** soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).
 
