@@ -194,10 +194,11 @@
       <li><a href="#feedback"><span class="n">7</span><span>Feedback &amp; corrections</span></a></li>
     </ul>
     <div class="side-meta">
-      <div><b>Status</b>All 23 rows scoped (draft)</div>
-      <div><b>Phase</b>1 of 2 — datasets</div>
-      <div><b>Verified</b>2 July 2026</div>
+      <div><b>B4T — where to comment</b></div>
       <div class="side-links">
+        <a href="#m-clarify" data-jump="methods:m-clarify">→ Clarifications for B4T (main Q&amp;A thread)</a>
+        <a href="#m-frame" data-jump="methods:m-frame">→ Comment on a method section</a>
+        <a href="#feedback">→ Open the feedback form (no GitHub needed)</a>
         <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/BRIEF.md">→ Read the use-case brief</a>
       </div>
     </div>
@@ -239,7 +240,7 @@
           <thead><tr><th class="sortable">Code</th><th class="sortable">Variable</th><th class="sortable">Hazard</th><th class="sortable">How used</th><th class="sortable">Verdict</th><th class="sortable">CDH action</th><th class="sortable">Effort</th></tr></thead>
           <tbody>
             <tr data-hazard="Drought"><td class="code"><a href="#row-d01">D-01</a></td><td class="var" title="Drought-event frequency: count of drought events (≥3 consecutive months with ≤50% of normal precipitation).">SPI/WASP (drought-event frequency)</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-mod">Adopt SPEI — extend CDH global</span></td><td>Re-run CDH SPEI pipeline globally; ASI complementary</td><td class="num">Low–med</td></tr>
-            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-clarify">Clarify — confirm source &amp; role</span></td><td>Confirm w/ Bert; WRSI if retained</td><td>—</td></tr>
+            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-clarify">Clarify — confirm source &amp; role</span></td><td>Confirm w/ B4T; WRSI if retained</td><td>—</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-03</a></td><td class="var" title="Renewable surface + groundwater available (WRI Aqueduct).">Available blue water</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-04</a></td><td class="var" title="Total sectoral water demand / net consumption (WRI Aqueduct).">Gross water demand / net consumption</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-05</a></td><td class="var" title="Ratio of water withdrawals to available renewable supply — water stress (WRI Aqueduct).">Baseline water stress</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
@@ -252,7 +253,7 @@
             <tr data-hazard="Changed rainfall"><td class="code"><a href="#row-aqueduct">R-04</a></td><td class="var" title="Within-year (intra-annual) water variability (WRI Aqueduct).">Intra-annual variability</td><td>Changed rainfall</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="Changed rainfall"><td class="code"><a href="#row-aqueduct">R-05</a></td><td class="var" title="Seasonal water variability (WRI Aqueduct).">Seasonal variability</td><td>Changed rainfall</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="High temperature"><td class="code"><a href="#row-t01">T-01</a></td><td class="var" title="Annual count of days with max Wet-Bulb Globe Temperature above ISO thresholds (GEHE).">Extreme humid heat days</td><td>High temperature</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-keep">Keep — GEHE (modern, open)</span></td><td>Catalogue-as-is; pair CMIP6 future</td><td class="num">Low</td></tr>
-            <tr data-hazard="High temperature"><td class="code"><a href="#row-lgp">T-03</a></td><td class="var" title="LGP-linked temperature stress (wording identical to R-01 — likely a duplicate).">LGP-linked temperature stress</td><td>High temperature</td><td><div class="tcell"><span class="tchip chg">Change</span></div></td><td><span class="pill p-clarify">Clarify — duplicate of R-01 (drop/merge)</span></td><td>Confirm w/ Bert; drop or merge</td><td>—</td></tr>
+            <tr data-hazard="High temperature"><td class="code"><a href="#row-lgp">T-03</a></td><td class="var" title="LGP-linked temperature stress (wording identical to R-01 — likely a duplicate).">LGP-linked temperature stress</td><td>High temperature</td><td><div class="tcell"><span class="tchip chg">Change</span></div></td><td><span class="pill p-clarify">Clarify — duplicate of R-01 (drop/merge)</span></td><td>Confirm w/ B4T; drop or merge</td><td>—</td></tr>
             <tr data-hazard="High temperature"><td class="code"><a href="#row-t02">T-02</a></td><td class="var" title="Growing-season mean daily max temperature crossing 30 °C between baseline and future.">Growing-season Tmax flip 30 °C</td><td>High temperature</td><td><div class="tcell"><span class="tchip chg">Change</span></div></td><td><span class="pill p-mod">Modernize → NEX-GDDP v2 (CMIP6)</span></td><td>Derive growing-season Tmax flip; GAEZ v5 alt</td><td class="num">Med</td></tr>
             <tr data-hazard="Salinity"><td class="code"><a href="#row-soil">S-01</a></td><td class="var" title="Salt-affected soils — EC/ESP/pH classes (FAO GSASmap).">Salt-affected soils map</td><td>Salinity</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-keep">Keep — FAO GSASmap</span></td><td>Catalogue-as-is</td><td class="num">Low</td></tr>
             <tr data-hazard="Salinity"><td class="code"><a href="#row-soil">S-02</a></td><td class="var" title="Remote-sensing soil salinity classes (ISRIC).">Global soil salinity</td><td>Salinity</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-keep">Keep — ISRIC</span></td><td>Catalogue; clarify overlap w/ S-01</td><td class="num">Low</td></tr>
@@ -269,8 +270,8 @@
     <section id="current">
       <h2>Current inputs</h2>
       <p class="sub">Each dataset’s current lineage on twelve axes. Where a modern alternative is recommended, it appears directly beneath as a shaded <strong>→ rec</strong> row (<strong>→ alt</strong> = agriculture-specific alternative), so old and new line up on identical axes. Rows recommended as <strong>Keep</strong> (already modern &amp; open) carry no → row — the current row stands.</p>
-      <p><strong>In plain terms:</strong> “CMIP” is the generation of coordinated global climate-model experiments — higher numbers are newer and better-supported. The rust-shaded cells mark the future <strong>CMIP5 / RCP8.5</strong> layers (17 CMIP5 models, per Philip Thornton; the <code>*</code> flags that this provenance is not fully confirmed — Bert is unsure, and it may in part be older). They are a generation behind today’s CMIP6/SSP standard, so they are prime modernization targets. The drought layer (D-01) is <strong>WASP</strong> — a coarse 2.5° precipitation-deficit index, not the “SPI” the document calls it. Rows marked <code>pending</code> are not yet verified in detail; shown honestly rather than guessed.</p>
-      <p class="cap"><b>Table 2.</b> Current-state lineage of the 23 inputs on twelve axes — <strong>what the CRI uses now</strong>, from B4T source documents and corrected against Bert’s emails (which describe the actual data). Recommendations are <em>not</em> shown here — they are in <a href="#decisions">§2 Decisions at a glance</a> and <a href="#detail">§6 Dataset details</a>. In <em>Downscaling / bias-correction</em>: a named technique (delta, quantile-mapping, neural-net, …) where known; <em>present (…)</em> = a step was applied but the technique is not stated in available sources; <em>none</em> = no climate downscaling/bias step; <em>N/A</em> = not applicable to a historical/observational layer; <em>not stated</em> = that lineage detail is not given in the source documents — a gap in the current-input record, <strong>not</strong> an incomplete review (every dataset has a verdict in §2 and §6). <em>CMIP5*</em> = provenance not fully confirmed (moot — CMIP5/pre-CMIP6 layers are replaced by default). Rust cells = pre-CMIP6/RCP8.5 legacy → replace. Specifics behind the `present`/`none` values: the CCAFS/Thornton future layers (R-01/02, T-02/03) apply Jones-&-Thornton statistical downscaling and bias-correction but the exact technique is not stated in the sources; F-02 applies bias-correction to rainfall only; W-01’s pedotransfer (random-forest) is soil modelling, not a climate step, hence `none`. The <strong>How-used</strong> chip on each variable — <span class="tchip base">Baseline</span> (historic value), <span class="tchip chg">Change</span> (baseline→future difference), <span class="tchip fut">Future</span> (future projection) — says how the CRI ingests it. <em>Dataset reference</em> is the dataset's own history used to build the layer, so a row can carry a reference period yet be used as <span class="tchip fut">Future</span> (e.g. the Aqueduct rows).</p>
+      <p><strong>In plain terms:</strong> “CMIP” is the generation of coordinated global climate-model experiments — higher numbers are newer and better-supported. The rust-shaded cells mark the future <strong>CMIP5 / RCP8.5</strong> layers (17 CMIP5 models, per Philip Thornton; the <code>*</code> flags that this provenance is not fully confirmed — B4T is unsure, and it may in part be older). They are a generation behind today’s CMIP6/SSP standard, so they are prime modernization targets. The drought layer (D-01) is <strong>WASP</strong> — a coarse 2.5° precipitation-deficit index, not the “SPI” the document calls it. Rows marked <code>pending</code> are not yet verified in detail; shown honestly rather than guessed.</p>
+      <p class="cap"><b>Table 2.</b> Current-state lineage of the 23 inputs on twelve axes — <strong>what the CRI uses now</strong>, from B4T source documents and corrected against the B4T technical emails (which describe the actual data). Recommendations are <em>not</em> shown here — they are in <a href="#decisions">§2 Decisions at a glance</a> and <a href="#detail">§6 Dataset details</a>. In <em>Downscaling / bias-correction</em>: a named technique (delta, quantile-mapping, neural-net, …) where known; <em>present (…)</em> = a step was applied but the technique is not stated in available sources; <em>none</em> = no climate downscaling/bias step; <em>N/A</em> = not applicable to a historical/observational layer; <em>not stated</em> = that lineage detail is not given in the source documents — a gap in the current-input record, <strong>not</strong> an incomplete review (every dataset has a verdict in §2 and §6). <em>CMIP5*</em> = provenance not fully confirmed (moot — CMIP5/pre-CMIP6 layers are replaced by default). Rust cells = pre-CMIP6/RCP8.5 legacy → replace. Specifics behind the `present`/`none` values: the CCAFS/Thornton future layers (R-01/02, T-02/03) apply Jones-&-Thornton statistical downscaling and bias-correction but the exact technique is not stated in the sources; F-02 applies bias-correction to rainfall only; W-01’s pedotransfer (random-forest) is soil modelling, not a climate step, hence `none`. The <strong>How-used</strong> chip on each variable — <span class="tchip base">Baseline</span> (historic value), <span class="tchip chg">Change</span> (baseline→future difference), <span class="tchip fut">Future</span> (future projection) — says how the CRI ingests it. <em>Dataset reference</em> is the dataset's own history used to build the layer, so a row can carry a reference period yet be used as <span class="tchip fut">Future</span> (e.g. the Aqueduct rows).</p>
       <div class="controls">
         <input id="q-cur" type="search" placeholder="Filter by dataset, source, year…" oninput="applyFilter('cur')" aria-label="Filter current inputs">
         <select id="hz-cur" onchange="applyFilter('cur')" aria-label="Filter by hazard">
@@ -398,11 +399,11 @@
 
         <p><strong>Present — what the CRI uses now.</strong> Supplies the drought layer — the average number of drought events per year at each location, where an “event” is three straight months getting less than half the normal rainfall. It describes the recent past, not the future.</p>
 
-        <p><strong>Present data — the sources conflict.</strong> Per Bert and Philip Thornton’s emails (the actual data used), the drought layer is the <strong>Weighted Anomaly of Standardized Precipitation (WASP)</strong> from IRI, on a coarse <strong>2.5° grid</strong> (~275 km) over <strong>1980–2000</strong>, with high-risk areas from the top two deciles of Dilley (2005). The CRI <em>document</em> instead calls it “SPI” over 1974–2004. Either way:</p>
+        <p><strong>Present data — the sources conflict.</strong> Per the B4T technical emails (relaying Philip Thornton) (the actual data used), the drought layer is the <strong>Weighted Anomaly of Standardized Precipitation (WASP)</strong> from IRI, on a coarse <strong>2.5° grid</strong> (~275 km) over <strong>1980–2000</strong>, with high-risk areas from the top two deciles of Dilley (2005). The CRI <em>document</em> instead calls it “SPI” over 1974–2004. Either way:</p>
         <ul>
           <li><strong>It isn’t really “SPI.”</strong> Standard SPI (McKee et al. 1993, WMO-endorsed) is a statistical index; WASP is a different IRI index, and the CRI layer is a count of dry spells. Publishing it as “SPI” misdescribes it.</li>
           <li><strong>It’s very coarse.</strong> A 2.5° grid is roughly 275 km per cell — far coarser than the CRI’s 0.05° working grid, so today’s layer is heavily stretched to fit.</li>
-          <li><strong>The provenance is unresolved</strong> — WASP / 2.5° / 1980–2000 (emails) versus SPI / 1974–2004 (document). A real question for Bert.</li>
+          <li><strong>The provenance is unresolved</strong> — WASP / 2.5° / 1980–2000 (emails) versus SPI / 1974–2004 (document). A real question for B4T.</li>
         </ul>
 
         <p><strong>Recommended — CDH’s existing SPEI product</strong> (internal Digital-Atlas observational track, CHIRPS v3 + CHIRTS-ERA5). Already produced and gridded — no new derivation. Spec per the CDH team (July 2026):</p>
@@ -431,12 +432,12 @@
 
         <p><strong>Recommended baseline (decision).</strong> Adopt <strong>SPEI</strong> as the drought-hazard index. <em>Why SPEI and not ASI/CDI:</em> the CRI's drought slot is a <strong>hazard</strong> layer, and the CRI already scores the crop's response separately as coping capacity — so the hazard should be the <em>climatic</em> water deficit (SPEI), not a realised-stress index like ASI/CDI, which risks double-counting the crop's response. (This is a defensible default rather than an absolute rule — it holds insofar as the coping-capacity layer is structural/socioeconomic and independent of vegetation stress; if it is, ASI/CDI could carry extra hazard information. Worth confirming against how CCC is actually built.) SPEI is also temperature-aware, which matters under warming. <strong>Deliver it by extending CDH's existing SPEI pipeline to global 0.05°</strong> (CHIRPS-CHIRTS-ERA5) — a re-run of a proven pipeline, not a new indicator, and within capacity. Coverage is bounded by CHIRPS to <strong>60°N–60°S</strong>, which covers essentially all B4T crop areas (the practical availability caveat; a modest compute/storage cost for the global run). Keep <strong>FAO ASI</strong> (global, 1 km, crop-masked, open) as a complementary agriculture-specific / validation layer, with <strong>SPEIbase</strong> as an independent global cross-check. Get B4T sign-off on moving from the current precipitation-deficit count to SPEI, and stop calling it “SPI.”</p>
 
-        <div class="note"><b>Questions for Bert.</b> Is temperature-aware <strong>SPEI</strong> acceptable for the drought hazard in place of the precip-only WASP layer (and does it overlap the heat hazard)? What covers the <strong>non-Africa</strong> footprint? And is the current layer WASP (2.5°, 1980–2000) or the document’s “SPI 1974–2004”?</div>
+        <div class="note"><b>Questions for B4T.</b> Is temperature-aware <strong>SPEI</strong> acceptable for the drought hazard in place of the precip-only WASP layer (and does it overlap the heat hazard)? What covers the <strong>non-Africa</strong> footprint? And is the current layer WASP (2.5°, 1980–2000) or the document’s “SPI 1974–2004”?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: internal CDH SPEI product spec (CDH team, July 2026); CHIRPS v3 / SPEIbase steward pages — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
       <div class="card" id="row-d02" style="margin-top:18px">
         <h3 style="margin-top:0">D-02 — Failed season (cropping reliability)</h3>
-        <p><span class="pill p-clarify">Verdict: Clarify — confirm source &amp; role with Bert</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">can’t finalise until the mis-cited source and production status are confirmed; a clear modern route exists if retained.</span></p>
+        <p><span class="pill p-clarify">Verdict: Clarify — confirm source &amp; role with B4T</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">can’t finalise until the mis-cited source and production status are confirmed; a clear modern route exists if retained.</span></p>
 
         <p class="measures"><strong>Measures:</strong> probability of a failed growing season — germination/establishment, then fewer than 50 growing days before season end. Reported as % cropping reliability; production-specific (a season “fails” when production cost exceeds harvest value).</p>
         <div class="spec">
@@ -468,16 +469,16 @@
         </div>
         <p><strong>Alternatives:</strong> FAO GAEZ growing-period / reliability (open, ~9–10 km, historical + future); CDH internal <strong>water-balance v2</strong> (NDWS/NDWL). <strong>Overlap (Phase 2):</strong> failed-season overlaps the LGP-flip rows and drought — confirm it is a distinct, needed input (double-count risk). Keep the production cost-vs-value test as a B4T economic assumption, separate from the climate layer.</p>
 
-        <div class="note"><b>Questions for Bert.</b> What is the correct source for the failed-season method? Is it active in the production CRI? How does it relate to the LGP rows and the drought layer (overlap)?</div>
+        <div class="note"><b>Questions for B4T.</b> What is the correct source for the failed-season method? Is it active in the production CRI? How does it relate to the LGP rows and the drought layer (overlap)?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO/USGS WRSI &amp; CHC GeoWRSI; FAO GAEZ v4 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
       <div class="card" id="row-aqueduct" style="margin-top:18px">
         <h3 style="margin-top:0">Aqueduct 4.0 (shared) — D-03, D-04, D-05 (drought) · R-04, R-05 (changed rainfall)</h3>
-        <p><span class="pill p-keep">Verdict: Keep — on Aqueduct 4.0 (CMIP6); confirm version</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">light touch if on 4.0 — but Bert flags the CRI may still run a CMIP5-era Aqueduct, so confirming the version is the one real action.</span></p>
+        <p><span class="pill p-keep">Verdict: Keep — on Aqueduct 4.0 (CMIP6); confirm version</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">light touch if on 4.0 — but B4T flags the CRI may still run a CMIP5-era Aqueduct, so confirming the version is the one real action.</span></p>
 
         <p class="measures"><strong>Measures:</strong> five WRI Aqueduct water indicators — D-03 available blue water; D-04 gross water demand / net consumption (8 monthly sectoral sets, 1960–2019); D-05 baseline water stress; R-04 intra-annual variability; R-05 seasonal variability.</p>
-        <p style="font-size:13px;color:var(--muted);margin:4px 0 0"><strong>Version uncertain:</strong> Bert notes “seems CMIP5 is being used in the CRI, but Aqueduct v4.0 is available using CMIP6” — the current layers may be an older CMIP5-era Aqueduct. Confirming the running version is the one real action; the spec below is the CMIP6 4.0 target.</p>
+        <p style="font-size:13px;color:var(--muted);margin:4px 0 0"><strong>Version uncertain:</strong> B4T notes “seems CMIP5 is being used in the CRI, but Aqueduct v4.0 is available using CMIP6” — the current layers may be an older CMIP5-era Aqueduct. Confirming the running version is the one real action; the spec below is the CMIP6 4.0 target.</p>
         <div class="spec" style="grid-template-columns:1fr">
           <div class="spec-col rec">
             <div class="spec-h">Recommended (Keep) — WRI Aqueduct 4.0 (CMIP6)</div>
@@ -494,7 +495,7 @@
           </div>
         </div>
 
-        <div class="note"><b>Questions for Bert.</b> Confirm the Aqueduct version (4.0/CMIP6, not CMIP5-era); which scenario + period; 5-GCM ensemble vs single model; exact indicator layers used; and harmonise the 2030 horizon with the CRI's other future layers.</div>
+        <div class="note"><b>Questions for B4T.</b> Confirm the Aqueduct version (4.0/CMIP6, not CMIP5-era); which scenario + period; 5-GCM ensemble vs single model; exact indicator layers used; and harmonise the 2030 horizon with the CRI's other future layers.</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: WRI Aqueduct 4.0 (Kuzma et al. 2023) technical note + data page — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -530,7 +531,7 @@
           </div>
         </div>
         <p><strong>Secondary option:</strong> Google Flood Hub <em>“Inundation History”</em> — per-pixel <em>frequency</em> of inundation (<strong>1999–2020, 128 m</strong>, wet ≥5 / ≥1 / ≥0.5% = High/Med/Low), Google Cloud Storage, <strong>CC-BY 4.0</strong>. Its README confirms it is a <strong>repackaging of the GLAD Global Surface Water Dynamics dataset</strong> (Pickens et al. 2020, UMD; <strong>Landsat 5/7/8</strong>, 30 m native → 128 m, smoothed) — i.e. a <strong>surface-water-occurrence</strong> product (peer of JRC Global Surface Water), <strong>not a flood-event catalogue</strong>, coverage band excludes far north/south. Useful context; <em>complements</em> GFD, doesn't replace it. (Distinct from Flood Hub's operational Sentinel-1/2 nowcast model.)</p>
-        <div class="note"><b>Question for Bert.</b> Keep an observed flood-frequency proxy, or move the flood hazard entirely to a modelled return-period product (GIRI / Aqueduct Floods)?</div>
+        <div class="note"><b>Question for B4T.</b> Keep an observed flood-frequency proxy, or move the flood hazard entirely to a modelled return-period product (GIRI / Aqueduct Floods)?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: Global Flood Database (Tellman et al. 2021) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -595,7 +596,7 @@
           </div>
         </div>
         <p style="font-size:13px;color:var(--muted);margin:2px 0 0">Cross-checks: Kirezci 2020 is CMIP5/RCP and not openly packaged; GIRI is riverine-only. Harmonise the return-period/horizon with the rest of the CRI.</p>
-        <div class="note"><b>Questions for Bert.</b> Which return period does the CRI use (1-in-10)? Is CMIP6 currency (GIRI) or multi-model breadth (Aqueduct Floods) the priority? Confirm the current Aqueduct Floods version/scenario in use.</div>
+        <div class="note"><b>Questions for B4T.</b> Which return period does the CRI use (1-in-10)? Is CMIP6 currency (GIRI) or multi-model breadth (Aqueduct Floods) the priority? Confirm the current Aqueduct Floods version/scenario in use.</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: WRI Aqueduct Floods (Ward et al. 2020); GIRI global flood hazard model (CIMA/UNEP-GRID) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -632,7 +633,7 @@
         </div>
         <p><strong>Why GAEZ v5:</strong> it computes LGP directly from an agro-climatic water balance — the exact construct — as a ready CMIP6 product. (Thermal LGPt Ta&gt;5/10/20/30&nbsp;°C are separate layers.)</p>
         <p><strong>Note — likely duplicate + overlap.</strong> T-03 (under High temperature) is word-for-word the R-01 LGP-flip — resolve before implementing. LGP adequacy also overlaps failed-season (D-02) and drought — a Phase-2 consolidation question.</p>
-        <div class="note"><b>Questions for Bert.</b> Confirm the LGP definition/threshold in production; is T-03 the same layer as R-01? Is coarser GAEZ (~9 km) acceptable, or derive at finer resolution from NEX-GDDP v2?</div>
+        <div class="note"><b>Questions for B4T.</b> Confirm the LGP definition/threshold in production; is T-03 the same layer as R-01? Is coarser GAEZ (~9 km) acceptable, or derive at finer resolution from NEX-GDDP v2?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO GAEZ v5 (CMIP6/ISIMIP3b); CDH NEX-GDDP-CMIP6 v2 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -667,7 +668,7 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Question for Bert.</b> Keep the historic-CV-as-future-proxy design, or move to a CMIP6 future-variability metric?</div>
+        <div class="note"><b>Question for B4T.</b> Keep the historic-CV-as-future-proxy design, or move to a CMIP6 future-variability metric?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: CHIRPS v3 (CHC/UCSB) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -690,7 +691,7 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Question for Bert.</b> Is the 1983–2016 window acceptable, or is an update-to-present / future-heat pairing wanted?</div>
+        <div class="note"><b>Question for B4T.</b> Is the 1983–2016 window acceptable, or is an update-to-present / future-heat pairing wanted?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: GEHE (Tuholske et al. 2023, NASA SEDAC) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -725,7 +726,7 @@
             </dl>
           </div>
         </div>
-        <div class="note"><b>Questions for Bert.</b> Confirm the growing-season definition + 30 °C threshold in production; internal NEX-GDDP derivation vs ready GAEZ v5 thermal?</div>
+        <div class="note"><b>Questions for B4T.</b> Confirm the growing-season definition + 30 °C threshold in production; internal NEX-GDDP derivation vs ready GAEZ v5 thermal?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: CDH NEX-GDDP-CMIP6 v2; FAO GAEZ v5 — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
@@ -747,13 +748,13 @@
             </tbody>
           </table>
         </div>
-        <p><strong>Consolidation flags (Phase 2).</strong> Two overlaps to resolve: <strong>two salinity products</strong> (S-01 vs S-02) and <strong>four soil-water products</strong> (W-01 retention, W-02 AWC, W-03 rooting-zone, W-04 PASW) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. Bert also notes the crop <strong>coping-capacity (CCC)</strong> soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).</p>
+        <p><strong>Consolidation flags (Phase 2).</strong> Two overlaps to resolve: <strong>two salinity products</strong> (S-01 vs S-02) and <strong>four soil-water products</strong> (W-01 retention, W-02 AWC, W-03 rooting-zone, W-04 PASW) all describe soil water-holding capacity — likely more layers than the CRI needs. Confirm which are load-bearing rather than modernising all of them. B4T also notes the crop <strong>coping-capacity (CCC)</strong> soil-water term uses a soil water-balance model (waterlogging / water stress) with MapSPAM crops — confirm how the W-01…04 layers relate to it (possible overlap/double-count).</p>
         <p><strong>Recommendation.</strong> Keep all seven off-the-shelf (catalogue; update W-01/W-02 to SoilGrids 2.0; verify W-04's dataset link). No CDH build required. In Phase 2, consolidate the salinity pair and the soil-water quartet to what the index actually uses; add the projected AEI (SSP) if a future irrigation layer is needed.</p>
-        <div class="note"><b>Questions for Bert.</b> Are both salinity products needed (S-01 vs S-02)? Which of the four soil-water layers are actually used? Is a future irrigation layer (projected AEI) wanted?</div>
+        <div class="note"><b>Questions for B4T.</b> Are both salinity products needed (S-01 vs S-02)? Which of the four soil-water layers are actually used? Is a future irrigation layer (projected AEI) wanted?</div>
         <p style="margin:10px 0 0;font-size:13px;color:var(--muted)">Sources: FAO GSASmap; ISRIC SoilGrids 2.0 / salinity; Stocker 2023 (Zenodo); Gupta 2023; Mehta 2024 (Zenodo) — <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</p>
       </div>
 
-      <div class="callout" style="margin-top:18px"><b>All 23 Appendix Table 1 rows are now scoped.</b> Every current input has a verdict, a recommended direction (off-the-shelf or CDH-derived), and — where relevant — open questions routed to Bert. Next: consolidate the questions, confirm the lineage gaps, and (per Todd) rebuild the pipeline for the old-vs-new comparison.</div>
+      <div class="callout" style="margin-top:18px"><b>All 23 Appendix Table 1 rows are now scoped.</b> Every current input has a verdict, a recommended direction (off-the-shelf or CDH-derived), and — where relevant — open questions routed to B4T. Next: consolidate the questions, confirm the lineage gaps, and (per Todd) rebuild the pipeline for the old-vs-new comparison.</div>
     </section>
 
     <section id="feedback">
@@ -784,7 +785,7 @@
       <li><a href="#m-feeds"><span class="n">7</span><span>Where it feeds B4T</span></a></li>
       <li><a href="#m-corrections"><span class="n">8</span><span>Email corrections</span></a></li>
       <li><a href="#m-weaknesses"><span class="n">9</span><span>Known weaknesses</span></a></li>
-      <li><a href="#m-clarify"><span class="n">10</span><span>Clarifications for Bert</span></a></li>
+      <li><a href="#m-clarify"><span class="n">10</span><span>Clarifications for B4T</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Source</b>CRI doc v1 — Lenaerts &amp; Badayos, 2025-12-15</div>
@@ -797,7 +798,7 @@
     <section id="m-frame">
       <p class="eyebrow">Breeding for Tomorrow × Climate Data Hub · Phase 2 (methodology)</p>
       <h1>How the Crop Risk Index is built</h1>
-      <p class="lede">A public-safe, section-by-section summary of <strong>current CRI practice</strong>, following the source document's own structure — the starting point for the Phase-2 methodology review. Reconstructed from the CRI documentation (Lenaerts &amp; Badayos, v1, 2025-12-15); <strong>Bert's technical emails supersede it where noted</strong> (§8). The <em>Data</em> tab reviews the input datasets; this tab summarises the <em>method</em> that combines them.</p>
+      <p class="lede">A public-safe, section-by-section summary of <strong>current CRI practice</strong>, following the source document's own structure — the starting point for the Phase-2 methodology review. Reconstructed from the CRI documentation (Lenaerts &amp; Badayos, v1, 2025-12-15); <strong>the B4T technical emails supersede it where noted</strong> (§8). The <em>Data</em> tab reviews the input datasets; this tab summarises the <em>method</em> that combines them.</p>
       <p>The CRI uses an <strong>IPCC-style risk framing</strong> (source Table 1; hazard definition after Rød et al. 2025, exposure after Dilley 2005):</p>
       <div class="grid2">
         <div class="kv"><h5>Hazard</h5><p>Gridded historic + future climate/environmental hazards relevant to crop production.</p></div>
@@ -873,7 +874,7 @@
           <li>Salinity — <code>SALR</code></li>
         </ul>
         <p><strong>50 crops</strong> (Appendix Table 2). The source flags this is <strong>crop-level, not variety-level</strong> — a submergence-tolerant rice or salt-tolerant wheat would shift the rating.</p>
-        <div class="note"><b>Directly relevant to B4T.</b> The crop-vs-variety gap matters for breeding segmentation. Bert also notes the CCC soil-water term uses a soil water-balance model (waterlogging / water stress) over MapSPAM crops — confirm how it relates to the W-01…04 soil-water datasets (Data tab).</div>
+        <div class="note"><b>Directly relevant to B4T.</b> The crop-vs-variety gap matters for breeding segmentation. B4T also notes the CCC soil-water term uses a soil water-balance model (waterlogging / water stress) over MapSPAM crops — confirm how it relates to the W-01…04 soil-water datasets (Data tab).</div>
       </div>
         <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §4 (CCC) + Appendix Table 2 (crops) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>.</p><blockquote class="srcquote">The level of tolerance to drought, high temperature, flooding, changed rainfall, and salinity of each crop was derived from FAO’s Ecocrop database (Brown et al., 2024). … Drought: ROPMN, RMIN; High Temperature: TOPMN, TMAX; Flooding: ROPMX, RMAX; Changed Rainfall: ROPMN, RMIN, GMIN; Salinity: SALR. … this approach generalises tolerance for each crop, whereas in practice, many crops come in varieties with very different stress tolerances. For example, submergence-tolerant rice or salt-tolerant wheat varieties exist and may shift these ratings.</blockquote></div></details>
             <details class="cmts" data-term="B4T CRI Methods — Crop Coping Capacity"><summary>💬 Comments on “Crop Coping Capacity”</summary><div class="giscus-slot"></div></details>
@@ -902,11 +903,11 @@
     <section id="m-corrections">
       <div class="card">
         <h2 style="margin-top:0">Corrections from B4T technical emails</h2>
-        <p>Bert's emails of <strong>2026-04-29/30</strong> (relaying Philip Thornton, pers. comm.) describe the <em>actual</em> data used and correct the published documentation, which lags:</p>
+        <p>The B4T technical emails of <strong>2026-04-29/30</strong> (relaying Philip Thornton, pers. comm.) describe the <em>actual</em> data used and correct the published documentation, which lags:</p>
         <ul>
           <li><strong>Drought (D-01) is WASP, not SPI</strong> — Weighted Anomaly of Standardized Precipitation (IRI), <strong>2.5°, 1980–2000</strong> (event = ≤50% of long-term median for 3+ months), high-risk from Dilley 2005 top-two-deciles. The doc's "SPI, 1974–2004, Ericksen" conflicts. Coarse 2.5° strengthens the modernization case.</li>
           <li><strong>Future layers are CMIP5, not CMIP3</strong> — the 2050s threshold-flips (R-01, R-02, T-02, T-03) used <strong>17 CMIP5 GCMs, RCP8.5</strong> (Jones &amp; Thornton). Provenance uncertain (notebook flags "possibly pre-CMIP5") → <code>conflicted</code>; pre-CMIP6/SSP either way.</li>
-          <li><strong>Aqueduct may be older than cited</strong> — Bert flags the CRI "seems [to use] CMIP5" Aqueduct while the doc cites 4.0 (CMIP6); verify per row.</li>
+          <li><strong>Aqueduct may be older than cited</strong> — B4T flags the CRI "seems [to use] CMIP5" Aqueduct while the doc cites 4.0 (CMIP6); verify per row.</li>
         </ul>
       </div>
         <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">Internal: Bert Lenaerts’ technical emails, 2026-04-29 / 2026-04-30 (relaying Philip Thornton, pers. comm.) — not a public document.</div></details>
@@ -932,7 +933,7 @@
 
     <section id="m-clarify">
       <div class="card" style="border-left:3px solid var(--brand)">
-        <h2 style="margin-top:0">Clarifications for Bert</h2>
+        <h2 style="margin-top:0">Clarifications for B4T</h2>
         <p class="measures">The open questions the review can't resolve without B4T, grouped by hazard. Answer or discuss inline below (GitHub sign-in) — it becomes a tracked Discussion.</p>
         <ul>
           <li><strong>Drought (D-01):</strong> Is the current layer WASP (2.5°, 1980–2000) or the doc's “SPI 1974–2004”? Is temperature-aware SPEI acceptable to replace precip-only WASP (does it overlap the heat hazard)? What covers the non-Africa footprint?</li>
@@ -943,11 +944,11 @@
           <li><strong>Salinity / soil water / irrigation:</strong> Are both salinity products needed (S-01 vs S-02)? Which of the four soil-water layers (W-01…04) are actually used, and how does the CCC soil-water term relate to them? Is a future irrigation layer (projected AEI) wanted?</li>
           <li><strong>Method (Phase 2):</strong> How deep is the HII matrix's literature/expert validation across the cells? Is averaging an expert estimate with an LLM estimate acceptable for the yield step?</li>
         </ul>
-        <details class="cmts" data-term="B4T CRI — Clarifications for Bert"><summary>💬 Answer / discuss the clarifications</summary><div class="giscus-slot"></div></details>
+        <details class="cmts" data-term="B4T CRI — Clarifications for B4T"><summary>💬 Answer / discuss the clarifications</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
 
-    <div class="foot">B4T CRI methodology summary · reconstructed from the CRI doc (v1, 2025-12-15) · Bert's emails supersede where noted · Phase 2 not yet started</div>
+    <div class="foot">B4T CRI methodology summary · reconstructed from the CRI doc (v1, 2025-12-15) · the B4T technical emails supersede where noted · Phase 2 not yet started</div>
   </main>
 </div>
 
@@ -1064,6 +1065,15 @@
       window.scrollTo(0,0);
     }
     tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('data-tab'))})});
+    document.querySelectorAll('[data-jump]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var p=a.getAttribute('data-jump').split(':');
+        show(p[0]);
+        var el=document.getElementById(p[1]);
+        if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
   })();
 
   // lazy per-section giscus comments (load on expand)
