@@ -785,7 +785,6 @@
       <li><a href="#m-feeds"><span class="n">7</span><span>Where it feeds B4T</span></a></li>
       <li><a href="#m-corrections"><span class="n">8</span><span>Email corrections</span></a></li>
       <li><a href="#m-weaknesses"><span class="n">9</span><span>Known weaknesses</span></a></li>
-      <li><a href="#m-comments"><span class="n">10</span><span>Comments</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Source</b>CRI doc v1 — Lenaerts &amp; Badayos, 2025-12-15</div>
@@ -807,7 +806,8 @@
         <div class="kv"><h5>Coping capacity</h5><p>Crop tolerance to hazards, via Ecocrop optimum growing conditions.</p></div>
       </div>
       <p><strong>Risk</strong> = the interaction of these. Stated objective: <em>"develop a crop production risk index that enables the quantification of expected yield changes in the future, facilitating benefit modelling."</em></p>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Conceptual frame"><summary>💬 Comments on “Conceptual frame”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-components">
       <div class="card">
@@ -820,7 +820,8 @@
           <li><strong>Empirical yield changes</strong> — translate to projected yield change.</li>
         </ol>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — The four components"><summary>💬 Comments on “The four components”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-hazard">
       <div class="card">
@@ -839,7 +840,8 @@
         </ol>
         <div class="note"><b>Phase-2 flags.</b> The 50–50 present/future weighting, the 90th-percentile binarisation, and the "ensemble learning" framing are method choices worth revisiting — especially where inputs mix vintages/horizons (see Known weaknesses).</div>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Hazard data &amp; processing"><summary>💬 Comments on “Hazard data &amp; processing”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-hii">
       <div class="card">
@@ -852,7 +854,8 @@
         <p>Single-hazard scores are base values from global yield-impact literature; multi-hazard scores are built up incrementally with documented exceptions (e.g. flood + salinity treated as coastal flooding; irrigation deducted against soil water). Triple+ combinations derive from the two-hazard interactions.</p>
         <div class="note"><b>Honest read.</b> This is more structured than "an LLM guessed" — there is a real rubric and a literature/expert cross-check. But validation depth is <strong>uneven across the matrix</strong>. A Phase-2 methods question, not a dataset one.</div>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Hazard Intensity &amp; Interactions"><summary>💬 Comments on “Hazard Intensity &amp; Interactions”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-ccc">
       <div class="card">
@@ -868,7 +871,8 @@
         <p><strong>50 crops</strong> (Appendix Table 2). The source flags this is <strong>crop-level, not variety-level</strong> — a submergence-tolerant rice or salt-tolerant wheat would shift the rating.</p>
         <div class="note"><b>Directly relevant to B4T.</b> The crop-vs-variety gap matters for breeding segmentation. Bert also notes the CCC soil-water term uses a soil water-balance model (waterlogging / water stress) over MapSPAM crops — confirm how it relates to the W-01…04 soil-water datasets (Data tab).</div>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Crop Coping Capacity"><summary>💬 Comments on “Crop Coping Capacity”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-yield">
       <div class="card">
@@ -877,14 +881,16 @@
         <p><strong>Yield changes</strong> (source §6): projected yearly yield change under three scenarios — business-as-usual, conservative, optimistic — over a 10-year frame. Estimates are the <strong>simple average of (a) expert review and (b) an LLM</strong> (Copilot "Think Deeper", 11 Nov 2025; 1%/yr baseline yield increase assumed).</p>
         <div class="note"><b>Phase-2 flag.</b> Averaging an expert estimate with an LLM estimate is a transparency / uncertainty question to revisit.</div>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Final CRI &amp; yield changes"><summary>💬 Comments on “Final CRI &amp; yield changes”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-feeds">
       <div class="card">
         <h2 style="margin-top:0">Where the CRI feeds B4T decisions</h2>
         <p><code>Crop x region priority-2025.xlsx</code> shows climate risk already sits in B4T prioritization (<em>Population affected by Climate change</em>; value proposition <em>Farmer — Less Loss &amp; Risk — CC-relevant stress</em>). Meeting notes (2026-04-16, 2026-04-20) confirm B4T wants climate-hazard information linked at <strong>market-segment / TPP granularity</strong>, projected ~20–25 years forward. So CRI revisions can influence crop-country prioritization and breeding-segment decisions — not just background analysis.</p>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Where the CRI feeds B4T"><summary>💬 Comments on “Where the CRI feeds B4T”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-corrections">
       <div class="card">
@@ -896,7 +902,8 @@
           <li><strong>Aqueduct may be older than cited</strong> — Bert flags the CRI "seems [to use] CMIP5" Aqueduct while the doc cites 4.0 (CMIP6); verify per row.</li>
         </ul>
       </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Email corrections"><summary>💬 Comments on “Email corrections”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <section id="m-weaknesses">
       <div class="card">
@@ -911,36 +918,18 @@
         </ul>
         <div class="callout" style="border-left-color:var(--brand)">Not all inputs are outdated. The real problems are <strong>mixed vintage, mixed horizon, unclear reprocessing lineage, and uneven method transparency</strong> — not uniform obsolescence. Phase 2 addresses the method; the Data tab addresses the inputs.</div>
       </div>
-    </section>
-
-    <section id="m-comments">
-      <div class="card">
-        <h2 style="margin-top:0">Comments</h2>
-        <p class="measures">Comment on the method here — <strong>sign in with GitHub</strong> to post. Threaded discussion (stored in this repo's GitHub Discussions). Name the section you're referring to (e.g. "HII") in your comment.</p>
-        <script src="https://giscus.app/client.js"
-          data-repo="CGIAR-Climate-Data-Hub/use-cases"
-          data-repo-id="R_kgDOSdPhVA"
-          data-category="General"
-          data-category-id="DIC_kwDOSdPhVM4DAdzS"
-          data-mapping="specific"
-          data-term="B4T CRI — Methods review"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="light"
-          data-lang="en"
-          crossorigin="anonymous"
-          async>
-        </script>
-      </div>
-    </section>
+            <details class="cmts" data-term="B4T CRI Methods — Known weaknesses"><summary>💬 Comments on “Known weaknesses”</summary><div class="giscus-slot"></div></details>
+      </section>
 
     <div class="foot">B4T CRI methodology summary · reconstructed from the CRI doc (v1, 2025-12-15) · Bert's emails supersede where noted · Phase 2 not yet started</div>
   </main>
 </div>
 
 <style>
+  .cmts{margin:16px 0 2px;border-top:1px dashed var(--line);padding-top:10px}
+  .cmts summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--brand);list-style:none}
+  .cmts summary::-webkit-details-marker{display:none}
+  .cmts .giscus-slot{margin-top:10px}
   .fab{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:7px;background:var(--brand);color:#fff;padding:11px 17px;border-radius:24px;font-size:14px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.22);text-decoration:none;transition:background .15s ease,transform .15s ease}
   .fab:hover{background:var(--brand-dark);color:#fff;transform:translateY(-1px)}
   .fab:focus-visible{outline:3px solid var(--brand-light);outline-offset:2px}
@@ -1043,6 +1032,21 @@
       window.scrollTo(0,0);
     }
     tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('data-tab'))})});
+  })();
+
+  // lazy per-section giscus comments (load on expand)
+  (function(){
+    document.querySelectorAll('details.cmts').forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if(!d.open || d.dataset.loaded) return;
+        d.dataset.loaded='1';
+        var sc=document.createElement('script'); sc.src='https://giscus.app/client.js';
+        var a={'data-repo':'CGIAR-Climate-Data-Hub/use-cases','data-repo-id':'R_kgDOSdPhVA','data-category':'General','data-category-id':'DIC_kwDOSdPhVM4DAdzS','data-mapping':'specific','data-term':d.getAttribute('data-term'),'data-strict':'1','data-reactions-enabled':'1','data-emit-metadata':'0','data-input-position':'top','data-theme':'light','data-lang':'en'};
+        Object.keys(a).forEach(function(k){sc.setAttribute(k,a[k]);});
+        sc.crossOrigin='anonymous'; sc.async=true;
+        d.querySelector('.giscus-slot').appendChild(sc);
+      });
+    });
   })();
 </script>
 
