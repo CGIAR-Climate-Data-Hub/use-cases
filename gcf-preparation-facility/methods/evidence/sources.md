@@ -13,7 +13,11 @@ content-verified programmatically; **re-check in a browser before external circu
 
 > **Licence matters for CDH hosting.** The Hub can only *mirror-host* openly-licensed data.
 > Non-commercial / no-redistribute datasets (flagged **⚠ NC** below) must be **federated or
-> linked**, never copied into the catalogue. See the [licence-constraint summary](#licence-constraint-summary).
+> linked**, never copied into the catalogue as raw data. **But** — for our strictly
+> non-commercial research use — nearly all of them permit **computing and publishing derived
+> admin1/admin2 products** (the whole notebook model). The constraint is on redistributing the
+> *source* data, not on derived statistics. See the [derived-products guidance](#derived-products-non-commercial-use)
+> and the [licence-constraint summary](#licence-constraint-summary).
 
 ---
 
@@ -100,7 +104,7 @@ content-verified programmatically; **re-check in a browser before external circu
 | Dataset | Official URL | Licence | Verified | Notes |
 | --- | --- | --- | --- | --- |
 | OECD DAC CRS | https://www.oecd.org/en/publications/creditor-reporting-system_22180907.html | OECD terms (free reuse w/ attribution); not stated inline | ⚠ bot-blocked | OECD WAF 403. Interactive at `data-explorer.oecd.org` (DSD_CRS). Legacy `stats.oecd.org` CRS1 retiring. |
-| CPI Global Landscape of Climate Finance | https://www.climatepolicyinitiative.org/publication/global-landscape-of-climate-finance-2025/ | **⚠ All rights reserved** — no CC licence found | ✅ live | © 2026 CPI. Dashboard downloadable. 2026 microsite `glcf.climatepolicyinitiative.org`. |
+| CPI Global Landscape of Climate Finance | https://www.climatepolicyinitiative.org/publication/global-landscape-of-climate-finance-2025/ | **CC BY-NC-SA** (report front-matter: 4.0 recent / 3.0 older) — non-commercial; commercial use by contacting CPI | ⚠ PDF-indexed | **Corrected:** the website landing page shows only "© All rights reserved", but the report PDF inside-cover grants CC BY-NC-SA for non-commercial use — cite the PDF front-matter as the operative grant. ShareAlike applies to derivatives. Confirm in a browser (website-vs-PDF discrepancy). |
 | IMF fiscal data (Fiscal Monitor / GFS) | https://www.imf.org/en/publications/fm | IMF Copyright & Usage terms (reuse w/ attribution; some redistribution limits); not stated inline | ⚠ bot-blocked | IMF WAF 403. Structured data at `data.imf.org` (IMF.FAD:FM; GFS separate). |
 
 ## Cross-cutting reference — GCF / Togo
@@ -114,22 +118,63 @@ content-verified programmatically; **re-check in a browser before external circu
 
 ---
 
+## Derived products (non-commercial use)
+
+Our use is **strictly non-commercial research**. Two rights are separate: (1) mirror-hosting the
+**raw source data**, and (2) computing + publishing **derived admin1/admin2 products** (zonal stats,
+exposure tables, maps). The notebook is almost entirely (2). Verified against each licence's
+derivative/redistribution clause on 2026-07-07.
+
+**Bottom line: every restricted dataset here permits non-commercial derived admin products AND
+their publication. None forbids it outright.** The recurring bar is on re-serving the *source*
+data, not on derived outputs.
+
+| Dataset | Derive admin1/2 (NC)? | Publish the derived product? | Binding condition |
+| --- | --- | --- | --- |
+| ACLED | ✅ | ✅ **only if transformative** | Output "must be transformative, such that they cannot be reverse engineered to recreate the Licensed Content" — coarse admin aggregates pass; a reorganized dump fails. Attribution per ACLED policy (incl. AI/LLM). |
+| WDPA / Protected Planet | ✅ | ✅ | May publish "in whole or in part, including on-line, providing (a) the … Data are not downloadable and (b) proper attribution is clearly visible." So: publish stats/maps; **do not make the raw layer downloadable**. UNEP-WCMC + IUCN citation + release month/yr. NC only. |
+| IUCN Red List | ✅ (grant covers "scientific analyses and research") | ✅ | **Do not redistribute Red List data, even within derived works.** Send IUCN a copy of any publication (electronic / 2 paper). Versioned citation. NC only. |
+| IPC / Cadre Harmonisé | ✅ | ✅ | CC BY-NC-SA — derived product must carry **CC BY-NC-SA**. Attribution. |
+| WHO/UNICEF JMP | ✅ | ✅ | CC BY-NC-SA 3.0 IGO — **ShareAlike** on derivatives. |
+| GYGA | ✅ | ✅ | CC BY-NC-SA 4.0 — **ShareAlike**; companies pay. |
+| WOCAT | ✅ | ✅ | CC BY-NC-SA 4.0 — **ShareAlike**; notify wocat.cde@unibe.ch on reuse. |
+| CPI Global Landscape | ✅ | ✅ | CC BY-NC-SA (report front-matter) — **ShareAlike**; cite the PDF grant, not the website footer. |
+| DHS | ✅ (for the registered study) | ✅ (derived indicators) | **Microdata must not be passed to other researchers without DHS written consent**; no re-identification. Prefer the **DHS API / STATcompiler** aggregate indicators — freely open, no login — over deriving from restricted microdata. Submit publications to DHS. |
+| UNICEF MICS | ✅ | ✅ (aggregate indicators) | "Requested not to redistribute datasets"; a data subset may be posted only to meet a journal's data-availability rule. Cite UNICEF MICS. |
+
+**Two design constraints that follow:**
+1. **ShareAlike cascade.** IPC, JMP, GYGA, WOCAT and CPI are all CC BY-NC-SA. Any published
+   derivative of them must itself be CC BY-NC-SA — and if you **combine** a ShareAlike source with
+   an all-rights-reserved or incompatible source in one downloadable product, that combined output
+   has a licence conflict. Keep ShareAlike-derived layers separable, or licence the combined export
+   CC BY-NC-SA.
+2. **"Publish stats, not the raw layer."** For WDPA, IUCN, DHS, MICS the raw source stays with the
+   provider — the notebook exposes derived numbers/maps and links back, it does not offer the
+   underlying dataset for download.
+
+**⚠ Verify in a browser before external circulation** (these clauses were confirmed via bot-blocked
+pages / PDF-indexed text, not a live automated fetch): DHS terms, MICS FAQ, IUCN main terms page,
+CPI report front-matter (website footer disagrees with the PDF grant).
+
+---
+
 ## Licence-constraint summary
 
-**Openly licensed — CDH may mirror-host (with attribution):**
+**Openly licensed — CDH may mirror-host the raw data (with attribution):**
 NEX-GDDP-CMIP6 (CC0), ERA5, AgERA5, CHIRPS, CHIRTS, MapSPAM 2020, FAOSTAT, WRI Aqueduct 4.0,
 World Bank WDI, World Bank CPIA, WorldPop (all CC BY 4.0), UNDP HDI (CC BY 3.0 IGO), Climate Watch
 (CC BY 4.0 for its own data).
 
-**⚠ Non-commercial / no-redistribute — federate or link only, do NOT mirror-host:**
+**⚠ Non-commercial — raw data federate/link only, but derived NC products ARE publishable**
+(see [derived-products guidance](#derived-products-non-commercial-use)):
 ACLED, DHS, UNICEF MICS, WDPA/Protected Planet, IUCN Red List, IPC/Cadre Harmonisé,
-WHO/UNICEF JMP (reports), GYGA, WOCAT, CPI Global Landscape (all rights reserved).
+WHO/UNICEF JMP, GYGA, WOCAT, CPI Global Landscape.
 
 **⚠ Licence unclear — resolve before cataloguing:**
 FAO GLEAM (CC BY vs NC-SA-IGO conflict), ND-GAIN, INFORM (EC-policy default, not stated),
-IPCC EFDB, FAO EX-ACT, FAO Gender & Land Rights, OECD SIGI, OECD DAC CRS, IMF fiscal data.
+IPCC EFDB, FAO EX-ACT, FAO Gender & Land Rights (defunct), OECD SIGI, OECD DAC CRS, IMF fiscal data.
 GEF and Adaptation Fund project databases are "all rights reserved" (link only).
 
 **Bot-blocked — re-verify in a browser before external circulation:**
 IUCN Red List, IPC, UNICEF MICS, OECD SIGI, OECD DAC CRS, IMF Fiscal Monitor,
-World Bank IEG, IFAD IOE.
+World Bank IEG, IFAD IOE, CPI (report-PDF grant).
