@@ -7,7 +7,7 @@ science_program: Breeding for Tomorrow
 # === Lifecycle ===
 type: existing                       # new | existing
 origin: ongoing-project              # ongoing-project | funding-pipeline | data-gap
-status: brief                        # idea | brief | active-development | piloting | handover | complete | on-hold | no-go
+status: active-development           # idea | brief | active-development | piloting | handover | complete | on-hold | no-go
 
 # === Go / No Go ===
 go_no_go:
@@ -128,12 +128,12 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 
 CDH has completed a **Phase-1 dataset review** and a public-safe method reconstruction. A draft, shareable page presents both:
 
-- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) _(live once merged to `main`)_
+- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) — interactive Data / Methods tabs; each dataset card shows the verbatim Appendix Table 1 definition, current-vs-recommended lineage, and provenance links; each method section shows the highlighted source-PDF page; per-section GitHub Discussions (giscus) comment boxes + a no-account feedback form. **Shared for review (July 2026):** the CRI authorship team (to answer the Data-tab open questions) and the CAP team (datasets + methods).
 - **Dataset review & CDH recommendations:** [methods/dataset-review.md](./methods/dataset-review.md) — all 23 hazard/vulnerability inputs audited (current lineage vs recommended modern **open** alternative on identical axes), with a CDH integration + **licence** plan.
 - **Method reconstruction:** [methods/cri-formulation.md](./methods/cri-formulation.md) — the current CRI workflow, with Bert's email corrections that supersede the source doc.
 - **Backing data + evidence:** [methods folder](./methods/README.md) — 12-axis current-state lineage, recommended-options table, verified source/licence log.
 
-What was done: reconstructed the current method (hazard processing, HII, CCC, yield step); interrogated each input's lineage and corrected it against Bert's 2026-04-29/30 emails; researched and adversarially verified modern open replacements against steward pages; cleared licences for non-profit use; and stood up a no-account reviewer **feedback loop** (MS Form → GitHub issue). Phase-2 (methodology review) not yet started.
+What was done: reconstructed the current method (hazard processing, HII, CCC, yield step); interrogated each input's lineage and corrected it against Bert's 2026-04-29/30 emails; researched and adversarially verified modern open replacements against steward pages; cleared licences for non-profit use; and stood up a reviewer **feedback loop** — per-section GitHub Discussions (giscus) plus a no-account MS Form → Power Automate → GitHub issue. Phase-2 (methodology review) not yet started.
 
 ### Actions
 

@@ -164,6 +164,7 @@ This ensures the use case can later be reused as a Hub catalogue entry, case stu
 | Content | Location |
 | --- | --- |
 | Use-case briefs (public, version-controlled) | This repo: `<slug>/BRIEF.md` |
+| Interactive review pages (dataset / method reviews, optional) | This repo: `public/<slug>/*.html` — see [`REVIEW_PAGE_PLAYBOOK.md`](./REVIEW_PAGE_PLAYBOOK.md) |
 | Rendered briefs (Astro site) | <https://cgiar-climate-data-hub.github.io/use-cases/> (planned) |
 | Background materials (PDFs, slides, proposals) | OneDrive: `Climate_data_hub/use_cases/<slug>/` |
 | Meeting transcripts (canonical) | OneDrive: `Climate_data_hub/meetings/` |
