@@ -1154,18 +1154,54 @@
     });
   })();
 
-  // lazy per-section giscus comments (load on expand)
+  // lazy per-section giscus comments (load on expand).
+  // Build each giscus iframe directly instead of injecting <script src=client.js>:
+  // client.js reads document.currentScript, which is null for the 2nd+ lazily
+  // injected script, so only the first opened box would ever render. Building the
+  // widget iframe ourselves works for unlimited instances.
   (function(){
+    var GO='https://giscus.app';
+    // persist the GitHub session returned via ?giscus=<token> after sign-in
+    try{
+      var sp=new URLSearchParams(location.search);
+      if(sp.get('giscus')){
+        localStorage.setItem('giscus-session', JSON.stringify(sp.get('giscus')));
+        sp.delete('giscus');
+        var qs=sp.toString();
+        history.replaceState(undefined, document.title, location.pathname+(qs?'?'+qs:'')+location.hash);
+      }
+    }catch(e){}
+    function session(){ try{ var s=localStorage.getItem('giscus-session'); return s?JSON.parse(s):''; }catch(e){ return ''; } }
+    var origin=location.href.split('#')[0];
+    // giscus posts {giscus:{resize:{height}}} — size the matching iframe
+    window.addEventListener('message', function(ev){
+      if(ev.origin!==GO) return;
+      var g=ev.data && ev.data.giscus; if(!g || !g.resize) return;
+      document.querySelectorAll('iframe.giscus-frame').forEach(function(f){
+        if(f.contentWindow===ev.source){ f.style.height=g.resize.height+'px'; }
+      });
+    });
+    function build(slot, term){
+      var p=new URLSearchParams({
+        origin:origin, session:session(), theme:'light', reactionsEnabled:'1',
+        emitMetadata:'0', inputPosition:'top', repo:'CGIAR-Climate-Data-Hub/use-cases',
+        repoId:'R_kgDOSdPhVA', category:'General', categoryId:'DIC_kwDOSdPhVM4DAdzS',
+        strict:'1', backLink:origin, term:term
+      });
+      var f=document.createElement('iframe');
+      f.className='giscus-frame'; f.title='Comments'; f.scrolling='no';
+      f.setAttribute('allow','clipboard-write');
+      f.src=GO+'/en/widget?'+p.toString();
+      f.style.cssText='width:100%;border:0;color-scheme:light;height:150px';
+      slot.appendChild(f);
+    }
     document.querySelectorAll('details.cmts').forEach(function(d){
       d.addEventListener('toggle', function(){
         if(!d.open || d.dataset.loaded) return;
         d.dataset.loaded='1';
-        var nt=document.createElement('p'); nt.className='cmtnote'; nt.innerHTML='No GitHub account, and don\'t want to create one? Use the 💬 <strong>Feedback</strong> button (bottom-right) instead.'; var sl=d.querySelector('.giscus-slot'); sl.parentNode.insertBefore(nt, sl);
-        var sc=document.createElement('script'); sc.src='https://giscus.app/client.js';
-        var a={'data-repo':'CGIAR-Climate-Data-Hub/use-cases','data-repo-id':'R_kgDOSdPhVA','data-category':'General','data-category-id':'DIC_kwDOSdPhVM4DAdzS','data-mapping':'specific','data-term':d.getAttribute('data-term'),'data-strict':'1','data-reactions-enabled':'1','data-emit-metadata':'0','data-input-position':'top','data-theme':'light','data-lang':'en'};
-        Object.keys(a).forEach(function(k){sc.setAttribute(k,a[k]);});
-        sc.crossOrigin='anonymous'; sc.async=true;
-        d.querySelector('.giscus-slot').appendChild(sc);
+        var nt=document.createElement('p'); nt.className='cmtnote'; nt.innerHTML='No GitHub account, and don\'t want to create one? Use the 💬 <strong>Feedback</strong> button (bottom-right) instead.';
+        var sl=d.querySelector('.giscus-slot'); sl.parentNode.insertBefore(nt, sl);
+        build(sl, d.getAttribute('data-term'));
       });
     });
   })();
