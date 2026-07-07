@@ -1173,13 +1173,16 @@
     }catch(e){}
     function session(){ try{ var s=localStorage.getItem('giscus-session'); return s?JSON.parse(s):''; }catch(e){ return ''; } }
     var origin=location.href.split('#')[0];
-    // giscus posts {giscus:{resize:{height}}} — size the matching iframe
+    // giscus posts {giscus:{resizeHeight:<px>}} — size the matching iframe
     window.addEventListener('message', function(ev){
       if(ev.origin!==GO) return;
-      var g=ev.data && ev.data.giscus; if(!g || !g.resize) return;
-      document.querySelectorAll('iframe.giscus-frame').forEach(function(f){
-        if(f.contentWindow===ev.source){ f.style.height=g.resize.height+'px'; }
-      });
+      var g=ev.data && ev.data.giscus; if(!g || typeof ev.data!=='object') return;
+      if(g.resizeHeight){
+        document.querySelectorAll('iframe.giscus-frame').forEach(function(f){
+          if(f.contentWindow===ev.source){ f.style.height=g.resizeHeight+'px'; }
+        });
+      }
+      if(g.signOut){ try{ localStorage.removeItem('giscus-session'); }catch(e){} }
     });
     function build(slot, term){
       var p=new URLSearchParams({
