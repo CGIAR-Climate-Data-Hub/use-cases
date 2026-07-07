@@ -12,6 +12,7 @@ A private working store lives in OneDrive at `Climate_data_hub/use_cases/` — t
 
 - **Folder names**: lowercase kebab-case. Examples: `gcf-preparation-facility`, `b4t`, `livestock-emissions`, `user-needs-assessment`.
 - **Canonical file per use-case**: `<slug>/BRIEF.md`. Use-case-specific code or notebooks may live alongside (in `<slug>/code/`, `<slug>/notebooks/`, etc.).
+- **Interactive review pages** (optional dataset/method reviews, e.g. `public/b4t/cri-review.html`): follow [`REVIEW_PAGE_PLAYBOOK.md`](./REVIEW_PAGE_PLAYBOOK.md) — structure, giscus feedback (build the widget iframe directly, not `client.js`), styling tokens, and PDF-highlight tooling.
 - **Frontmatter schema**: see [`BRIEF_TEMPLATE.md`](./BRIEF_TEMPLATE.md) for the canonical field list. Formal validation rules live in [`src/content.config.ts`](./src/content.config.ts) (Zod).
 - **No meeting note duplicates here** — source of truth is `Climate_data_hub/meetings/` in OneDrive.
 - **Status vocabulary**: `idea` → `brief` → `active-development` → `piloting` → `handover` → `complete`. Terminal off-ramps: `on-hold`, `no-go`.
