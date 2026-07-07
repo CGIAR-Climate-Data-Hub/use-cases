@@ -188,12 +188,14 @@
       <li><a href="#overview"><span class="n">1</span><span>Overview &amp; context</span></a></li>
       <li><a href="#decisions"><span class="n">2</span><span>Decisions at a glance</span></a></li>
       <li><a href="#current"><span class="n">3</span><span>Current inputs</span></a></li>
-      <li><a href="#integration"><span class="n">4</span><span>CDH integration</span></a></li>
-      <li><a href="#gaps"><span class="n">5</span><span>What this doesn’t solve</span></a></li>
-      <li><a href="#detail"><span class="n">6</span><span>Dataset details</span></a>
+      <li><a href="#d-corrections"><span class="n">4</span><span>Corrections (B4T emails)</span></a></li>
+      <li><a href="#d-weaknesses"><span class="n">5</span><span>Potential weaknesses (data)</span></a></li>
+      <li><a href="#integration"><span class="n">6</span><span>CDH integration</span></a></li>
+      <li><a href="#gaps"><span class="n">7</span><span>What this doesn’t solve</span></a></li>
+      <li><a href="#detail"><span class="n">8</span><span>Dataset details</span></a>
         <ul class="toc-sub"><li><a href="#row-d01">D-01 — Drought</a></li><li><a href="#row-d02">D-02 — Failed season</a></li><li><a href="#row-aqueduct">Aqueduct 4.0 (shared)</a></li><li><a href="#row-f01">F-01 — Dartmouth flood</a></li><li><a href="#row-floods">Flood hazard (F-02/03)</a></li><li><a href="#row-lgp">LGP flips (R-01/02)</a></li><li><a href="#row-r03">R-03 — Rainfall CV</a></li><li><a href="#row-t01">T-01 — Humid heat</a></li><li><a href="#row-t02">T-02 — Tmax flip</a></li><li><a href="#row-soil">Salinity / soil / irrigation</a></li></ul>
       </li>
-      <li><a href="#feedback"><span class="n">7</span><span>Feedback &amp; corrections</span></a></li>
+      <li><a href="#feedback"><span class="n">9</span><span>Feedback &amp; corrections</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>B4T — where to comment</b></div>
@@ -326,6 +328,34 @@
         </table>
       </div>
     </section>
+
+    <section id="d-corrections">
+      <div class="card">
+        <h2 style="margin-top:0">Corrections from B4T technical emails</h2>
+        <p>The B4T technical emails of <strong>2026-04-29/30</strong> (relaying Philip Thornton, pers. comm.) describe the <em>actual</em> data used and correct the published documentation, which lags:</p>
+        <ul>
+          <li><strong>Drought (D-01) is WASP, not SPI</strong> — Weighted Anomaly of Standardized Precipitation (IRI), <strong>2.5°, 1980–2000</strong> (event = ≤50% of long-term median for 3+ months), high-risk from Dilley 2005 top-two-deciles. The doc's "SPI, 1974–2004, Ericksen" conflicts. Coarse 2.5° strengthens the modernization case.</li>
+          <li><strong>Future layers are CMIP5, not CMIP3</strong> — the 2050s threshold-flips (R-01, R-02, T-02, T-03) used <strong>17 CMIP5 GCMs, RCP8.5</strong> (Jones &amp; Thornton). Provenance uncertain (notebook flags "possibly pre-CMIP5") → <code>conflicted</code>; pre-CMIP6/SSP either way.</li>
+          <li><strong>Aqueduct may be older than cited</strong> — B4T flags the CRI "seems [to use] CMIP5" Aqueduct while the doc cites 4.0 (CMIP6); verify per row.</li>
+        </ul>
+      </div>
+        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">Internal: Bert Lenaerts’ technical emails, 2026-04-29 / 2026-04-30 (relaying Philip Thornton, pers. comm.) — not a public document.</div></details>
+            <details class="cmts" data-term="B4T CRI Data — Email corrections"><summary>💬 Comments on “Corrections from B4T emails”</summary><div class="giscus-slot"></div></details>
+      </section>
+
+    <section id="d-weaknesses">
+      <div class="card">
+        <h2 style="margin-top:0">Potential weaknesses (data)</h2>
+        <ul>
+          <li><strong>Pre-CMIP6 / pre-SSP future layers</strong> (RCP8.5 / CMIP5); Aqueduct CMIP5–CMIP6 version to confirm.</li>
+          <li><strong>T-03 appears to duplicate R-01</strong> — identical LGP-flip wording under a different hazard.</li>
+          <li><strong>“SPI” (D-01) is mislabelled</strong> — the actual index is WASP (a distinct IRI index).</li>
+        </ul>
+      </div>
+        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">Synthesis of the dataset review; per-dataset detail in the cards above and the <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">evidence log</a>.</div></details>
+            <details class="cmts" data-term="B4T CRI Data — Potential weaknesses"><summary>💬 Comments on “Potential weaknesses (data)”</summary><div class="giscus-slot"></div></details>
+      </section>
+
 
     <section id="integration">
       <h2>CDH integration</h2>
@@ -816,9 +846,8 @@
       <li><a href="#m-ccc"><span class="n">5</span><span>Crop coping capacity</span></a></li>
       <li><a href="#m-yield"><span class="n">6</span><span>Final CRI &amp; yield changes</span></a></li>
       <li><a href="#m-feeds"><span class="n">7</span><span>Where it feeds B4T</span></a></li>
-      <li><a href="#m-corrections"><span class="n">8</span><span>Email corrections</span></a></li>
-      <li><a href="#m-weaknesses"><span class="n">9</span><span>Known weaknesses</span></a></li>
-      <li><a href="#m-clarify"><span class="n">10</span><span>Clarifications for B4T</span></a></li>
+      <li><a href="#m-weaknesses"><span class="n">8</span><span>Potential weaknesses</span></a></li>
+      <li><a href="#m-clarify"><span class="n">9</span><span>Clarifications for B4T</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Source</b>CRI doc v1 — Lenaerts &amp; Badayos, 2025-12-15</div>
@@ -861,7 +890,7 @@
 
     <section id="m-hazard">
       <div class="card">
-        <h2 style="margin-top:0">1 · Hazard data &amp; processing</h2>
+        <h2 style="margin-top:0">Hazard data &amp; processing</h2>
         <p>Five hazards — <strong>drought (D), flooding (F), high temperature (T), changed rainfall (R), salinity (S)</strong> — plus two moderating factors: <strong>soil water (W)</strong> and <strong>irrigation potential (I)</strong>. The 23 input datasets are reviewed in the <strong>Data</strong> tab.</p>
         <p><strong>Processing chain</strong> (source §2.2):</p>
         <ol>
@@ -870,11 +899,11 @@
           <li>Mask non-crop areas — <strong>1%</strong> physical-pixel crop-area cutoff (CROPGRIDS).</li>
           <li>Downscale to <strong>3 arc-minute (0.05°)</strong>.</li>
           <li>Convert each indicator to <strong>pseudo-probabilities, 0–100</strong>.</li>
-          <li>Weighted average across indicators per hazard (source calls it "ensemble learning," Mienye &amp; Sun 2022; in practice a weighted average).</li>
+          <li>Weighted average across indicators per hazard (source labels this "ensemble learning," citing Mienye &amp; Sun 2022 — but that is a general machine-learning ensemble survey (IEEE Access), not a specification of how these indicators are weighted; in practice a fixed weighted average).</li>
           <li><strong>50–50</strong> weighting between present and future indicators.</li>
           <li>Binarise via a <strong>90th-percentile</strong> cutoff (top 10% → 1).</li>
         </ol>
-        <div class="note"><b>Phase-2 flags.</b> The 50–50 present/future weighting, the 90th-percentile binarisation, and the "ensemble learning" framing are method choices worth revisiting — especially where inputs mix vintages/horizons (see Known weaknesses).</div>
+        <div class="note"><b>Phase-2 flags.</b> The 50–50 present/future weighting, the 90th-percentile binarisation, and the "ensemble learning" framing are method choices worth revisiting — especially where inputs mix vintages/horizons (see Potential weaknesses). The ensemble citation (Mienye &amp; Sun 2022) is a generic ML survey and does not document how the indicators are actually weighted; a composite-indicator method reference would fit better.</div>
       </div>
         <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §2.2 (Data Processing) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>. Legacy hazard layers: <a href="https://cgspace.cgiar.org/items/f2c841ba-bb2a-4661-a23d-3881ee60f4e3" target="_blank" rel="noopener">Ericksen 2011</a>.</p><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p2.png" alt="CRI documentation v1, page 2" loading="lazy"><div class="pdfhl" style="left:15.57%;top:46.25%;width:73.09%;height:1.54%"></div><div class="pdfhl" style="left:15.57%;top:47.91%;width:49.58%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:48.06%;width:1.11%;height:1.34%"></div><div class="pdfhl" style="left:15.57%;top:49.56%;width:74.89%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:49.71%;width:1.11%;height:1.34%"></div><div class="pdfhl" style="left:15.57%;top:51.21%;width:74.92%;height:1.54%"></div><div class="pdfhl" style="left:15.57%;top:52.87%;width:35.51%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:54.52%;width:56.78%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:56.19%;width:76.04%;height:1.54%"></div><div class="pdfhl" style="left:11.9%;top:58.07%;width:78.6%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:59.72%;width:80.91%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:61.38%;width:80.95%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:63.03%;width:80.92%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:64.68%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:66.34%;width:80.9%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:67.99%;width:81.0%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:69.64%;width:80.99%;height:1.54%"></div><div class="pdfhl" style="left:51.83%;top:69.8%;width:1.05%;height:0.97%"></div><div class="pdfhl" style="left:9.51%;top:71.31%;width:8.36%;height:1.54%"></div></div><figcaption>Highlighted passage — CRI documentation v1, p.2. <a href="docs/cri-documentation-v1.pdf#page=2" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><details class="src2"><summary>Show transcript</summary><blockquote class="srcquote">After selection, each dataset is processed using the following processing steps: Standardisation of the map projections to the same coordinate reference system, ESPG:4326; Set the full global extent of the spatial data (-180, 180, -90, 90); Masked the spatial data to correct for areas without crop production … We used 1% of the physical pixel area devoted to crop production (across all crops reported in CROPGRIDS) as a cutoff; Downscale the spatial data to 3 arc-minute (0.05 degree) resolution; Each hazard indicator provided was converted to pseudoprobabilities ranging from 0 to 100. … we calculated the weighted average across the selected indicators for each hazard type, producing an ensemble estimate … (Mienye and Sun, 2022). An equal split of 50-50 weights was allocated to present and future hazard indicators, distributing uncertainty in future hazard occurrences. Finally, we converted the average pseudoprobabilities into dummy values, using a 90% percentile cutoff. This consequently sets the top 10th percentile to a value of “1” across all hazard indicators.</blockquote></details></div></details>
             <details class="cmts" data-term="B4T CRI Methods — Hazard data &amp; processing"><summary>💬 Comments on “Hazard data &amp; processing”</summary><div class="giscus-slot"></div></details>
@@ -882,22 +911,21 @@
 
     <section id="m-hii">
       <div class="card">
-        <h2 style="margin-top:0">2 · Hazard Intensity &amp; Interactions (HII)</h2>
+        <h2 style="margin-top:0">Hazard Intensity &amp; Interactions (HII)</h2>
         <p>Each hazard / hazard-vulnerability combination is scored <strong>1–5</strong> (source Table 2: 1 = none/very low loss → 5 = total loss). How the scores were produced (source §3):</p>
         <ol>
           <li><strong>AI first pass</strong> — a structured, schema-based prompt (source Appendix Text 1, with a defined <code>net_val = sign × ES × Ew × Fw</code> rubric) run across <strong>ChatGPT 5.0, Copilot GPT-5, and Gemini</strong> (tested Jul–Oct 2025) to draft interaction scores.</li>
           <li><strong>Cross-validation</strong> — literature review (~50 references, Appendix Table 3) plus expert consultation to adjust the AI-drafted scores.</li>
         </ol>
         <p>Single-hazard scores are base values from global yield-impact literature; multi-hazard scores are built up incrementally with documented exceptions (e.g. flood + salinity treated as coastal flooding; irrigation deducted against soil water). Triple+ combinations derive from the two-hazard interactions.</p>
-        <div class="note"><b>Honest read.</b> This is more structured than "an LLM guessed" — there is a real rubric and a literature/expert cross-check. But validation depth is <strong>uneven across the matrix</strong>. A Phase-2 methods question, not a dataset one.</div>
       </div>
-        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §3 (HII) + Appendix Text 1 (prompt) + Appendix Table 3 (references) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>. Interaction scores: <a href="docs/hii-scoring-matrix.pdf" target="_blank" rel="noopener">HII scoring matrix</a>.</p><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p3.png" alt="CRI documentation v1, page 3" loading="lazy"><div class="pdfhl" style="left:37.5%;top:51.61%;width:53.0%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:53.27%;width:80.97%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:54.92%;width:80.93%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:56.57%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:58.23%;width:80.96%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:59.88%;width:81.01%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:61.53%;width:80.96%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:63.19%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:64.84%;width:70.1%;height:1.54%"></div></div><figcaption>Highlighted passage — CRI documentation v1, p.3. <a href="docs/cri-documentation-v1.pdf#page=3" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><details class="src2"><summary>Show transcript</summary><blockquote class="srcquote">We assigned each hazard-vulnerability combination a score from 1 to 5. … we followed a two-step approach to structure and scale the scoring, given the limited and fragmented information available. First, artificial intelligence (AI), specifically large language models (LLMs), was used to set an initial understanding of the net effect of hazard interactions. A structured schema-based instructional prompt (see Appendix Text 1) was developed to generate a matrix … Multiple large language models (ChatGPT 5.0, Copilot GPT-5, Gemini) were compared, with testing conducted between July and October 2025. Second, as AI may be prone to hallucinations, a comprehensive literature review (see Appendix Table 3) was conducted in conjunction with expert consultation to cross-validate the AI-generated (interaction) scores.</blockquote></details></div></details>
+        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §3 (HII) + Appendix Text 1 (prompt) + Appendix Table 3 (references) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>. Interaction scores: <a href="docs/hii-scoring-matrix.pdf" target="_blank" rel="noopener">HII scoring matrix</a>.</p><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p3.png" alt="CRI documentation v1, page 3" loading="lazy"><div class="pdfhl" style="left:37.5%;top:51.61%;width:53.0%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:53.27%;width:80.97%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:54.92%;width:80.93%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:56.57%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:58.23%;width:80.96%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:59.88%;width:81.01%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:61.53%;width:80.96%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:63.19%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:64.84%;width:70.1%;height:1.54%"></div></div><figcaption>Highlighted passage — CRI documentation v1, p.3. <a href="docs/cri-documentation-v1.pdf#page=3" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p4-hii.png" alt="CRI documentation v1, page 4" loading="lazy"><div class="pdfhl" style="left:11.9%;top:50.81%;width:78.6%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:53.76%;width:81.0%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:56.7%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:59.65%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:62.59%;width:81.02%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:65.53%;width:80.99%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:68.48%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:71.42%;width:81.01%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:74.37%;width:80.97%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:77.31%;width:80.93%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:80.25%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:83.2%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:86.14%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:89.09%;width:80.98%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:92.04%;width:81.02%;height:2.74%"></div><div class="pdfhl" style="left:9.52%;top:95.0%;width:57.36%;height:2.74%"></div></div><figcaption>Table 2 (1–5 loss scale) and the scoring narrative that follows — source §3, p.4. <a href="docs/cri-documentation-v1.pdf#page=4" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><details class="src2"><summary>Show the full HII prompt (Appendix Text 1, p.16–17)</summary><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p16.png" alt="Appendix Text 1, page 16" loading="lazy"></div></figure><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p17.png" alt="Appendix Text 1, page 17" loading="lazy"></div><figcaption>Appendix Text 1 — the schema-based scoring prompt (<code>net_val = sign × ES × Ew × Fw</code>), p.16–17. <a href="docs/cri-documentation-v1.pdf#page=16" target="_blank" rel="noopener">open PDF</a></figcaption></figure></details><details class="src2"><summary>Show transcript</summary><blockquote class="srcquote">We assigned each hazard-vulnerability combination a score from 1 to 5. … we followed a two-step approach to structure and scale the scoring, given the limited and fragmented information available. First, artificial intelligence (AI), specifically large language models (LLMs), was used to set an initial understanding of the net effect of hazard interactions. A structured schema-based instructional prompt (see Appendix Text 1) was developed to generate a matrix … Multiple large language models (ChatGPT 5.0, Copilot GPT-5, Gemini) were compared, with testing conducted between July and October 2025. Second, as AI may be prone to hallucinations, a comprehensive literature review (see Appendix Table 3) was conducted in conjunction with expert consultation to cross-validate the AI-generated (interaction) scores.</blockquote></details></div></details>
             <details class="cmts" data-term="B4T CRI Methods — Hazard Intensity &amp; Interactions"><summary>💬 Comments on “Hazard Intensity &amp; Interactions”</summary><div class="giscus-slot"></div></details>
       </section>
 
     <section id="m-ccc">
       <div class="card">
-        <h2 style="margin-top:0">3 · Crop Coping Capacity (CCC)</h2>
+        <h2 style="margin-top:0">Crop Coping Capacity (CCC)</h2>
         <p>Crop tolerance from <strong>FAO Ecocrop</strong> (Brown et al. 2024), scored low / medium / high, per hazard:</p>
         <ul>
           <li>Drought — <code>ROPMN</code>, <code>RMIN</code></li>
@@ -909,13 +937,13 @@
         <p><strong>50 crops</strong> (Appendix Table 2). The source flags this is <strong>crop-level, not variety-level</strong> — a submergence-tolerant rice or salt-tolerant wheat would shift the rating.</p>
         <div class="note"><b>Directly relevant to B4T.</b> The crop-vs-variety gap matters for breeding segmentation. B4T also notes the CCC soil-water term uses a soil water-balance model (waterlogging / water stress) over MapSPAM crops — confirm how it relates to the W-01…04 soil-water datasets (Data tab).</div>
       </div>
-        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §4 (CCC) + Appendix Table 2 (crops) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>.</p><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p4.png" alt="CRI documentation v1, page 4" loading="lazy"><div class="pdfhl" style="left:32.99%;top:62.3%;width:57.51%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:63.96%;width:80.99%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:65.61%;width:80.97%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:67.28%;width:43.66%;height:1.54%"></div><div class="pdfhl" style="left:15.57%;top:69.16%;width:64.38%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:69.31%;width:1.11%;height:1.34%"></div><div class="pdfhl" style="left:12.54%;top:70.81%;width:77.94%;height:1.54%"></div><div class="pdfhl" style="left:15.57%;top:72.47%;width:6.74%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:74.12%;width:68.35%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:75.78%;width:77.91%;height:1.54%"></div><div class="pdfhl" style="left:15.57%;top:77.43%;width:66.98%;height:1.54%"></div><div class="pdfhl" style="left:12.54%;top:79.1%;width:32.56%;height:1.54%"></div><div class="pdfhl" style="left:11.9%;top:80.96%;width:78.59%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:82.62%;width:80.98%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:84.27%;width:80.97%;height:1.54%"></div><div class="pdfhl" style="left:9.51%;top:85.94%;width:54.04%;height:1.54%"></div></div><figcaption>Highlighted passage — CRI documentation v1, p.4. <a href="docs/cri-documentation-v1.pdf#page=4" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><details class="src2"><summary>Show transcript</summary><blockquote class="srcquote">The level of tolerance to drought, high temperature, flooding, changed rainfall, and salinity of each crop was derived from FAO’s Ecocrop database (Brown et al., 2024). … Drought: ROPMN, RMIN; High Temperature: TOPMN, TMAX; Flooding: ROPMX, RMAX; Changed Rainfall: ROPMN, RMIN, GMIN; Salinity: SALR. … this approach generalises tolerance for each crop, whereas in practice, many crops come in varieties with very different stress tolerances. For example, submergence-tolerant rice or salt-tolerant wheat varieties exist and may shift these ratings.</blockquote></details></div></details>
+        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody"><p style="margin:0 0 6px"><strong>CRI documentation v1</strong>, §4 (CCC) + Appendix Table 2 (crops) — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">open PDF</a>.</p><figure class="pdfshot"><div class="pdfwrap"><img src="docs/img/p4-ccc.png" alt="CRI documentation v1, page 4" loading="lazy"><div class="pdfhl" style="left:32.99%;top:12.31%;width:57.52%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:16.15%;width:81.0%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:20.0%;width:80.99%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:23.88%;width:43.67%;height:3.58%"></div><div class="pdfhl" style="left:15.57%;top:28.26%;width:64.39%;height:3.58%"></div><div class="pdfhl" style="left:12.54%;top:28.61%;width:1.11%;height:3.11%"></div><div class="pdfhl" style="left:12.54%;top:32.1%;width:77.96%;height:3.58%"></div><div class="pdfhl" style="left:15.57%;top:35.96%;width:6.74%;height:3.58%"></div><div class="pdfhl" style="left:12.54%;top:39.8%;width:68.37%;height:3.58%"></div><div class="pdfhl" style="left:12.54%;top:43.65%;width:77.92%;height:3.58%"></div><div class="pdfhl" style="left:15.57%;top:47.49%;width:66.99%;height:3.58%"></div><div class="pdfhl" style="left:12.54%;top:51.37%;width:32.56%;height:3.58%"></div><div class="pdfhl" style="left:11.9%;top:55.72%;width:78.6%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:59.56%;width:80.99%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:63.41%;width:80.98%;height:3.58%"></div><div class="pdfhl" style="left:9.52%;top:67.29%;width:54.06%;height:3.58%"></div></div><figcaption>§4 Crop Coping Capacity — from the section heading; the Ecocrop passage highlighted. Source p.4. <a href="docs/cri-documentation-v1.pdf#page=4" target="_blank" rel="noopener">open PDF at this page</a></figcaption></figure><details class="src2"><summary>Show transcript</summary><blockquote class="srcquote">The level of tolerance to drought, high temperature, flooding, changed rainfall, and salinity of each crop was derived from FAO’s Ecocrop database (Brown et al., 2024). … Drought: ROPMN, RMIN; High Temperature: TOPMN, TMAX; Flooding: ROPMX, RMAX; Changed Rainfall: ROPMN, RMIN, GMIN; Salinity: SALR. … this approach generalises tolerance for each crop, whereas in practice, many crops come in varieties with very different stress tolerances. For example, submergence-tolerant rice or salt-tolerant wheat varieties exist and may shift these ratings.</blockquote></details></div></details>
             <details class="cmts" data-term="B4T CRI Methods — Crop Coping Capacity"><summary>💬 Comments on “Crop Coping Capacity”</summary><div class="giscus-slot"></div></details>
       </section>
 
     <section id="m-yield">
       <div class="card">
-        <h2 style="margin-top:0">4 · Final CRI &amp; yield changes</h2>
+        <h2 style="margin-top:0">Final CRI &amp; yield changes</h2>
         <p><strong>CRI</strong> combines HII and CCC (source Figure 2). Example: flooding + salinity → <code>HII = 3</code>; a medium-tolerance crop → <code>CCC = 2</code>; giving <code>CRI = 2</code>.</p>
         <p><strong>Yield changes</strong> (source §6): projected yearly yield change under three scenarios — business-as-usual, conservative, optimistic — over a 10-year frame. Estimates are the <strong>simple average of (a) expert review and (b) an LLM</strong> (Copilot "Think Deeper", 11 Nov 2025; 1%/yr baseline yield increase assumed).</p>
         <div class="note"><b>Phase-2 flag.</b> Averaging an expert estimate with an LLM estimate is a transparency / uncertainty question to revisit.</div>
@@ -928,40 +956,24 @@
       <div class="card">
         <h2 style="margin-top:0">Where the CRI feeds B4T decisions</h2>
         <p><code>Crop x region priority-2025.xlsx</code> shows climate risk already sits in B4T prioritization (<em>Population affected by Climate change</em>; value proposition <em>Farmer — Less Loss &amp; Risk — CC-relevant stress</em>). Meeting notes (2026-04-16, 2026-04-20) confirm B4T wants climate-hazard information linked at <strong>market-segment / TPP granularity</strong>, projected ~20–25 years forward. So CRI revisions can influence crop-country prioritization and breeding-segment decisions — not just background analysis.</p>
+        <div class="note"><b>B4T request — share the code base.</b> B4T has asked for the CRI code base. The reprocessing pipeline is being rebuilt in code (for the old-vs-new comparison — Todd's ask); the working repository link is <em>TBC</em>. This review's own backing data (per-dataset CSVs, evidence log, method notes) is public in <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/tree/main/b4t/methods" target="_blank" rel="noopener">b4t/methods</a>.</div>
       </div>
-        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">B4T <em>Crop × region priority-2025.xlsx</em> prioritization workbook — shareable link <em>TBC</em>.</div></details>
+        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">B4T <em>Crop × region priority-2025.xlsx</em> prioritization workbook — not yet published here; the workbook (or a sanitised derivation) can be added under <code>docs/</code> and linked once cleared (link <em>TBC</em>).</div></details>
             <details class="cmts" data-term="B4T CRI Methods — Where the CRI feeds B4T"><summary>💬 Comments on “Where the CRI feeds B4T”</summary><div class="giscus-slot"></div></details>
-      </section>
-
-    <section id="m-corrections">
-      <div class="card">
-        <h2 style="margin-top:0">Corrections from B4T technical emails</h2>
-        <p>The B4T technical emails of <strong>2026-04-29/30</strong> (relaying Philip Thornton, pers. comm.) describe the <em>actual</em> data used and correct the published documentation, which lags:</p>
-        <ul>
-          <li><strong>Drought (D-01) is WASP, not SPI</strong> — Weighted Anomaly of Standardized Precipitation (IRI), <strong>2.5°, 1980–2000</strong> (event = ≤50% of long-term median for 3+ months), high-risk from Dilley 2005 top-two-deciles. The doc's "SPI, 1974–2004, Ericksen" conflicts. Coarse 2.5° strengthens the modernization case.</li>
-          <li><strong>Future layers are CMIP5, not CMIP3</strong> — the 2050s threshold-flips (R-01, R-02, T-02, T-03) used <strong>17 CMIP5 GCMs, RCP8.5</strong> (Jones &amp; Thornton). Provenance uncertain (notebook flags "possibly pre-CMIP5") → <code>conflicted</code>; pre-CMIP6/SSP either way.</li>
-          <li><strong>Aqueduct may be older than cited</strong> — B4T flags the CRI "seems [to use] CMIP5" Aqueduct while the doc cites 4.0 (CMIP6); verify per row.</li>
-        </ul>
-      </div>
-        <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">Internal: Bert Lenaerts’ technical emails, 2026-04-29 / 2026-04-30 (relaying Philip Thornton, pers. comm.) — not a public document.</div></details>
-            <details class="cmts" data-term="B4T CRI Methods — Email corrections"><summary>💬 Comments on “Email corrections”</summary><div class="giscus-slot"></div></details>
       </section>
 
     <section id="m-weaknesses">
       <div class="card">
-        <h2 style="margin-top:0">Known weaknesses to carry forward</h2>
+        <h2 style="margin-top:0">Potential weaknesses (method)</h2>
         <ul>
-          <li><strong>Mixed vintage + horizon in one score</strong> — historic layers (WASP 1980–2000, Dartmouth 1985–2003), 2030 Aqueduct, and 2050s CMIP5/RCP8.5 threshold layers.</li>
-          <li><strong>Pre-CMIP6 / pre-SSP</strong> future layers (RCP8.5/CMIP5); Aqueduct CMIP5–CMIP6 (version to confirm).</li>
-          <li><strong>T-03 appears to duplicate R-01</strong> — identical LGP-flip wording under a different hazard.</li>
+          <li><strong>Mixed vintage + horizon combined in one score</strong> — historic layers (WASP 1980–2000, Dartmouth 1985–2003), 2030 Aqueduct, and 2050s CMIP5/RCP8.5 threshold layers are averaged together.</li>
           <li><strong>CCC is crop-level, not variety-level</strong> (Ecocrop + soil water-balance over MapSPAM; no changed-rainfall/LGP or salinity in that dataset; perennials awkward).</li>
-          <li><strong>Yield step averages expert + LLM estimates.</strong></li>
-          <li><strong>"SPI" (D-01) is mislabelled</strong> — the actual index is WASP (a distinct IRI index).</li>
+          <li><strong>Yield step averages an expert estimate with an LLM estimate.</strong></li>
         </ul>
-        <div class="callout" style="border-left-color:var(--brand)">Not all inputs are outdated. The real problems are <strong>mixed vintage, mixed horizon, unclear reprocessing lineage, and uneven method transparency</strong> — not uniform obsolescence. Phase 2 addresses the method; the Data tab addresses the inputs.</div>
+        <div class="callout" style="border-left-color:var(--brand)">Not all inputs are outdated. The real problems are <strong>mixed vintage, mixed horizon, unclear reprocessing lineage, and uneven method transparency</strong> — not uniform obsolescence. Phase 2 addresses the method; the Data tab addresses the inputs (see <em>Potential weaknesses (data)</em>).</div>
       </div>
         <details class="src"><summary>📄 Source &amp; references</summary><div class="srcbody">Synthesis of the sections above; full method in the CRI documentation — <a href="docs/cri-documentation-v1.pdf" target="_blank" rel="noopener">PDF</a>; dataset detail in the Data tab.</div></details>
-            <details class="cmts" data-term="B4T CRI Methods — Known weaknesses"><summary>💬 Comments on “Known weaknesses”</summary><div class="giscus-slot"></div></details>
+            <details class="cmts" data-term="B4T CRI Methods — Potential weaknesses"><summary>💬 Comments on “Potential weaknesses (method)”</summary><div class="giscus-slot"></div></details>
       </section>
 
     <section id="m-clarify">
