@@ -1,3 +1,5 @@
+<!-- URL-dense evidence table; bare URLs in cells are intentional and more readable than wrapped autolinks -->
+<!-- markdownlint-disable MD034 -->
 # Evidence log — GCF Preparation Facility
 
 One entry per external dataset referenced in the use-case review page
@@ -143,6 +145,7 @@ data, not on derived outputs.
 | UNICEF MICS | ✅ | ✅ (aggregate indicators) | "Requested not to redistribute datasets"; a data subset may be posted only to meet a journal's data-availability rule. Cite UNICEF MICS. |
 
 **Two design constraints that follow:**
+
 1. **ShareAlike cascade.** IPC, JMP, GYGA, WOCAT and CPI are all CC BY-NC-SA. Any published
    derivative of them must itself be CC BY-NC-SA — and if you **combine** a ShareAlike source with
    an all-rights-reserved or incompatible source in one downloadable product, that combined output
