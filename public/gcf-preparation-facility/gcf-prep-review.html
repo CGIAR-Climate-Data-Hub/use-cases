@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GCF Preparation Facility — use-case review (DRAFT) · CGIAR Climate Data Hub</title>
+<style>*{box-sizing:border-box}</style>
+</head>
+<body>
+<title>GCF Preparation Facility — Use-case Review</title>
+<style>
+  :root{
+    --brand:#1955A6; --brand-light:#63A9FE; --brand-dark:#123f7d; --brand-wash:#eaf1f9;
+    --ink:#1b2733; --muted:#5b6773; --faint:#8b98a3; --line:#e0e6ec; --line-soft:#eef2f6;
+    --ground:#ffffff; --panel:#f6f9fc;
+    --keep:#2e7d5b; --keep-bg:#e6f2eb;
+    --mod:#a85f13; --mod-bg:#f7ecdb;
+    --clarify:#5b6773; --clarify-bg:#eef1f4;
+    --legacy:#b0402a; --legacy-bg:#f7e7e1;
+    --new:#5a3a9e; --new-bg:#efe9f8;
+    --display:"Times New Roman",Times,serif;
+    --sans:Arial,Helvetica,sans-serif;
+    --mono:ui-monospace,Menlo,Consolas,"SF Mono",monospace;
+  }
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--panel);color:var(--ink);font-family:var(--sans);
+    font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3,h4{font-family:var(--display)}
+
+  .mast{background:var(--ground);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+  .mast-in{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:14px 28px}
+  .word{font-family:var(--display);font-size:21px;color:var(--brand);font-weight:400}
+  .word span{color:var(--muted)}
+  .draft-badge{margin-right:auto;margin-left:12px;background:#b45309;color:#fff;font-size:11px;font-weight:700;letter-spacing:.09em;padding:3px 9px;border-radius:4px;line-height:1.6}
+  .mast nav{display:flex;gap:20px;font-size:14px;color:var(--muted)}
+  .mast nav a{color:var(--muted)}
+  .mast nav a:hover{color:var(--brand)}
+
+  .shell{max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;gap:0}
+  .shell[hidden]{display:none}
+  .side{position:sticky;top:97px;flex:0 0 250px;align-self:flex-start;height:calc(100vh - 97px);
+    overflow-y:auto;padding:26px 18px 40px 28px;border-right:1px solid var(--line)}
+  main section[id]{scroll-margin-top:104px}
+  .tabbar{position:sticky;top:52px;z-index:25;background:var(--ground);border-bottom:1px solid var(--line);display:flex;gap:2px;padding:0 28px}
+  .tabbar button{appearance:none;background:none;border:none;border-bottom:3px solid transparent;padding:12px 18px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:.01em}
+  .tabbar button[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--brand)}
+  .tabbar button:hover{color:var(--brand)}
+  .tabbar button:focus-visible{outline:2px solid var(--brand-light);outline-offset:-2px}
+  .side h4{font-family:var(--sans);font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--faint);margin:0 0 10px;font-weight:700}
+  .toc{list-style:none;margin:0 0 24px;padding:0}
+  .toc li{margin:1px 0}
+  .toc a{display:flex;gap:9px;align-items:baseline;padding:5px 10px;border-radius:6px;color:var(--muted);
+    font-size:13.5px;line-height:1.35;border-left:2px solid transparent}
+  .toc a .n{font-family:var(--mono);font-size:11px;color:var(--faint);min-width:14px}
+  .toc a:hover{background:var(--brand-wash);text-decoration:none;color:var(--brand-dark)}
+  .toc a.active{background:var(--brand-wash);color:var(--brand-dark);border-left-color:var(--brand);font-weight:700}
+  .toc a.active .n{color:var(--brand)}
+  .side-meta{border-top:1px solid var(--line);padding-top:16px;font-size:12.5px;color:var(--muted)}
+  .side-meta div{margin:7px 0}
+  .side-meta b{color:var(--ink);font-weight:700;display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+  .side-links{margin-top:12px;display:flex;flex-direction:column;gap:7px;font-size:13px}
+  .side-links a{color:var(--brand);font-weight:700}
+  .side-note{margin-top:8px;font-size:11.5px;line-height:1.45;color:var(--muted);font-style:italic}
+  .side-links-2{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+
+  .content{flex:1 1 auto;min-width:0;padding:30px 40px 90px}
+  section{scroll-margin-top:66px;margin-bottom:34px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin:0 0 6px}
+  h1{font-size:34px;line-height:1.12;margin:0 0 12px;color:var(--ink);text-wrap:balance;font-weight:700}
+  h2{font-size:25px;margin:0 0 4px;color:var(--ink);font-weight:700;padding-bottom:8px;border-bottom:2px solid var(--brand-wash)}
+  .lede{font-size:17px;color:var(--muted);margin:0 0 4px}
+  h3{font-size:19px;margin:22px 0 6px;color:var(--ink)}
+  h4.cardh{font-family:var(--display);font-size:17px;margin:0 0 2px;color:var(--ink)}
+  p{margin:0 0 12px}
+  ul{margin:0 0 12px;padding-left:20px}li{margin:6px 0}
+  code{font-family:var(--mono);font-size:.85em;background:var(--line-soft);padding:1px 5px;border-radius:4px}
+  strong{font-weight:700}
+  .sub{color:var(--muted);font-size:14px;margin:2px 0 14px}
+  .cap{font-size:12.5px;color:var(--muted);margin:4px 0 10px;line-height:1.5}
+  .cap b{color:var(--ink)}
+
+  .card{background:var(--ground);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:16px 0}
+  .card.detail{border-left:3px solid var(--brand)}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0}
+  .kv{background:var(--ground);border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+  .kv h5{margin:0 0 5px;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);font-weight:700}
+  .kv p{margin:0;font-size:14px;color:var(--ink)}
+  .callout{background:var(--brand-wash);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:13px 17px;margin:12px 0;font-size:14.5px}
+  .callout b{color:var(--brand-dark)}
+  .note{background:#fff9ee;border-left:3px solid var(--mod);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px;color:#5c400f}
+  .note b{color:#7a3d0a}
+  .warn{background:#fbeee9;border-left:3px solid var(--legacy);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px;color:#7a2617}
+  .warn b{color:#7a2617}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.7}
+  .p-keep{background:var(--keep-bg);color:var(--keep)}
+  .p-mod{background:var(--mod-bg);color:var(--mod)}
+  .p-clarify{background:var(--clarify-bg);color:var(--clarify)}
+  .p-legacy{background:var(--legacy-bg);color:var(--legacy)}
+  .p-new{background:var(--new-bg);color:var(--new)}
+  .p-todo{background:#eef1f4;color:#8b98a3}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+  .legend span.lbl{font-size:12px;color:var(--muted)}
+
+  .tscroll{overflow-x:auto;overflow-y:visible;border:1px solid var(--line);border-radius:9px;background:var(--ground);margin:14px 0}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  .glance{min-width:720px}
+  .skilltbl{min-width:820px}
+  thead th{position:sticky;top:0;background:#eef3f9;color:var(--ink);text-align:left;
+    font-family:var(--sans);font-size:10px;letter-spacing:.02em;text-transform:uppercase;font-weight:700;
+    padding:8px 10px;border-bottom:2px solid var(--line);white-space:nowrap;z-index:2}
+  tbody td{padding:8px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  tbody tr:hover{background:#fafcfe}
+  tbody tr:last-child td{border-bottom:none}
+  td.sec{font-weight:700;color:var(--ink);white-space:nowrap}
+  .cell-pending{color:#9aa9b0;font-style:italic}
+
+  .spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .spec-col{border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+  .spec-col.present{background:#f6f7f8}
+  .spec-col.rec{background:var(--brand-wash);border-color:#cfe0f2}
+  .spec-h{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .spec-col.rec .spec-h{color:var(--brand-dark)}
+  .spec dl{margin:0;display:grid;grid-template-columns:minmax(78px,auto) 1fr;gap:5px 10px}
+  .spec dt{font-weight:600;color:var(--muted);font-size:12px}
+  .spec dd{margin:0;font-size:12.5px;color:var(--ink)}
+  .spec dd a{word-break:break-word}
+  @media (max-width:680px){.spec{grid-template-columns:1fr}}
+
+  .src{margin:12px 0}
+  .src summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--brand);padding:7px 12px;background:var(--brand-wash);border-radius:7px;list-style:none}
+  .src summary::-webkit-details-marker{display:none}
+  .src summary::before{content:"▸ ";color:var(--brand)}
+  .src[open] summary::before{content:"▾ "}
+  .srcbody{padding:10px 4px 2px}
+  .srcquote{border-left:3px solid var(--faint);background:#fbfcfd;margin:8px 0;padding:9px 14px;font-size:13px;color:#33414d;font-style:italic}
+  .srcquote cite{display:block;font-style:normal;font-size:11.5px;color:var(--faint);margin-top:6px}
+
+  figure{margin:16px 0}
+  figure img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block}
+  figcaption{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5}
+
+  .cmts{margin:12px 0 4px}
+  .cmts>summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--brand);padding:8px 13px;background:var(--brand-wash);border-radius:8px;list-style:none;display:inline-block}
+  .cmts>summary::-webkit-details-marker{display:none}
+  .cmts .cmtnote{font-size:12px;color:var(--muted);margin:10px 2px 4px}
+  .qbox{border:1px solid #cfe0f2;border-radius:9px;padding:2px 14px 6px;background:#f7fafd;margin:14px 0}
+  .qbox>summary{background:none;padding:12px 2px;display:block}
+  .qhead{display:block;font-size:14px;color:var(--ink);font-weight:400;margin-bottom:2px}
+  .qhead b{color:var(--brand-dark)}
+  .qcta{display:inline-block;margin-top:4px;font-size:12.5px;font-weight:700;color:var(--brand)}
+
+  .foot{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padding:22px 0 0;margin-top:20px}
+  .fab{position:fixed;right:20px;bottom:20px;z-index:40;background:var(--brand);color:#fff;font-weight:700;font-size:14px;padding:11px 17px;border-radius:999px;box-shadow:0 4px 16px rgba(18,63,125,.28)}
+  .fab:hover{background:var(--brand-dark);text-decoration:none}
+  @media print{.fab{display:none}}
+
+  @media (max-width:900px){
+    .side{display:none}
+    .content{padding:24px 20px 70px}
+    .mast-in{padding:12px 18px}
+  }
+</style>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="word" href="#top">CGIAR Climate Data Hub <span>— Use Cases</span></a>
+    <span class="draft-badge" title="Draft for review — not final">DRAFT</span>
+    <nav>
+      <a href="https://cgiar-climate-data-hub.github.io/CDH_prototype_v2/">Portfolio</a>
+      <a href="https://cgiar-climate-data-hub.github.io/use-cases/use-cases/gcf-preparation-facility/">Use-case brief</a>
+      <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="tabbar" role="tablist" aria-label="Report view">
+  <button type="button" data-tab="data" role="tab" aria-selected="true">Data</button>
+  <button type="button" data-tab="skills" role="tab" aria-selected="false">Skills</button>
+  <button type="button" data-tab="notebook" role="tab" aria-selected="false">Notebook</button>
+</div>
+
+<!-- ============================= DATA TAB ============================= -->
+<div class="shell" id="top" data-tab="data">
+  <aside class="side">
+    <h4>Data — on this page</h4>
+    <ul class="toc">
+      <li><a href="#d-overview"><span class="n">1</span><span>Overview &amp; context</span></a></li>
+      <li><a href="#d-glance"><span class="n">2</span><span>Nine sections at a glance</span></a></li>
+      <li><a href="#s1"><span class="n">3</span><span>Climate trends &amp; projections</span></a></li>
+      <li><a href="#s2"><span class="n">4</span><span>Extreme events</span></a></li>
+      <li><a href="#s3"><span class="n">5</span><span>Crop &amp; livestock exposure</span></a></li>
+      <li><a href="#s4"><span class="n">6</span><span>Vulnerability &amp; socioeconomic</span></a></li>
+      <li><a href="#s5"><span class="n">7</span><span>NDC &amp; NAP alignment</span></a></li>
+      <li><a href="#s6"><span class="n">8</span><span>Impact &amp; beneficiaries</span></a></li>
+      <li><a href="#s7"><span class="n">9</span><span>Theory of change / portfolio</span></a></li>
+      <li><a href="#s8"><span class="n">10</span><span>Safeguards &amp; gender</span></a></li>
+      <li><a href="#s9"><span class="n">11</span><span>Financial context</span></a></li>
+      <li><a href="#d-target"><span class="n">12</span><span>Target output (Togo SAT)</span></a></li>
+      <li><a href="#d-delivery"><span class="n">13</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
+      <li><a href="#d-feedback"><span class="n">14</span><span>Feedback</span></a></li>
+    </ul>
+    <div class="side-meta">
+      <div><b>Where to comment</b></div>
+      <div class="side-note">Each section has its own comment box — expand “💬 Comment / discuss” under it (GitHub sign-in). No account? Use the 💬 Feedback button (bottom-right).</div>
+      <div class="side-links side-links-2">
+        <a href="#s5" data-jump="data:s5">→ Open question: NDC/NAP scope</a>
+        <a href="#d-feedback" data-jump="data:d-feedback">→ Feedback form (no GitHub needed)</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="d-overview">
+      <p class="eyebrow">GCF Preparation Facility · Climate Rationale v2 · Data review</p>
+      <h1>GCF Preparation Facility — data, skills &amp; notebook review</h1>
+      <p class="lede">A structured review of the data behind the Atlas <strong>Climate Rationale v2</strong> notebook and the CGIAR Climate Data Hub’s plan to serve Green Climate Fund proposal writers — organised around the nine notebook sections in Cesare Scartozzi’s GCF data-requirements memo, and mapped to the GCF Concept Note (v3.1) sections each one feeds.</p>
+
+      <div class="grid2">
+        <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion: Cesare Scartozzi; coordinator: Peter Steward; Brayden Youngberg; Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
+        <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is the reference gold standard.</p></div>
+        <div class="kv"><h5>How it’s organised</h5><p>Three tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), and <strong>Notebook</strong> (Cesare’s multilateral-climate-funds pipeline idea).</p></div>
+        <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
+      </div>
+
+      <div class="callout"><b>What “status” means.</b> Each section is tagged from the memo: <span class="pill p-keep">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod">PARTIAL</span> partly present, needs additions · <span class="pill p-new">NEW</span> not yet built · <span class="pill p-clarify">DEPRIORITISED</span> in the memo but since parked by the champion. “Present” = what the live notebook does today; “Recommended” = the memo’s target datasets.</div>
+
+      <div class="note"><b>How we keep it honest.</b> Section requirements are quoted verbatim from Cesare’s memo (dated 2026-01-31; filed as “2026.03”). Notebook state comes from the live <code>climateRationale</code> notebook and its decision log. Dataset facts come from each provider’s official page, checked live on 2026-07-07 and re-checked adversarially — logged in <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">the evidence log</a>. Internal meeting transcripts, chats and emails are <strong>not</strong> reproduced — only short excerpts and summaries of decisions. Anything unconfirmed is marked <code>pending</code>, never guessed.</div>
+    </section>
+
+    <section id="d-glance">
+      <h2>The nine notebook sections at a glance</h2>
+      <p class="sub">From the memo: each row is a section of the proposed GCF notebook, the GCF Concept Note (CN) / Funding Proposal (FP) codes it serves, and its build status. All sections must be queryable at country + admin level and emit structured, citable outputs for an LLM to draft from.</p>
+      <div class="tscroll">
+        <table class="glance">
+          <thead><tr><th>#</th><th>Notebook section</th><th>Serves (CN · FP)</th><th>Status</th><th>Feasibility</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="sec">Climate trends &amp; projections</td><td>CN C.1 · FP B.1</td><td><span class="pill p-keep">IN CR</span></td><td>2</td></tr>
+            <tr><td>2</td><td class="sec">Extreme events</td><td>CN C.1 · FP B.1, D.1</td><td><span class="pill p-keep">IN CR</span></td><td>2</td></tr>
+            <tr><td>3</td><td class="sec">Crop &amp; livestock hazard exposure</td><td>CN C.1, C.2 · FP B.1, D.1</td><td><span class="pill p-mod">PARTIAL</span></td><td>2–3</td></tr>
+            <tr><td>4</td><td class="sec">Vulnerability &amp; socioeconomic context</td><td>CN Exec Summary · FP D.4</td><td><span class="pill p-mod">PARTIAL</span></td><td>1–2</td></tr>
+            <tr><td>5</td><td class="sec">NDC &amp; NAP alignment</td><td>CN A.16 · FP D.5</td><td><span class="pill p-clarify">DEPRIORITISED</span></td><td>3</td></tr>
+            <tr><td>6</td><td class="sec">Impact potential &amp; beneficiaries</td><td>CN A.6–A.7 · FP D.1, E.3</td><td><span class="pill p-new">NEW</span></td><td>2–4</td></tr>
+            <tr><td>7</td><td class="sec">Theory of change &amp; GCF portfolio</td><td>FP B.2, D.2</td><td><span class="pill p-new">NEW</span></td><td>2–3</td></tr>
+            <tr><td>8</td><td class="sec">Safeguards &amp; gender screening</td><td>CN C.4 · FP G.1–G.2</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
+            <tr><td>9</td><td class="sec">Financial context &amp; justification</td><td>CN D.1–D.4 · FP B.5, C.1</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cap">Feasibility 1 = easy (public, mostly integration) to 5 = hard (per-country acquisition, NLP, or new modelling). Memo priority actions: (a) extend Sections 3–4; (b) build Section 7 (GCF portfolio); (c) build the remaining NEW sections on public global datasets; (d) standardise all outputs to a common schema.</p>
+      <div class="callout"><b>Licence: two separate rights.</b> <em>Hosting the raw data</em> and <em>publishing derived admin1/admin2 products</em> are governed differently — and the notebook is almost entirely the latter.
+        <ul style="margin:8px 0 2px">
+          <li><b>Mirror-host the raw data:</b> only the openly-licensed sets (NEX-GDDP-CMIP6, ERA5/AgERA5, CHIRPS/CHIRTS, MapSPAM, FAOSTAT, Aqueduct, World Bank WDI/CPIA, WorldPop, HDI, Climate Watch).</li>
+          <li><b>Non-commercial raw data</b> (ACLED, DHS, MICS, WDPA, IUCN Red List, IPC, WHO/UNICEF JMP, GYGA, WOCAT, CPI) — <strong>federate or link, don’t copy the raw layer</strong>. But for our non-commercial use, <strong>all of them permit computing and publishing derived admin-level stats/maps</strong> — verified per-licence in the evidence log.</li>
+        </ul>
+        Three catches on the derived products: <b>(1) ShareAlike cascade</b> — IPC, JMP, GYGA, WOCAT, CPI are CC BY-NC-SA, so a derived (or combined) export must carry that licence; <b>(2) ACLED</b> outputs must be genuinely transformative (coarse aggregates, not a reorganised dump); <b>(3) publish stats, not the raw layer</b> — WDPA/IUCN/DHS/MICS raw data stays with the provider. GLEAM, ND-GAIN, INFORM, EFDB, EX-ACT and the OECD/IMF series have unclear licences to resolve first. Full per-dataset detail: <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">evidence log</a>.</div>
+      <details class="cmts" data-term="GCF Prep Data — Nine sections at a glance"><summary>💬 Comment / discuss “Sections at a glance”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <!-- SECTION 1 -->
+    <section id="s1">
+      <div class="card detail">
+        <h4 class="cardh">1 · Climate trends &amp; projections <span class="pill p-keep">IN CR</span></h4>
+        <p class="sub">Serves CN C.1 · FP B.1 — historical timeseries and future projections, all at administrative level.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Historical timeseries (TAVG, PTOT, by season); future projections (SSP1-2.6 through SSP5-8.5, periods 2021–2040 to 2080–2100); anomalies; warming stripes. All at administrative level.<cite>GCF Data Notebook Memo, Section 1 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl>
+              <dt>Historical</dt><dd>CHIRPS (precip) + CHIRTS/AgERA5 (temperature); monthly plots, anomaly toggle, baseline-period picker (1991–2020 / 1995–2014)</dd>
+              <dt>Future</dt><dd>NEX-GDDP-CMIP6 ensemble ribbon, 17–83% inter-model range; seasonal selector; Ribbon / Dot / Summary views</dd>
+              <dt>Coverage</dt><dd>NEX-GDDP hazards effectively global (tropics/subtropics)</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6">NEX-GDDP-CMIP6</a> / CORDEX; <a href="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels">ERA5</a>; <a href="https://www.chc.ucsb.edu/data/chirps">CHIRPS</a> / <a href="https://www.chc.ucsb.edu/data/chirtsdaily">CHIRTS</a></dd>
+              <dt>Scenarios</dt><dd>SSP1-2.6 → SSP5-8.5; periods 2021–2040 to 2080–2100</dd>
+              <dt>Outputs</dt><dd>anomalies + warming stripes, admin-level, with pre-computed sentence fragments</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Core capability exists and is the notebook’s strongest section. Gap is breadth of SSP/period coverage in the exposed outputs, not the underlying data.</p>
+        <details class="cmts" data-term="GCF Prep Data — S1 Climate trends & projections"><summary>💬 Comment / discuss “Climate trends &amp; projections”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="s2">
+      <div class="card detail">
+        <h4 class="cardh">2 · Extreme events <span class="pill p-keep">IN CR</span></h4>
+        <p class="sub">Serves CN C.1 · FP B.1, D.1 — unusual / extreme temperature and precipitation events.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Z-score classification of unusual/extreme temperature and precipitation events; historical vs. projected frequency by scenario. All at administrative level.<cite>GCF Data Notebook Memo, Section 2 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl>
+              <dt>Method</dt><dd>Z-score categorisation; tails-aware (PTOT both tails, others high-only); per-hazard threshold rows</dd>
+              <dt>Derivation</dt><dd>computed in-notebook from the Section 1 climate layers</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Source</dt><dd>derived from Section 1</dd>
+              <dt>Add</dt><dd>historical vs projected frequency by scenario; per-GCM classification for uncertainty bands (open pipeline item)</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Matches the Togo SAT z-score approach (Fig. 5 rainfall anomalies). Note the Togo document’s own Z=1 / Z=2 labelling is internally inconsistent with its annex — resolve the threshold labels when this feeds a template.</p>
+        <details class="cmts" data-term="GCF Prep Data — S2 Extreme events"><summary>💬 Comment / discuss “Extreme events”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="s3">
+      <div class="card detail">
+        <h4 class="cardh">3 · Crop &amp; livestock hazard exposure <span class="pill p-mod">PARTIAL</span></h4>
+        <p class="sub">Serves CN C.1, C.2 · FP B.1, D.1 — production value exposed to compound hazards, valued in USD. This is the Togo SAT Table 5 output.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl>
+              <dt>Crops</dt><dd>MapSPAM production value × hazard-exposure parquet; severity / threshold advanced controls; Ecocrop defaults</dd>
+              <dt>Scope</dt><dd><strong>Sub-Saharan Africa only</strong> (MapSPAM SSA run) — flagged by the champion as “the biggest limitation”</dd>
+              <dt>Livestock</dt><dd>partial; fisheries / aquaculture not yet present</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Base</dt><dd><a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SWPENT">MapSPAM 2020</a>; <a href="https://www.fao.org/faostat/en/">FAOSTAT</a></dd>
+              <dt>Add</dt><dd><a href="https://www.fao.org/gleam/en/">FAO GLEAM</a> (livestock); <a href="https://www.wri.org/data/aqueduct-global-maps-40-data">WRI Aqueduct</a> (water-demand stress on irrigated systems); fisheries / aquaculture exposure</dd>
+              <dt>Coverage</dt><dd>extend beyond SSA toward all non-Annex-I countries</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Highest-value section — it is the Togo Table 5 matrix (see <a href="#d-target" data-jump="data:d-target">Target output</a>). Priorities: livestock + water-stress additions (memo action a) and geographic coverage beyond SSA.</p>
+        <details class="cmts qbox" id="q-coverage" data-term="GCF Prep Q — Geographic coverage beyond SSA"><summary><span class="qhead"><b>Open question.</b> The crop-exposure pipeline is Sub-Saharan Africa only, but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="s4">
+      <div class="card detail">
+        <h4 class="cardh">4 · Vulnerability &amp; socioeconomic context <span class="pill p-mod">PARTIAL</span></h4>
+        <p class="sub">Serves CN Exec Summary · FP D.4.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">CR has poverty rates, GDP by sector, land use. Add if possible: composite vulnerability indices (ND-GAIN, INFORM Risk); food insecurity prevalence (IPC/CH); water stress and WASH access; gender-disaggregated vulnerability; population projections; HDI.<cite>GCF Data Notebook Memo, Section 4 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl>
+              <dt>Have</dt><dd>World Bank indicators: poverty rates, GDP by sector, land use (Key Facts section)</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Add</dt><dd><a href="https://gain.nd.edu/our-work/country-index/">ND-GAIN</a>; <a href="https://drmkc.jrc.ec.europa.eu/inform-index">INFORM Risk</a>; <a href="https://www.ipcinfo.org/cadre-harmonise">IPC / Cadre Harmonisé</a>; <a href="https://washdata.org/">WHO/UNICEF JMP</a> (WASH); <a href="https://www.worldpop.org/">WorldPop</a>; <a href="https://dhsprogram.com/">DHS</a> / <a href="https://mics.unicef.org/">MICS</a>; <a href="https://hdr.undp.org/data-center/human-development-index">UNDP HDI</a></dd>
+              <dt>Effort</dt><dd>moderate — mostly public, mainly integration work</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Additions are mostly public, low-risk integrations (memo action a). Good early wins for the Hub catalogue.</p>
+        <details class="cmts" data-term="GCF Prep Data — S4 Vulnerability & socioeconomic"><summary>💬 Comment / discuss “Vulnerability &amp; socioeconomic”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="s5">
+      <div class="card detail">
+        <h4 class="cardh">5 · NDC &amp; NAP alignment <span class="pill p-clarify">DEPRIORITISED</span></h4>
+        <p class="sub">Serves CN A.16 · FP D.5.</p>
+        <div class="warn"><b>Conflict flagged.</b> The memo names this the <strong>highest-priority new section</strong> (“Build Section 5 (NDC/NAP) as the highest-priority new section”). But on 2026-04-29 the champion <strong>withdrew the automation ask</strong> — summarised as: the NAP/NDC corpus is too small (roughly a dozen documents a year of reading) to justify text-extraction automation; at most, a metadata page that links out. This page follows the later decision and marks the section deprioritised, but records the conflict rather than silently picking one.</div>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Country NDC targets for agriculture, forestry, land use, water; NAP priority actions; LT-LEDS commitments; GCF country programme priorities.<cite>GCF Data Notebook Memo, Section 5 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl><dt>Have</dt><dd>none</dd></dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — revised scope</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://unfccc.int/NDCREG">UNFCCC NDC Registry</a>; <a href="https://napcentral.org">NAP Central</a>; <a href="https://www.climatewatchdata.org">Climate Watch</a>; <a href="https://www.greenclimate.fund/countries-and-regions">GCF country programmes</a></dd>
+              <dt>Scope now</dt><dd>metadata / signpost page linking out — not text-extraction automation; revisit only if demand recurs</dd>
+            </dl></div>
+        </div>
+        <details class="cmts" data-term="GCF Prep Data — S5 NDC & NAP alignment"><summary>💬 Comment / discuss “NDC &amp; NAP alignment”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="s6">
+      <div class="card detail">
+        <h4 class="cardh">6 · Impact potential &amp; beneficiary estimates <span class="pill p-new">NEW</span></h4>
+        <p class="sub">Serves CN A.6–A.7 · FP D.1, E.3.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">List of useful datasets and methods to calculate beneficiaries.<cite>GCF Data Notebook Memo, Section 6 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl><dt>Have</dt><dd>none (WorldPop population available via Section 4 additions)</dd></dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://www.worldpop.org/">WorldPop</a>; <a href="https://www.ipcc-nggip.iges.or.jp/EFDB/main.php">IPCC emission factors</a>; <a href="https://www.fao.org/in-action/epic/ex-act-tool/en/">EX-ACT</a>; Atlas yield gaps (<a href="https://www.globalyieldgap.org/">GYGA</a>); <a href="https://wocat.net/en/database/">WOCAT</a>; national census</dd>
+              <dt>Note</dt><dd>national census = per-country acquisition (hardest, feasibility 4); mitigation-side accounting needs the L2 focal point</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Mixes easy public layers with a hard per-country census dependency. Mitigation accounting (EX-ACT, IPCC EFs) is new territory — CGIAR’s prior GCF work is adaptation-only, so the mitigation focal point needs to be engaged.</p>
+        <details class="cmts" data-term="GCF Prep Data — S6 Impact & beneficiaries"><summary>💬 Comment / discuss “Impact &amp; beneficiaries”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section id="s7">
+      <div class="card detail">
+        <h4 class="cardh">7 · Theory of change &amp; GCF portfolio evidence <span class="pill p-new">NEW</span></h4>
+        <p class="sub">Serves FP B.2, D.2. Memo action (b): build this section.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Database of approved GCF projects in food/land/water result areas (T4, T5, T6) with structured fields.<cite>GCF Data Notebook Memo, Section 7 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl><dt>Have</dt><dd>none in the CR notebook — but the champion holds a project-level multilateral-climate-funds dataset that directly serves this (see <a href="#top" data-jump="notebook:top">Notebook tab</a>)</dd></dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://www.greenclimate.fund/projects">GCF project database</a>; CGIAR evidence maps; <a href="https://ieg.worldbankgroup.org/evaluations">World Bank IEG</a>; <a href="https://ioe.ifad.org/en/">IFAD evaluations</a>; Cesare’s MCF project-level dataset</dd>
+              <dt>Filter</dt><dd>food / land / water result areas (GCF Strategic Plan targets T4, T5, T6)</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Strongly overlaps the Notebook tab deliverable — the multilateral-climate-funds dataset is the natural engine for this section. Sequence the two together.</p>
+        <details class="cmts" data-term="GCF Prep Data — S7 Theory of change & portfolio"><summary>💬 Comment / discuss “Theory of change &amp; portfolio”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section id="s8">
+      <div class="card detail">
+        <h4 class="cardh">8 · Safeguards &amp; gender screening <span class="pill p-new">NEW</span></h4>
+        <p class="sub">Serves CN C.4 · FP G.1–G.2.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Protected areas and biodiversity hotspots in project zones; indigenous territories; gender gap indices for agriculture; land tenure; SEAH risk indicators by country, Climate Security Programming Dashboard for Climate Finance (CSO).<cite>GCF Data Notebook Memo, Section 8 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl><dt>Have</dt><dd>none</dd></dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://www.protectedplanet.net/en">WDPA / Protected Planet</a>; <a href="https://www.iucnredlist.org/">IUCN Red List</a>; FAO Gender &amp; Land Rights <em>(site defunct — see evidence log)</em>; <a href="https://www.oecd.org/en/about/programmes/social-institutions-and-gender-index-sigi.html">OECD SIGI</a>; <a href="https://databank.worldbank.org/source/country-policy-and-institutional-assessment">World Bank CPIA</a>; Climate Security Programming Dashboard (CSO)</dd>
+              <dt>Type</dt><dd>mostly project-zone spatial overlays — fits the Hub’s geospatial pipeline well</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Public global layers, largely spatial overlay work. Feasibility 2; good candidate once Sections 3–4 land.</p>
+        <details class="cmts" data-term="GCF Prep Data — S8 Safeguards & gender"><summary>💬 Comment / discuss “Safeguards &amp; gender”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section id="s9">
+      <div class="card detail">
+        <h4 class="cardh">9 · Financial context &amp; justification <span class="pill p-new">NEW</span></h4>
+        <p class="sub">Serves CN D.1–D.4 · FP B.5, C.1.</p>
+        <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
+          <blockquote class="srcquote">Climate finance flows to country/sector; adaptation finance gap; co-financing landscape (MDB, bilateral, domestic); fiscal space indicators; GCF funding benchmarks from comparable approved projects.<cite>GCF Data Notebook Memo, Section 9 — Cesare Scartozzi</cite></blockquote>
+        </div></details>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
+            <dl><dt>Have</dt><dd>none in the CR notebook — the MCF dataset also carries project financing fields (project value, GCF financing, co-financing)</dd></dl></div>
+          <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
+            <dl>
+              <dt>Sources</dt><dd><a href="https://www.oecd.org/en/publications/creditor-reporting-system_22180907.html">OECD DAC CRS</a>; <a href="https://www.climatepolicyinitiative.org/publication/global-landscape-of-climate-finance-2025/">CPI Global Landscape of Climate Finance</a>; <a href="https://www.imf.org/en/publications/fm">IMF fiscal data</a>; Cesare’s MCF dataset</dd>
+            </dl></div>
+        </div>
+        <p><strong>Verdict.</strong> Also overlaps the MCF dataset (financing columns + GCF benchmarks from comparable projects). Bundle with Section 7.</p>
+        <details class="cmts" data-term="GCF Prep Data — S9 Financial context"><summary>💬 Comment / discuss “Financial context”</summary><div class="giscus-slot"></div></details>
+      </div>
+    </section>
+
+    <section id="d-target">
+      <h2>Target output — the Togo SAT hazard-exposure matrix</h2>
+      <p>The gold-standard reference is the Togo Sustainable Agricultural Transformation rapid climate-risk assessment (Global Center on Adaptation + Alliance Bioversity-CIAT, April 2025). Its <strong>Table 5</strong> is exactly what Section 3 of the notebook should auto-generate: crop production value exposed to compound hazards, by region × crop × scenario, with the share of regional crop value in parentheses.</p>
+      <figure>
+        <img src="docs/img/togo-table5.png" alt="Togo SAT report Table 5 — projected value of crop production exposed to severe climate hazards, by region, crop, and SSP scenario">
+        <figcaption><b>Togo SAT report, Table 5 (p.19).</b> Rows = region × hazard combination (Dry only / Heat only / Dry and Heat); columns = crop (maize / soybean / rice) × scenario (SSP245 / SSP585); cells = exposed value of production in constant 2015 US$ with the % of that region’s crop value in parentheses. Built from MapSPAM (Togo agricultural census 2012–14) crossed with African Adaptation Atlas hazard layers — the exact pipeline the Climate Rationale notebook runs. A companion Table 6 shows the same in harvested hectares. Reproduced from the source report for reference; note the source header typo “SS245” in the rice column.</figcaption>
+      </figure>
+      <div class="callout"><b>Methods to match (Togo Annex 2).</b> CHIRPS + AgERA5 historical (1981–2022); 5-GCM CMIP6 ensemble (ACCESS-ESM1-5, MPI-ESM1-2-HR, EC-Earth3, INM-CM5-0, MRI-ESM2-0); SSP245 &amp; SSP585; baseline 1995–2014; 0.05° resolution; hazard indices NTx35 (crop heat), NDWS (drought), NDWL0 (waterlogging), HSH (human heat) with the thresholds in the report’s Annex Table A.1.</div>
+      <details class="cmts" data-term="GCF Prep Data — Target output Togo Table 5"><summary>💬 Comment / discuss “Target output”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="d-delivery">
+      <h2>Delivering the data — geoselection &amp; AI-skill access</h2>
+      <p class="sub">Two practical questions the review has to answer: under an Atlas-style <strong>country/admin geoselector</strong>, how does each dataset get summarised? And could an <strong>AI skill</strong> reach the data — by federating to a live endpoint, or by rehosting? The answer turns on the dataset’s native form (raster / vector / point / tabular) and, for hosting, its licence.</p>
+
+      <h3>By data type — how a geoselection is summarised</h3>
+      <div class="tscroll">
+        <table class="skilltbl">
+          <thead><tr><th>Data type</th><th>Datasets</th><th>Native form &amp; access</th><th>Geoselection summary → output</th><th>AI-skill route</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="sec">Gridded climate raster</td>
+              <td>NEX-GDDP-CMIP6, ERA5, AgERA5, CHIRPS, CHIRTS</td>
+              <td>NetCDF/GeoTIFF/COG, 0.05–0.25°. NEX-GDDP COGs on public AWS S3; CHIRPS has a COG dir; <strong>ERA5/AgERA5 gated behind the Copernicus CDS API (key + async queue)</strong>; CHIRTS bulk.</td>
+              <td><strong>Zonal statistics</strong> (mean / sum) within the selected admin0/1/2 polygon → per-admin timeseries, anomalies, warming stripes.</td>
+              <td>Federate NEX-GDDP / CHIRPS COGs; but the practical route is <strong>rehost a precomputed admin-indexed parquet</strong> (what <code>hazards_prototype</code> already does). CDS is not real-time — pre-compute.</td>
+            </tr>
+            <tr>
+              <td class="sec">Gridded exposure raster</td>
+              <td>MapSPAM 2020, WorldPop</td>
+              <td>GeoTIFF. MapSPAM = Dataverse bulk (~10 km); WorldPop = REST API (`worldpop.org/rest/data`) → GeoTIFF (100 m/1 km).</td>
+              <td><strong>Zonal sum</strong> within admin × hazard mask → value / population exposed (the Togo Table 5 matrix).</td>
+              <td>WorldPop federates via REST; MapSPAM bulk-download-then-host. Exposure product is a derived parquet either way.</td>
+            </tr>
+            <tr>
+              <td class="sec">Vector polygons</td>
+              <td>WDPA / Protected Planet, IUCN ranges, Aqueduct (HydroBASINS)</td>
+              <td>Polygons. WDPA = global GDB bulk + per-country API; IUCN ranges = spatial download (API is attributes only); Aqueduct = bulk zip, sub-basin level.</td>
+              <td><strong>Spatial overlay / intersection</strong> with the admin unit or project zone → area or count within the selection (e.g. % of project zone under protection).</td>
+              <td>Bulk-download-then-host the geometry; derive the admin/zone overlay. <strong>⚠ non-commercial — host the derived stat, not the raw polygons.</strong></td>
+            </tr>
+            <tr>
+              <td class="sec">Point / event</td>
+              <td>ACLED</td>
+              <td>Point events (lat/lon) + admin1/2/3 fields, <code>event_date</code>. REST API (OAuth token).</td>
+              <td><strong>Spatial join / admin-field aggregation</strong> → event count or rate per admin unit over time.</td>
+              <td>Federate via API for ingest; <strong>⚠ NC + transformative rule — host only coarse admin aggregates</strong> that can’t reconstruct events.</td>
+            </tr>
+            <tr>
+              <td class="sec">National tabular (admin0)</td>
+              <td>World Bank WDI, FAOSTAT, ND-GAIN, INFORM, HDI, WHO/UNICEF JMP, CPIA, OECD CRS/SIGI, IMF, CPI</td>
+              <td>One row per country-year. <strong>Live APIs:</strong> WDI, FAOSTAT, INFORM (JRC), OECD &amp; IMF (SDMX). <strong>Bulk-only:</strong> ND-GAIN, HDI, JMP, CPI.</td>
+              <td><strong>Row filter / join by ISO3</strong> → national value(s) for the selected country; trivially "geoselected".</td>
+              <td>Federate to the provider API where one exists (WDI, FAOSTAT, INFORM, OECD, IMF); bulk-then-host the rest.</td>
+            </tr>
+            <tr>
+              <td class="sec">Subnational tabular</td>
+              <td>IPC / Cadre Harmonisé</td>
+              <td>Subnational phase areas as GeoJSON + vector tiles; REST API (`api.ipcinfo.org`, key). <strong>The only source here that natively serves subnational polygons via API.</strong></td>
+              <td><strong>Join by admin1/2 unit-of-analysis</strong> → food-insecurity phase for the selected sub-area.</td>
+              <td>Federate via API. <strong>⚠ CC BY-NC-SA</strong> — derived product carries the same licence.</td>
+            </tr>
+            <tr>
+              <td class="sec">Project databases (admin0 attribute)</td>
+              <td>GCF, GEF, Adaptation Fund, Cesare’s MCF dataset</td>
+              <td>Project-level rows; country is an <strong>attribute, no geometry</strong>. GCF = Open Data API; AF = via IATI Registry; GEF = export/scrape; MCF = the delivered CSV.</td>
+              <td><strong>Filter by selected country</strong>, join country → admin0 boundary to map → aggregate financing / counts (Cesare’s pipeline notebook).</td>
+              <td>Federate GCF / AF (IATI); scrape GEF; host the MCF dataset as a CDH parquet (its metadata-standard pilot).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cap">Access modes verified live 2026-07-07/08 (see <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">evidence log</a>). ⚠ marks datasets where licence limits what can be hosted — see the licence note above.</p>
+
+      <h3>Can an AI skill access this — federate or rehost?</h3>
+      <p><strong>Yes — all of it, through one pattern.</strong> The skill (or MCP) queries a <strong>CDH-hosted, admin-indexed derived layer via a stable metadata URL</strong> — the federation-by-metadata design Brayden is building, where the URL never changes and the Hub swaps the backing S3 path underneath. Behind that URL, each dataset takes one of two routes:</p>
+      <div class="spec">
+        <div class="spec-col rec"><div class="spec-h">Federate — skill hits a live endpoint</div>
+          <dl>
+            <dt>When</dt><dd>the provider has a live API/cloud endpoint <em>and</em> the licence allows</dd>
+            <dt>Datasets</dt><dd>WDI, FAOSTAT, INFORM, IPC, ACLED, WorldPop, OECD, IMF, GCF, Adaptation Fund (IATI), Climate Watch, GAUL (WFS), NEX-GDDP / CHIRPS COGs</dd>
+            <dt>Good for</dt><dd>national tabular (fast, always current); no storage burden</dd>
+          </dl></div>
+        <div class="spec-col present"><div class="spec-h">Rehost a derived product — Hub stores it</div>
+          <dl>
+            <dt>When</dt><dd>bulk-only, or heavy raster needing zonal stats, <em>or</em> non-commercial data where only the <strong>derived</strong> product may be hosted</dd>
+            <dt>Datasets</dt><dd>MapSPAM, CHIRTS, ND-GAIN, HDI, JMP, WDPA, IUCN, Aqueduct, GEF, the MCF dataset — plus the climate hazards already in <code>hazards_prototype</code></dd>
+            <dt>Good for</dt><dd>performance (~1 s admin queries) and the only lawful route for the NC datasets</dd>
+          </dl></div>
+      </div>
+      <div class="callout"><b>The one architecture serves both.</b> Because the Hub hosts the <em>derived admin-indexed layer</em> — not the raw source — the same skill endpoint works for open and non-commercial data alike (deriving + publishing admin summaries is permitted even for the NC sets; see the licence note). Federation is the default where a live API exists and the licence permits; rehosting-the-derived-product covers everything else. <strong>Caveats:</strong> ERA5/AgERA5 is API-gated (key + async queue — pre-compute, don’t federate live); ACLED aggregates must be coarse enough to be non-reverse-engineerable; ShareAlike (IPC, JMP, GYGA, WOCAT, CPI) propagates to the hosted derivative.</div>
+      <details class="cmts" data-term="GCF Prep Data — Delivery, geoselection & AI access"><summary>💬 Comment / discuss “Delivering the data”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="d-feedback">
+      <h2>Feedback</h2>
+      <p>Two ways to respond. <strong>With a GitHub account:</strong> expand the “💬 Comment / discuss” box under any section — comments post to GitHub Discussions on the use-cases repo. <strong>Without one:</strong> use the floating <strong>💬 Feedback</strong> button (bottom-right), which opens a short form; submissions become tracked issues the coordinator triages.</p>
+      <p class="foot">Draft for task-group review. Facts sourced from the GCF data-requirements memo, the live Climate Rationale notebook, and dataset providers’ official pages (evidence log linked above). Not for external circulation until the champion confirms it is public-safe.</p>
+    </section>
+  </main>
+</div>
+
+<!-- ============================= SKILLS TAB ============================= -->
+<div class="shell" data-tab="skills" hidden>
+  <aside class="side">
+    <h4>Skills — on this page</h4>
+    <ul class="toc">
+      <li><a href="#sk-intro"><span class="n">1</span><span>What the skills library is</span></a></li>
+      <li><a href="#sk-naming"><span class="n">2</span><span>Naming: there is no GCF skill yet</span></a></li>
+      <li><a href="#sk-inventory"><span class="n">3</span><span>Existing skills &amp; relevance</span></a></li>
+      <li><a href="#sk-proposed"><span class="n">4</span><span>Proposed: a GCF-proposal skill</span></a></li>
+      <li><a href="#sk-access"><span class="n">5</span><span>Federate or rehost?</span></a></li>
+      <li><a href="#sk-questions"><span class="n">6</span><span>Open questions</span></a></li>
+    </ul>
+    <div class="side-meta">
+      <div><b>Skills repo</b></div>
+      <div class="side-links">
+        <a href="https://github.com/CGIAR-Climate-Data-Hub/skills">→ CGIAR-Climate-Data-Hub/skills</a>
+        <a href="https://cgiar-climate-data-hub.github.io/skills/">→ Skills docs site</a>
+      </div>
+      <div class="side-note">A “skill” is a domain instruction-set loaded into Claude Code — you describe what you need and Claude acts as a specialist for that workflow.</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="sk-intro">
+      <p class="eyebrow">GCF Preparation Facility · CDH skills library</p>
+      <h1>Skills — what exists, and the GCF skill worth building</h1>
+      <p class="lede">The Climate Data Hub maintains a library of Claude Code “skills” for climate + agriculture workflows. This tab inventories them against this use-case and specs a genuine GCF-proposal skill — the piece the library is currently missing.</p>
+      <div class="callout"><b>What a skill is.</b> A skill turns a natural-language request into a ready-to-run workflow — routing to the right APIs, writing correct code, following an established recipe — without the user needing tool names or parameters. Skills live in <code>.agents/skills/</code> in the <a href="https://github.com/CGIAR-Climate-Data-Hub/skills">skills repo</a>.</div>
+    </section>
+
+    <section id="sk-naming">
+      <h2>Naming: there is no “Green Climate Fund” skill yet</h2>
+      <div class="warn"><b>Read this first.</b> The skills repo contains a skill called <code>gcf-pipeline</code> — but <strong>“GCF” there means “Get, Clip, Figure”</strong>, not Green Climate Fund. It is a generic download → clip-to-boundary → plot orchestrator, unrelated to GCF proposals. There is currently <strong>no</strong> skill dedicated to Green Climate Fund proposal support. Anyone browsing the library for GCF work will trip on this collision — so a real proposal skill should be named unambiguously (e.g. <code>gcf-proposal</code> or <code>climate-rationale</code>).</div>
+      <details class="src"><summary>Evidence — the <code>gcf-pipeline</code> skill’s own description (verbatim)</summary><div class="srcbody">
+        <blockquote class="srcquote">gcf-pipeline — Get, Clip, Figure (Orchestrator). You are a thin pipeline orchestrator. You collect parameters, show one plan, then delegate each stage to the appropriate specialist skill… Full download → process → notebook + dashboard workflow in one conversation.<cite>skills repo · .agents/skills/gcf-pipeline/SKILL.md (fetched 2026-07-07)</cite></blockquote>
+      </div></details>
+    </section>
+
+    <section id="sk-inventory">
+      <h2>Existing skills &amp; their relevance here</h2>
+      <p class="sub">The eight skills in the library on 2026-07-07, and how each bears on the GCF Preparation Facility.</p>
+      <div class="tscroll">
+        <table class="skilltbl">
+          <thead><tr><th>Skill</th><th>What it does</th><th>Relevance to this use-case</th></tr></thead>
+          <tbody>
+            <tr><td class="sec">climate-data-download</td><td>Downloads CHIRPS, CHIRTS-ERA5, AgERA5, NASA POWER for any country / bbox</td><td><span class="pill p-keep">High</span> — the exact ingestion layer for notebook Sections 1–2</td></tr>
+            <tr><td class="sec">geospatial-cube-processor</td><td>Clips rasters to admin boundaries, stacks datasets, computes zonal statistics</td><td><span class="pill p-keep">High</span> — admin-level aggregation is a hard requirement of every section</td></tr>
+            <tr><td class="sec">notebook-plots</td><td>Writes Plotly time-series / choropleth cells into a Jupyter notebook; exports standalone HTML</td><td><span class="pill p-keep">High</span> — matches the notebook delivery format</td></tr>
+            <tr><td class="sec">climate-dashboard</td><td>Builds a self-contained interactive HTML dashboard (KPIs, Chart.js, table) from a climate CSV / NetCDF</td><td><span class="pill p-mod">Medium</span> — useful for the funds notebook’s summary views</td></tr>
+            <tr><td class="sec">gcf-pipeline</td><td>“Get, Clip, Figure” orchestrator chaining the three above</td><td><span class="pill p-mod">Medium</span> — generic; <strong>not</strong> GCF-proposal specific (see naming note)</td></tr>
+            <tr><td class="sec">cdh-metadata</td><td>Inspects a geospatial file, generates a valid CDH-standard YAML metadata record</td><td><span class="pill p-keep">High</span> — every dataset the Hub catalogues needs this; the MCF dataset is the first non-geospatial pilot</td></tr>
+            <tr><td class="sec">soil-data-download</td><td>Downloads soil data layers</td><td><span class="pill p-clarify">Low</span> — only if soil enters beneficiary / suitability work (Section 6)</td></tr>
+            <tr><td class="sec">spatial-crop-modeler</td><td>Spatial crop modelling / suitability</td><td><span class="pill p-mod">Medium</span> — relates to yield-gap / suitability inputs for Section 6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cap">Source: skills repo file tree + each <code>SKILL.md</code>, fetched 2026-07-07. Relevance ratings are this review’s assessment, open to correction by the team.</p>
+      <details class="cmts" data-term="GCF Prep Skills — Existing inventory"><summary>💬 Comment / discuss “Existing skills”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="sk-proposed">
+      <h2>Proposed: a GCF-proposal skill</h2>
+      <p>The memo’s LLM-pipeline requirements describe a skill that does not yet exist: one that turns the notebook’s section outputs into <strong>structured, citable fragments mapped to GCF Concept Note sections</strong>, ready for an LLM to draft from. The existing skills get data in and plotted; none of them speak GCF.</p>
+      <details class="src"><summary>Memo requirement this skill would satisfy (verbatim)</summary><div class="srcbody">
+        <blockquote class="srcquote">All nine sections must produce structured outputs (JSON or Markdown) with labelled fields (e.g., hazard_type, trend_description, projection_value, source_citation) so the LLM can compose narrative text with inline citations. Every data point must carry its source reference (dataset, year, DOI/URL). Where possible, sections should output pre-computed sentence fragments (e.g., “Mean annual temperature in [admin1] increased by X°C over 1980–2020”)… Tag each section with applicable GCF Strategic Plan 2024–2027 targets (T4: Food, T5: Ecosystems, T6: Infrastructure) and result areas.<cite>GCF Data Notebook Memo, Section 3 (LLM Pipeline Requirements) — Cesare Scartozzi</cite></blockquote>
+      </div></details>
+      <div class="card">
+        <h4 class="cardh">Draft spec — <code>gcf-proposal</code> skill</h4>
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Input</div>
+            <dl>
+              <dt>Given</dt><dd>country (+ admin level), crops/sectors, target CN section(s)</dd>
+              <dt>Reads</dt><dd>the notebook’s per-section structured outputs (parquet / JSON) from the Hub</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Output</div>
+            <dl>
+              <dt>Emits</dt><dd>labelled JSON/Markdown fields + pre-computed sentence fragments, each with a <code>source_citation</code></dd>
+              <dt>Tags</dt><dd>GCF Strategic Plan targets (T4/T5/T6) + result areas; maps to CN v3.1 codes (C.1, C.4, A.16, D.1–D.4…)</dd>
+              <dt>Guardrail</dt><dd>no fabricated references — cite only Hub-catalogued sources; leave gaps explicit</dd>
+            </dl></div>
+        </div>
+        <p style="margin:6px 0 0"><strong>Boundary (from the meetings).</strong> The agreed product provides baseline data + GCF-aligned prompt instructions and stops short of writing the actual proposal draft — “I wouldn’t do the extra step of asking the AI system to write the actual draft.” So this skill prepares citable inputs; it does not author narrative.</p>
+      </div>
+      <div class="note"><b>Fabrication risk is real here.</b> A prior attempt to have a general LLM produce a hazard→solutions table “made up” references; a guardrailed version returned blank. Any GCF skill must cite only Hub-catalogued sources and surface gaps rather than inventing citations.</div>
+      <details class="cmts" data-term="GCF Prep Skills — Proposed gcf-proposal skill"><summary>💬 Comment / discuss “Proposed GCF skill”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="sk-access">
+      <h2>Could a skill actually reach the data — federate or rehost?</h2>
+      <p><strong>Yes.</strong> A skill or MCP queries a <strong>CDH-hosted, admin-indexed derived layer through a stable metadata URL</strong>; behind it the Hub either <strong>federates</strong> to a provider API (where a live endpoint exists and the licence allows — WDI, FAOSTAT, INFORM, IPC, ACLED, WorldPop, OECD, IMF, GCF, Climate Watch, NEX-GDDP/CHIRPS COGs) or <strong>rehosts a precomputed derived product</strong> (bulk-only or heavy raster, or non-commercial data where only the derived admin summary may be hosted — MapSPAM, CHIRTS, ND-GAIN, HDI, JMP, WDPA, IUCN, Aqueduct, the MCF dataset). Because it is the <em>derived</em> layer being served, the same endpoint works for open and non-commercial datasets alike. Full per-dataset routing and the geoselection method for each data type are in the Data tab: <a href="#d-delivery" data-jump="data:d-delivery">Delivering the data</a>.</p>
+      <div class="note"><b>Practical caveats for the skill.</b> ERA5/AgERA5 sit behind the Copernicus CDS API (key + async queue) — pre-compute, don’t federate live. ACLED aggregates must be coarse enough not to reconstruct events. CC BY-NC-SA sources (IPC, JMP, GYGA, WOCAT, CPI) propagate ShareAlike to any hosted derivative. The project databases (GCF/GEF/AF) carry country as an attribute only — join to an admin0 boundary to map them.</div>
+      <details class="cmts" data-term="GCF Prep Skills — Federate or rehost"><summary>💬 Comment / discuss “Federate or rehost”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="sk-questions">
+      <h2>Open questions for the team</h2>
+      <details class="cmts qbox" id="q-skill-mcp" data-term="GCF Prep Q — Skill vs MCP"><summary><span class="qhead"><b>Skill or MCP (or both)?</b> Should GCF proposal support ship as a Claude Code skill, an MCP server that lets an AI pull insights directly from the Hub, or both? The team has floated MCPs for direct Hub access — early days. What’s the v1 shape?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <details class="cmts qbox" id="q-skill-owner" data-term="GCF Prep Q — GCF skill owner & evals"><summary><span class="qhead"><b>Owner and evals?</b> Who owns a <code>gcf-proposal</code> skill, and what eval set proves it works — reproducing sections of the Togo SAT rationale from the notebook’s outputs is one candidate benchmark.</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <p class="foot">Skill facts fetched live from the skills repo on 2026-07-07. The proposed spec is a starting point for discussion, not a committed design.</p>
+    </section>
+  </main>
+</div>
+
+<!-- ============================= NOTEBOOK TAB ============================= -->
+<div class="shell" data-tab="notebook" hidden>
+  <aside class="side">
+    <h4>Notebook — on this page</h4>
+    <ul class="toc">
+      <li><a href="#nb-idea"><span class="n">1</span><span>Cesare’s idea</span></a></li>
+      <li><a href="#nb-dataset"><span class="n">2</span><span>The dataset</span></a></li>
+      <li><a href="#nb-spec"><span class="n">3</span><span>Proposed notebook</span></a></li>
+      <li><a href="#nb-build"><span class="n">4</span><span>Build path</span></a></li>
+      <li><a href="#nb-questions"><span class="n">5</span><span>Open questions</span></a></li>
+    </ul>
+    <div class="side-meta">
+      <div><b>Status</b></div>
+      <div class="side-note">Partial dataset delivered 2026-06-17. Notebook not yet started. Final sub-classifiers due end June 2026.</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="nb-idea">
+      <p class="eyebrow">GCF Preparation Facility · multilateral climate funds notebook</p>
+      <h1>Notebook — the multilateral-climate-funds pipeline</h1>
+      <p class="lede">The champion holds a project-level dataset of the multilateral climate-fund investment pipeline (GCF, GEF, Adaptation Fund) and wants it turned into an Atlas-style interactive notebook. It doubles as the engine for notebook Sections 7 &amp; 9, and as the Hub’s first non-geospatial metadata pilot.</p>
+      <div class="callout"><b>The concept, in the champion’s words.</b> <em>“The idea is to allow users to select one or multiple countries to see past and ongoing investment pipelines, so that they can identify gaps, complementary projects, or examples for project development.”</em> <cite style="display:block;font-size:11.5px;color:var(--faint);margin-top:4px">— Cesare Scartozzi, dataset covering email, 2026-06-17</cite></div>
+    </section>
+
+    <section id="nb-dataset">
+      <h2>The dataset</h2>
+      <p>A harmonised scrape of the UNFCCC financial-mechanism funds — the Green Climate Fund, the Global Environment Facility, and the Adaptation Fund — with project metadata and (privately held) linked project documents. A partial CSV was delivered on 2026-06-17.</p>
+      <div class="grid2">
+        <div class="kv"><h5>Delivered file</h5><p><code>projects_dis_by_country_fund.csv</code> — 5,115 project rows: <strong>GEF 3,524 · GCF 936 · Adaptation Fund 250</strong> (plus header/blank rows).</p></div>
+        <div class="kv"><h5>Harmonised fields</h5><p>Fund, project title/link, country + ISO3, theme &amp; sector (harmonised), implementing-entity type, status, approval/completion dates, project value, fund financing, co-financing, emissions avoided, beneficiaries.</p></div>
+        <div class="kv"><h5>Country enrichment</h5><p>~40 extra columns from World Bank, ACLED, ND-GAIN, INFORM, income group, FCAS/LDC/SIDS flags. The champion’s note: “you can ignore these for now.”</p></div>
+        <div class="kv"><h5>Public scope</h5><p>Public release narrowed to the <strong>food / land / water systems</strong> subset (decided after climateprojectexplorer.org and data.unfccc.int launched). Extracted document text stays private; links suffice.</p></div>
+      </div>
+      <div class="note"><b>Caveats.</b> The file carries a <code>needs_review</code> flag column; project-intervention sub-classifiers are not yet finished (promised end June 2026, same schema so “plug and play”). Underlying counts: the demo cited ~2,100 projects + ~15,000 documents in the full SQL store; a chat mentioned “more than 14k projects” — likely a project/document conflation. The delivered CSV is the authoritative row count for now.</div>
+      <div class="warn"><b>Hosting decision pending.</b> This page describes the dataset; it does not host it. Whether the CSV/parquet is published on the Hub (with a DOI via CGSpace / Harvard Dataverse) waits on the champion’s final version and confirmation the food/land/water subset is cleared for public release.</div>
+      <details class="cmts" data-term="GCF Prep Notebook — The dataset"><summary>💬 Comment / discuss “The dataset”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="nb-spec">
+      <h2>Proposed notebook</h2>
+      <p class="sub">A first cut for discussion, following the Atlas notebook pattern (selectors → linked views → downloadable table). Precedent: the champion already used a Jupyter version for CARICOM training — per-capita / total funding by fund, entity, and adaptation-vs-mitigation for selected countries.</p>
+      <div class="card">
+        <div class="spec">
+          <div class="spec-col present"><div class="spec-h">Selectors</div>
+            <dl>
+              <dt>Country</dt><dd>multi-select (the core ask)</dd>
+              <dt>Fund</dt><dd>GCF / GEF / Adaptation Fund</dd>
+              <dt>Filter</dt><dd>theme, sector (harmonised), status, approval-year range</dd>
+            </dl></div>
+          <div class="spec-col rec"><div class="spec-h">Views</div>
+            <dl>
+              <dt>Pipeline</dt><dd>funding over time; totals &amp; per-capita by country</dd>
+              <dt>Composition</dt><dd>by fund, implementing-entity type, adaptation vs mitigation vs cross-cutting</dd>
+              <dt>Project table</dt><dd>filterable list with links to each project page — “examples for project development”</dd>
+            </dl></div>
+        </div>
+      </div>
+      <p><strong>What it serves.</strong> Directly answers the champion’s use — country pipeline snapshots, gap-spotting, comparable-project lookup — and feeds notebook <a href="#s7" data-jump="data:s7">Section 7 (theory of change / portfolio)</a> and <a href="#s9" data-jump="data:s9">Section 9 (financial context)</a>.</p>
+      <details class="cmts" data-term="GCF Prep Notebook — Proposed spec"><summary>💬 Comment / discuss “Proposed notebook”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="nb-build">
+      <h2>Build path</h2>
+      <p>Agreed at the 2026-04-29 meeting: the champion drafts a Jupyter mock-up; Brayden Youngberg ports it to Quarto (Atlas moved from Observable to Quarto). Estimate: “a couple of days… a week maximum,” since the data is clean. The notebook is a static site (GitHub Pages / Cloudflare Pages); the Hub stores the data that powers it, likely optimised to a Parquet table. The dataset is also the <strong>first non-geospatial pilot</strong> of the CDH metadata standard Brayden is building.</p>
+      <ul>
+        <li><strong>1.</strong> Champion finalises sub-classifiers &amp; delivers the complete dataset (target: end June 2026).</li>
+        <li><strong>2.</strong> Champion completes the CDH metadata template for the dataset.</li>
+        <li><strong>3.</strong> Champion uploads the original dataset to CGSpace / Harvard Dataverse for a DOI.</li>
+        <li><strong>4.</strong> Brayden converts the Jupyter mock-up to a Quarto notebook; data as Parquet in the Hub.</li>
+      </ul>
+      <details class="cmts" data-term="GCF Prep Notebook — Build path"><summary>💬 Comment / discuss “Build path”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="nb-questions">
+      <h2>Open questions</h2>
+      <details class="cmts qbox" id="q-nb-subclass" data-term="GCF Prep Q — Sub-classifier ETA"><summary><span class="qhead"><b>Sub-classifier status?</b> The project-intervention sub-classifiers were due end June 2026. Are they final — and does the delivered schema still hold so the notebook is “plug and play”?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <details class="cmts qbox" id="q-nb-host" data-term="GCF Prep Q — Dataset hosting & DOI"><summary><span class="qhead"><b>Hosting &amp; DOI?</b> Is the food/land/water subset cleared for public release, and should the Hub host the Parquet directly or only link the DOI’d original on CGSpace / Dataverse?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <p class="foot">The concept and dataset facts come from the champion’s 2026-06-17 email and delivered CSV, and the 2026-04-29 meeting. Notebook design is a draft for discussion.</p>
+    </section>
+  </main>
+</div>
+
+<a class="fab" href="https://forms.office.com/e/ZF59NaT4RN" target="_blank" rel="noopener" aria-label="Open the feedback form">💬 Feedback</a>
+
+<script>
+  // tab switching (Data / Skills / Notebook)
+  (function(){
+    var tabs=[].slice.call(document.querySelectorAll('.tabbar button'));
+    var panels=[].slice.call(document.querySelectorAll('.shell'));
+    function show(name){
+      panels.forEach(function(p){p.hidden=(p.getAttribute('data-tab')!==name)});
+      tabs.forEach(function(t){t.setAttribute('aria-selected', t.getAttribute('data-tab')===name?'true':'false')});
+      window.scrollTo(0,0);
+    }
+    tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('data-tab'))})});
+    document.querySelectorAll('[data-jump]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var p=a.getAttribute('data-jump').split(':');
+        show(p[0]);
+        var el=document.getElementById(p[1]);
+        if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
+  })();
+
+  // scrollspy (per-tab TOCs share one observer)
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href');if(h&&h[0]==='#')map[h.slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var a=map[en.target.id]; if(!a)return;
+          links.forEach(function(l){l.classList.remove('active')});
+          a.classList.add('active');
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){obs.observe(s)});
+  }
+
+  // lazy per-section giscus comments (load on expand).
+  // Build each giscus iframe directly instead of injecting <script src=client.js>:
+  // client.js reads document.currentScript, which is null for the 2nd+ lazily
+  // injected script, so only the first opened box would ever render. Building the
+  // widget iframe ourselves works for unlimited instances.
+  (function(){
+    var GO='https://giscus.app';
+    try{
+      var sp=new URLSearchParams(location.search);
+      if(sp.get('giscus')){
+        localStorage.setItem('giscus-session', JSON.stringify(sp.get('giscus')));
+        sp.delete('giscus');
+        var qs=sp.toString();
+        history.replaceState(undefined, document.title, location.pathname+(qs?'?'+qs:'')+location.hash);
+      }
+    }catch(e){}
+    function session(){ try{ var s=localStorage.getItem('giscus-session'); return s?JSON.parse(s):''; }catch(e){ return ''; } }
+    var origin=location.href.split('#')[0];
+    window.addEventListener('message', function(ev){
+      if(ev.origin!==GO) return;
+      var g=ev.data && ev.data.giscus; if(!g || typeof ev.data!=='object') return;
+      if(g.resizeHeight){
+        document.querySelectorAll('iframe.giscus-frame').forEach(function(f){
+          if(f.contentWindow===ev.source){ f.style.height=g.resizeHeight+'px'; }
+        });
+      }
+      if(g.signOut){ try{ localStorage.removeItem('giscus-session'); }catch(e){} }
+    });
+    function build(slot, term){
+      var p=new URLSearchParams({
+        origin:origin, session:session(), theme:'light', reactionsEnabled:'1',
+        emitMetadata:'0', inputPosition:'top', repo:'CGIAR-Climate-Data-Hub/use-cases',
+        repoId:'R_kgDOSdPhVA', category:'General', categoryId:'DIC_kwDOSdPhVM4DAdzS',
+        strict:'1', backLink:origin, term:term
+      });
+      var f=document.createElement('iframe');
+      f.className='giscus-frame'; f.title='Comments'; f.scrolling='no';
+      f.setAttribute('allow','clipboard-write');
+      f.src=GO+'/en/widget?'+p.toString();
+      f.style.cssText='width:100%;border:0;color-scheme:light;height:150px';
+      slot.appendChild(f);
+    }
+    document.querySelectorAll('details.cmts').forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if(!d.open || d.dataset.loaded) return;
+        d.dataset.loaded='1';
+        var nt=document.createElement('p'); nt.className='cmtnote'; nt.innerHTML='No GitHub account, and don\'t want to create one? Use the 💬 <strong>Feedback</strong> button (bottom-right) instead.';
+        var sl=d.querySelector('.giscus-slot'); sl.parentNode.insertBefore(nt, sl);
+        build(sl, d.getAttribute('data-term'));
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
