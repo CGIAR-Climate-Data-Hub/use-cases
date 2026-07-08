@@ -202,7 +202,8 @@
       <li><a href="#s8"><span class="n">10</span><span>Safeguards &amp; gender</span></a></li>
       <li><a href="#s9"><span class="n">11</span><span>Financial context</span></a></li>
       <li><a href="#d-target"><span class="n">12</span><span>Target output (Togo SAT)</span></a></li>
-      <li><a href="#d-feedback"><span class="n">13</span><span>Feedback</span></a></li>
+      <li><a href="#d-delivery"><span class="n">13</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
+      <li><a href="#d-feedback"><span class="n">14</span><span>Feedback</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Where to comment</b></div>
@@ -484,6 +485,89 @@
       <details class="cmts" data-term="GCF Prep Data — Target output Togo Table 5"><summary>💬 Comment / discuss “Target output”</summary><div class="giscus-slot"></div></details>
     </section>
 
+    <section id="d-delivery">
+      <h2>Delivering the data — geoselection &amp; AI-skill access</h2>
+      <p class="sub">Two practical questions the review has to answer: under an Atlas-style <strong>country/admin geoselector</strong>, how does each dataset get summarised? And could an <strong>AI skill</strong> reach the data — by federating to a live endpoint, or by rehosting? The answer turns on the dataset’s native form (raster / vector / point / tabular) and, for hosting, its licence.</p>
+
+      <h3>By data type — how a geoselection is summarised</h3>
+      <div class="tscroll">
+        <table class="skilltbl">
+          <thead><tr><th>Data type</th><th>Datasets</th><th>Native form &amp; access</th><th>Geoselection summary → output</th><th>AI-skill route</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="sec">Gridded climate raster</td>
+              <td>NEX-GDDP-CMIP6, ERA5, AgERA5, CHIRPS, CHIRTS</td>
+              <td>NetCDF/GeoTIFF/COG, 0.05–0.25°. NEX-GDDP COGs on public AWS S3; CHIRPS has a COG dir; <strong>ERA5/AgERA5 gated behind the Copernicus CDS API (key + async queue)</strong>; CHIRTS bulk.</td>
+              <td><strong>Zonal statistics</strong> (mean / sum) within the selected admin0/1/2 polygon → per-admin timeseries, anomalies, warming stripes.</td>
+              <td>Federate NEX-GDDP / CHIRPS COGs; but the practical route is <strong>rehost a precomputed admin-indexed parquet</strong> (what <code>hazards_prototype</code> already does). CDS is not real-time — pre-compute.</td>
+            </tr>
+            <tr>
+              <td class="sec">Gridded exposure raster</td>
+              <td>MapSPAM 2020, WorldPop</td>
+              <td>GeoTIFF. MapSPAM = Dataverse bulk (~10 km); WorldPop = REST API (`worldpop.org/rest/data`) → GeoTIFF (100 m/1 km).</td>
+              <td><strong>Zonal sum</strong> within admin × hazard mask → value / population exposed (the Togo Table 5 matrix).</td>
+              <td>WorldPop federates via REST; MapSPAM bulk-download-then-host. Exposure product is a derived parquet either way.</td>
+            </tr>
+            <tr>
+              <td class="sec">Vector polygons</td>
+              <td>WDPA / Protected Planet, IUCN ranges, Aqueduct (HydroBASINS)</td>
+              <td>Polygons. WDPA = global GDB bulk + per-country API; IUCN ranges = spatial download (API is attributes only); Aqueduct = bulk zip, sub-basin level.</td>
+              <td><strong>Spatial overlay / intersection</strong> with the admin unit or project zone → area or count within the selection (e.g. % of project zone under protection).</td>
+              <td>Bulk-download-then-host the geometry; derive the admin/zone overlay. <strong>⚠ non-commercial — host the derived stat, not the raw polygons.</strong></td>
+            </tr>
+            <tr>
+              <td class="sec">Point / event</td>
+              <td>ACLED</td>
+              <td>Point events (lat/lon) + admin1/2/3 fields, <code>event_date</code>. REST API (OAuth token).</td>
+              <td><strong>Spatial join / admin-field aggregation</strong> → event count or rate per admin unit over time.</td>
+              <td>Federate via API for ingest; <strong>⚠ NC + transformative rule — host only coarse admin aggregates</strong> that can’t reconstruct events.</td>
+            </tr>
+            <tr>
+              <td class="sec">National tabular (admin0)</td>
+              <td>World Bank WDI, FAOSTAT, ND-GAIN, INFORM, HDI, WHO/UNICEF JMP, CPIA, OECD CRS/SIGI, IMF, CPI</td>
+              <td>One row per country-year. <strong>Live APIs:</strong> WDI, FAOSTAT, INFORM (JRC), OECD &amp; IMF (SDMX). <strong>Bulk-only:</strong> ND-GAIN, HDI, JMP, CPI.</td>
+              <td><strong>Row filter / join by ISO3</strong> → national value(s) for the selected country; trivially "geoselected".</td>
+              <td>Federate to the provider API where one exists (WDI, FAOSTAT, INFORM, OECD, IMF); bulk-then-host the rest.</td>
+            </tr>
+            <tr>
+              <td class="sec">Subnational tabular</td>
+              <td>IPC / Cadre Harmonisé</td>
+              <td>Subnational phase areas as GeoJSON + vector tiles; REST API (`api.ipcinfo.org`, key). <strong>The only source here that natively serves subnational polygons via API.</strong></td>
+              <td><strong>Join by admin1/2 unit-of-analysis</strong> → food-insecurity phase for the selected sub-area.</td>
+              <td>Federate via API. <strong>⚠ CC BY-NC-SA</strong> — derived product carries the same licence.</td>
+            </tr>
+            <tr>
+              <td class="sec">Project databases (admin0 attribute)</td>
+              <td>GCF, GEF, Adaptation Fund, Cesare’s MCF dataset</td>
+              <td>Project-level rows; country is an <strong>attribute, no geometry</strong>. GCF = Open Data API; AF = via IATI Registry; GEF = export/scrape; MCF = the delivered CSV.</td>
+              <td><strong>Filter by selected country</strong>, join country → admin0 boundary to map → aggregate financing / counts (Cesare’s pipeline notebook).</td>
+              <td>Federate GCF / AF (IATI); scrape GEF; host the MCF dataset as a CDH parquet (its metadata-standard pilot).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cap">Access modes verified live 2026-07-07/08 (see <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">evidence log</a>). ⚠ marks datasets where licence limits what can be hosted — see the licence note above.</p>
+
+      <h3>Can an AI skill access this — federate or rehost?</h3>
+      <p><strong>Yes — all of it, through one pattern.</strong> The skill (or MCP) queries a <strong>CDH-hosted, admin-indexed derived layer via a stable metadata URL</strong> — the federation-by-metadata design Brayden is building, where the URL never changes and the Hub swaps the backing S3 path underneath. Behind that URL, each dataset takes one of two routes:</p>
+      <div class="spec">
+        <div class="spec-col rec"><div class="spec-h">Federate — skill hits a live endpoint</div>
+          <dl>
+            <dt>When</dt><dd>the provider has a live API/cloud endpoint <em>and</em> the licence allows</dd>
+            <dt>Datasets</dt><dd>WDI, FAOSTAT, INFORM, IPC, ACLED, WorldPop, OECD, IMF, GCF, Adaptation Fund (IATI), Climate Watch, GAUL (WFS), NEX-GDDP / CHIRPS COGs</dd>
+            <dt>Good for</dt><dd>national tabular (fast, always current); no storage burden</dd>
+          </dl></div>
+        <div class="spec-col present"><div class="spec-h">Rehost a derived product — Hub stores it</div>
+          <dl>
+            <dt>When</dt><dd>bulk-only, or heavy raster needing zonal stats, <em>or</em> non-commercial data where only the <strong>derived</strong> product may be hosted</dd>
+            <dt>Datasets</dt><dd>MapSPAM, CHIRTS, ND-GAIN, HDI, JMP, WDPA, IUCN, Aqueduct, GEF, the MCF dataset — plus the climate hazards already in <code>hazards_prototype</code></dd>
+            <dt>Good for</dt><dd>performance (~1 s admin queries) and the only lawful route for the NC datasets</dd>
+          </dl></div>
+      </div>
+      <div class="callout"><b>The one architecture serves both.</b> Because the Hub hosts the <em>derived admin-indexed layer</em> — not the raw source — the same skill endpoint works for open and non-commercial data alike (deriving + publishing admin summaries is permitted even for the NC sets; see the licence note). Federation is the default where a live API exists and the licence permits; rehosting-the-derived-product covers everything else. <strong>Caveats:</strong> ERA5/AgERA5 is API-gated (key + async queue — pre-compute, don’t federate live); ACLED aggregates must be coarse enough to be non-reverse-engineerable; ShareAlike (IPC, JMP, GYGA, WOCAT, CPI) propagates to the hosted derivative.</div>
+      <details class="cmts" data-term="GCF Prep Data — Delivery, geoselection & AI access"><summary>💬 Comment / discuss “Delivering the data”</summary><div class="giscus-slot"></div></details>
+    </section>
+
     <section id="d-feedback">
       <h2>Feedback</h2>
       <p>Two ways to respond. <strong>With a GitHub account:</strong> expand the “💬 Comment / discuss” box under any section — comments post to GitHub Discussions on the use-cases repo. <strong>Without one:</strong> use the floating <strong>💬 Feedback</strong> button (bottom-right), which opens a short form; submissions become tracked issues the coordinator triages.</p>
@@ -501,7 +585,8 @@
       <li><a href="#sk-naming"><span class="n">2</span><span>Naming: there is no GCF skill yet</span></a></li>
       <li><a href="#sk-inventory"><span class="n">3</span><span>Existing skills &amp; relevance</span></a></li>
       <li><a href="#sk-proposed"><span class="n">4</span><span>Proposed: a GCF-proposal skill</span></a></li>
-      <li><a href="#sk-questions"><span class="n">5</span><span>Open questions</span></a></li>
+      <li><a href="#sk-access"><span class="n">5</span><span>Federate or rehost?</span></a></li>
+      <li><a href="#sk-questions"><span class="n">6</span><span>Open questions</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Skills repo</b></div>
@@ -576,6 +661,13 @@
       </div>
       <div class="note"><b>Fabrication risk is real here.</b> A prior attempt to have a general LLM produce a hazard→solutions table “made up” references; a guardrailed version returned blank. Any GCF skill must cite only Hub-catalogued sources and surface gaps rather than inventing citations.</div>
       <details class="cmts" data-term="GCF Prep Skills — Proposed gcf-proposal skill"><summary>💬 Comment / discuss “Proposed GCF skill”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="sk-access">
+      <h2>Could a skill actually reach the data — federate or rehost?</h2>
+      <p><strong>Yes.</strong> A skill or MCP queries a <strong>CDH-hosted, admin-indexed derived layer through a stable metadata URL</strong>; behind it the Hub either <strong>federates</strong> to a provider API (where a live endpoint exists and the licence allows — WDI, FAOSTAT, INFORM, IPC, ACLED, WorldPop, OECD, IMF, GCF, Climate Watch, NEX-GDDP/CHIRPS COGs) or <strong>rehosts a precomputed derived product</strong> (bulk-only or heavy raster, or non-commercial data where only the derived admin summary may be hosted — MapSPAM, CHIRTS, ND-GAIN, HDI, JMP, WDPA, IUCN, Aqueduct, the MCF dataset). Because it is the <em>derived</em> layer being served, the same endpoint works for open and non-commercial datasets alike. Full per-dataset routing and the geoselection method for each data type are in the Data tab: <a href="#d-delivery" data-jump="data:d-delivery">Delivering the data</a>.</p>
+      <div class="note"><b>Practical caveats for the skill.</b> ERA5/AgERA5 sit behind the Copernicus CDS API (key + async queue) — pre-compute, don’t federate live. ACLED aggregates must be coarse enough not to reconstruct events. CC BY-NC-SA sources (IPC, JMP, GYGA, WOCAT, CPI) propagate ShareAlike to any hosted derivative. The project databases (GCF/GEF/AF) carry country as an attribute only — join to an admin0 boundary to map them.</div>
+      <details class="cmts" data-term="GCF Prep Skills — Federate or rehost"><summary>💬 Comment / discuss “Federate or rehost”</summary><div class="giscus-slot"></div></details>
     </section>
 
     <section id="sk-questions">
