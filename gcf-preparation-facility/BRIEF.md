@@ -36,8 +36,9 @@ tags:
   - climate-rationale
   - quarto
   - hazard-exposure
+  - climate-finance
 
-updated: 2026-05-19
+updated: 2026-07-07
 ---
 
 > A Climate Rationale notebook that auto-generates evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries to support Green Climate Fund (GCF) proposal writers. Existing CAP bilateral asset being showcased through the CGIAR Climate Data Hub.
@@ -70,10 +71,12 @@ GCF proposals require a defensible climate rationale grounded in subnational cli
 
 | Date | Milestone |
 | --- | --- |
-| 2023-04 | Majambo CR Needs assessment (early user feedback) |
+| 2023-04 | Majambo CR Needs assessment (early user feedback; file dated 2023.04 but content cites NAP Expo 2025 — date _TBC_) |
 | 2025-04 | Togo SAT climate rationale published — reference gold standard |
-| 2026-03 | Cesare Scartozzi GCF data-requirements memo |
+| 2026-01-31 | Cesare Scartozzi GCF data-requirements memo (document header date; filed in OneDrive as 2026.03) |
 | 2026-05-13 | Pete's code review + decision log finalised; handover materials published |
+| 2026-06-17 | Cesare delivers partial multilateral-climate-funds dataset (CSV, 5,115 projects: GEF 3,524 / GCF 936 / AF 250) + notebook concept |
+| 2026-08 | Target: usable v1 — federated S3 datasets + metadata standard + catalog front end ("really optimistically", 2026-04-29 meeting) |
 
 ### Background materials
 
@@ -86,6 +89,10 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 - **GCF Data Notebook Memo (Cesare Scartozzi, 2026.03)** — GCF data requirements and use-case framing. `Background Materials/2026.03 - GCF_Data_Notebook_Memo - Cesare Scartozzi.docx`
 - **Togo SAT climate risk analysis (2025-04)** — visual reference for target outputs (Table 5, Figure 5). `Background Materials/Togo_SAT_climate risk_risk_analysis_Updated_24042025.pdf`
 - **Majambo CR Needs (2023-04)** — user feedback on spatial mapping and admin-2 polygons. `Background Materials/2023.04 - Majambo CR Needs.docx`
+- **Sample multilateral-climate-funds dataset (Cesare Scartozzi, 2026-06-17)** — partial CSV of the health/food/water-security investment pipeline across GEF, GCF, and Adaptation Fund; sector/theme/implementing-entity-type harmonised; final sub-classifiers to follow. `example dataset/projects_dis_by_country_fund.csv` + covering email.
+- **GCF/B.33/05 "Steps to enhance the climate rationale of GCF-supported activities" (2022-06-24)** — GCF Board paper defining climate rationale and the four adaptation principles (Identification, Response, Alignment, M&E); policy basis for the notebook's outputs. `Background Materials/gcf-b33-05.pdf`
+- **GCF Concept Note template v3.1** — section codes (A.1–A.17, C.1–C.5, D.1–D.4) that the memo's nine notebook sections map onto. `GCF_Concept note template_V.3.1.docx`
+- **Data-in-GCF-Proposal database + synthesis deck** — indicators extracted from 10 real GCF proposals (Niger, Ghana, Mali, Malawi, Senegal ×2, Ethiopia, Kenya ×2, Zambia) classified Hazards / Vulnerability / Exposure / Solutions, mapped to decision-support tools. `Background Materials/2. Data-in-GCF-Proposal- CLEAN.xlsx`, `Background Materials/GCF data synthesis.pptx`
 
 ## Go / No Go
 
@@ -99,14 +106,21 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 ### Actions
 
 - [x] Code review + decision log finalised — Peter Steward — completed 2026-05-13
-- [ ] Lock selector architecture — Brayden Youngberg — blocks 3 PRs
-- [ ] Dispatch 8 unblocked PRs via Claude Code — Peter Steward — ready
+- [x] Selector architecture (notebook side) — Peter Steward — resolved: one global sticky selector (DECISIONS.md Q1); cross-notebook adoption still with Brayden Youngberg
+- [x] Fix-sweep sessions on Climate Rationale v2 — Peter Steward + Claude — 20+ cowork sessions 2026-05-14 → 2026-06-16; CR backlog worked through CR-122 (perf, baselines, extreme-event tails, exposure controls)
+- [x] Review AI-drafted French translations — Peter Steward — production FR gaps zero as of 2026-06-16
 - [ ] Resolve HSH-max interpretation — Brayden Youngberg — open question
 - [ ] Audit parquet inventory (canonical inputs vs legacy artefacts) — Brayden Youngberg — open question
-- [ ] Review AI-drafted French translations — Peter Steward — pending
 - [ ] Finalise methods appendix — Peter Steward — in draft
 - [ ] Re-scope admin-2 support post-MVP — _TBC_ — deferred
 - [ ] Slot Mann-Kendall / Sen's slope into a future sprint — _TBC_ — Harold engagement deferred
+- [ ] Build interactive multilateral-climate-funds notebook — Cesare Scartozzi (Jupyter mock-up) → Brayden Youngberg (Quarto port, est. "a couple of days… a week maximum") — agreed 2026-04-29; partial dataset delivered 2026-06-17
+- [ ] Finalise dataset sub-classifiers (project-intervention types) — Cesare Scartozzi — promised end June 2026; status _TBC_
+- [ ] Upload original dataset to CGSpace / Harvard Dataverse for a DOI — Cesare Scartozzi — agreed 2026-04-29
+- [ ] Use Cesare's dataset as first non-geospatial pilot of the CDH metadata standard — Brayden Youngberg — agreed 2026-04-29
+- [ ] Mitigation data needs: engage L2 focal point (Augusto Castro — name garbled in transcript, _TBC_) — Cesare Scartozzi — from 2026-04-29 meeting
+- [ ] Connect with Adaptation Insights on hazard ↔ solutions mapping — Peter Steward — from 2026-04-29 meeting
+- [ ] Meet Cesare on notebook next steps — Peter Steward — Cesare requested "first half of July" (2026-06-17 email); due now
 
 ### Data assets for the hub
 
@@ -130,8 +144,8 @@ Datasets needed in (or federated with) the CDH catalog. Sources and section mapp
 | WHO / UNICEF JMP | PARTIAL | scoped | _pending_ | 1 | CN Exec Summary · FP D.4 | Water and WASH access |
 | WorldPop | PARTIAL | scoped | _pending_ | 2 | CN Exec Summary · FP D.4 + A.6–A.7 | Population, gender-disaggregated |
 | DHS / MICS | PARTIAL | scoped | _pending_ | 2 | CN Exec Summary · FP D.4 | Household surveys |
-| UNFCCC NDC Registry | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 — NDC / NAP alignment | NDC text extraction needed (Section 5 of memo) |
-| NAP Central | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 | NAP priority actions extraction |
+| UNFCCC NDC Registry | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 — NDC / NAP alignment | Deprioritised 2026-04-29: Cesare withdrew the NAP/NDC-automation ask ("maybe I made a mistake to include the naps") — corpus too small to justify; at most a metadata page linking out |
+| NAP Central | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 | Deprioritised 2026-04-29 — see UNFCCC NDC Registry row |
 | Climate Watch | NEW | scoped | _pending_ | 2 | CN A.16 · FP D.5 | Country climate commitments |
 | GCF country programmes | NEW | scoped | _pending_ | 2 | CN A.16 · FP D.5 | Country programme priorities |
 | IPCC default emission factors | NEW | scoped | _pending_ | 2 | CN A.6–A.7 · FP D.1, E.3 — beneficiary estimates | Tier 1 mitigation accounting |
@@ -143,7 +157,7 @@ Datasets needed in (or federated with) the CDH catalog. Sources and section mapp
 | CGIAR evidence maps | NEW | scoped | _pending_ | 3 | FP B.2, D.2 | Adaptation/mitigation evidence base |
 | World Bank IEG evaluations | NEW | scoped | _pending_ | 2 | FP B.2, D.2 | Adjacent project evaluations |
 | IFAD evaluations | NEW | scoped | _pending_ | 2 | FP B.2, D.2 | Smallholder finance evaluations |
-| Cesare's MCF project dataset | NEW | scoped | _pending_ | 3 | FP B.2, D.2 + CN D.1–D.4 | Project-level multilateral climate finance |
+| Cesare's MCF project dataset | NEW | planned | _pending_ | 3 | FP B.2, D.2 + CN D.1–D.4 | Partial CSV delivered 2026-06-17 (5,115 projects: GEF/GCF/AF, sector + theme + lead-type harmonised). Public release scoped to the food/land/water subset (decided after climateprojectexplorer.org launch); document text extracts stay private. Pilot for the CDH non-geospatial metadata standard |
 | WDPA (protected areas) | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 — safeguards | Project-zone overlay |
 | IUCN Red List | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Biodiversity hotspots |
 | FAO Gender & Land Rights | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Land tenure |
@@ -182,24 +196,27 @@ Quarto + Observable JS notebook served at <https://notebooks-climaterationale.ad
 
 | Date | Attendees | Summary | Decisions | Recording / transcript |
 | --- | --- | --- | --- | --- |
-| 2026-04-29 | Peter Steward, Cesare Scartozzi, Brayden Youngberg | Implementation scope: get a usable v1 by August; federated S3 + STAC catalog + use-case wiki as MVP | Federate rather than mirror NEX-GDDP-CMIP6; Brayden owns the metadata standard | `Climate_data_hub/meetings/2026.04.29 - CDH GCF Use-case.docx` |
+| 2026-06-17 | Cesare Scartozzi → Peter Steward, Brayden Youngberg (email) | Partial multilateral-climate-funds dataset delivered (CSV, 5,115 projects); notebook concept: "allow users to select one or multiple countries to see past and ongoing investment pipelines, so that they can identify gaps, complementary projects, or examples for project development" | Share incomplete dataset now, final sub-classifiers end June; meet first half of July | `use_cases/gcf-preparation-facility/example dataset/` |
+| 2026-04-29 | Peter Steward, Cesare Scartozzi, Brayden Youngberg | Implementation scope: get a usable v1 by August; federated S3 + STAC catalog + use-case wiki as MVP. Cesare demoed the MCF SQL dataset (~2,100 projects, 15k documents); agreed to turn it into an Atlas-style interactive notebook (Cesare Jupyter → Brayden Quarto). NAP/NDC automation withdrawn by Cesare | Federate rather than mirror NEX-GDDP-CMIP6; Brayden owns the metadata standard; dataset = first non-geospatial metadata pilot; DOI via CGSpace/Dataverse | `Climate_data_hub/meetings/2026.04.29 - CDH GCF Use-case.docx` |
 | 2026-03-17 | Peter Steward, Cesare Scartozzi, Bia Carneiro, Brayden Youngberg | CACC1 × CACC2 integration — repurpose the Atlas Climate Rationale notebook for the GCF pipeline | Short concept memo to follow from Cesare | `Climate_data_hub/meetings/2026.03.17 - GCF Use-case - CACC1 & CACC2 integration.docx` |
 
 _Source of truth for transcripts: `Climate_data_hub/meetings/` in OneDrive._
 
 ## Risks & open questions
 
-- **Selector architecture decision** — Brayden Youngberg — blocking 3 PRs
+- **Geographic coverage** — crop-exposure pipeline is Sub-Saharan Africa only (MapSPAM SSA); Cesare calls this "the biggest limitation" — target is all non-Annex-I countries; active GCF pipeline includes Syria, Iraq, Sri Lanka, Egypt. **Owner:** _TBC_ **Status:** open
+- **Hazard ↔ solutions mapping gap** — Cesare: what would be "super useful… that we don't have" is a mapping of CGIAR-deliverable climate solutions to hazards/vulnerability; a prior GPT-generated attempt fabricated references. Route via Adaptation Insights. **Owner:** Peter Steward **Status:** open
 - **HSH-max interpretation** — Brayden Youngberg — what does the current implementation actually compute vs what was intended?
 - **Parquet inventory** — Brayden Youngberg — which derived parquet files are canonical inputs vs legacy artefacts?
 - **Admin-2 support** — deferred from current scope but a known user ask (Majambo); re-open after MVP
 - **Trend statistics drift** — Mann-Kendall / Sen's slope work paused; Harold engagement deferred; risk of methodological drift if not slotted into a future sprint
-- **NDC / NAP text extraction** — Section 5 of Cesare's memo is the highest-priority NEW data ingestion; non-trivial NLP work
+- **NDC / NAP text extraction** — was the memo's highest-priority NEW ingestion, but deprioritised 2026-04-29: Cesare withdrew the ask (corpus too small to justify automation); revisit only if demand recurs
+- **Overlapping external products** — climateprojectexplorer.org (the funds' own explorer) and data.unfccc.int launched while the dataset was in preparation; CDH offer must stay differentiated (harmonised metadata, FLW focus, notebook analytics). **Owner:** Cesare Scartozzi **Status:** watching
 
 ## Outputs
 
 > Status is `active-development`. The notebook is live and in use, but formal piloting / handover metrics have not yet been captured. This section fills in as the use-case progresses.
 
-- **Deliverables in flight:** Climate Rationale v2 notebook (live), Key Facts and hazard-exposure exportable tables, methods appendix (in draft), French translations (AI-drafted, Pete-reviewed)
+- **Deliverables in flight:** Climate Rationale v2 notebook (live; 20+ fix-sweep sessions to 2026-06-16), Key Facts and hazard-exposure exportable tables, methods appendix (in draft), French translations (complete — zero production FR gaps as of 2026-06-16), multilateral-climate-funds pipeline notebook (partial dataset in hand; notebook not started)
 - **Adoption signals:** _TBC_ — track usage of the notebook for live GCF concept notes
 - **Lessons learned:** _TBC_ — fill in at handover
