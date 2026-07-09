@@ -369,6 +369,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Highest-value theme — the hazard-exposure matrix in the style of the Togo SAT Table 5 example (see <a href="#d-target" data-jump="data:d-target">Example target output</a>). Priorities: water-stress additions and coverage beyond SSA. We already hold the open <strong>GLW4</strong> gridded animal-numbers layer, so GLEAM isn't needed to count livestock; pair Aqueduct <code>bws</code> with <strong>GMIA</strong> to resolve stress onto irrigated cropland.</p>
+        <p class="cap"><b>Overlaps →</b> GLW4 (open animal numbers, held) supersedes GLEAM for <em>counting</em> livestock — GLEAM only adds emission intensity, so it belongs in Theme 6, not here. Sea Around Us overlaps FishStat — add only if sub-national/marine detail is needed beyond FishStat's national totals.</p>
         <div class="note" id="q-gleam"><b>Open question — for Cesare (CACC1):</b> We already hold <strong>GLW4</strong> (open gridded livestock numbers), and GLEAM is restricted-use and provides emission <em>intensity</em> (kg CO₂eq/kg product), not animal numbers or USD exposure. <strong>What does GLEAM add here — is it for the mitigation / enteric-CH₄ side (Theme 6), and is its restricted licence worth pursuing?</strong></div>
         <div class="note" id="q-coverage"><b>Open question:</b> The crop-exposure pipeline is Sub-Saharan Africa only, but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</div>
       </div>
@@ -407,6 +408,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Additions are mostly public, low-risk integrations (memo action a) — good early Hub wins. The real design decision is <strong>subnational coverage</strong>: add the CACC2 trio (GDL SHDI, Meta RWI, FEWS NET) so admin1/2 mode is more than a single country colour. Non-commercial flags on IPC, JMP, GDL are fine for GCF/non-profit use but must ride through to any LLM-skill citation.</p>
+        <p class="cap"><b>Overlaps →</b> GDL SHDI is the subnational version of UNDP HDI (promote GDL for admin1/2, keep HDI for the national headline); FEWS NET and IPC/Cadre Harmonisé both classify acute food insecurity (FEWS adds livelihood zones + open licence + reaches gaps IPC misses); ND-GAIN and INFORM Risk are both national composite indices — one may suffice.</p>
         <details class="cmts" data-term="GCF Prep Data — S4 Vulnerability & socioeconomic"><summary>💬 Comment / discuss “Vulnerability &amp; socioeconomic”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -471,6 +473,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Mitigation accounting (EX-ACT, IPCC EFs) is new territory — CGIAR's prior GCF work is adaptation-only, so the L2 mitigation focal point must be engaged. Build EX-ACT/EFDB as a <strong>computation layer</strong>, not a tile service. Prefer the open CACC2 trio (GLW4, ESA WorldCover, EDGAR/FAOSTAT — all CC BY 4.0) for activity data; note <strong>GYGA and GAEZ v4 are both non-commercial</strong> (derive-and-cite only). National census is the recurring manual cost — budget it.</p>
+        <p class="cap"><b>Overlaps →</b> GYGA and GAEZ v4 both give attainable yield / yield-gap and are <em>both</em> non-commercial — pick one, don't ingest both. GLW4 (held) and national census both supply livestock/holding activity data — census only where finer ground-truth is essential.</p>
         <div class="note" id="q-accounting"><b>Open question — for Cesare (CACC1):</b> EX-ACT and the IPCC EFDB are accounting <em>machinery</em>, not spatial datasets. <strong>How does he imagine these integrated into a pipeline?</strong> Options: (a) the notebook/skill emits admin-level activity data (areas, heads) and a human runs EX-ACT separately; (b) reimplement the relevant EX-ACT / IPCC Tier-1 coefficients inside the pipeline to emit tCO₂e directly; (c) EX-ACT as an external computation service the pipeline calls. Which fits the GCF workflow?</div>
         <details class="cmts" data-term="GCF Prep Data — S6 Impact & beneficiaries"><summary>💬 Comment / discuss “Impact &amp; beneficiaries”</summary><div class="giscus-slot"></div></details>
       </div>
@@ -507,6 +510,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Strongly overlaps the Notebook tab — the MCF dataset is the natural engine; sequence them together. <strong>Licences are not uniformly open:</strong> IEG, OECD CRDF, GAMI and the IATI feeds are clean CC BY; GCF (unstated), GEF and AF (all-rights-reserved), IFAD (unstated) and CGIAR 3ie EGMs (NC-SA) need link-out-and-cite or written permission — don't silently derive-and-host. Use OECD CRDF + IATI as the open comparable-projects backbone.</p>
+        <p class="cap"><b>Overlaps →</b> heavy — the held MCF dataset already unifies GEF/GCF/AF projects, and OECD CRDF + IATI supersede pulling each fund's own DB (demote the individual GCF/GEF/AF DBs to source-of-record / drill-down); CGIAR evidence maps and GAMI are both evidence corpora (GAMI is CC-BY, cleaner); WB IEG and IFAD IOE both supply project-evaluation ratings.</p>
         <details class="cmts" data-term="GCF Prep Data — S7 Theory of change & portfolio"><summary>💬 Comment / discuss “Theory of change &amp; portfolio”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -542,6 +546,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Public global layers, largely project-zone overlay work — good once Sections 3–4 land. <strong>Licence split is the rule:</strong> rehost the CC-BY set (GFW, CPIA, FAO 5.a.x, SIGI); derive-then-host the non-commercial set (WDPA, IUCN, KBA, CSPD) — computed stat only, federate users to source. LandMark fills the indigenous-territories gap but carries FPIC conditions. ACLED intentionally omitted — its conflict/SEAH signal already rides through the CACC1 CSPDxCF.</p>
+        <p class="cap"><b>Overlaps →</b> WDPA (protected areas) and KBA (biodiversity-significant sites, incl. <em>unprotected</em>) overlap but are complementary — KBA fills what WDPA misses; IUCN Red List ranges feed the same biodiversity screen. Promote the open GFW / CPIA / FAO 5.a.x; the NC layers (WDPA / IUCN / KBA) all share the derive-then-host pattern.</p>
         <details class="cmts" data-term="GCF Prep Data — S8 Safeguards & gender"><summary>💬 Comment / discuss “Safeguards &amp; gender”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -573,6 +578,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Bundle with Section 7 (both lean on the MCF dataset). Ingest CRS + CRDF from one OECD SDMX endpoint (CRDF is the climate view of CRS — not a separate pipeline); route IMF through Data360 to stay within terms. <strong>CPI is regional, not country</strong> — the biggest surprise; keep it as a citable benchmark only and clear its all-rights-reserved terms before republishing any figure. Dropped: IMF Climate Dashboard (repackages CRDF) and Climate Funds Update (overlaps MCF, no API/licence).</p>
+        <p class="cap"><b>Overlaps →</b> OECD CRDF is the climate-tagged subset of OECD CRS — ingest from one SDMX endpoint, don't treat them as two pipelines; the held MCF dataset overlaps the multilateral-fund flows (use it for GCF/GEF/AF, CRS/CRDF for the wider donor picture); CPI is regional so it duplicates nothing but can't serve as a country layer.</p>
         <details class="cmts" data-term="GCF Prep Data — S9 Financial context"><summary>💬 Comment / discuss “Financial context”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -975,7 +981,7 @@
       d.addEventListener('toggle', function(){
         if(!d.open || d.dataset.loaded) return;
         d.dataset.loaded='1';
-        var nt=document.createElement('p'); nt.className='cmtnote'; nt.innerHTML='No GitHub account, and don\'t want to create one? Use the 💬 <strong>Feedback</strong> button (bottom-right) instead.';
+        var nt=document.createElement('p'); nt.className='cmtnote'; nt.innerHTML='Start your comment with a type — <strong>💡 Suggest a resource</strong> · <strong>🐛 Flag an issue</strong> · <strong>✅ Answer a question</strong> · <strong>💬 Comment on content</strong> — and drag in a screenshot if it helps. No GitHub account? Use the 💬 <strong>Feedback</strong> button (bottom-right) instead.';
         var sl=d.querySelector('.giscus-slot'); sl.parentNode.insertBefore(nt, sl);
         build(sl, d.getAttribute('data-term'));
       });
