@@ -140,7 +140,14 @@
   .spec dt{font-weight:600;color:var(--muted);font-size:12px}
   .spec dd{margin:0;font-size:12.5px;color:var(--ink)}
   .spec dd a{word-break:break-word}
-  @media (max-width:680px){.spec{grid-template-columns:1fr}}
+  .spec3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
+  .spec-col.add{background:var(--new-bg);border-color:#d9ccf0}
+  .spec-col.add .spec-h{color:var(--new)}
+  .spec-col.present .spec-h{color:var(--muted)}
+  .spec-col ul{margin:0;padding-left:16px}
+  .spec-col li{margin:3px 0;font-size:12.5px}
+  .spec-col li b{font-weight:700}
+  @media (max-width:680px){.spec,.spec3{grid-template-columns:1fr}}
 
   .src{margin:12px 0}
   .src summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--brand);padding:7px 12px;background:var(--brand-wash);border-radius:7px;list-style:none}
@@ -200,21 +207,21 @@
   <aside class="side">
     <h4>Data — on this page</h4>
     <ul class="toc">
-      <li><a href="#d-overview"><span class="n">1</span><span>Overview &amp; context</span></a></li>
-      <li><a href="#d-glance"><span class="n">2</span><span>Nine data themes at a glance</span></a></li>
-      <li><a href="#s1"><span class="n">3</span><span>Climate trends &amp; projections</span></a></li>
-      <li><a href="#s2"><span class="n">4</span><span>Extreme events</span></a></li>
-      <li><a href="#s3"><span class="n">5</span><span>Crop &amp; livestock exposure</span></a></li>
-      <li><a href="#s4"><span class="n">6</span><span>Vulnerability &amp; socioeconomic</span></a></li>
-      <li><a href="#s5"><span class="n">7</span><span>NDC &amp; NAP alignment</span></a></li>
-      <li><a href="#s6"><span class="n">8</span><span>Impact &amp; beneficiaries</span></a></li>
-      <li><a href="#s7"><span class="n">9</span><span>Theory of change / portfolio</span></a></li>
-      <li><a href="#s8"><span class="n">10</span><span>Safeguards &amp; gender</span></a></li>
-      <li><a href="#s9"><span class="n">11</span><span>Financial context</span></a></li>
-      <li><a href="#d-target"><span class="n">12</span><span>Target output (Togo SAT)</span></a></li>
-      <li><a href="#d-licence"><span class="n">13</span><span>Data licensing — what the Hub can host</span></a></li>
-      <li><a href="#d-delivery"><span class="n">14</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
-      <li><a href="#d-feedback"><span class="n">15</span><span>Feedback</span></a></li>
+      <li><a href="#d-overview"><span class="n">·</span><span>Overview &amp; context</span></a></li>
+      <li><a href="#d-glance"><span class="n">·</span><span>Nine data themes at a glance</span></a></li>
+      <li><a href="#s1"><span class="n">1</span><span>Climate trends &amp; projections</span></a></li>
+      <li><a href="#s2"><span class="n">2</span><span>Extreme events</span></a></li>
+      <li><a href="#s3"><span class="n">3</span><span>Crop &amp; livestock exposure</span></a></li>
+      <li><a href="#s4"><span class="n">4</span><span>Vulnerability &amp; socioeconomic</span></a></li>
+      <li><a href="#s5"><span class="n">5</span><span>NDC &amp; NAP alignment</span></a></li>
+      <li><a href="#s6"><span class="n">6</span><span>Impact &amp; beneficiaries</span></a></li>
+      <li><a href="#s7"><span class="n">7</span><span>Theory of change / portfolio</span></a></li>
+      <li><a href="#s8"><span class="n">8</span><span>Safeguards &amp; gender</span></a></li>
+      <li><a href="#s9"><span class="n">9</span><span>Financial context</span></a></li>
+      <li><a href="#d-target"><span class="n">·</span><span>Target output (Togo SAT)</span></a></li>
+      <li><a href="#d-licence"><span class="n">·</span><span>Data licensing — what the Hub can host</span></a></li>
+      <li><a href="#d-delivery"><span class="n">·</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
+      <li><a href="#d-feedback"><span class="n">·</span><span>Feedback</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Questions — where to comment</b></div>
@@ -341,6 +348,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>MapSPAM 2020 <b>·</b> crop value</li><li>FAOSTAT <b>·</b> production, prices</li><li>GLW4 <b>·</b> livestock numbers</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>FAO GLEAM <b>·</b> emission intensity</li><li>WRI Aqueduct <b>·</b> water stress</li><li>FAO FishStat <b>·</b> aquaculture value</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>AQUASTAT GMIA v5 <b>·</b> irrigation extent</li><li>Sea Around Us <b>·</b> marine catch value</li></ul></div>
+        </div>
         <p><b>Present in the notebook:</b> MapSPAM production value × the hazard-exposure parquet (severity / threshold controls, Ecocrop defaults) — but <strong>Sub-Saharan Africa only</strong> (the champion's "biggest limitation"); livestock partial; fisheries / aquaculture absent.</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
@@ -369,6 +381,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">CR has poverty rates, GDP by sector, land use. Add if possible: composite vulnerability indices (ND-GAIN, INFORM Risk); food insecurity prevalence (IPC/CH); water stress and WASH access; gender-disaggregated vulnerability; population projections; HDI.<cite>GCF Data Notebook Memo, Section 4</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>World Bank WDI <b>·</b> poverty, GDP</li><li>WorldPop <b>·</b> population</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>ND-GAIN</li><li>INFORM Risk (+ Subnational)</li><li>IPC / Cadre Harmonisé</li><li>WHO/UNICEF JMP</li><li>DHS · UNICEF MICS</li><li>UNDP HDI</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>GDL SHDI <b>·</b> subnational HDI</li><li>Meta RWI <b>·</b> 2.4 km, CC0</li><li>FEWS NET <b>·</b> admin2 food security</li></ul></div>
+        </div>
         <p><b>Present in the notebook:</b> World Bank indicators (poverty rates, GDP by sector, land use) in Key Facts — national only.</p>
         <p class="cap"><b>The crux of this theme:</b> most memo datasets are <strong>national-only (admin0)</strong> — they can only shade a whole country. Genuine <strong>subnational</strong> granularity comes from DHS, IPC/CH, INFORM-Subnational (regional coverage only), and the CACC2 additions (GDL SHDI, Meta RWI, FEWS NET).</p>
         <div class="tscroll"><table class="dstbl">
@@ -422,6 +439,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">List of useful datasets and methods to calculate beneficiaries.<cite>GCF Data Notebook Memo, Section 6</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>GLW4 <b>·</b> livestock activity data</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>IPCC EFDB <b>·</b> emission factors</li><li>FAO EX-ACT <b>·</b> C-balance tool</li><li>GYGA <b>·</b> yield gaps</li><li>WOCAT <b>·</b> SLM practices</li><li>national census</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>ESA WorldCover <b>·</b> 10 m land cover</li><li>EDGAR / FAOSTAT <b>·</b> baseline GHG</li></ul></div>
+        </div>
         <p><b>Present in the notebook:</b> none (WorldPop population comes via Section 4).</p>
         <p class="cap"><b>Read this theme as two layers:</b> EX-ACT and the IPCC EFDB are <strong>accounting machinery, not spatial datasets</strong> — other layers supply activity data per admin unit (land-cover areas, livestock heads, holdings), which the factors/tools convert to tCO₂e for the CN A.6 mitigation claim.</p>
         <div class="tscroll"><table class="dstbl">
@@ -451,6 +473,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Database of approved GCF projects in food/land/water result areas (T4, T5, T6) with structured fields.<cite>GCF Data Notebook Memo, Section 7</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>CACC1 MCF dataset <b>·</b> 5,115 GEF/GCF/AF projects (seed/spine)</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>GCF project DB</li><li>GEF projects DB</li><li>Adaptation Fund DB</li><li>CGIAR evidence maps</li><li>World Bank IEG</li><li>IFAD IOE</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>OECD CRDF <b>·</b> Rio markers</li><li>IATI Datastore <b>·</b> multi-funder feed</li><li>GAMI <b>·</b> adaptation evidence</li></ul></div>
+        </div>
         <p><b>Present:</b> the CACC1 MCF project-level dataset (5,115 GEF/GCF/AF records) is the seed/spine — see the <a href="#top" data-jump="notebook:top">Notebook tab</a>.</p>
         <p class="cap"><b>Geometry note (all rows):</b> these carry <strong>country as a text/ISO attribute only</strong> — no sub-national geometry, many regional/global records. For the geoselector they are admin0-after-ISO3-join; this theme is better served by the <strong>LLM-skill / citable-output route</strong> than by mapping. Keep two functions separate: <em>comparable-projects</em> (funds DBs) vs <em>evidence</em> (EGM/GAMI, feeding FP B.2/D.2 narrative).</p>
         <div class="tscroll"><table class="dstbl">
@@ -480,6 +507,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Protected areas and biodiversity hotspots in project zones; indigenous territories; gender gap indices for agriculture; land tenure; SEAH risk indicators by country, Climate Security Programming Dashboard for Climate Finance (CSO).<cite>GCF Data Notebook Memo, Section 8</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>none</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>WDPA / Protected Planet</li><li>IUCN Red List</li><li>FAO SDG 5.a.x + Land Portal <b>·</b> replaces defunct GLRD</li><li>OECD SIGI</li><li>World Bank CPIA</li><li>CSPD / CSPDxCF <b>·</b> GCF module</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>Key Biodiversity Areas</li><li>LandMark <b>·</b> indigenous lands</li><li>Global Forest Watch</li></ul></div>
+        </div>
         <p><b>Present in the notebook:</b> none.</p>
         <p class="cap"><b>Two delivery routes here:</b> polygon/raster layers (WDPA, IUCN, KBA, LandMark, GFW) drive project-zone overlays in the notebook; tabular-by-country layers (SIGI, CPIA, FAO 5.a.x, CSPD tier) suit the LLM skill (ISO3 join → cited sentence). <b>Split the portfolio by licence, not theme:</b> rehost the CC-BY ones; derive-then-host the non-commercial ones (host the computed overlay stat, never the raw layer).</p>
         <div class="tscroll"><table class="dstbl">
@@ -509,6 +541,11 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Climate finance flows to country/sector; adaptation finance gap; co-financing landscape (MDB, bilateral, domestic); fiscal space indicators; GCF funding benchmarks from comparable approved projects.<cite>GCF Data Notebook Memo, Section 9</cite></blockquote>
         </div></details>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>CACC1 MCF dataset <b>·</b> project financing fields</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>OECD DAC CRS</li><li>CPI Global Landscape <b>·</b> regional only</li><li>IMF fiscal (Fiscal Monitor / GFS)</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>OECD CRDF <b>·</b> Rio markers</li><li>World Bank IDS <b>·</b> debt / creditors</li></ul></div>
+        </div>
         <p><b>Present:</b> the CACC1 MCF dataset carries project financing fields (project value, GCF financing, co-financing).</p>
         <p class="cap"><b>One client covers most of this theme:</b> a single SDMX/Data360 client pulls OECD CRS + CRDF and the IMF/World Bank finance series — all natively country-year, so they drop straight into the geoselector and self-cite (deterministic query URL = citation).</p>
         <div class="tscroll"><table class="dstbl">
