@@ -220,18 +220,20 @@
     <section id="d-overview">
       <p class="eyebrow">GCF Preparation Facility · Climate Rationale v2 · Data review</p>
       <h1>GCF Preparation Facility — data, skills &amp; notebook review</h1>
-      <p class="lede">A structured review of the data behind the Atlas <strong>Climate Rationale v2</strong> notebook and the CGIAR Climate Data Hub’s plan to serve Green Climate Fund proposal writers — organised around the nine notebook sections in Cesare Scartozzi’s GCF data-requirements memo, and mapped to the GCF Concept Note (v3.1) sections each one feeds.</p>
+      <p class="lede">A structured review of the data behind the Atlas <strong>Climate Rationale v2</strong> notebook and the CGIAR Climate Data Hub’s plan to serve Green Climate Fund proposal writers — organised around the nine notebook sections in the GCF data-requirements memo, and mapped to the GCF Concept Note (v3.1) sections each one feeds.</p>
+
+      <div class="callout"><b>Where this sits.</b> This use-case is a deliverable of <strong>CACC2</strong> — the CGIAR Climate Data &amp; Innovations Hub, the Climate Action capability that builds shared, quality-assured climate-data infrastructure. It is designed to support <strong>CACC1</strong> — “Support the development of CGIAR’s GCF portfolio”, the capability that gives CGIAR Centers technical backstopping on climate rationale and proposal design across engagements in Togo, Benin/Nigeria, Egypt, Zambia and Kenya. In short: <strong>CACC2 provides the data and tools; CACC1 puts them to work in GCF proposals.</strong> Cesare Scartozzi (CACC1) is the champion and first user; Peter Steward (CACC2) coordinates.</div>
 
       <div class="grid2">
-        <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion: Cesare Scartozzi; coordinator: Peter Steward; Brayden Youngberg; Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
+        <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion, CACC1; coordinator, CACC2; plus Brayden Youngberg and Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
         <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is the reference gold standard.</p></div>
-        <div class="kv"><h5>How it’s organised</h5><p>Three tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), and <strong>Notebook</strong> (Cesare’s multilateral-climate-funds pipeline idea).</p></div>
+        <div class="kv"><h5>How it’s organised</h5><p>Three tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), and <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea).</p></div>
         <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
       </div>
 
       <div class="callout"><b>What “status” means.</b> Each section is tagged from the memo: <span class="pill p-keep">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod">PARTIAL</span> partly present, needs additions · <span class="pill p-new">NEW</span> not yet built · <span class="pill p-clarify">DEPRIORITISED</span> in the memo but since parked by the champion. “Present” = what the live notebook does today; “Recommended” = the memo’s target datasets.</div>
 
-      <div class="note"><b>How we keep it honest.</b> Section requirements are quoted verbatim from Cesare’s memo (dated 2026-01-31; filed as “2026.03”). Notebook state comes from the live <code>climateRationale</code> notebook and its decision log. Dataset facts come from each provider’s official page, checked live on 2026-07-07 and re-checked adversarially — logged in <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">the evidence log</a>. Internal meeting transcripts, chats and emails are <strong>not</strong> reproduced — only short excerpts and summaries of decisions. Anything unconfirmed is marked <code>pending</code>, never guessed.</div>
+      <div class="note"><b>How we keep it honest.</b> Section requirements are quoted verbatim from the CACC1 GCF data-requirements memo (dated 2026-01-31; filed as “2026.03”). Notebook state comes from the live <code>climateRationale</code> notebook and its decision log. Dataset facts come from each provider’s official page, checked live on 2026-07-07 and re-checked adversarially — logged in <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">the evidence log</a>. Internal meeting transcripts, chats and emails are <strong>not</strong> reproduced — only short excerpts and summaries of decisions. Anything unconfirmed is marked <code>pending</code>, never guessed.</div>
     </section>
 
     <section id="d-glance">
@@ -272,7 +274,7 @@
         <h4 class="cardh">1 · Climate trends &amp; projections <span class="pill p-keep">IN CR</span></h4>
         <p class="sub">Serves CN C.1 · FP B.1 — historical timeseries and future projections, all at administrative level.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Historical timeseries (TAVG, PTOT, by season); future projections (SSP1-2.6 through SSP5-8.5, periods 2021–2040 to 2080–2100); anomalies; warming stripes. All at administrative level.<cite>GCF Data Notebook Memo, Section 1 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Historical timeseries (TAVG, PTOT, by season); future projections (SSP1-2.6 through SSP5-8.5, periods 2021–2040 to 2080–2100); anomalies; warming stripes. All at administrative level.<cite>GCF Data Notebook Memo, Section 1</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -299,7 +301,7 @@
         <h4 class="cardh">2 · Extreme events <span class="pill p-keep">IN CR</span></h4>
         <p class="sub">Serves CN C.1 · FP B.1, D.1 — unusual / extreme temperature and precipitation events.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Z-score classification of unusual/extreme temperature and precipitation events; historical vs. projected frequency by scenario. All at administrative level.<cite>GCF Data Notebook Memo, Section 2 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Z-score classification of unusual/extreme temperature and precipitation events; historical vs. projected frequency by scenario. All at administrative level.<cite>GCF Data Notebook Memo, Section 2</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -324,7 +326,7 @@
         <h4 class="cardh">3 · Crop &amp; livestock hazard exposure <span class="pill p-mod">PARTIAL</span></h4>
         <p class="sub">Serves CN C.1, C.2 · FP B.1, D.1 — production value exposed to compound hazards, valued in USD. This is the Togo SAT Table 5 output.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -351,7 +353,7 @@
         <h4 class="cardh">4 · Vulnerability &amp; socioeconomic context <span class="pill p-mod">PARTIAL</span></h4>
         <p class="sub">Serves CN Exec Summary · FP D.4.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">CR has poverty rates, GDP by sector, land use. Add if possible: composite vulnerability indices (ND-GAIN, INFORM Risk); food insecurity prevalence (IPC/CH); water stress and WASH access; gender-disaggregated vulnerability; population projections; HDI.<cite>GCF Data Notebook Memo, Section 4 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">CR has poverty rates, GDP by sector, land use. Add if possible: composite vulnerability indices (ND-GAIN, INFORM Risk); food insecurity prevalence (IPC/CH); water stress and WASH access; gender-disaggregated vulnerability; population projections; HDI.<cite>GCF Data Notebook Memo, Section 4</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -376,7 +378,7 @@
         <p class="sub">Serves CN A.16 · FP D.5.</p>
         <div class="warn"><b>Conflict flagged.</b> The memo names this the <strong>highest-priority new section</strong> (“Build Section 5 (NDC/NAP) as the highest-priority new section”). But on 2026-04-29 the champion <strong>withdrew the automation ask</strong> — summarised as: the NAP/NDC corpus is too small (roughly a dozen documents a year of reading) to justify text-extraction automation; at most, a metadata page that links out. This page follows the later decision and marks the section deprioritised, but records the conflict rather than silently picking one.</div>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Country NDC targets for agriculture, forestry, land use, water; NAP priority actions; LT-LEDS commitments; GCF country programme priorities.<cite>GCF Data Notebook Memo, Section 5 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Country NDC targets for agriculture, forestry, land use, water; NAP priority actions; LT-LEDS commitments; GCF country programme priorities.<cite>GCF Data Notebook Memo, Section 5</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -397,7 +399,7 @@
         <h4 class="cardh">6 · Impact potential &amp; beneficiary estimates <span class="pill p-new">NEW</span></h4>
         <p class="sub">Serves CN A.6–A.7 · FP D.1, E.3.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">List of useful datasets and methods to calculate beneficiaries.<cite>GCF Data Notebook Memo, Section 6 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">List of useful datasets and methods to calculate beneficiaries.<cite>GCF Data Notebook Memo, Section 6</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -419,14 +421,14 @@
         <h4 class="cardh">7 · Theory of change &amp; GCF portfolio evidence <span class="pill p-new">NEW</span></h4>
         <p class="sub">Serves FP B.2, D.2. Memo action (b): build this section.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Database of approved GCF projects in food/land/water result areas (T4, T5, T6) with structured fields.<cite>GCF Data Notebook Memo, Section 7 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Database of approved GCF projects in food/land/water result areas (T4, T5, T6) with structured fields.<cite>GCF Data Notebook Memo, Section 7</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
             <dl><dt>Have</dt><dd>none in the CR notebook — but the champion holds a project-level multilateral-climate-funds dataset that directly serves this (see <a href="#top" data-jump="notebook:top">Notebook tab</a>)</dd></dl></div>
           <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
             <dl>
-              <dt>Sources</dt><dd><a href="https://www.greenclimate.fund/projects">GCF project database</a>; CGIAR evidence maps; <a href="https://ieg.worldbankgroup.org/evaluations">World Bank IEG</a>; <a href="https://ioe.ifad.org/en/">IFAD evaluations</a>; Cesare’s MCF project-level dataset</dd>
+              <dt>Sources</dt><dd><a href="https://www.greenclimate.fund/projects">GCF project database</a>; CGIAR evidence maps; <a href="https://ieg.worldbankgroup.org/evaluations">World Bank IEG</a>; <a href="https://ioe.ifad.org/en/">IFAD evaluations</a>; the CACC1 MCF project-level dataset</dd>
               <dt>Filter</dt><dd>food / land / water result areas (GCF Strategic Plan targets T4, T5, T6)</dd>
             </dl></div>
         </div>
@@ -441,7 +443,7 @@
         <h4 class="cardh">8 · Safeguards &amp; gender screening <span class="pill p-new">NEW</span></h4>
         <p class="sub">Serves CN C.4 · FP G.1–G.2.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Protected areas and biodiversity hotspots in project zones; indigenous territories; gender gap indices for agriculture; land tenure; SEAH risk indicators by country, Climate Security Programming Dashboard for Climate Finance (CSO).<cite>GCF Data Notebook Memo, Section 8 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Protected areas and biodiversity hotspots in project zones; indigenous territories; gender gap indices for agriculture; land tenure; SEAH risk indicators by country, Climate Security Programming Dashboard for Climate Finance (CSO).<cite>GCF Data Notebook Memo, Section 8</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
@@ -463,14 +465,14 @@
         <h4 class="cardh">9 · Financial context &amp; justification <span class="pill p-new">NEW</span></h4>
         <p class="sub">Serves CN D.1–D.4 · FP B.5, C.1.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
-          <blockquote class="srcquote">Climate finance flows to country/sector; adaptation finance gap; co-financing landscape (MDB, bilateral, domestic); fiscal space indicators; GCF funding benchmarks from comparable approved projects.<cite>GCF Data Notebook Memo, Section 9 — Cesare Scartozzi</cite></blockquote>
+          <blockquote class="srcquote">Climate finance flows to country/sector; adaptation finance gap; co-financing landscape (MDB, bilateral, domestic); fiscal space indicators; GCF funding benchmarks from comparable approved projects.<cite>GCF Data Notebook Memo, Section 9</cite></blockquote>
         </div></details>
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
             <dl><dt>Have</dt><dd>none in the CR notebook — the MCF dataset also carries project financing fields (project value, GCF financing, co-financing)</dd></dl></div>
           <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
             <dl>
-              <dt>Sources</dt><dd><a href="https://www.oecd.org/en/publications/creditor-reporting-system_22180907.html">OECD DAC CRS</a>; <a href="https://www.climatepolicyinitiative.org/publication/global-landscape-of-climate-finance-2025/">CPI Global Landscape of Climate Finance</a>; <a href="https://www.imf.org/en/publications/fm">IMF fiscal data</a>; Cesare’s MCF dataset</dd>
+              <dt>Sources</dt><dd><a href="https://www.oecd.org/en/publications/creditor-reporting-system_22180907.html">OECD DAC CRS</a>; <a href="https://www.climatepolicyinitiative.org/publication/global-landscape-of-climate-finance-2025/">CPI Global Landscape of Climate Finance</a>; <a href="https://www.imf.org/en/publications/fm">IMF fiscal data</a>; the CACC1 MCF dataset</dd>
             </dl></div>
         </div>
         <p><strong>Verdict.</strong> Also overlaps the MCF dataset (financing columns + GCF benchmarks from comparable projects). Bundle with Section 7.</p>
@@ -555,9 +557,9 @@
             </tr>
             <tr>
               <td class="sec">Project databases (admin0 attribute)</td>
-              <td>GCF, GEF, Adaptation Fund, Cesare’s MCF dataset</td>
+              <td>GCF, GEF, Adaptation Fund, the CACC1 MCF dataset</td>
               <td>Project-level rows; country is an <strong>attribute, no geometry</strong>. GCF = Open Data API; AF = via IATI Registry; GEF = export/scrape; MCF = the delivered CSV.</td>
-              <td><strong>Filter by selected country</strong>, join country → admin0 boundary to map → aggregate financing / counts (Cesare’s pipeline notebook).</td>
+              <td><strong>Filter by selected country</strong>, join country → admin0 boundary to map → aggregate financing / counts (the CACC1 pipeline notebook).</td>
               <td>Federate GCF / AF (IATI); scrape GEF; host the MCF dataset as a CDH parquet (its metadata-standard pilot).</td>
             </tr>
           </tbody>
@@ -657,7 +659,7 @@
       <h2>Proposed: a GCF-proposal skill</h2>
       <p>The memo’s LLM-pipeline requirements describe a skill that does not yet exist: one that turns the notebook’s section outputs into <strong>structured, citable fragments mapped to GCF Concept Note sections</strong>, ready for an LLM to draft from. The existing skills get data in and plotted; none of them speak GCF.</p>
       <details class="src"><summary>Memo requirement this skill would satisfy (verbatim)</summary><div class="srcbody">
-        <blockquote class="srcquote">All nine sections must produce structured outputs (JSON or Markdown) with labelled fields (e.g., hazard_type, trend_description, projection_value, source_citation) so the LLM can compose narrative text with inline citations. Every data point must carry its source reference (dataset, year, DOI/URL). Where possible, sections should output pre-computed sentence fragments (e.g., “Mean annual temperature in [admin1] increased by X°C over 1980–2020”)… Tag each section with applicable GCF Strategic Plan 2024–2027 targets (T4: Food, T5: Ecosystems, T6: Infrastructure) and result areas.<cite>GCF Data Notebook Memo, Section 3 (LLM Pipeline Requirements) — Cesare Scartozzi</cite></blockquote>
+        <blockquote class="srcquote">All nine sections must produce structured outputs (JSON or Markdown) with labelled fields (e.g., hazard_type, trend_description, projection_value, source_citation) so the LLM can compose narrative text with inline citations. Every data point must carry its source reference (dataset, year, DOI/URL). Where possible, sections should output pre-computed sentence fragments (e.g., “Mean annual temperature in [admin1] increased by X°C over 1980–2020”)… Tag each section with applicable GCF Strategic Plan 2024–2027 targets (T4: Food, T5: Ecosystems, T6: Infrastructure) and result areas.<cite>GCF Data Notebook Memo, Section 3 (LLM Pipeline Requirements)</cite></blockquote>
       </div></details>
       <div class="card">
         <h4 class="cardh">Draft spec — <code>gcf-proposal</code> skill</h4>
@@ -701,7 +703,7 @@
   <aside class="side">
     <h4>Notebook — on this page</h4>
     <ul class="toc">
-      <li><a href="#nb-idea"><span class="n">1</span><span>Cesare’s idea</span></a></li>
+      <li><a href="#nb-idea"><span class="n">1</span><span>The pipeline idea</span></a></li>
       <li><a href="#nb-dataset"><span class="n">2</span><span>The dataset</span></a></li>
       <li><a href="#nb-spec"><span class="n">3</span><span>Proposed notebook</span></a></li>
       <li><a href="#nb-build"><span class="n">4</span><span>Build path</span></a></li>
