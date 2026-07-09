@@ -191,7 +191,7 @@
     <h4>Data — on this page</h4>
     <ul class="toc">
       <li><a href="#d-overview"><span class="n">1</span><span>Overview &amp; context</span></a></li>
-      <li><a href="#d-glance"><span class="n">2</span><span>Nine sections at a glance</span></a></li>
+      <li><a href="#d-glance"><span class="n">2</span><span>Nine data themes at a glance</span></a></li>
       <li><a href="#s1"><span class="n">3</span><span>Climate trends &amp; projections</span></a></li>
       <li><a href="#s2"><span class="n">4</span><span>Extreme events</span></a></li>
       <li><a href="#s3"><span class="n">5</span><span>Crop &amp; livestock exposure</span></a></li>
@@ -231,15 +231,13 @@
         <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
       </div>
 
-      <div class="callout"><b>What “status” means.</b> Each section is tagged from the memo: <span class="pill p-keep">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod">PARTIAL</span> partly present, needs additions · <span class="pill p-new">NEW</span> not yet built · <span class="pill p-clarify">DEPRIORITISED</span> in the memo but since parked by the champion. “Present” = what the live notebook does today; “Recommended” = the memo’s target datasets.</div>
-
       <div class="note"><b>How we keep it honest.</b> Section requirements are quoted verbatim from the CACC1 GCF data-requirements memo (dated 2026-01-31; filed as “2026.03”). Notebook state comes from the live <code>climateRationale</code> notebook and its decision log. Dataset facts come from each provider’s official page, checked live on 2026-07-07 and re-checked adversarially — logged in <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">the evidence log</a>. Internal meeting transcripts, chats and emails are <strong>not</strong> reproduced — only short excerpts and summaries of decisions. Anything unconfirmed is marked <code>pending</code>, never guessed.</div>
     </section>
 
     <section id="d-glance">
-      <h2>The nine notebook sections at a glance</h2>
-      <p class="sub">Each row is a section of the proposed GCF notebook, the GCF proposal sections it feeds, and its build status. Every section must be queryable at country + admin level and emit structured, citable outputs for an LLM to draft from. Click a section name to jump to its detail card.</p>
-      <p class="cap"><b>Table 1 — The nine proposed notebook sections.</b> “Serves” lists the GCF Concept Note / Funding Proposal sections each one supports — see the key below the table.</p>
+      <h2>The nine data themes at a glance</h2>
+      <p class="sub">Each row is a theme of a GCF/IFI proposal and the datasets that serve it. The same data can be delivered two ways — through an <strong>Atlas-style geoselector notebook</strong> or an <strong>LLM skill</strong> that emits citable structured outputs — so this review is about the <em>datasets</em>, not one delivery surface. Every theme must be queryable at country + admin0/1/2 level. Click a theme to jump to its datasets.</p>
+      <p class="cap"><b>Table 1 — Nine data themes for GCF/IFI proposal development.</b> “Serves” = the GCF Concept Note (CN) / Funding Proposal (FP) sections each theme supports (key in the fold below the table). <b>Status:</b> <span class="pill p-keep">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod">PARTIAL</span> partly present, needs additions · <span class="pill p-new">NEW</span> not yet built · <span class="pill p-clarify">DEPRIORITISED</span> in the memo but since parked. “Present” = what the live notebook does today; “Recommended” = target datasets.</p>
       <div class="tscroll">
         <table class="glance">
           <thead><tr><th>#</th><th>Notebook section</th><th>Serves (GCF proposal sections)</th><th>Status</th><th>Feasibility</th></tr></thead>
