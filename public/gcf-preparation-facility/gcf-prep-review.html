@@ -304,10 +304,11 @@
         <div class="spec">
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
             <dl>
-              <dt>Historical</dt><dd>CHIRPS (precip) + CHIRTS/AgERA5 (temperature); monthly plots, anomaly toggle, baseline-period picker (1991–2020 / 1995–2014)</dd>
-              <dt>Future</dt><dd>NEX-GDDP-CMIP6 ensemble ribbon, 17–83% inter-model range; seasonal selector; Ribbon / Dot / Summary views</dd>
-              <dt>Coverage</dt><dd>NEX-GDDP hazards effectively global (tropics/subtropics)</dd>
-            </dl></div>
+              <dt>Historical</dt><dd>CHIRPS v3 (PTOT) + CHIRTS-ERA5 (TAVG/TMAX/TMIN) + SPEI-03/12; 0.05°; adm0 + adm1; baseline 1991–2020 (WMO); anomaly toggle</dd>
+              <dt>Future</dt><dd>NEX-GDDP-CMIP6, <strong>18-GCM ensemble</strong>; <strong>adm1 only</strong>; 4 periods 2021–2100; 4 SSPs (1-2.6 → 5-8.5); baseline 1995–2014; 17–83% inter-model range</dd>
+              <dt>Coverage</dt><dd>served products are <strong>region = Africa</strong> (both obs &amp; projections) — not global; the pipeline could extend but hasn't published beyond Africa</dd>
+            </dl>
+            <p style="margin:6px 0 0;font-size:11.5px;color:var(--muted)">Verified against the Atlas CR data audit, 2026-07-09. Two trend/variability products (Theil-Sen slope; interannual variability) are produced but not yet wired into the production notebook.</p></div>
           <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
             <dl>
               <dt>Sources</dt><dd><a href="https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6">NEX-GDDP-CMIP6</a> / CORDEX; <a href="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels">ERA5</a>; <a href="https://www.chc.ucsb.edu/data/chirps">CHIRPS</a> / <a href="https://www.chc.ucsb.edu/data/chirtsdaily">CHIRTS</a></dd>
@@ -332,7 +333,7 @@
           <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
             <dl>
               <dt>Method</dt><dd>Z-score categorisation; tails-aware (PTOT both tails, others high-only); per-hazard threshold rows</dd>
-              <dt>Derivation</dt><dd>computed in-notebook from the Section 1 climate layers</dd>
+              <dt>Derivation</dt><dd>computed in-notebook (client-side) from the Section 1 projections parquet; z-score vs 1995–2014; <strong>ensemble-mean only</strong> — no per-GCM classification, so tail models are masked (audit 2026-07-09)</dd>
             </dl></div>
           <div class="spec-col rec"><div class="spec-h">Recommended — memo target</div>
             <dl>
@@ -358,7 +359,8 @@
           <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>FAO GLEAM <b>·</b> emission intensity</li><li>WRI Aqueduct <b>·</b> water stress</li><li>FAO FishStat <b>·</b> aquaculture value</li></ul></div>
           <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>AQUASTAT GMIA v5 <b>·</b> irrigation extent</li><li>Sea Around Us <b>·</b> marine catch value</li></ul></div>
         </div>
-        <p><b>Present in the notebook:</b> MapSPAM production value × the hazard-exposure parquet (severity / threshold controls, Ecocrop defaults) — but <strong>Sub-Saharan Africa only</strong> (the champion's "biggest limitation"); livestock partial; fisheries / aquaculture absent.</p>
+        <p><b>Present in the notebook</b> (verified against the Atlas CR data audit, 2026-07-09): <strong>MapSPAM 2020 v1r2</strong> production value × <strong>GLW4-2020</strong> livestock (a combined crop + livestock exposure parquet — livestock <em>is</em> present, not partial) × the hazard indices; Ecocrop-default thresholds. Scope: <strong>Sub-Saharan Africa only, adm1 only</strong> (the champion's "biggest limitation"); fisheries / aquaculture absent. Only the <strong>severe</strong> severity tier is live (moderate / extreme pending). Valued in <strong>nominal 2021 USD</strong>, not constant dollars.</p>
+        <div class="note"><b>Data-plumbing flag (for the dev team).</b> The audit found the hazard-exposure product the notebook <em>reads</em> and the one the pipeline <em>writes</em> sit on different S3 paths — 4 of 6 partition keys diverge (<code>source</code> nex-gddp-cmip6 vs atlas_cmip6; <code>variable</code> vop_nominal-usd21 vs vop_intld15/usd15; <code>model</code> ENSEMBLEmean vs ENSEMBLE/historic; interaction filename). The constant-dollar currency fix prepped in <code>hazards_prototype</code> ships to keys the live notebook doesn't read. Not yet S3-verified — needs an <code>aws s3 ls</code> on both prefixes to confirm it's a real gap vs a stale notebook path.</div>
         <p class="cap"><b>Theme 3 datasets — crop &amp; livestock hazard exposure.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> already in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>CDH integration route</b> = how the Hub would connect it: mirror-host (open data), federate (live API), or derive-then-host (compute a product — for bulk-only or non-commercial sources).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
@@ -376,7 +378,7 @@
         <p><strong>Verdict.</strong> Highest-value theme — the hazard-exposure matrix in the style of the Togo SAT Table 5 example (see <a href="#d-target" data-jump="data:d-target">Example target output</a>). Priorities: water-stress additions and coverage beyond SSA. We already hold the open <strong>GLW4</strong> gridded animal-numbers layer, so GLEAM isn't needed to count livestock; pair Aqueduct <code>bws</code> with <strong>GMIA</strong> to resolve stress onto irrigated cropland.</p>
         <p class="cap"><b>Overlaps →</b> GLW4 (open animal numbers, held) supersedes GLEAM for <em>counting</em> livestock — GLEAM only adds emission intensity, so it belongs in Theme 6, not here. Sea Around Us overlaps FishStat — add only if sub-national/marine detail is needed beyond FishStat's national totals.</p>
         <div class="note" id="q-gleam"><b>Open question — for Cesare (CACC1):</b> We already hold <strong>GLW4</strong> (open gridded livestock numbers), and GLEAM is restricted-use and provides emission <em>intensity</em> (kg CO₂eq/kg product), not animal numbers or USD exposure. <strong>What does GLEAM add here — is it for the mitigation / enteric-CH₄ side (Theme 6), and is its restricted licence worth pursuing?</strong></div>
-        <div class="note" id="q-coverage"><b>Open question:</b> The crop-exposure pipeline is Sub-Saharan Africa only, but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</div>
+        <div class="note" id="q-coverage"><b>Open question:</b> The crop-exposure pipeline is Sub-Saharan Africa only — <em>confirmed by the Atlas data audit (2026-07-09): SSA + adm1 only</em> — but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</div>
       </div>
     </section>
 
