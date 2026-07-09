@@ -218,14 +218,14 @@
       <li><a href="#s7"><span class="n">7</span><span>Theory of change / portfolio</span></a></li>
       <li><a href="#s8"><span class="n">8</span><span>Safeguards &amp; gender</span></a></li>
       <li><a href="#s9"><span class="n">9</span><span>Financial context</span></a></li>
-      <li><a href="#d-target"><span class="n">·</span><span>Target output (Togo SAT)</span></a></li>
+      <li><a href="#d-target"><span class="n">·</span><span>Example target output (Togo SAT)</span></a></li>
       <li><a href="#d-licence"><span class="n">·</span><span>Data licensing — what the Hub can host</span></a></li>
       <li><a href="#d-delivery"><span class="n">·</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
       <li><a href="#d-feedback"><span class="n">·</span><span>Feedback</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Questions — where to comment</b></div>
-      <div class="side-note">Each has its own comment box (GitHub sign-in). <b>★ = for Cesare (CACC1)</b>. No account? Use the 💬 Feedback button (bottom-right).</div>
+      <div class="side-note">Jump to an open question below; comment in that section's comment box (GitHub sign-in — screenshots welcome). <b>★ = for Cesare (CACC1)</b>. No account? Use the 💬 Feedback button (bottom-right).</div>
       <div class="side-links">
         <a href="#q-gleam" data-jump="data:q-gleam">★ → GLEAM's purpose vs GLW4</a>
         <a href="#q-coverage" data-jump="data:q-coverage">→ Coverage beyond SSA</a>
@@ -247,7 +247,7 @@
 
       <div class="grid2">
         <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion, CACC1; coordinator, CACC2; plus Brayden Youngberg and Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
-        <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is the reference gold standard.</p></div>
+        <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is one illustrative example of the kind of output — a suggestion, not a prescribed standard.</p></div>
         <div class="kv"><h5>How it’s organised</h5><p>Three tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), and <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea).</p></div>
         <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
       </div>
@@ -284,7 +284,7 @@
         </ul>
         <p style="margin:0">So e.g. “CN C.1 · FP B.1” means the section supplies the climate-context narrative needed for Concept Note section C.1 and Funding Proposal section B.1. Codes trace to the memo’s section-to-GCF mapping.</p>
       </div></details>
-      <div class="callout"><b>How to read the dataset tables (Themes 3–9).</b> Each theme below unpacks its datasets for the Hub technical team — what each one is, its format, the transformation to reach admin0/1/2, its IP/licence, and a concrete CDH integration route (<strong>mirror-host</strong> the raw data, <strong>federate</strong> to a live API, or <strong>derive-then-host</strong> a computed product). Every dataset is tagged by source: <span class="pill p-have">HAVE</span> already held · <span class="pill p-c1">CACC1</span> recommended in Cesare's memo · <span class="pill p-c2">CACC2</span> additional, from this review's own deep research (beyond the memo). Themes 1–2 are already in the notebook, so they keep the short summary; Theme 5 is deprioritised.</div>
+      <div class="callout"><b>How to read the dataset tables (Themes 3–9).</b> Each theme below unpacks its datasets for the Hub technical team — what each one is, its format, the transformation to reach admin0/1/2, its IP/licence, and a concrete CDH integration route (<strong>mirror-host</strong> the raw data, <strong>federate</strong> to a live API, or <strong>derive-then-host</strong> a computed product). Every dataset is tagged by source: <span class="pill p-have">HAVE</span> already held · <span class="pill p-c1">CACC1</span> recommended in Cesare's memo · <span class="pill p-c2">CACC2</span> additional, from this review's own deep research (beyond the memo). Themes 1–2 are already in the notebook, so they keep the short summary; Theme 5 is deprioritised but its sources are still unpacked so the dev team can see how they'd connect. <b>Tip:</b> the comment boxes accept <strong>screenshots</strong> — GitHub Discussions supports drag-and-drop / paste images, handy for suggesting an output format or flagging an issue in place.</div>
       <details class="cmts" data-term="GCF Prep Data — Nine sections at a glance"><summary>💬 Comment / discuss “Sections at a glance”</summary><div class="giscus-slot"></div></details>
     </section>
 
@@ -344,7 +344,7 @@
     <section id="s3">
       <div class="card detail">
         <h4 class="cardh">3 · Crop &amp; livestock hazard exposure <span class="pill p-mod">PARTIAL</span></h4>
-        <p class="sub">Serves CN C.1, C.2 · FP B.1, D.1 — production value exposed to compound hazards, valued in USD. This is the Togo SAT Table 5 output.</p>
+        <p class="sub">Serves CN C.1, C.2 · FP B.1, D.1 — production value exposed to compound hazards, valued in USD — in the style of the Togo SAT Table 5 example.</p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3</cite></blockquote>
         </div></details>
@@ -354,6 +354,7 @@
           <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>AQUASTAT GMIA v5 <b>·</b> irrigation extent</li><li>Sea Around Us <b>·</b> marine catch value</li></ul></div>
         </div>
         <p><b>Present in the notebook:</b> MapSPAM production value × the hazard-exposure parquet (severity / threshold controls, Ecocrop defaults) — but <strong>Sub-Saharan Africa only</strong> (the champion's "biggest limitation"); livestock partial; fisheries / aquaculture absent.</p>
+        <p class="cap"><b>Theme 3 datasets — crop &amp; livestock hazard exposure.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> already in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>CDH integration route</b> = how the Hub would connect it: mirror-host (open data), federate (live API), or derive-then-host (compute a product — for bulk-only or non-commercial sources).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -367,9 +368,9 @@
             <tr><td><a href="https://www.seaaroundus.org/">Sea Around Us</a></td><td><span class="pill p-c2">CACC2</span></td><td>Reconstructed marine catch tonnage + landed value (sub-national / EEZ detail FishStat lacks)</td><td>0.5° grid + EEZ polygons + API</td><td>cell → EEZ → coastal ISO3</td><td class="lic-nc">NC — CC BY-NC 4.0</td><td>Federate API / derive-then-host — only if coastal/marine sub-national detail is needed</td></tr>
           </tbody>
         </table></div>
-        <p><strong>Verdict.</strong> Highest-value theme — it is the Togo Table 5 matrix (see <a href="#d-target" data-jump="data:d-target">Target output</a>). Priorities: water-stress additions and coverage beyond SSA. We already hold the open <strong>GLW4</strong> gridded animal-numbers layer, so GLEAM isn't needed to count livestock; pair Aqueduct <code>bws</code> with <strong>GMIA</strong> to resolve stress onto irrigated cropland.</p>
-        <details class="cmts qbox" id="q-gleam" data-term="GCF Prep Q — GLEAM purpose"><summary><span class="qhead"><b>To clarify with the champion (CACC1).</b> We already hold <strong>GLW4</strong> (open gridded livestock numbers), and GLEAM is restricted-use and provides emission <em>intensity</em> (kg CO₂eq/kg product), not animal numbers or USD exposure. <strong>What does GLEAM add here — is it for the mitigation / enteric-CH₄ side (Theme 6), and is its restricted licence worth pursuing?</strong></span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
-        <details class="cmts qbox" id="q-coverage" data-term="GCF Prep Q — Geographic coverage beyond SSA"><summary><span class="qhead"><b>Open question.</b> The crop-exposure pipeline is Sub-Saharan Africa only, but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+        <p><strong>Verdict.</strong> Highest-value theme — the hazard-exposure matrix in the style of the Togo SAT Table 5 example (see <a href="#d-target" data-jump="data:d-target">Example target output</a>). Priorities: water-stress additions and coverage beyond SSA. We already hold the open <strong>GLW4</strong> gridded animal-numbers layer, so GLEAM isn't needed to count livestock; pair Aqueduct <code>bws</code> with <strong>GMIA</strong> to resolve stress onto irrigated cropland.</p>
+        <div class="note" id="q-gleam"><b>Open question — for Cesare (CACC1):</b> We already hold <strong>GLW4</strong> (open gridded livestock numbers), and GLEAM is restricted-use and provides emission <em>intensity</em> (kg CO₂eq/kg product), not animal numbers or USD exposure. <strong>What does GLEAM add here — is it for the mitigation / enteric-CH₄ side (Theme 6), and is its restricted licence worth pursuing?</strong></div>
+        <div class="note" id="q-coverage"><b>Open question:</b> The crop-exposure pipeline is Sub-Saharan Africa only, but the active GCF pipeline includes non-African countries (e.g. Syria, Iraq, Sri Lanka, Egypt). What is the minimum coverage v1 must reach, and does global MapSPAM need to be run — or do we signpost an external global product where GCF prefers one?</div>
       </div>
     </section>
 
@@ -388,6 +389,7 @@
         </div>
         <p><b>Present in the notebook:</b> World Bank indicators (poverty rates, GDP by sector, land use) in Key Facts — national only.</p>
         <p class="cap"><b>The crux of this theme:</b> most memo datasets are <strong>national-only (admin0)</strong> — they can only shade a whole country. Genuine <strong>subnational</strong> granularity comes from DHS, IPC/CH, INFORM-Subnational (regional coverage only), and the CACC2 additions (GDL SHDI, Meta RWI, FEWS NET).</p>
+        <p class="cap"><b>Theme 4 datasets — vulnerability &amp; socioeconomic context.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; finest admin</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -418,15 +420,23 @@
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Country NDC targets for agriculture, forestry, land use, water; NAP priority actions; LT-LEDS commitments; GCF country programme priorities.<cite>GCF Data Notebook Memo, Section 5</cite></blockquote>
         </div></details>
-        <div class="spec">
-          <div class="spec-col present"><div class="spec-h">Present — in the notebook today</div>
-            <dl><dt>Have</dt><dd>none</dd></dl></div>
-          <div class="spec-col rec"><div class="spec-h">Recommended — revised scope</div>
-            <dl>
-              <dt>Sources</dt><dd><a href="https://unfccc.int/NDCREG">UNFCCC NDC Registry</a>; <a href="https://napcentral.org">NAP Central</a>; <a href="https://www.climatewatchdata.org">Climate Watch</a>; <a href="https://www.greenclimate.fund/countries-and-regions">GCF country programmes</a></dd>
-              <dt>Scope now</dt><dd>metadata / signpost page linking out — not text-extraction automation; revisit only if demand recurs</dd>
-            </dl></div>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Present — in CDH / Atlas</div><ul><li>none</li></ul></div>
+          <div class="spec-col rec"><div class="spec-h">CACC1 — Cesare's memo</div><ul><li>UNFCCC NDC Registry</li><li>NAP Central</li><li>Climate Watch</li><li>GCF country programmes</li></ul></div>
+          <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>none new needed — the gap here is <b>NLP text-extraction</b> from PDFs, not more datasets; Climate Watch already structures NDC targets via API</li></ul></div>
         </div>
+        <p><b>Deprioritised, but unpacked for the dev team.</b> Automation was withdrawn — yet if this is ever revisited, here is how each source would connect. The key point: three of the four are <strong>PDF document registries</strong> that need NLP text-extraction; only <strong>Climate Watch</strong> exposes structured NDC content via an API, so it is the pragmatic connect route.</p>
+        <p class="cap"><b>Theme 5 datasets — NDC &amp; NAP alignment.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
+        <div class="tscroll"><table class="dstbl">
+          <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ connect</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://unfccc.int/NDCREG">UNFCCC NDC Registry</a></td><td><span class="pill p-c1">CACC1</span></td><td>Official NDC submissions — country targets for agriculture, forestry, land use, water</td><td>PDF documents per Party + registry metadata; <b>no structured target API</b></td><td>download PDF → NLP-extract targets</td><td class="lic-unclear">UNFCCC terms — free download, no open licence</td><td>Federate / link; NLP extraction (non-trivial)</td></tr>
+            <tr><td><a href="https://napcentral.org">NAP Central</a></td><td><span class="pill p-c1">CACC1</span></td><td>National Adaptation Plans + priority actions</td><td>PDF per country</td><td>download → NLP-extract priority actions</td><td class="lic-unclear">© UNFCCC terms</td><td>Federate / link; NLP extraction</td></tr>
+            <tr><td><a href="https://www.climatewatchdata.org">Climate Watch</a></td><td><span class="pill p-c1">CACC1</span></td><td>Structured NDC content (NDC Explorer) + GHG + pathways — the same targets, already parsed</td><td>REST API + CSV, country-structured</td><td>API query by country → structured NDC targets</td><td class="lic-open">open — CC BY 4.0 (Climate-Watch data)</td><td><strong>Federate API — the structured shortcut that avoids most NLP</strong></td></tr>
+            <tr><td><a href="https://www.greenclimate.fund/countries-and-regions">GCF country programmes</a></td><td><span class="pill p-c1">CACC1</span></td><td>Country programme priorities</td><td>PDF operational documents, per country</td><td>filter operational-docs by country → link</td><td class="lic-nc">GCF terms — no open licence</td><td>Federate / link; scrape</td></tr>
+          </tbody>
+        </table></div>
+        <p><strong>Verdict.</strong> Stays deprioritised (champion withdrew automation; corpus is small). If revisited, <strong>start with Climate Watch's API</strong> — it already structures NDC targets, so most of the NDC side needs no text-extraction; reserve NLP for the NAP PDFs. A metadata/signpost page linking out is the low-effort interim.</p>
         <details class="cmts" data-term="GCF Prep Data — S5 NDC & NAP alignment"><summary>💬 Comment / discuss “NDC &amp; NAP alignment”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -446,6 +456,7 @@
         </div>
         <p><b>Present in the notebook:</b> none (WorldPop population comes via Section 4).</p>
         <p class="cap"><b>Read this theme as two layers:</b> EX-ACT and the IPCC EFDB are <strong>accounting machinery, not spatial datasets</strong> — other layers supply activity data per admin unit (land-cover areas, livestock heads, holdings), which the factors/tools convert to tCO₂e for the CN A.6 mitigation claim.</p>
+        <p class="cap"><b>Theme 6 datasets — impact potential &amp; beneficiary estimates.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin / use</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -460,7 +471,7 @@
           </tbody>
         </table></div>
         <p><strong>Verdict.</strong> Mitigation accounting (EX-ACT, IPCC EFs) is new territory — CGIAR's prior GCF work is adaptation-only, so the L2 mitigation focal point must be engaged. Build EX-ACT/EFDB as a <strong>computation layer</strong>, not a tile service. Prefer the open CACC2 trio (GLW4, ESA WorldCover, EDGAR/FAOSTAT — all CC BY 4.0) for activity data; note <strong>GYGA and GAEZ v4 are both non-commercial</strong> (derive-and-cite only). National census is the recurring manual cost — budget it.</p>
-        <details class="cmts qbox" id="q-accounting" data-term="GCF Prep Q — Accounting-tool integration"><summary><span class="qhead"><b>To clarify with the champion (CACC1).</b> EX-ACT and the IPCC EFDB are accounting <em>machinery</em>, not spatial datasets. <strong>How does he imagine these integrated into a pipeline?</strong> Options: (a) the notebook/skill emits admin-level activity data (areas, heads) and a human runs EX-ACT separately; (b) reimplement the relevant EX-ACT / IPCC Tier-1 coefficients inside the pipeline to emit tCO₂e directly; (c) EX-ACT as an external computation service the pipeline calls. Which fits the GCF workflow?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+        <div class="note" id="q-accounting"><b>Open question — for Cesare (CACC1):</b> EX-ACT and the IPCC EFDB are accounting <em>machinery</em>, not spatial datasets. <strong>How does he imagine these integrated into a pipeline?</strong> Options: (a) the notebook/skill emits admin-level activity data (areas, heads) and a human runs EX-ACT separately; (b) reimplement the relevant EX-ACT / IPCC Tier-1 coefficients inside the pipeline to emit tCO₂e directly; (c) EX-ACT as an external computation service the pipeline calls. Which fits the GCF workflow?</div>
         <details class="cmts" data-term="GCF Prep Data — S6 Impact & beneficiaries"><summary>💬 Comment / discuss “Impact &amp; beneficiaries”</summary><div class="giscus-slot"></div></details>
       </div>
     </section>
@@ -480,6 +491,7 @@
         </div>
         <p><b>Present:</b> the CACC1 MCF project-level dataset (5,115 GEF/GCF/AF records) is the seed/spine — see the <a href="#top" data-jump="notebook:top">Notebook tab</a>.</p>
         <p class="cap"><b>Geometry note (all rows):</b> these carry <strong>country as a text/ISO attribute only</strong> — no sub-national geometry, many regional/global records. For the geoselector they are admin0-after-ISO3-join; this theme is better served by the <strong>LLM-skill / citable-output route</strong> than by mapping. Keep two functions separate: <em>comparable-projects</em> (funds DBs) vs <em>evidence</em> (EGM/GAMI, feeding FP B.2/D.2 narrative).</p>
+        <p class="cap"><b>Theme 7 datasets — theory of change &amp; GCF portfolio.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ country</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -514,6 +526,7 @@
         </div>
         <p><b>Present in the notebook:</b> none.</p>
         <p class="cap"><b>Two delivery routes here:</b> polygon/raster layers (WDPA, IUCN, KBA, LandMark, GFW) drive project-zone overlays in the notebook; tabular-by-country layers (SIGI, CPIA, FAO 5.a.x, CSPD tier) suit the LLM skill (ISO3 join → cited sentence). <b>Split the portfolio by licence, not theme:</b> rehost the CC-BY ones; derive-then-host the non-commercial ones (host the computed overlay stat, never the raw layer).</p>
+        <p class="cap"><b>Theme 8 datasets — safeguards &amp; gender screening.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; geometry</th><th>→ admin / zone</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -548,6 +561,7 @@
         </div>
         <p><b>Present:</b> the CACC1 MCF dataset carries project financing fields (project value, GCF financing, co-financing).</p>
         <p class="cap"><b>One client covers most of this theme:</b> a single SDMX/Data360 client pulls OECD CRS + CRDF and the IMF/World Bank finance series — all natively country-year, so they drop straight into the geoselector and self-cite (deterministic query URL = citation).</p>
+        <p class="cap"><b>Theme 9 datasets — financial context &amp; justification.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Route</b> = mirror-host (open) / federate (live API) / derive-then-host (compute).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ country</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -564,13 +578,13 @@
     </section>
 
     <section id="d-target">
-      <h2>Target output — the Togo SAT hazard-exposure matrix</h2>
-      <p>The gold-standard reference is the Togo Sustainable Agricultural Transformation rapid climate-risk assessment (Global Center on Adaptation + Alliance Bioversity-CIAT, April 2025). Its <strong>Table 5</strong> is exactly what Section 3 of the notebook should auto-generate: crop production value exposed to compound hazards, by region × crop × scenario, with the share of regional crop value in parentheses.</p>
+      <h2>Example target output — the Togo SAT hazard-exposure matrix</h2>
+      <p>One illustrative example of a target output is the Togo Sustainable Agricultural Transformation rapid climate-risk assessment (Global Center on Adaptation + Alliance Bioversity-CIAT, April 2025) — a <strong>suggestion</strong> of the kind of table Theme 3 could produce, not a prescribed standard. Its <strong>Table 5</strong> shows crop production value exposed to compound hazards, by region × crop × scenario, with the share of regional crop value in parentheses.</p>
       <figure>
         <img src="docs/img/togo-table5.png" alt="Togo SAT report Table 5 — projected value of crop production exposed to severe climate hazards, by region, crop, and SSP scenario">
         <figcaption><b>Togo SAT report, Table 5 (p.19).</b> Rows = region × hazard combination (Dry only / Heat only / Dry and Heat); columns = crop (maize / soybean / rice) × scenario (SSP245 / SSP585); cells = exposed value of production in constant 2015 US$ with the % of that region’s crop value in parentheses. Built from MapSPAM (Togo agricultural census 2012–14) crossed with African Adaptation Atlas hazard layers — the exact pipeline the Climate Rationale notebook runs. A companion Table 6 shows the same in harvested hectares. Reproduced from the source report for reference; note the source header typo “SS245” in the rice column.</figcaption>
       </figure>
-      <div class="callout"><b>Methods to match (Togo Annex 2).</b> CHIRPS + AgERA5 historical (1981–2022); 5-GCM CMIP6 ensemble (ACCESS-ESM1-5, MPI-ESM1-2-HR, EC-Earth3, INM-CM5-0, MRI-ESM2-0); SSP245 &amp; SSP585; baseline 1995–2014; 0.05° resolution; hazard indices NTx35 (crop heat), NDWS (drought), NDWL0 (waterlogging), HSH (human heat) with the thresholds in the report’s Annex Table A.1.</div>
+      <div class="callout"><b>Methods used in the Togo example (Annex 2), for reference.</b> CHIRPS + AgERA5 historical (1981–2022); 5-GCM CMIP6 ensemble (ACCESS-ESM1-5, MPI-ESM1-2-HR, EC-Earth3, INM-CM5-0, MRI-ESM2-0); SSP245 &amp; SSP585; baseline 1995–2014; 0.05° resolution; hazard indices NTx35 (crop heat), NDWS (drought), NDWL0 (waterlogging), HSH (human heat) with the thresholds in the report’s Annex Table A.1.</div>
       <details class="cmts" data-term="GCF Prep Data — Target output Togo Table 5"><summary>💬 Comment / discuss “Target output”</summary><div class="giscus-slot"></div></details>
     </section>
 
@@ -607,7 +621,7 @@
               <td class="sec">Gridded exposure raster</td>
               <td>MapSPAM 2020, WorldPop</td>
               <td>GeoTIFF. MapSPAM = Dataverse bulk (~10 km); WorldPop = REST API (`worldpop.org/rest/data`) → GeoTIFF (100 m/1 km).</td>
-              <td><strong>Zonal sum</strong> within admin × hazard mask → value / population exposed (the Togo Table 5 matrix).</td>
+              <td><strong>Zonal sum</strong> within admin × hazard mask → value / population exposed (e.g. the Togo Table 5 example).</td>
               <td>WorldPop federates via REST; MapSPAM bulk-download-then-host. Exposure product is a derived parquet either way.</td>
             </tr>
             <tr>
@@ -778,8 +792,9 @@
 
     <section id="sk-questions">
       <h2>Open questions for the team</h2>
-      <details class="cmts qbox" id="q-skill-mcp" data-term="GCF Prep Q — Skill vs MCP"><summary><span class="qhead"><b>Skill or MCP (or both)?</b> Should GCF proposal support ship as a Claude Code skill, an MCP server that lets an AI pull insights directly from the Hub, or both? The team has floated MCPs for direct Hub access — early days. What’s the v1 shape?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
-      <details class="cmts qbox" id="q-skill-owner" data-term="GCF Prep Q — GCF skill owner & evals"><summary><span class="qhead"><b>Owner and evals?</b> Who owns a <code>gcf-proposal</code> skill, and what eval set proves it works — reproducing sections of the Togo SAT rationale from the notebook’s outputs is one candidate benchmark.</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <div class="note" id="q-skill-mcp"><b>Open question:</b> Skill or MCP (or both)? Should GCF proposal support ship as a Claude Code skill, an MCP server that lets an AI pull insights directly from the Hub, or both? The team has floated MCPs for direct Hub access — early days. What’s the v1 shape?</div>
+      <div class="note" id="q-skill-owner"><b>Open question:</b> Owner and evals? Who owns a <code>gcf-proposal</code> skill, and what eval set proves it works — reproducing sections of the Togo SAT rationale example from the notebook’s outputs is one candidate benchmark.</div>
+      <details class="cmts" data-term="GCF Prep Skills — Open questions"><summary>💬 Comment / discuss the Skills open questions</summary><div class="giscus-slot"></div></details>
       <p class="foot">Skill facts fetched live from the skills repo on 2026-07-07. The proposed spec is a starting point for discussion, not a committed design.</p>
     </section>
   </main>
@@ -866,8 +881,9 @@
 
     <section id="nb-questions">
       <h2>Open questions</h2>
-      <details class="cmts qbox" id="q-nb-subclass" data-term="GCF Prep Q — Sub-classifier ETA"><summary><span class="qhead"><b>Sub-classifier status?</b> The project-intervention sub-classifiers were due end June 2026. Are they final — and does the delivered schema still hold so the notebook is “plug and play”?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
-      <details class="cmts qbox" id="q-nb-host" data-term="GCF Prep Q — Dataset hosting & DOI"><summary><span class="qhead"><b>Hosting &amp; DOI?</b> Is the food/land/water subset cleared for public release, and should the Hub host the Parquet directly or only link the DOI’d original on CGSpace / Dataverse?</span><span class="qcta">💬 Answer / discuss this question</span></summary><div class="giscus-slot"></div></details>
+      <div class="note" id="q-nb-subclass"><b>Open question — for Cesare (CACC1):</b> Sub-classifier status? The project-intervention sub-classifiers were due end June 2026. Are they final — and does the delivered schema still hold so the notebook is “plug and play”?</div>
+      <div class="note" id="q-nb-host"><b>Open question — for Cesare (CACC1):</b> Hosting &amp; DOI? Is the food/land/water subset cleared for public release, and should the Hub host the Parquet directly or only link the DOI’d original on CGSpace / Dataverse?</div>
+      <details class="cmts" data-term="GCF Prep Notebook — Open questions"><summary>💬 Comment / discuss the Notebook open questions</summary><div class="giscus-slot"></div></details>
       <p class="foot">The concept and dataset facts come from the champion’s 2026-06-17 email and delivered CSV, and the 2026-04-29 meeting. Notebook design is a draft for discussion.</p>
     </section>
   </main>
