@@ -202,8 +202,9 @@
       <li><a href="#s8"><span class="n">10</span><span>Safeguards &amp; gender</span></a></li>
       <li><a href="#s9"><span class="n">11</span><span>Financial context</span></a></li>
       <li><a href="#d-target"><span class="n">12</span><span>Target output (Togo SAT)</span></a></li>
-      <li><a href="#d-delivery"><span class="n">13</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
-      <li><a href="#d-feedback"><span class="n">14</span><span>Feedback</span></a></li>
+      <li><a href="#d-licence"><span class="n">13</span><span>Data licensing — what the Hub can host</span></a></li>
+      <li><a href="#d-delivery"><span class="n">14</span><span>Delivering the data (geoselection &amp; AI)</span></a></li>
+      <li><a href="#d-feedback"><span class="n">15</span><span>Feedback</span></a></li>
     </ul>
     <div class="side-meta">
       <div><b>Where to comment</b></div>
@@ -235,30 +236,33 @@
 
     <section id="d-glance">
       <h2>The nine notebook sections at a glance</h2>
-      <p class="sub">From the memo: each row is a section of the proposed GCF notebook, the GCF Concept Note (CN) / Funding Proposal (FP) codes it serves, and its build status. All sections must be queryable at country + admin level and emit structured, citable outputs for an LLM to draft from.</p>
+      <p class="sub">Each row is a section of the proposed GCF notebook, the GCF proposal sections it feeds, and its build status. Every section must be queryable at country + admin level and emit structured, citable outputs for an LLM to draft from. Click a section name to jump to its detail card.</p>
+      <p class="cap"><b>Table 1 — The nine proposed notebook sections.</b> “Serves” lists the GCF Concept Note / Funding Proposal sections each one supports — see the key below the table.</p>
       <div class="tscroll">
         <table class="glance">
-          <thead><tr><th>#</th><th>Notebook section</th><th>Serves (CN · FP)</th><th>Status</th><th>Feasibility</th></tr></thead>
+          <thead><tr><th>#</th><th>Notebook section</th><th>Serves (GCF proposal sections)</th><th>Status</th><th>Feasibility</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td class="sec">Climate trends &amp; projections</td><td>CN C.1 · FP B.1</td><td><span class="pill p-keep">IN CR</span></td><td>2</td></tr>
-            <tr><td>2</td><td class="sec">Extreme events</td><td>CN C.1 · FP B.1, D.1</td><td><span class="pill p-keep">IN CR</span></td><td>2</td></tr>
-            <tr><td>3</td><td class="sec">Crop &amp; livestock hazard exposure</td><td>CN C.1, C.2 · FP B.1, D.1</td><td><span class="pill p-mod">PARTIAL</span></td><td>2–3</td></tr>
-            <tr><td>4</td><td class="sec">Vulnerability &amp; socioeconomic context</td><td>CN Exec Summary · FP D.4</td><td><span class="pill p-mod">PARTIAL</span></td><td>1–2</td></tr>
-            <tr><td>5</td><td class="sec">NDC &amp; NAP alignment</td><td>CN A.16 · FP D.5</td><td><span class="pill p-clarify">DEPRIORITISED</span></td><td>3</td></tr>
-            <tr><td>6</td><td class="sec">Impact potential &amp; beneficiaries</td><td>CN A.6–A.7 · FP D.1, E.3</td><td><span class="pill p-new">NEW</span></td><td>2–4</td></tr>
-            <tr><td>7</td><td class="sec">Theory of change &amp; GCF portfolio</td><td>FP B.2, D.2</td><td><span class="pill p-new">NEW</span></td><td>2–3</td></tr>
-            <tr><td>8</td><td class="sec">Safeguards &amp; gender screening</td><td>CN C.4 · FP G.1–G.2</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
-            <tr><td>9</td><td class="sec">Financial context &amp; justification</td><td>CN D.1–D.4 · FP B.5, C.1</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
+            <tr><td>1</td><td class="sec"><a href="#s1" data-jump="data:s1">Climate trends &amp; projections</a></td><td>CN C.1 · FP B.1</td><td><span class="pill p-keep">IN CR</span></td><td>1</td></tr>
+            <tr><td>2</td><td class="sec"><a href="#s2" data-jump="data:s2">Extreme events</a></td><td>CN C.1 · FP B.1, D.1</td><td><span class="pill p-keep">IN CR</span></td><td>1</td></tr>
+            <tr><td>3</td><td class="sec"><a href="#s3" data-jump="data:s3">Crop &amp; livestock hazard exposure</a></td><td>CN C.1, C.2 · FP B.1, D.1</td><td><span class="pill p-mod">PARTIAL</span></td><td>2–3</td></tr>
+            <tr><td>4</td><td class="sec"><a href="#s4" data-jump="data:s4">Vulnerability &amp; socioeconomic context</a></td><td>CN Exec Summary · FP D.4</td><td><span class="pill p-mod">PARTIAL</span></td><td>1–2</td></tr>
+            <tr><td>5</td><td class="sec"><a href="#s5" data-jump="data:s5">NDC &amp; NAP alignment</a></td><td>CN A.16 · FP D.5</td><td><span class="pill p-clarify">DEPRIORITISED</span></td><td>3</td></tr>
+            <tr><td>6</td><td class="sec"><a href="#s6" data-jump="data:s6">Impact potential &amp; beneficiaries</a></td><td>CN A.6–A.7 · FP D.1, E.3</td><td><span class="pill p-new">NEW</span></td><td>2–4</td></tr>
+            <tr><td>7</td><td class="sec"><a href="#s7" data-jump="data:s7">Theory of change &amp; GCF portfolio</a></td><td>FP B.2, D.2</td><td><span class="pill p-new">NEW</span></td><td>2–3</td></tr>
+            <tr><td>8</td><td class="sec"><a href="#s8" data-jump="data:s8">Safeguards &amp; gender screening</a></td><td>CN C.4 · FP G.1–G.2</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
+            <tr><td>9</td><td class="sec"><a href="#s9" data-jump="data:s9">Financial context &amp; justification</a></td><td>CN D.1–D.4 · FP B.5, C.1</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
           </tbody>
         </table>
       </div>
       <p class="cap">Feasibility 1 = easy (public, mostly integration) to 5 = hard (per-country acquisition, NLP, or new modelling). Memo priority actions: (a) extend Sections 3–4; (b) build Section 7 (GCF portfolio); (c) build the remaining NEW sections on public global datasets; (d) standardise all outputs to a common schema.</p>
-      <div class="callout"><b>Licence: two separate rights.</b> <em>Hosting the raw data</em> and <em>publishing derived admin1/admin2 products</em> are governed differently — and the notebook is almost entirely the latter.
-        <ul style="margin:8px 0 2px">
-          <li><b>Mirror-host the raw data:</b> only the openly-licensed sets (NEX-GDDP-CMIP6, ERA5/AgERA5, CHIRPS/CHIRTS, MapSPAM, FAOSTAT, Aqueduct, World Bank WDI/CPIA, WorldPop, HDI, Climate Watch).</li>
-          <li><b>Non-commercial raw data</b> (ACLED, DHS, MICS, WDPA, IUCN Red List, IPC, WHO/UNICEF JMP, GYGA, WOCAT, CPI) — <strong>federate or link, don’t copy the raw layer</strong>. But for our non-commercial use, <strong>all of them permit computing and publishing derived admin-level stats/maps</strong> — verified per-licence in the evidence log.</li>
+      <details class="src"><summary>Key — what the “CN” / “FP” section codes mean</summary><div class="srcbody">
+        <p>GCF applications come in two stages, each a standard template. The codes are section references within them:</p>
+        <ul>
+          <li><b>CN — Concept Note</b> (template v3.1): the short first-stage pitch. Its sections include <b>Exec Summary</b> (the problem + solution), <b>C.1</b> Climate change context, <b>C.2</b> Proposed project/programme, <b>C.4</b> Indicative safeguards profile, <b>A.6–A.7</b> Estimated mitigation / adaptation outcomes, <b>A.16</b> Alignment with country NDCs &amp; NAPs, and <b>D.1–D.4</b> Financing information &amp; justification.</li>
+          <li><b>FP — Funding Proposal</b>: the full second-stage document that follows a successful Concept Note. Its section letters cover the same themes in more depth — broadly <b>B</b> climate rationale &amp; theory of change, <b>D</b> expected performance / financing, <b>E</b> logic &amp; results, <b>G</b> safeguards annexes (exact subsection titles per the GCF Funding Proposal template).</li>
         </ul>
-        Three catches on the derived products: <b>(1) ShareAlike cascade</b> — IPC, JMP, GYGA, WOCAT, CPI are CC BY-NC-SA, so a derived (or combined) export must carry that licence; <b>(2) ACLED</b> outputs must be genuinely transformative (coarse aggregates, not a reorganised dump); <b>(3) publish stats, not the raw layer</b> — WDPA/IUCN/DHS/MICS raw data stays with the provider. GLEAM, ND-GAIN, INFORM, EFDB, EX-ACT and the OECD/IMF series have unclear licences to resolve first. Full per-dataset detail: <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">evidence log</a>.</div>
+        <p style="margin:0">So e.g. “CN C.1 · FP B.1” means the section supplies the climate-context narrative needed for Concept Note section C.1 and Funding Proposal section B.1. Codes trace to the memo’s section-to-GCF mapping.</p>
+      </div></details>
       <details class="cmts" data-term="GCF Prep Data — Nine sections at a glance"><summary>💬 Comment / discuss “Sections at a glance”</summary><div class="giscus-slot"></div></details>
     </section>
 
@@ -483,6 +487,19 @@
       </figure>
       <div class="callout"><b>Methods to match (Togo Annex 2).</b> CHIRPS + AgERA5 historical (1981–2022); 5-GCM CMIP6 ensemble (ACCESS-ESM1-5, MPI-ESM1-2-HR, EC-Earth3, INM-CM5-0, MRI-ESM2-0); SSP245 &amp; SSP585; baseline 1995–2014; 0.05° resolution; hazard indices NTx35 (crop heat), NDWS (drought), NDWL0 (waterlogging), HSH (human heat) with the thresholds in the report’s Annex Table A.1.</div>
       <details class="cmts" data-term="GCF Prep Data — Target output Togo Table 5"><summary>💬 Comment / discuss “Target output”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="d-licence">
+      <h2>Data licensing — what the Hub can host</h2>
+      <p class="sub">Why this matters before anything is built: a dataset’s licence decides whether the CGIAR Climate Data Hub may legally <strong>host a copy</strong> of it, only <strong>link</strong> to it, or use it at all. Get this wrong and the Hub can’t publish the result. It is as much a gating factor as whether the data is technically useful — so it is worth stating plainly for everyone, not just lawyers.</p>
+      <div class="callout"><b>Two separate rights.</b> <em>Hosting the raw data</em> and <em>publishing derived admin1/admin2 products</em> (summaries, maps, tables) are governed differently — and the notebook is almost entirely the second. Good news: even where we can’t host the raw data, we can nearly always compute and publish the derived summaries for non-commercial use.</div>
+      <ul>
+        <li><b>Open licence → the Hub can mirror-host the raw data.</b> Free to copy and redistribute with attribution: NEX-GDDP-CMIP6, ERA5/AgERA5, CHIRPS/CHIRTS, MapSPAM, FAOSTAT, Aqueduct, World Bank WDI/CPIA, WorldPop, HDI, Climate Watch.</li>
+        <li><b>Non-commercial → federate or link the raw data, don’t copy it.</b> ACLED, DHS, MICS, WDPA, IUCN Red List, IPC, WHO/UNICEF JMP, GYGA, WOCAT, CPI. For our non-commercial research use, all of them still permit <strong>computing and publishing derived admin-level stats and maps</strong> — the notebook’s actual output — verified per-licence in the evidence log.</li>
+        <li><b>Unclear licence → resolve before cataloguing.</b> FAO GLEAM, ND-GAIN, INFORM, IPCC EFDB, EX-ACT, and the OECD / IMF series don’t state a clear reuse licence; confirm terms first.</li>
+      </ul>
+      <p>Three conditions attach to the derived products from the non-commercial sets: <b>(1) ShareAlike cascade</b> — IPC, JMP, GYGA, WOCAT and CPI are CC BY-NC-SA, so a derived (or combined) export must itself carry that licence; <b>(2) ACLED</b> outputs must be genuinely transformative (coarse aggregates, not a reorganised dump); <b>(3) publish the statistics, not the raw layer</b> — for WDPA, IUCN, DHS, MICS the source data stays with the provider and we expose derived numbers/maps that link back. Full per-dataset URLs, licences and verification dates: <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md">evidence log</a>.</p>
+      <details class="cmts" data-term="GCF Prep Data — Data licensing"><summary>💬 Comment / discuss “Data licensing”</summary><div class="giscus-slot"></div></details>
     </section>
 
     <section id="d-delivery">
