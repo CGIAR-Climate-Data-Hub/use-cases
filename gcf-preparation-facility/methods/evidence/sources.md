@@ -178,6 +178,8 @@ FAO GLEAM (CC BY vs NC-SA-IGO conflict), ND-GAIN, INFORM (EC-policy default, not
 IPCC EFDB, FAO EX-ACT, FAO Gender & Land Rights (defunct), OECD SIGI, OECD DAC CRS, IMF fiscal data.
 GEF and Adaptation Fund project databases are "all rights reserved" (link only).
 
-**Bot-blocked — re-verify in a browser before external circulation:**
+**Bot-blocked / flaky to automated checkers — re-verify in a browser before external circulation:**
 IUCN Red List, IPC, UNICEF MICS, OECD SIGI, OECD DAC CRS, IMF Fiscal Monitor,
-World Bank IEG, IFAD IOE, CPI (report-PDF grant).
+World Bank IEG, IFAD IOE, CPI (report-PDF grant), ACLED (returns HTTP 415 to
+link-checkers), Climate Watch (its TLS certificate had **expired** at the
+2026-07-09 check — provider-side, should renew; confirm in a browser).
