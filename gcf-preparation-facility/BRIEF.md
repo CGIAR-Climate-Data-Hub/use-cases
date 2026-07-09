@@ -1,7 +1,7 @@
 ---
 title: GCF Preparation Facility
 description: Climate Rationale notebook auto-generating evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries for Green Climate Fund proposal writers.
-science_program: Critical Capacity (CACC1)
+science_program: Critical Capacity (CACC2) — Climate Data & Innovations Hub
 
 type: existing
 origin: ongoing-project
@@ -38,7 +38,7 @@ tags:
   - hazard-exposure
   - climate-finance
 
-updated: 2026-07-08
+updated: 2026-07-09
 ---
 
 > A Climate Rationale notebook that auto-generates evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries to support Green Climate Fund (GCF) proposal writers. Existing CAP bilateral asset being showcased through the CGIAR Climate Data Hub.
@@ -46,6 +46,8 @@ updated: 2026-07-08
 ## Brief
 
 ### Background & rationale
+
+This use-case is a deliverable of **CACC2** — the CGIAR Climate Data & Innovations Hub, the Climate Action capability that builds shared, quality-assured climate-data infrastructure. It is designed to support **CACC1** — "Support the development of CGIAR's GCF portfolio", the capability that gives CGIAR Centers technical backstopping on climate rationale and proposal design (current engagements: Togo, Benin/Nigeria, Egypt, Zambia, Kenya). In short: CACC2 provides the shared data and tools; CACC1 puts them to work in GCF proposals.
 
 GCF proposals require a defensible climate rationale grounded in subnational climate and agricultural data — currently a slow, manual, and inconsistent process. CDH is building the **Atlas Climate Rationale v2** notebook (Quarto + Observable JS) on top of CDH data infrastructure to compress this work from weeks to hours while maintaining methodological transparency. The Togo SAT climate rationale (April 2025) is the reference gold standard.
 
@@ -61,8 +63,8 @@ GCF proposals require a defensible climate rationale grounded in subnational cli
 
 | Name | Organisation | Role |
 | --- | --- | --- |
-| Cesare Scartozzi | CGIAR / Alliance Bioversity-CIAT (CACC1) | Champion — sets GCF data requirements |
-| Peter Steward | CGIAR / Alliance Bioversity-CIAT | Coordinator — climate adaptation analyst; driving handover |
+| Cesare Scartozzi | CGIAR / Alliance Bioversity-CIAT — CACC1 (GCF portfolio) | Champion — sets GCF data requirements; first user |
+| Peter Steward | CGIAR / Alliance Bioversity-CIAT — CACC2 (Climate Data Hub) | Coordinator — CDH Hub focal point; climate adaptation analyst |
 | Brayden Youngberg | CGIAR / Alliance Bioversity-CIAT | Engineering co-author — selector architecture and data pipeline |
 | Majambo Gamoyo | CGIAR / Alliance Bioversity-CIAT | End-user / partner — feedback on spatial mapping, admin-2 support, multi-region geometries |
 | Harold | External consultant | Trend statistics (Mann-Kendall, Sen's slope) — deferred from current sprint |
