@@ -30,6 +30,8 @@ jobs:
             --exclude 'imf\.org'
             --exclude 'ipcinfo\.org'
             --exclude 'oecd\.org'
+            --exclude 'acleddata\.com'
+            --exclude 'climatewatchdata\.org'
             --exclude-path 'BRIEF_TEMPLATE.md'
             --exclude-path 'b4t/archive'
             '**/*.md'

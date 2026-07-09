@@ -1,7 +1,7 @@
 ---
 title: GCF Preparation Facility
 description: Climate Rationale notebook auto-generating evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries for Green Climate Fund proposal writers.
-science_program: Critical Capacity (CACC1)
+science_program: Critical Capacity (CACC2) — Climate Data & Innovations Hub
 
 type: existing
 origin: ongoing-project
@@ -38,7 +38,7 @@ tags:
   - hazard-exposure
   - climate-finance
 
-updated: 2026-07-07
+updated: 2026-07-09
 ---
 
 > A Climate Rationale notebook that auto-generates evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries to support Green Climate Fund (GCF) proposal writers. Existing CAP bilateral asset being showcased through the CGIAR Climate Data Hub.
@@ -46,6 +46,8 @@ updated: 2026-07-07
 ## Brief
 
 ### Background & rationale
+
+This use-case is a deliverable of **CACC2** — the CGIAR Climate Data & Innovations Hub, the Climate Action capability that builds shared, quality-assured climate-data infrastructure. It is designed to support **CACC1** — "Support the development of CGIAR's GCF portfolio", the capability that gives CGIAR Centers technical backstopping on climate rationale and proposal design (current engagements: Togo, Benin/Nigeria, Egypt, Zambia, Kenya). In short: CACC2 provides the shared data and tools; CACC1 puts them to work in GCF proposals.
 
 GCF proposals require a defensible climate rationale grounded in subnational climate and agricultural data — currently a slow, manual, and inconsistent process. CDH is building the **Atlas Climate Rationale v2** notebook (Quarto + Observable JS) on top of CDH data infrastructure to compress this work from weeks to hours while maintaining methodological transparency. The Togo SAT climate rationale (April 2025) is the reference gold standard.
 
@@ -61,8 +63,8 @@ GCF proposals require a defensible climate rationale grounded in subnational cli
 
 | Name | Organisation | Role |
 | --- | --- | --- |
-| Cesare Scartozzi | CGIAR / Alliance Bioversity-CIAT (CACC1) | Champion — sets GCF data requirements |
-| Peter Steward | CGIAR / Alliance Bioversity-CIAT | Coordinator — climate adaptation analyst; driving handover |
+| Cesare Scartozzi | CGIAR / Alliance Bioversity-CIAT — CACC1 (GCF portfolio) | Champion — sets GCF data requirements; first user |
+| Peter Steward | CGIAR / Alliance Bioversity-CIAT — CACC2 (Climate Data Hub) | Coordinator — CDH Hub focal point; climate adaptation analyst |
 | Brayden Youngberg | CGIAR / Alliance Bioversity-CIAT | Engineering co-author — selector architecture and data pipeline |
 | Majambo Gamoyo | CGIAR / Alliance Bioversity-CIAT | End-user / partner — feedback on spatial mapping, admin-2 support, multi-region geometries |
 | Harold | External consultant | Trend statistics (Mann-Kendall, Sen's slope) — deferred from current sprint |
@@ -124,52 +126,27 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 
 ### Data assets for the hub
 
-Datasets needed in (or federated with) the CDH catalog. Sources and section mapping derived from Cesare's GCF Data Notebook Memo (2026.03). Memo status column: **IN CR** = already in Atlas Climate Rationale notebook; **PARTIAL** = partially present, needs additions; **NEW** = not in CR.
+The full per-dataset audit — all ~40 datasets behind the nine notebook sections, with verified source URLs, **licences** (open → mirror-hostable vs non-commercial → federate/link only), and how each can be **summarised under a geoselector** or **reached by an AI skill** (federate vs rehost) — lives in the review page and evidence log, not here:
 
-| Dataset | Memo status | Hub status | Hub catalog | Feasibility (1=easy, 5=hard) | Serves | Notes |
-| --- | --- | --- | --- | --- | --- | --- |
-| NEX-GDDP-CMIP6 (or CMIP6 / CORDEX) | IN CR | scoped | _pending_ | 2 | CN C.1 · FP B.1 — climate trends & projections | Bias-corrected daily downscaled, 0.25°, multi-GCM |
-| ERA5 reanalysis | IN CR | scoped | _pending_ | 2 | CN C.1 · FP B.1 | Historical climate timeseries |
-| CHIRPS | IN CR | scoped | _pending_ | 1 | CN C.1 · FP B.1 | Daily precipitation; already cloud-hosted |
-| CHIRTS | IN CR | scoped | _pending_ | 1 | CN C.1 · FP B.1 | Daily temperature pair to CHIRPS |
-| Section-1-derived z-score extremes | IN CR | scoped | _pending_ | 2 | CN C.1 · FP B.1, D.1 — extreme events | Derived in-notebook from Section 1 |
-| MapSPAM 2020 | PARTIAL | scoped | _pending_ | 2 | CN C.1, C.2 · FP B.1, D.1 — crop hazard exposure | Crop production value layers |
-| FAOSTAT | PARTIAL | scoped | _pending_ | 1 | CN C.1, C.2 · FP B.1 | National agricultural statistics |
-| FAO GLEAM | PARTIAL | scoped | _pending_ | 3 | CN C.1, C.2 · FP B.1 — livestock exposure | New for this use-case |
-| WRI Aqueduct | PARTIAL | scoped | _pending_ | 2 | CN C.1, C.2 · FP B.1 | Water-demand stress on irrigated systems |
-| World Bank development indicators | PARTIAL | scoped | _pending_ | 1 | CN Exec Summary · FP D.4 | Poverty, GDP by sector, land use |
-| ND-GAIN | PARTIAL | scoped | _pending_ | 1 | CN Exec Summary · FP D.4 | Composite vulnerability index |
-| INFORM Risk | PARTIAL | scoped | _pending_ | 1 | CN Exec Summary · FP D.4 | Composite risk index |
-| IPC / CH food insecurity | PARTIAL | scoped | _pending_ | 2 | CN Exec Summary · FP D.4 | Food insecurity prevalence |
-| WHO / UNICEF JMP | PARTIAL | scoped | _pending_ | 1 | CN Exec Summary · FP D.4 | Water and WASH access |
-| WorldPop | PARTIAL | scoped | _pending_ | 2 | CN Exec Summary · FP D.4 + A.6–A.7 | Population, gender-disaggregated |
-| DHS / MICS | PARTIAL | scoped | _pending_ | 2 | CN Exec Summary · FP D.4 | Household surveys |
-| UNFCCC NDC Registry | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 — NDC / NAP alignment | Deprioritised 2026-04-29: Cesare withdrew the NAP/NDC-automation ask ("maybe I made a mistake to include the naps") — corpus too small to justify; at most a metadata page linking out |
-| NAP Central | NEW | scoped | _pending_ | 3 | CN A.16 · FP D.5 | Deprioritised 2026-04-29 — see UNFCCC NDC Registry row |
-| Climate Watch | NEW | scoped | _pending_ | 2 | CN A.16 · FP D.5 | Country climate commitments |
-| GCF country programmes | NEW | scoped | _pending_ | 2 | CN A.16 · FP D.5 | Country programme priorities |
-| IPCC default emission factors | NEW | scoped | _pending_ | 2 | CN A.6–A.7 · FP D.1, E.3 — beneficiary estimates | Tier 1 mitigation accounting |
-| EX-ACT | NEW | scoped | _pending_ | 3 | CN A.6–A.7 · FP D.1, E.3 | Ex-ante carbon balance tool |
-| Atlas yield gaps | NEW | scoped | _pending_ | 2 | CN A.6–A.7 · FP D.1, E.3 | Yield-gap layer for impact estimates |
-| WOCAT | NEW | scoped | _pending_ | 2 | CN A.6–A.7 · FP D.1, E.3 | Sustainable land management practices |
-| National census data | NEW | scoped | _pending_ | 4 | CN A.6–A.7 · FP D.1, E.3 | Per-country acquisition needed |
-| GCF approved-project database | NEW | scoped | _pending_ | 2 | FP B.2, D.2 — theory of change / portfolio evidence | Filter to food / land / water result areas (T4, T5, T6) |
-| CGIAR evidence maps | NEW | scoped | _pending_ | 3 | FP B.2, D.2 | Adaptation/mitigation evidence base |
-| World Bank IEG evaluations | NEW | scoped | _pending_ | 2 | FP B.2, D.2 | Adjacent project evaluations |
-| IFAD evaluations | NEW | scoped | _pending_ | 2 | FP B.2, D.2 | Smallholder finance evaluations |
-| Cesare's MCF project dataset | NEW | planned | _pending_ | 3 | FP B.2, D.2 + CN D.1–D.4 | Partial CSV delivered 2026-06-17 (5,115 projects: GEF/GCF/AF, sector + theme + lead-type harmonised). Public release scoped to the food/land/water subset (decided after climateprojectexplorer.org launch); document text extracts stay private. Pilot for the CDH non-geospatial metadata standard |
-| WDPA (protected areas) | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 — safeguards | Project-zone overlay |
-| IUCN Red List | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Biodiversity hotspots |
-| FAO Gender & Land Rights | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Land tenure |
-| OECD SIGI | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Gender inequality index |
-| World Bank CPIA | NEW | scoped | _pending_ | 2 | CN C.4 · FP G.1–G.2 | Country policy assessment |
-| Climate Security Programming Dashboard (CSO) | NEW | scoped | _pending_ | 3 | CN C.4 | Climate security context |
-| OECD DAC CRS | NEW | scoped | _pending_ | 2 | CN D.1–D.4 · FP B.5, C.1 — financial context | Climate finance flows |
-| CPI landscape (Climate Policy Initiative) | NEW | scoped | _pending_ | 2 | CN D.1–D.4 | Adaptation finance gap |
-| IMF fiscal data | NEW | scoped | _pending_ | 2 | CN D.1–D.4 | Fiscal space indicators |
-| GAUL admin boundaries (2024) | IN CR | scoped | _pending_ | 1 | All sections | Admin-0 / admin-1 (admin-2 deferred) |
+- **[Review page — Data tab](https://cgiar-climate-data-hub.github.io/use-cases/gcf-preparation-facility/gcf-prep-review.html)** — dataset detail per notebook section + the "Delivering the data" delivery-route analysis.
+- **[Evidence log](./methods/evidence/sources.md)** — one entry per dataset: URL, licence, verification date, derived-products guidance.
 
-_Hub status vocabulary: `scoped → planned → in-progress → published`. The Hub catalog column becomes a live link once Brayden's STAC entry exists for each dataset._
+Section-level summary (memo status: **IN CR** = already in the Climate Rationale notebook; **PARTIAL** = partly present, needs additions; **NEW** = not yet built; **DEPRIORITISED** = in the memo but since parked). All sections are currently at Hub status `scoped`.
+
+| # | Notebook section | Serves (CN · FP) | Memo status | Feasibility (1=easy, 5=hard) |
+| --- | --- | --- | --- | --- |
+| 1 | Climate trends & projections | CN C.1 · FP B.1 | IN CR | 2 |
+| 2 | Extreme events | CN C.1 · FP B.1, D.1 | IN CR | 2 |
+| 3 | Crop & livestock hazard exposure | CN C.1, C.2 · FP B.1, D.1 | PARTIAL | 2–3 |
+| 4 | Vulnerability & socioeconomic context | CN Exec Summary · FP D.4 | PARTIAL | 1–2 |
+| 5 | NDC & NAP alignment | CN A.16 · FP D.5 | DEPRIORITISED | 3 |
+| 6 | Impact potential & beneficiaries | CN A.6–A.7 · FP D.1, E.3 | NEW | 2–4 |
+| 7 | Theory of change & GCF portfolio | FP B.2, D.2 | NEW | 2–3 |
+| 8 | Safeguards & gender screening | CN C.4 · FP G.1–G.2 | NEW | 2 |
+| 9 | Financial context & justification | CN D.1–D.4 · FP B.5, C.1 | NEW | 2 |
+| — | Admin boundaries (GAUL 2024) | all sections | IN CR | 1 |
+
+_Hub status vocabulary: `scoped → planned → in-progress → published`. Per-dataset hub status and the eventual STAC catalog links are tracked in the evidence log._
 
 ### Methodological guidance needed
 
@@ -218,5 +195,6 @@ _Source of truth for transcripts: `Climate_data_hub/meetings/` in OneDrive._
 > Status is `active-development`. The notebook is live and in use, but formal piloting / handover metrics have not yet been captured. This section fills in as the use-case progresses.
 
 - **Deliverables in flight:** Climate Rationale v2 notebook (live; 20+ fix-sweep sessions to 2026-06-16), Key Facts and hazard-exposure exportable tables, methods appendix (in draft), French translations (complete — zero production FR gaps as of 2026-06-16), multilateral-climate-funds pipeline notebook (partial dataset in hand; notebook not started)
+- **Use-case review page (DRAFT):** [GCF Preparation Facility — data, skills & notebook review](https://cgiar-climate-data-hub.github.io/use-cases/gcf-preparation-facility/gcf-prep-review.html) — three tabs (Data / Skills / Notebook): the nine notebook sections mapped to GCF Concept Note / Funding Proposal codes with present-vs-recommended datasets and the Togo SAT Table 5 target output; the CDH skills library vs this use-case plus a proposed GCF-proposal skill; and Cesare's multilateral-climate-funds notebook concept. Per-section giscus comment boxes + a no-account feedback form. Backed by the [evidence log](./methods/evidence/sources.md) (per-dataset URLs, licences, delivery routes). Not for external circulation until the champion confirms it is public-safe.
 - **Adoption signals:** _TBC_ — track usage of the notebook for live GCF concept notes
 - **Lessons learned:** _TBC_ — fill in at handover
