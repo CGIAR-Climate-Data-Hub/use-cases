@@ -171,3 +171,17 @@ From the B4T notebook PDF (Bert's emails 2026-04-29/30, relaying Philip Thornton
 - `ccafsreport5-climate_hotspots_final.pdf` (Ericksen et al. 2011, CCAFS Report No. 5) — source of the legacy drought (Map 2.13, 1974–2004), Dartmouth flood, LGP-flip and CV-rainfall layers. Future layers: 4 CMIP3 GCMs, A2 SRES, futureclim.info (Jones et al. 2009).
 - `HII-scoring matrix.pdf` — HII matrix (for Phase-2 methods review).
 - `Crop x region priority- 2025.xlsx` — B4T prioritization workbook.
+
+## B4T feedback incorporated — Bert Lenaerts, 2026-07-13 (review page v1.1)
+
+Answers to the review's open questions, posted in the giscus threads and folded into the review page as inline "Answered" notes. New / confirmed facts:
+
+- **Failed season (D-02):** source is **CIAT RTBMaps** (`gisweb.ciat.cgiar.org/RTBMaps`), still in production; uses a different LGP definition from Philip's layer. Ref: **Hyman, G. et al. 2008**, *Agricultural Systems* 98:50–61.
+- **Aqueduct Flood (F-02/03; and the D-03/04/05 water thread):** the flood layer used is **CMIP5-era, not Aqueduct 4.0** (which is CMIP6). Product = **Aqueduct Floods Hazard Maps — inundation depth (m), coastal + riverine, Version 2 (20 Oct 2020)**; **10-year** return period. Confirms the vintage flag; cross-hazard future-horizon harmonisation still open.
+- **LGP (T-02 / R-01):** Philip's LGP = mean days/yr with Tavg > 6 °C AND actual/potential evapotranspiration > 0.35. Non-production-corrected hazards masked by the share of land under crop production. **The LGP definition was accidentally pasted into T-03 and R-01** (a documentation slip — not the same layer). Rainfall uses two LGP lengths; temperature has LGP-corrected + uncorrected versions (both used). Coarser GAEZ (~9 km) acceptable.
+- **Rainfall CV (R-03):** combine historic + projected; weighting open (currently 50–50).
+- **Heat growing season (T-03):** 30 °C critical threshold — Philip citing **Boote et al. 1998; Prasad et al. 2008** (already noted under Future hazards above).
+- **Salinity / soil water (S, W):** S-01 + S-02 kept to avoid single-source reliance (not both strictly needed); source data categorical (levels only), so quantifying it adds noise. All four soil-water layers used; a future / projected layer preferred.
+- **Drought (D-01):** the CRI already has a hazard-interaction component → merging drought + temperature risks double-counting; near-global coverage required for B4T; current layer 1980–2000; the Philip-notes vs Ericksen-2011 discrepancy is a B4T-side omission.
+- **Flood proxy (F-01):** historic + projected combined (Bert flagged the question as unclear — rephrase next round).
+- **Still open:** T-01 heat window (1983–2016) — not yet answered.

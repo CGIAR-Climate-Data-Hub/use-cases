@@ -28,7 +28,7 @@ ca_os_packages: []
 
 # === Metadata ===
 tags: [crop-risk-index, climate-hazard, breeding]
-updated: 2026-07-04
+updated: 2026-07-14
 ---
 
 > Review and support refinement of the Climate and Environmental Crop Risk Index (CRI), including its current hazard formulation, source datasets, and role in B4T crop-country-market prioritization.
@@ -97,6 +97,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 | 2026-04-30 | Bert relays Philip Thornton notes on inherited drought, flood, and future hazard definitions. |
 | 2026-05-08 | CDH outreach email circulated to reviewers with request for critique of CRI method and data choices. |
 | 2026-05-15 | Expert review feedback deadline (Peter Steward outreach round) |
+| 2026-07-13 | Bert Lenaerts (B4T) answered 9 of the review's open questions via giscus; incorporated into the review page (v1.1) on 2026-07-14 |
 | TBD | CDH and B4T confirm current CRI processing chain against working files / scripts. |
 | TBD | CDH proposes hazard-by-hazard update and harmonization options. |
 | TBD | CDH and B4T agree whether to revise only inputs, or also selected scoring / aggregation rules. |
@@ -128,7 +129,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 
 CDH has completed a **Phase-1 dataset review** and a public-safe method reconstruction. A draft, shareable page presents both:
 
-- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) — interactive Data / Methods tabs; each dataset card shows the verbatim Appendix Table 1 definition, current-vs-recommended lineage, and provenance links; each method section shows the highlighted source-PDF page; per-section GitHub Discussions (giscus) comment boxes + a no-account feedback form. **Shared for review (July 2026):** the CRI authorship team (to answer the Data-tab open questions) and the CAP team (datasets + methods).
+- **Rendered draft (shareable, labelled DRAFT):** [B4T CRI review — Data + Methods](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html) — interactive Data / Methods tabs; each dataset card shows the verbatim Appendix Table 1 definition, current-vs-recommended lineage, and provenance links; each method section shows the highlighted source-PDF page; per-section GitHub Discussions (giscus) comment boxes + a no-account feedback form. **Shared for review (July 2026):** the CRI authorship team (to answer the Data-tab open questions) and the CAP team (datasets + methods). **Update (review page v1.1, 2026-07-14):** Bert Lenaerts answered 9 of the open questions on 2026-07-13 — resolutions are folded inline into each card and the [evidence log](./methods/evidence/sources.md); the T-01 heat-window question remains open.
 - **Dataset review & CDH recommendations:** [methods/dataset-review.md](./methods/dataset-review.md) — all 23 hazard/vulnerability inputs audited (current lineage vs recommended modern **open** alternative on identical axes), with a CDH integration + **licence** plan.
 - **Method reconstruction:** [methods/cri-formulation.md](./methods/cri-formulation.md) — the current CRI workflow, with Bert's email corrections that supersede the source doc.
 - **Backing data + evidence:** [methods folder](./methods/README.md) — 12-axis current-state lineage, recommended-options table, verified source/licence log.
