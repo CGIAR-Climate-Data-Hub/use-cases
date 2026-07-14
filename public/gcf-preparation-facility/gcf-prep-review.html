@@ -205,6 +205,7 @@
   <button type="button" data-tab="data" role="tab" aria-selected="true">Data</button>
   <button type="button" data-tab="skills" role="tab" aria-selected="false">Skills</button>
   <button type="button" data-tab="notebook" role="tab" aria-selected="false">Notebook</button>
+  <button type="button" data-tab="gca" role="tab" aria-selected="false">GCA alignment</button>
 </div>
 
 <!-- ============================= DATA TAB ============================= -->
@@ -253,7 +254,7 @@
       <div class="grid2">
         <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion, CACC1; coordinator, CACC2; plus Brayden Youngberg and Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
         <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is one illustrative example of the kind of output — a suggestion, not a prescribed standard.</p></div>
-        <div class="kv"><h5>How it’s organised</h5><p>Three tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), and <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea).</p></div>
+        <div class="kv"><h5>How it’s organised</h5><p>Four tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea), and <strong>GCA alignment</strong> (the Global Center on Adaptation’s parallel IFI/MDB adaptation-finance use-case and where it overlaps this one).</p></div>
         <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
       </div>
 
@@ -899,6 +900,97 @@
       <div class="note" id="q-nb-host"><b>Open question — for Cesare (CACC1):</b> Hosting &amp; DOI? Is the food/land/water subset cleared for public release, and should the Hub host the Parquet directly or only link the DOI’d original on CGSpace / Dataverse?</div>
       <details class="cmts" data-term="GCF Prep Notebook — Open questions"><summary>💬 Comment / discuss the Notebook open questions</summary><div class="giscus-slot"></div></details>
       <p class="foot">The concept and dataset facts come from the champion’s 2026-06-17 email and delivered CSV, and the 2026-04-29 meeting. Notebook design is a draft for discussion.</p>
+    </section>
+  </main>
+</div>
+
+<!-- ============================= GCA ALIGNMENT TAB ============================= -->
+<div class="shell" data-tab="gca" hidden>
+  <aside class="side">
+    <h4>GCA alignment — on this page</h4>
+    <ul class="toc">
+      <li><a href="#gca-usecase"><span class="n">1</span><span>The Atlas × GCA use-case</span></a></li>
+      <li><a href="#gca-feedback"><span class="n">2</span><span>What GCA &amp; the IFIs asked for</span></a></li>
+      <li><a href="#gca-overlap"><span class="n">3</span><span>Overlap with this use-case</span></a></li>
+      <li><a href="#gca-scoping"><span class="n">4</span><span>Scoping &amp; next steps</span></a></li>
+      <li><a href="#gca-questions"><span class="n">·</span><span>Open questions &amp; feedback</span></a></li>
+    </ul>
+    <div class="side-meta">
+      <div><b>Why this tab</b></div>
+      <div class="side-note">GCA and the GCF Preparation Facility are two faces of one need — an evidence-based climate rationale + solutions + finance case, built from CDH data. This tab shows the parallel use-case and the shared spine.</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="gca-usecase">
+      <p class="eyebrow">GCF Preparation Facility · alignment with the Global Center on Adaptation</p>
+      <h1>GCA alignment — the Atlas in IFI adaptation-finance preparation</h1>
+      <p class="lede">The <strong>Global Center on Adaptation (GCA)</strong> uses the Africa Agriculture Adaptation Atlas in its <strong>technical assistance to IFIs and MDBs</strong> (World Bank, IFAD, AfDB, EIB) preparing adaptation-finance projects — the same climate-rationale spine this use-case builds for the GCF. This tab captures GCA's Atlas use-case, its feedback, and where the two overlap.</p>
+
+      <div class="callout"><b>Where this sits.</b> GCA is an external partner; the CGIAR side is the Climate Action work that supports financing/investment partners — <strong>CACC4</strong> (“shared technical assistance to CGIAR, countries and financing/investment partners”), drawing on the same Climate Data Hub (<strong>CACC2</strong>) that feeds the GCF Preparation Facility. Both are <strong>adaptation-finance proposal development</strong> (AoW1-Accelerate · AoW2-Adapt) — GCA for IFIs/MDBs, the GCF Facility for the Green Climate Fund.</div>
+
+      <h3>How GCA uses the Atlas</h3>
+      <p>In TA engagements the Atlas supplies the <strong>project-preparation</strong> evidence: climate risk &amp; vulnerability assessment, hotspot identification, adaptation-gap analysis, and investment prioritisation — the material that builds a defensible climate rationale for an IFI project design.</p>
+      <p class="cap">Documented applications (from GCA's feedback): World Bank <strong>Togo SAT</strong> (the example on the <a href="#d-target" data-jump="data:d-target">Data tab</a>), IFAD VIANDES (agropastoral), WBG Republic of Congo Poultry &amp; Aquaculture, IFAD Burkina Faso Agricultural Development — among others.</p>
+      <div class="callout"><b>A concrete win — Togo.</b> For the World Bank Togo project, the CGIAR team (Lucy Njuguna / the Adaptation Insights project) helped the proposal articulate its <strong>adaptation and mitigation co-benefits</strong>. Per the team, that stronger case was a factor in the project <strong>qualifying for financing</strong> — evidence that better climate-rationale + co-benefit articulation directly moves finance.</p>
+      <details class="cmts" data-term="GCF Prep GCA — Atlas use-case"><summary>💬 Comment / discuss “The Atlas × GCA use-case”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="gca-feedback">
+      <h2>What GCA &amp; the IFIs asked for</h2>
+      <p class="sub">Consolidated from GCA's IFI/MDB feedback and a partnership stocktake. The through-line: the Atlas is valued for climate-risk assessment, but users want it to become a <strong>decision-support platform</strong> — climate risk → impacts → adaptation options → investment → implementation → monitoring.</p>
+      <div class="tscroll"><table class="skilltbl">
+        <thead><tr><th>Ask</th><th>What they want</th><th>Overlaps this use-case?</th></tr></thead>
+        <tbody>
+          <tr><td class="sec">Hazard → solutions link</td><td>Move from “hazard → generic option list” to <strong>hazard → impacts → suitability → evidence → expected outcomes → investment guidance</strong>; evidence ratings (★–★★★), enabling conditions, cost-effectiveness, co-benefits, links to TAAT / WOCAT; suggestive not prescriptive.</td><td><span class="pill p-keep">Yes — #1 shared gap</span></td></tr>
+          <tr><td class="sec">Finance-facing outputs</td><td>A <strong>Financial Returns notebook</strong> (IRR / NPV / benefit-cost + sensitivity), market sizing, credit-risk / stress-test support, short–medium-term projections for lending, integration with bank systems (Impact SF Analyzer, DDA).</td><td><span class="pill p-keep">Yes</span> — GCF Theme 9</td></tr>
+          <tr><td class="sec">Coverage beyond crops</td><td>Too crop-focused — add livestock, fisheries, aquaculture, legumes, tree/perennial, horticulture; value chain (processing, storage, transport, markets); infrastructure, biodiversity, nutrition, health, ecosystem services.</td><td><span class="pill p-mod">Partly</span> — GCF Theme 3</td></tr>
+          <tr><td class="sec">Data quality &amp; coverage</td><td>Regular updates + versioning, national validation, metadata/provenance, near-real-time observations, Loss &amp; Damage, pests/diseases, soils, irrigation, household socioeconomics. Country gaps flagged (Angola, Burkina Faso, North Africa).</td><td><span class="pill p-mod">Partly</span></td></tr>
+          <tr><td class="sec">Usability &amp; access</td><td>Simpler uncertainty (confidence symbols), CSV/Shapefile/GeoTIFF/<strong>API</strong> downloads, <strong>AI-assisted workflows</strong>, multilingual (French, Portuguese, Swahili, Yoruba — French gaps flagged for Rep Congo, Burkina). Embed <em>beyond</em> preparation into IFI implementation &amp; M&amp;E.</td><td><span class="pill p-keep">Yes</span> — AI-skill / federation</td></tr>
+        </tbody>
+      </table></div>
+      <p class="cap"><b>Table 11 — GCA / IFI feedback themes and their overlap with this use-case.</b> Sourced from GCA feedback documents (2025–2026); internal meeting material is summarised, not reproduced.</p>
+      <details class="cmts" data-term="GCF Prep GCA — Feedback"><summary>💬 Comment / discuss “What GCA &amp; the IFIs asked for”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="gca-overlap">
+      <h2>Overlap with the GCF Preparation Facility</h2>
+      <p class="sub">GCA (IFI/MDB adaptation finance) and this use-case (GCF adaptation + mitigation finance) are the same problem in two funding windows: an evidence-based <strong>climate rationale → solutions → finance justification</strong>, assembled from CDH data. The shared build is worth doing once.</p>
+      <div class="tscroll"><table class="skilltbl">
+        <thead><tr><th>Shared need</th><th>GCA use-case</th><th>GCF Preparation Facility</th></tr></thead>
+        <tbody>
+          <tr><td class="sec">Climate rationale</td><td>Atlas risk/vulnerability evidence for IFI project design</td><td>Climate Rationale v2 notebook (Themes 1–2)</td></tr>
+          <tr><td class="sec">Hazard → solutions</td><td>The #1 ask — weak link to costed, evidenced adaptation options</td><td>Flagged on the <a href="#top" data-jump="skills:top">Skills tab</a>; both point to <strong>Lucy Njuguna's Adaptation Insights</strong> evidence base as the shared answer</td></tr>
+          <tr><td class="sec">Finance outputs</td><td>Financial Returns notebook (IRR/NPV), market sizing, credit-risk</td><td>Theme 9 financial context + GCF benchmarks from comparable projects</td></tr>
+          <tr><td class="sec">Co-benefits</td><td>Adaptation + mitigation co-benefits (the Togo qualifying factor)</td><td>CN A.6–A.7 mitigation + adaptation impact (Theme 6)</td></tr>
+          <tr><td class="sec">Coverage</td><td>Beyond crops (livestock, fisheries, legumes) &amp; beyond Africa</td><td>Theme 3 coverage question (SSA + adm1 only today)</td></tr>
+          <tr><td class="sec">AI-ready, traceable data</td><td>“Authoritative and traceable, not AI slop” — curated data commons</td><td>The proposed GCF-proposal skill + the CDH federation model</td></tr>
+        </tbody>
+      </table></div>
+      <p class="cap"><b>Table 12 — the shared spine.</b> Same people and assets serve both: Peter Steward (coordinator), Lucy Njuguna / Adaptation Insights (hazard→solutions evidence + co-benefits), the Togo SAT reference, and the Climate Data Hub itself.</p>
+      <div class="callout"><b>The implication.</b> The Hub (CACC2) is the common backbone: it feeds the GCF portfolio capability (CACC1) <em>and</em> the IFI/MDB technical-assistance capability (CACC4). Building the hazard→solutions link, the finance-returns outputs, and the AI-ready traceable datasets once serves both — the strongest argument for prioritising them in the Climate Data Hub roadmap.</div>
+      <details class="cmts" data-term="GCF Prep GCA — Overlap"><summary>💬 Comment / discuss “Overlap with this use-case”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="gca-scoping">
+      <h2>Scoping &amp; next steps</h2>
+      <p>A GCA–CIAT scoping call on <strong>2026-07-09</strong> (GCA's TA team with Peter Steward, Lucy Njuguna and Pedro Chilambe) confirmed the alignment. Both sides described the <strong>same challenge</strong>: strong climate-hazard/risk data, but a weak link from that rationale to specific, costed adaptation solutions — GCA hits it on infrastructure too.</p>
+      <p>The vision set out on the call: a curated, <strong>AI-ready “climate data commons”</strong> of authoritative, traceable datasets — in the words used, <em>“not just AI-generated slop… traceable back to source”</em> — that AI skills draw on to assemble a rationale and link it to solutions (via Adaptation Insights). The GCF Preparation Facility use-case was shared as the template, with a proposal to <strong>co-develop a parallel GCA concept</strong> as a Climate Data Hub use-case.</p>
+      <ul>
+        <li><b>GCA to share</b> its internal survey of 100+ IFI technical-assistance engagements (World Bank, AfDB, EIB) on MDB-collaboration gaps.</li>
+        <li><b>Follow-up</b> ~August 2026; Bia Carneiro to help collate this into CDH use-case briefs.</li>
+        <li><b>Timing</b> — the Climate Action programme runs to 2030 with annual planning underway now, so partner demand can be built into next year's activities.</li>
+      </ul>
+      <p class="foot">Facts from the 2026-07-09 scoping call and GCA feedback documents. Internal transcripts, chats and emails are not reproduced — only short excerpts and decision summaries. Not for external circulation until confirmed public-safe.</p>
+      <details class="cmts" data-term="GCF Prep GCA — Scoping"><summary>💬 Comment / discuss “Scoping &amp; next steps”</summary><div class="giscus-slot"></div></details>
+    </section>
+
+    <section id="gca-questions">
+      <h2>Open questions</h2>
+      <div class="note" id="q-gca-brief"><b>Open question:</b> Should GCA be its own CDH use-case brief, or a workstream of this use-case? The overlap is large enough that a shared “adaptation-finance proposal” backbone with GCF- and IFI-facing front ends may beat two separate builds.</div>
+      <div class="note" id="q-gca-solutions"><b>Open question:</b> The hazard→solutions link is the #1 ask for <em>both</em> GCA and GCF. Prioritise the Adaptation Insights integration first, since it unblocks both?</div>
+      <div class="note" id="q-gca-finance"><b>Open question:</b> Build the Financial Returns / investment outputs once (IRR/NPV for GCA + Theme 9 financial context for GCF) rather than twice?</div>
+      <details class="cmts" data-term="GCF Prep GCA — Open questions"><summary>💬 Comment / discuss the GCA open questions</summary><div class="giscus-slot"></div></details>
     </section>
   </main>
 </div>
