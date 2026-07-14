@@ -254,7 +254,7 @@
       <div class="grid2">
         <div class="kv"><h5>Who this is for</h5><p>The use-case task group (champion, CACC1; coordinator, CACC2; plus Brayden Youngberg and Majambo Gamoyo); the CDH technical team prioritising which datasets to bring into the Hub; and GCF proposal writers as the end users.</p></div>
         <div class="kv"><h5>The goal</h5><p>Compress the climate-rationale step of a GCF Concept Note / Funding Proposal from weeks to hours, while keeping methodological attribution transparent. The <strong>Togo SAT rationale (April 2025)</strong> is one illustrative example of the kind of output — a suggestion, not a prescribed standard.</p></div>
-        <div class="kv"><h5>How it’s organised</h5><p>Four tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed GCF skill), <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea), and <strong>GCA alignment</strong> (the Global Center on Adaptation’s parallel IFI/MDB adaptation-finance use-case and where it overlaps this one).</p></div>
+        <div class="kv"><h5>How it’s organised</h5><p>Four tabs: <strong>Data</strong> (this one — the nine notebook sections and their datasets), <strong>Skills</strong> (the CDH LLM-skills library and a proposed generic climate-rationale skill), <strong>Notebook</strong> (the multilateral-climate-funds pipeline idea), and <strong>GCA alignment</strong> (the Global Center on Adaptation’s parallel IFI/MDB adaptation-finance use-case and where it overlaps this one).</p></div>
         <div class="kv"><h5>Decisions it informs</h5><p>Which datasets the Hub catalogues first; which memo sections are in scope for v1 (August target); what to build as a reusable skill; and how to turn the climate-funds dataset into a notebook.</p></div>
       </div>
 
@@ -735,14 +735,14 @@
   <main class="content">
     <section id="sk-intro">
       <p class="eyebrow">GCF Preparation Facility · CDH skills library</p>
-      <h1>Skills — what exists, and the GCF skill worth building</h1>
-      <p class="lede">The Climate Data Hub maintains a library of Claude Code “skills” for climate + agriculture workflows. This tab inventories them against this use-case and specs a genuine GCF-proposal skill — the piece the library is currently missing.</p>
+      <h1>Skills — what exists, and the generic rationale skill worth building</h1>
+      <p class="lede">The Climate Data Hub maintains a library of Claude Code “skills” for climate + agriculture workflows. This tab inventories them against this use-case and specs the piece that's missing — <strong>generic, composable skills that pull curated data into a proposal-development pipeline</strong>, with a fund-neutral climate-rationale skill at the centre (not a bespoke GCF skill).</p>
       <div class="callout"><b>What a skill is.</b> A skill turns a natural-language request into a ready-to-run workflow — routing to the right APIs, writing correct code, following an established recipe — without the user needing tool names or parameters. Skills live in <code>.agents/skills/</code> in the <a href="https://github.com/CGIAR-Climate-Data-Hub/skills">skills repo</a>.</div>
     </section>
 
     <section id="sk-naming">
       <h2>Naming: there is no “Green Climate Fund” skill yet</h2>
-      <div class="warn"><b>Read this first.</b> The skills repo contains a skill called <code>gcf-pipeline</code> — but <strong>“GCF” there means “Get, Clip, Figure”</strong>, not Green Climate Fund. It is a generic download → clip-to-boundary → plot orchestrator, unrelated to GCF proposals. There is currently <strong>no</strong> skill dedicated to Green Climate Fund proposal support. Anyone browsing the library for GCF work will trip on this collision — so a real proposal skill should be named unambiguously (e.g. <code>gcf-proposal</code> or <code>climate-rationale</code>).</div>
+      <div class="warn"><b>Read this first.</b> The skills repo contains a skill called <code>gcf-pipeline</code> — but <strong>“GCF” there means “Get, Clip, Figure”</strong>, not Green Climate Fund. It is a generic download → clip-to-boundary → plot orchestrator, unrelated to GCF proposals. There is currently <strong>no</strong> skill dedicated to Green Climate Fund proposal support. Anyone browsing the library for GCF work will trip on this collision — so the generic proposal-rationale skill proposed below should be named unambiguously (e.g. <code>climate-rationale</code>).</div>
       <details class="src"><summary>Evidence — the <code>gcf-pipeline</code> skill’s own description (verbatim)</summary><div class="srcbody">
         <blockquote class="srcquote">gcf-pipeline — Get, Clip, Figure (Orchestrator). You are a thin pipeline orchestrator. You collect parameters, show one plan, then delegate each stage to the appropriate specialist skill… Full download → process → notebook + dashboard workflow in one conversation.<cite>skills repo · .agents/skills/gcf-pipeline/SKILL.md (fetched 2026-07-07)</cite></blockquote>
       </div></details>
@@ -772,30 +772,38 @@
     </section>
 
     <section id="sk-proposed">
-      <h2>Proposed: a GCF-proposal skill</h2>
-      <p>The memo’s LLM-pipeline requirements describe a skill that does not yet exist: one that turns the notebook’s section outputs into <strong>structured, citable fragments mapped to GCF Concept Note sections</strong>, ready for an LLM to draft from. The existing skills get data in and plotted; none of them speak GCF.</p>
+      <h2>Proposed: generic climate-rationale skills for a proposal pipeline</h2>
+      <p>What this use-case needs is <strong>not a bespoke GCF skill</strong> — it is a set of <strong>generic, composable skills that pull curated CDH data into a proposal-development pipeline / orchestrator</strong>. A GCF-specific skill would be too narrow: the same climate-rationale building blocks serve GCF, IFI/MDB work (see the <a href="#top" data-jump="gca:top">GCA alignment</a> tab) and any adaptation-finance proposal. The fund-specific parts — section codes, target tags, templates — belong in prompts and templates, not baked into a skill.</p>
+      <div class="callout"><b>Why not a bespoke GCF skill.</b> It's too specific to justify building now. The reusable capability is the <em>generic climate-rationale</em> one; it works across funders. If a GCF-specific skill is later warranted, develop it jointly with <strong>Cesare (CACC1) and AoW1</strong> — the capabilities that own the GCF proposal pipeline — rather than pre-building it here.</div>
+      <p>The target is a generic <strong>climate-rationale skill</strong> that turns Hub data into structured, citable rationale fragments, plus a thin <strong>orchestrator</strong> that chains the existing data-pull skills into a proposal pipeline (the <code>gcf-pipeline</code> "Get, Clip, Figure" skill is already that orchestration pattern, just misleadingly named). The memo's LLM-pipeline requirements describe exactly this output — and they are fund-agnostic:</p>
       <details class="src"><summary>Memo requirement this skill would satisfy (verbatim)</summary><div class="srcbody">
         <blockquote class="srcquote">All nine sections must produce structured outputs (JSON or Markdown) with labelled fields (e.g., hazard_type, trend_description, projection_value, source_citation) so the LLM can compose narrative text with inline citations. Every data point must carry its source reference (dataset, year, DOI/URL). Where possible, sections should output pre-computed sentence fragments (e.g., “Mean annual temperature in [admin1] increased by X°C over 1980–2020”)… Tag each section with applicable GCF Strategic Plan 2024–2027 targets (T4: Food, T5: Ecosystems, T6: Infrastructure) and result areas.<cite>GCF Data Notebook Memo, Section 3 (LLM Pipeline Requirements)</cite></blockquote>
+        <p style="margin:6px 0 0;font-size:12px;color:var(--muted)">The GCF target-tagging is one fund's flavour on top of a generic rationale skill — exactly the fund-specific layer that belongs in a template, not the skill itself.</p>
       </div></details>
       <div class="card">
-        <h4 class="cardh">Draft spec — <code>gcf-proposal</code> skill</h4>
-        <div class="spec">
-          <div class="spec-col present"><div class="spec-h">Input</div>
+        <h4 class="cardh">Draft spec — generic <code>climate-rationale</code> skill</h4>
+        <div class="spec3">
+          <div class="spec-col present"><div class="spec-h">Input (pull)</div>
             <dl>
-              <dt>Given</dt><dd>country (+ admin level), crops/sectors, target CN section(s)</dd>
-              <dt>Reads</dt><dd>the notebook’s per-section structured outputs (parquet / JSON) from the Hub</dd>
+              <dt>Given</dt><dd>country (+ admin level), crops / sectors, which rationale sections are wanted</dd>
+              <dt>Reads</dt><dd>the Hub's per-theme structured outputs (parquet / JSON), via the data-pull skills below</dd>
             </dl></div>
-          <div class="spec-col rec"><div class="spec-h">Output</div>
+          <div class="spec-col rec"><div class="spec-h">Output (fund-neutral)</div>
             <dl>
-              <dt>Emits</dt><dd>labelled JSON/Markdown fields + pre-computed sentence fragments, each with a <code>source_citation</code></dd>
-              <dt>Tags</dt><dd>GCF Strategic Plan targets (T4/T5/T6) + result areas; maps to CN v3.1 codes (C.1, C.4, A.16, D.1–D.4…)</dd>
-              <dt>Guardrail</dt><dd>no fabricated references — cite only Hub-catalogued sources; leave gaps explicit</dd>
+              <dt>Emits</dt><dd>labelled JSON / Markdown fields + pre-computed sentence fragments, each with a <code>source_citation</code></dd>
+              <dt>Maps via template</dt><dd>a thin template layer maps fragments to a funder's structure — GCF CN v3.1 codes, an IFI/MDB format, etc.</dd>
+              <dt>Guardrail</dt><dd>cite only Hub-catalogued sources; leave gaps explicit; no fabricated references</dd>
+            </dl></div>
+          <div class="spec-col add"><div class="spec-h">Orchestration</div>
+            <dl>
+              <dt>Chains</dt><dd><code>climate-data-download</code> → <code>geospatial-cube-processor</code> → <code>cdh-metadata</code> → the rationale skill</dd>
+              <dt>Pattern</dt><dd>the existing <code>gcf-pipeline</code> orchestrator, generalised — pull → process → assemble citable rationale</dd>
             </dl></div>
         </div>
-        <p style="margin:6px 0 0"><strong>Boundary (from the meetings).</strong> The agreed product provides baseline data + GCF-aligned prompt instructions and stops short of writing the actual proposal draft — “I wouldn’t do the extra step of asking the AI system to write the actual draft.” So this skill prepares citable inputs; it does not author narrative.</p>
+        <p style="margin:6px 0 0"><strong>Boundary (from the meetings).</strong> The agreed product provides baseline data + prompt instructions and stops short of writing the proposal draft — “I wouldn’t do the extra step of asking the AI system to write the actual draft.” So it prepares citable inputs; it does not author narrative.</p>
       </div>
-      <div class="note"><b>Fabrication risk is real here.</b> A prior attempt to have a general LLM produce a hazard→solutions table “made up” references; a guardrailed version returned blank. Any GCF skill must cite only Hub-catalogued sources and surface gaps rather than inventing citations.</div>
-      <details class="cmts" data-term="GCF Prep Skills — Proposed gcf-proposal skill"><summary>💬 Comment / discuss “Proposed GCF skill”</summary><div class="giscus-slot"></div></details>
+      <div class="note"><b>Fabrication risk is real.</b> A prior attempt to have a general LLM produce a hazard→solutions table “made up” references; a guardrailed version returned blank. Any rationale skill must cite only Hub-catalogued sources and surface gaps rather than inventing citations.</div>
+      <details class="cmts" data-term="GCF Prep Skills — Proposed climate-rationale skill"><summary>💬 Comment / discuss “Proposed climate-rationale skill”</summary><div class="giscus-slot"></div></details>
     </section>
 
     <section id="sk-access">
@@ -807,8 +815,8 @@
 
     <section id="sk-questions">
       <h2>Open questions for the team</h2>
-      <div class="note" id="q-skill-mcp"><b>Open question:</b> Skill or MCP (or both)? Should GCF proposal support ship as a Claude Code skill, an MCP server that lets an AI pull insights directly from the Hub, or both? The team has floated MCPs for direct Hub access — early days. What’s the v1 shape?</div>
-      <div class="note" id="q-skill-owner"><b>Open question:</b> Owner and evals? Who owns a <code>gcf-proposal</code> skill, and what eval set proves it works — reproducing sections of the Togo SAT rationale example from the notebook’s outputs is one candidate benchmark.</div>
+      <div class="note" id="q-skill-mcp"><b>Open question:</b> Skill or MCP (or both)? Should the climate-rationale capability ship as a Claude Code skill, an MCP server that lets an AI pull insights directly from the Hub, or both? The team has floated MCPs for direct Hub access — early days. What’s the v1 shape?</div>
+      <div class="note" id="q-skill-owner"><b>Open question:</b> Owner and evals? Who owns a generic <code>climate-rationale</code> skill, and what eval set proves it works — reproducing sections of the Togo SAT rationale example from the Hub's outputs is one candidate benchmark.</div>
       <details class="cmts" data-term="GCF Prep Skills — Open questions"><summary>💬 Comment / discuss the Skills open questions</summary><div class="giscus-slot"></div></details>
       <p class="foot">Skill facts fetched live from the skills repo on 2026-07-07. The proposed spec is a starting point for discussion, not a committed design.</p>
     </section>
