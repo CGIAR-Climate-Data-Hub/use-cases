@@ -214,6 +214,7 @@
     <ul class="toc">
       <li><a href="#d-overview"><span class="n">·</span><span>Overview &amp; context</span></a></li>
       <li><a href="#d-glance"><span class="n">·</span><span>Nine data themes at a glance</span></a></li>
+      <li><a href="#d-ingest"><span class="n">·</span><span>Ingestion shortlist (P1 do-first)</span></a></li>
       <li><a href="#s1"><span class="n">1</span><span>Climate trends &amp; projections</span></a></li>
       <li><a href="#s2"><span class="n">2</span><span>Extreme events</span></a></li>
       <li><a href="#s3"><span class="n">3</span><span>Crop &amp; livestock exposure</span></a></li>
@@ -263,20 +264,20 @@
     <section id="d-glance">
       <h2>The nine data themes at a glance</h2>
       <p class="sub">Each row is a theme of a GCF/IFI proposal and the datasets that serve it. The same data can be delivered two ways — through an <strong>Atlas-style geoselector notebook</strong> or an <strong>LLM skill</strong> that emits citable structured outputs — so this review is about the <em>datasets</em>, not one delivery surface. Every theme must be queryable at country + admin0/1/2 level. Click a theme to jump to its datasets.</p>
-      <p class="cap"><b>Table 1 — Nine data themes for GCF/IFI proposal development.</b> “Serves” = the GCF Concept Note (CN) / Funding Proposal (FP) sections each theme supports (key in the fold below the table). <b>Status:</b> <span class="pill p-keep">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod">PARTIAL</span> partly present, needs additions · <span class="pill p-new">NEW</span> not yet built · <span class="pill p-clarify">DEPRIORITISED</span> in the memo but since parked. “Present” = what the live notebook does today; “Recommended” = target datasets.</p>
+      <p class="cap"><b>Table 1 — Nine data themes for GCF/IFI proposal development.</b> “Serves” = the GCF Concept Note (CN) / Funding Proposal (FP) sections each theme supports (key in the fold below the table). <b>Status:</b> <span class="pill p-keep" title="IN CR = already in the Climate Rationale notebook">IN CR</span> already in the Climate Rationale notebook · <span class="pill p-mod" title="PARTIAL = partly present in the notebook; needs additions">PARTIAL</span> partly present, needs additions · <span class="pill p-new" title="NEW = not yet built">NEW</span> not yet built · <span class="pill p-clarify" title="DEPRIORITISED = in the memo but since parked by the champion">DEPRIORITISED</span> in the memo but since parked. “Present” = what the live notebook does today; “Recommended” = target datasets.</p>
       <div class="tscroll">
         <table class="glance">
           <thead><tr><th>#</th><th>Notebook section</th><th>Serves (GCF proposal sections)</th><th>Status</th><th>Feasibility</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td class="sec"><a href="#s1" data-jump="data:s1">Climate trends &amp; projections</a></td><td>CN C.1 · FP B.1</td><td><span class="pill p-keep">IN CR</span></td><td>1</td></tr>
-            <tr><td>2</td><td class="sec"><a href="#s2" data-jump="data:s2">Extreme events</a></td><td>CN C.1 · FP B.1, D.1</td><td><span class="pill p-keep">IN CR</span></td><td>1</td></tr>
-            <tr><td>3</td><td class="sec"><a href="#s3" data-jump="data:s3">Crop &amp; livestock hazard exposure</a></td><td>CN C.1, C.2 · FP B.1, D.1</td><td><span class="pill p-mod">PARTIAL</span></td><td>2–3</td></tr>
-            <tr><td>4</td><td class="sec"><a href="#s4" data-jump="data:s4">Vulnerability &amp; socioeconomic context</a></td><td>CN Exec Summary · FP D.4</td><td><span class="pill p-mod">PARTIAL</span></td><td>1–2</td></tr>
-            <tr><td>5</td><td class="sec"><a href="#s5" data-jump="data:s5">NDC &amp; NAP alignment</a></td><td>CN A.16 · FP D.5</td><td><span class="pill p-clarify">DEPRIORITISED</span></td><td>3</td></tr>
-            <tr><td>6</td><td class="sec"><a href="#s6" data-jump="data:s6">Impact potential &amp; beneficiaries</a></td><td>CN A.6–A.7 · FP D.1, E.3</td><td><span class="pill p-new">NEW</span></td><td>2–4</td></tr>
-            <tr><td>7</td><td class="sec"><a href="#s7" data-jump="data:s7">Theory of change &amp; GCF portfolio</a></td><td>FP B.2, D.2</td><td><span class="pill p-new">NEW</span></td><td>2–3</td></tr>
-            <tr><td>8</td><td class="sec"><a href="#s8" data-jump="data:s8">Safeguards &amp; gender screening</a></td><td>CN C.4 · FP G.1–G.2</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
-            <tr><td>9</td><td class="sec"><a href="#s9" data-jump="data:s9">Financial context &amp; justification</a></td><td>CN D.1–D.4 · FP B.5, C.1</td><td><span class="pill p-new">NEW</span></td><td>2</td></tr>
+            <tr><td>1</td><td class="sec"><a href="#s1" data-jump="data:s1">Climate trends &amp; projections</a></td><td>CN C.1 · FP B.1</td><td><span class="pill p-keep" title="IN CR = already in the Climate Rationale notebook">IN CR</span></td><td>1</td></tr>
+            <tr><td>2</td><td class="sec"><a href="#s2" data-jump="data:s2">Extreme events</a></td><td>CN C.1 · FP B.1, D.1</td><td><span class="pill p-keep" title="IN CR = already in the Climate Rationale notebook">IN CR</span></td><td>1</td></tr>
+            <tr><td>3</td><td class="sec"><a href="#s3" data-jump="data:s3">Crop &amp; livestock hazard exposure</a></td><td>CN C.1, C.2 · FP B.1, D.1</td><td><span class="pill p-mod" title="PARTIAL = partly present in the notebook; needs additions">PARTIAL</span></td><td>2–3</td></tr>
+            <tr><td>4</td><td class="sec"><a href="#s4" data-jump="data:s4">Vulnerability &amp; socioeconomic context</a></td><td>CN Exec Summary · FP D.4</td><td><span class="pill p-mod" title="PARTIAL = partly present in the notebook; needs additions">PARTIAL</span></td><td>1–2</td></tr>
+            <tr><td>5</td><td class="sec"><a href="#s5" data-jump="data:s5">NDC &amp; NAP alignment</a></td><td>CN A.16 · FP D.5</td><td><span class="pill p-clarify" title="DEPRIORITISED = in the memo but since parked by the champion">DEPRIORITISED</span></td><td>3</td></tr>
+            <tr><td>6</td><td class="sec"><a href="#s6" data-jump="data:s6">Impact potential &amp; beneficiaries</a></td><td>CN A.6–A.7 · FP D.1, E.3</td><td><span class="pill p-new" title="NEW = not yet built">NEW</span></td><td>2–4</td></tr>
+            <tr><td>7</td><td class="sec"><a href="#s7" data-jump="data:s7">Theory of change &amp; GCF portfolio</a></td><td>FP B.2, D.2</td><td><span class="pill p-new" title="NEW = not yet built">NEW</span></td><td>2–3</td></tr>
+            <tr><td>8</td><td class="sec"><a href="#s8" data-jump="data:s8">Safeguards &amp; gender screening</a></td><td>CN C.4 · FP G.1–G.2</td><td><span class="pill p-new" title="NEW = not yet built">NEW</span></td><td>2</td></tr>
+            <tr><td>9</td><td class="sec"><a href="#s9" data-jump="data:s9">Financial context &amp; justification</a></td><td>CN D.1–D.4 · FP B.5, C.1</td><td><span class="pill p-new" title="NEW = not yet built">NEW</span></td><td>2</td></tr>
           </tbody>
         </table>
       </div>
@@ -293,10 +294,43 @@
       <details class="cmts" data-term="GCF Prep Data — Nine sections at a glance"><summary>💬 Comment / discuss “Sections at a glance”</summary><div class="giscus-slot"></div></details>
     </section>
 
+    <section id="d-ingest">
+      <h2>Ingestion shortlist — the P1 datasets to bring in first</h2>
+      <p class="sub">One consolidated do-first list for the CDH data-ingestion team: every <span class="pri p1">P1</span> dataset across the nine themes, pulled into a single view. <strong>Quick wins</strong> (open licence + a live API or cloud-optimised endpoint) can be federated / mirrored with little work; the rest are P1 but need a <strong>licence decision or a derive-then-host step first</strong>. P2 / P3 datasets stay in each theme's table. Themes 1–2 are already held; Theme 5 is deprioritised.</p>
+      <p class="cap"><b>Table 2 — P1 ingestion shortlist.</b> <b>Source:</b> <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Start</b> = <span class="pill p-keep">quick win</span> (open + API/cloud) or <span class="pill p-mod">resolve first</span> (licence / derive step).</p>
+      <div class="tscroll"><table class="dstbl">
+        <thead><tr><th>Dataset</th><th>Theme</th><th>Source</th><th>Licence</th><th>First move (integration route)</th><th>Start</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://drmkc.jrc.ec.europa.eu/inform-index">INFORM Risk</a></td><td>4 · Vulnerability</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate the JRC JSON API</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://fews.net/">FEWS NET</a></td><td>4 · Vulnerability</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open (USAID)</td><td>Federate FDW API + mirror admin2 / livelihood-zone boundaries</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://dhsprogram.com/">DHS</a> (aggregate)</td><td>4 · Vulnerability</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open (aggregate API)</td><td>Federate the DHS Indicator API (not the restricted microdata)</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://esa-worldcover.org/">ESA WorldCover</a></td><td>6 · Impact</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate the GEE / AWS COG; on-the-fly zonal stats</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://edgar.jrc.ec.europa.eu/">EDGAR</a> / <a href="https://www.fao.org/faostat/en/#data/GT">FAOSTAT emissions</a></td><td>6 · Impact</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate the FAOSTAT API (country totals) / EDGAR bulk grid</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://ieg.worldbankgroup.org/data">World Bank IEG</a></td><td>7 · Portfolio</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate the DDH OpenAPI</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://data-explorer.oecd.org/">OECD DAC CRS</a></td><td>9 · Finance</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate the OECD SDMX-REST endpoint</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://data-explorer.oecd.org/">OECD CRDF</a> (Rio markers)</td><td>7 &amp; 9</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate via the same OECD SDMX client as CRS</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://iatiregistry.org/">IATI Datastore</a></td><td>7 · Portfolio</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open</td><td>Federate the Datastore API (pulls AF / IFAD / WB at once)</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://www.globalforestwatch.org/">Global Forest Watch</a></td><td>8 · Safeguards</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open — CC BY 4.0</td><td>Federate GFW API / GEE, or mirror the derived zonal stats</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://www.wri.org/data/aqueduct-global-maps-40-data">WRI Aqueduct 4.0</a></td><td>3 · Crop/livestock</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open — CC BY 4.0</td><td>Mirror the bulk ZIP, or derive an admin-joined <code>bws</code>/<code>bwd</code> parquet</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://data.apps.fao.org/aquastat/">AQUASTAT GMIA v5</a></td><td>3 · Crop/livestock</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">open (cite-as)</td><td>Mirror the bulk raster; pairs with Aqueduct</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://data360.worldbank.org/en/dataset/IMF_FM">IMF fiscal</a></td><td>9 · Finance</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-open">open via WB Data360 (CC BY)</td><td>Federate the Data360 mirror (avoid IMF's own bulk)</td><td><span class="pill p-keep">quick win</span></td></tr>
+          <tr><td><a href="https://data.humdata.org/dataset/relative-wealth-index">Meta RWI</a></td><td>4 · Vulnerability</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-open">CC0</td><td>Derive an admin table (pop-weighted zonal) then host</td><td><span class="pill p-mod">resolve first</span> — derive step</td></tr>
+          <tr><td><a href="https://globaldatalab.org/shdi/">GDL SHDI</a></td><td>4 · Vulnerability</td><td><span class="pill p-c2">CACC2</span></td><td class="lic-nc">NC</td><td>Derive-then-host, keyed to GDLCODE</td><td><span class="pill p-mod">resolve first</span> — NC</td></tr>
+          <tr><td><a href="https://www.ipcinfo.org/cadre-harmonise">IPC / Cadre Harmonisé</a></td><td>4 · Vulnerability</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-nc">NC — CC BY-NC-SA</td><td>Federate the API; host derived products only (ShareAlike)</td><td><span class="pill p-mod">resolve first</span> — NC</td></tr>
+          <tr><td><a href="https://www.protectedplanet.net/en">WDPA / Protected Planet</a></td><td>8 · Safeguards</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-nc">NC, no-redistribute</td><td>Host the derived overlay stat only — never the raw layer</td><td><span class="pill p-mod">resolve first</span> — NC</td></tr>
+          <tr><td><a href="https://cspd.cso.cgiar.org/">CSPD / CSPDxCF</a></td><td>8 · Safeguards</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-nc">NC — CC BY-NC</td><td>Federate + derive the country risk tier (CGIAR sibling — coordinate with CSO)</td><td><span class="pill p-mod">resolve first</span> — NC</td></tr>
+          <tr><td><a href="https://www.ipcc-nggip.iges.or.jp/EFDB/main.php">IPCC EFDB</a></td><td>6 · Impact</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-unclear">unclear</td><td>Derive a curated emission-factor lookup; confirm terms first</td><td><span class="pill p-mod">resolve first</span> — licence</td></tr>
+          <tr><td><a href="https://www.fao.org/in-action/epic/ex-act-tool/en/">FAO EX-ACT</a></td><td>6 · Impact</td><td><span class="pill p-c1">CACC1</span></td><td class="lic-unclear">tool (no data licence)</td><td>Wire as a computation engine, not a hosted dataset</td><td><span class="pill p-mod">resolve first</span> — it's a tool</td></tr>
+        </tbody>
+      </table></div>
+      <p class="cap">Reads across the theme tables below; priorities and routes are this review's assessment, open to the team's correction. Start top-down: the quick wins are the fastest path to a populated Hub.</p>
+      <details class="cmts" data-term="GCF Prep Data — Ingestion shortlist"><summary>💬 Comment / discuss “Ingestion shortlist”</summary><div class="giscus-slot"></div></details>
+    </section>
+
     <!-- SECTION 1 -->
     <section id="s1">
       <div class="card detail">
-        <h4 class="cardh">1 · Climate trends &amp; projections <span class="pill p-keep">IN CR</span></h4>
+        <h4 class="cardh">1 · Climate trends &amp; projections <span class="pill p-keep" title="IN CR = already in the Climate Rationale notebook">IN CR</span></h4>
         <p class="sub"><b>Serves CN C.1 · FP B.1.</b> Every GCF proposal opens with the <b>climate context</b> — a defensible account of how the climate has already shifted in the project area and how it is projected to change, from historical timeseries and future projections at admin level. The datasets must answer: <em>what is the temperature and rainfall baseline and trajectory here, by season and scenario?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Historical timeseries (TAVG, PTOT, by season); future projections (SSP1-2.6 through SSP5-8.5, periods 2021–2040 to 2080–2100); anomalies; warming stripes. All at administrative level.<cite>GCF Data Notebook Memo, Section 1</cite></blockquote>
@@ -324,7 +358,7 @@
     <!-- SECTION 2 -->
     <section id="s2">
       <div class="card detail">
-        <h4 class="cardh">2 · Extreme events <span class="pill p-keep">IN CR</span></h4>
+        <h4 class="cardh">2 · Extreme events <span class="pill p-keep" title="IN CR = already in the Climate Rationale notebook">IN CR</span></h4>
         <p class="sub"><b>Serves CN C.1 · FP B.1, D.1.</b> A proposal must show the <b>acute hazard is real and rising</b> — that damaging extremes (drought, heat, heavy rain) already occur and intensify under future scenarios. The datasets must answer: <em>how often do unusual / extreme events hit, historically versus projected, and is the frequency climbing?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Z-score classification of unusual/extreme temperature and precipitation events; historical vs. projected frequency by scenario. All at administrative level.<cite>GCF Data Notebook Memo, Section 2</cite></blockquote>
@@ -349,7 +383,7 @@
     <!-- SECTION 3 -->
     <section id="s3">
       <div class="card detail">
-        <h4 class="cardh">3 · Crop &amp; livestock hazard exposure <span class="pill p-mod">PARTIAL</span></h4>
+        <h4 class="cardh">3 · Crop &amp; livestock hazard exposure <span class="pill p-mod" title="PARTIAL = partly present in the notebook; needs additions">PARTIAL</span></h4>
         <p class="sub"><b>Serves CN C.1, C.2 · FP B.1, D.1.</b> The crux of the adaptation rationale: <b>what is at stake</b> — the value of agricultural production and livelihoods exposed to the hazard, valued in USD (in the style of the Togo SAT Table 5 example). The datasets must answer: <em>how much crop and livestock production value is exposed to compound hazards, where, and under which scenario?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Production value by crop (MapSpam); crop and livestock hazard exposure (drought, heat, waterlogging combos) valued in USD by scenario. Add if possible: fisheries/aquaculture exposure, water-demand stress on irrigated systems.<cite>GCF Data Notebook Memo, Section 3</cite></blockquote>
@@ -361,7 +395,7 @@
         </div>
         <p><b>Present in the notebook</b> (verified against the Atlas CR data audit, 2026-07-09): <strong>MapSPAM 2020 v1r2</strong> production value × <strong>GLW4-2020</strong> livestock (a combined crop + livestock exposure parquet — livestock <em>is</em> present, not partial) × the hazard indices; Ecocrop-default thresholds. Scope: <strong>Sub-Saharan Africa only, adm1 only</strong> (the champion's "biggest limitation"); fisheries / aquaculture absent. Only the <strong>severe</strong> severity tier is live (moderate / extreme pending). Valued in <strong>nominal 2021 USD</strong>, not constant dollars.</p>
         <div class="note"><b>Data-plumbing flag (for the dev team).</b> The audit found the hazard-exposure product the notebook <em>reads</em> and the one the pipeline <em>writes</em> sit on different S3 paths — 4 of 6 partition keys diverge (<code>source</code> nex-gddp-cmip6 vs atlas_cmip6; <code>variable</code> vop_nominal-usd21 vs vop_intld15/usd15; <code>model</code> ENSEMBLEmean vs ENSEMBLE/historic; interaction filename). The constant-dollar currency fix prepped in <code>hazards_prototype</code> ships to keys the live notebook doesn't read. Not yet S3-verified — needs an <code>aws s3 ls</code> on both prefixes to confirm it's a real gap vs a stale notebook path.</div>
-        <p class="cap"><b>Table 2 — Theme 3 datasets: crop &amp; livestock hazard exposure.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 3 — Theme 3 datasets: crop &amp; livestock hazard exposure.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -385,7 +419,7 @@
     <!-- SECTION 4 -->
     <section id="s4">
       <div class="card detail">
-        <h4 class="cardh">4 · Vulnerability &amp; socioeconomic context <span class="pill p-mod">PARTIAL</span></h4>
+        <h4 class="cardh">4 · Vulnerability &amp; socioeconomic context <span class="pill p-mod" title="PARTIAL = partly present in the notebook; needs additions">PARTIAL</span></h4>
         <p class="sub"><b>Serves CN Exec Summary · FP D.4.</b> The executive summary and needs case must establish <b>who is vulnerable and why concessional GCF finance is warranted</b> — poverty, food insecurity, water access, gender. The datasets must answer: <em>how vulnerable are the people in the project area, on composite indices and sectoral measures?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">CR has poverty rates, GDP by sector, land use. Add if possible: composite vulnerability indices (ND-GAIN, INFORM Risk); food insecurity prevalence (IPC/CH); water stress and WASH access; gender-disaggregated vulnerability; population projections; HDI.<cite>GCF Data Notebook Memo, Section 4</cite></blockquote>
@@ -397,7 +431,7 @@
         </div>
         <p><b>Present in the notebook:</b> World Bank indicators (poverty rates, GDP by sector, land use) in Key Facts — national only.</p>
         <p class="cap"><b>The crux of this theme:</b> most memo datasets are <strong>national-only (admin0)</strong> — they can only shade a whole country. Genuine <strong>subnational</strong> granularity comes from DHS, IPC/CH, INFORM-Subnational (regional coverage only), and the CACC2 additions (GDL SHDI, Meta RWI, FEWS NET).</p>
-        <p class="cap"><b>Table 3 — Theme 4 datasets: vulnerability &amp; socioeconomic context.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 4 — Theme 4 datasets: vulnerability &amp; socioeconomic context.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; finest admin</th><th>→ admin</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -423,7 +457,7 @@
     <!-- SECTION 5 -->
     <section id="s5">
       <div class="card detail">
-        <h4 class="cardh">5 · NDC &amp; NAP alignment <span class="pill p-clarify">DEPRIORITISED</span></h4>
+        <h4 class="cardh">5 · NDC &amp; NAP alignment <span class="pill p-clarify" title="DEPRIORITISED = in the memo but since parked by the champion">DEPRIORITISED</span></h4>
         <p class="sub"><b>Serves CN A.16 · FP D.5.</b> A proposal must show it <b>aligns with the country's own climate commitments</b> — NDC targets and NAP priorities — to demonstrate country ownership. The datasets must answer: <em>what has the country pledged for agriculture, land use and water, and does this project deliver on it?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Country NDC targets for agriculture, forestry, land use, water; NAP priority actions; LT-LEDS commitments; GCF country programme priorities.<cite>GCF Data Notebook Memo, Section 5</cite></blockquote>
@@ -434,7 +468,7 @@
           <div class="spec-col add"><div class="spec-h">CACC2 — added by this review</div><ul><li>none new needed — the gap here is <b>NLP text-extraction</b> from PDFs, not more datasets; Climate Watch already structures NDC targets via API</li></ul></div>
         </div>
         <p><b>Deprioritised — but unpacked for the dev team.</b> The memo named this the <strong>highest-priority new section</strong>, but on 2026-04-29 the champion <strong>withdrew the automation ask</strong> (the NAP/NDC corpus — roughly a dozen documents a year — is too small to justify text-extraction automation; at most a metadata page that links out). We record the conflict rather than silently picking one. Still, if it is ever revisited, here is how each source would connect: three of the four are <strong>PDF document registries</strong> that need NLP text-extraction; only <strong>Climate Watch</strong> exposes structured NDC content via an API, so it is the pragmatic connect route.</p>
-        <p class="cap"><b>Table 4 — Theme 5 datasets: NDC &amp; NAP alignment.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 5 — Theme 5 datasets: NDC &amp; NAP alignment.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ connect</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -452,7 +486,7 @@
     <!-- SECTION 6 -->
     <section id="s6">
       <div class="card detail">
-        <h4 class="cardh">6 · Impact potential &amp; beneficiary estimates <span class="pill p-new">NEW</span></h4>
+        <h4 class="cardh">6 · Impact potential &amp; beneficiary estimates <span class="pill p-new" title="NEW = not yet built">NEW</span></h4>
         <p class="sub"><b>Serves CN A.6–A.7 · FP D.1, E.3.</b> A proposal must estimate its <b>impact</b> — how many beneficiaries are reached and, for mitigation, how much GHG is avoided. The datasets and tools must answer: <em>how many people benefit, and what is the tCO₂e mitigation impact?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">List of useful datasets and methods to calculate beneficiaries.<cite>GCF Data Notebook Memo, Section 6</cite></blockquote>
@@ -464,7 +498,7 @@
         </div>
         <p><b>Present in the notebook:</b> none (WorldPop population comes via Section 4).</p>
         <p class="cap"><b>Read this theme as two layers:</b> EX-ACT and the IPCC EFDB are <strong>accounting machinery, not spatial datasets</strong> — other layers supply activity data per admin unit (land-cover areas, livestock heads, holdings), which the factors/tools convert to tCO₂e for the CN A.6 mitigation claim.</p>
-        <p class="cap"><b>Table 5 — Theme 6 datasets: impact potential &amp; beneficiary estimates.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 6 — Theme 6 datasets: impact potential &amp; beneficiary estimates.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; resolution</th><th>→ admin / use</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -488,7 +522,7 @@
     <!-- SECTION 7 -->
     <section id="s7">
       <div class="card detail">
-        <h4 class="cardh">7 · Theory of change &amp; GCF portfolio evidence <span class="pill p-new">NEW</span></h4>
+        <h4 class="cardh">7 · Theory of change &amp; GCF portfolio evidence <span class="pill p-new" title="NEW = not yet built">NEW</span></h4>
         <p class="sub"><b>Serves FP B.2, D.2</b> (memo action (b)). A proposal must justify its <b>theory of change</b> with evidence and show it is not duplicating what other funders already back. The datasets must answer: <em>what interventions are shown to work here, and what comparable food / land / water projects have the funds already financed?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Database of approved GCF projects in food/land/water result areas (T4, T5, T6) with structured fields.<cite>GCF Data Notebook Memo, Section 7</cite></blockquote>
@@ -500,7 +534,7 @@
         </div>
         <p><b>Present:</b> the CACC1 MCF project-level dataset (5,115 GEF/GCF/AF records) is the seed/spine — see the <a href="#top" data-jump="notebook:top">Notebook tab</a>.</p>
         <p class="cap"><b>Geometry note (all rows):</b> these carry <strong>country as a text/ISO attribute only</strong> — no sub-national geometry, many regional/global records. For the geoselector they are admin0-after-ISO3-join; this theme is better served by the <strong>LLM-skill / citable-output route</strong> than by mapping. Keep two functions separate: <em>comparable-projects</em> (funds DBs) vs <em>evidence</em> (EGM/GAMI, feeding FP B.2/D.2 narrative).</p>
-        <p class="cap"><b>Table 6 — Theme 7 datasets: theory of change &amp; GCF portfolio.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 7 — Theme 7 datasets: theory of change &amp; GCF portfolio.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ country</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -524,7 +558,7 @@
     <!-- SECTION 8 -->
     <section id="s8">
       <div class="card detail">
-        <h4 class="cardh">8 · Safeguards &amp; gender screening <span class="pill p-new">NEW</span></h4>
+        <h4 class="cardh">8 · Safeguards &amp; gender screening <span class="pill p-new" title="NEW = not yet built">NEW</span></h4>
         <p class="sub"><b>Serves CN C.4 · FP G.1–G.2.</b> A proposal must pass <b>environmental &amp; social safeguards and gender screening</b> — protected areas, biodiversity, indigenous lands, land tenure, SEAH risk. The datasets must answer: <em>what environmental, social and gender risks does the project zone carry?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Protected areas and biodiversity hotspots in project zones; indigenous territories; gender gap indices for agriculture; land tenure; SEAH risk indicators by country, Climate Security Programming Dashboard for Climate Finance (CSO).<cite>GCF Data Notebook Memo, Section 8</cite></blockquote>
@@ -536,7 +570,7 @@
         </div>
         <p><b>Present in the notebook:</b> none.</p>
         <p class="cap"><b>Two delivery routes here:</b> polygon/raster layers (WDPA, IUCN, KBA, LandMark, GFW) drive project-zone overlays in the notebook; tabular-by-country layers (SIGI, CPIA, FAO 5.a.x, CSPD tier) suit the LLM skill (ISO3 join → cited sentence). <b>Split the portfolio by licence, not theme:</b> rehost the CC-BY ones; derive-then-host the non-commercial ones (host the computed overlay stat, never the raw layer).</p>
-        <p class="cap"><b>Table 7 — Theme 8 datasets: safeguards &amp; gender screening.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 8 — Theme 8 datasets: safeguards &amp; gender screening.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; geometry</th><th>→ admin / zone</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -560,7 +594,7 @@
     <!-- SECTION 9 -->
     <section id="s9">
       <div class="card detail">
-        <h4 class="cardh">9 · Financial context &amp; justification <span class="pill p-new">NEW</span></h4>
+        <h4 class="cardh">9 · Financial context &amp; justification <span class="pill p-new" title="NEW = not yet built">NEW</span></h4>
         <p class="sub"><b>Serves CN D.1–D.4 · FP B.5, C.1.</b> A proposal must justify its <b>funding request and additionality</b> — the climate-finance landscape, the adaptation-finance gap, fiscal space and co-financing. The datasets must answer: <em>why is GCF finance needed and additional, and what do comparable approved projects cost?</em></p>
         <details class="src"><summary>Memo requirement (verbatim)</summary><div class="srcbody">
           <blockquote class="srcquote">Climate finance flows to country/sector; adaptation finance gap; co-financing landscape (MDB, bilateral, domestic); fiscal space indicators; GCF funding benchmarks from comparable approved projects.<cite>GCF Data Notebook Memo, Section 9</cite></blockquote>
@@ -572,7 +606,7 @@
         </div>
         <p><b>Present:</b> the CACC1 MCF dataset carries project financing fields (project value, GCF financing, co-financing).</p>
         <p class="cap"><b>One client covers most of this theme:</b> a single SDMX/Data360 client pulls OECD CRS + CRDF and the IMF/World Bank finance series — all natively country-year, so they drop straight into the geoselector and self-cite (deterministic query URL = citation).</p>
-        <p class="cap"><b>Table 8 — Theme 9 datasets: financial context &amp; justification.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
+        <p class="cap"><b>Table 9 — Theme 9 datasets: financial context &amp; justification.</b> <b>Source:</b> <span class="pill p-have">HAVE</span> in CDH/Atlas · <span class="pill p-c1">CACC1</span> Cesare's memo · <span class="pill p-c2">CACC2</span> added by this review. <b>Priority:</b> <span class="pri p1">P1</span> do first · <span class="pri p2">P2</span> next · <span class="pri p3">P3</span> later (rubric above).</p>
         <div class="tscroll"><table class="dstbl">
           <thead><tr><th>Dataset</th><th>Source</th><th>What it is</th><th>Format &amp; granularity</th><th>→ country</th><th>IP / licence</th><th>CDH integration route</th></tr></thead>
           <tbody>
@@ -618,7 +652,7 @@
       <p class="sub">Two practical questions the review has to answer: under an Atlas-style <strong>country/admin geoselector</strong>, how does each dataset get summarised? And could an <strong>AI skill</strong> reach the data — by federating to a live endpoint, or by rehosting? The answer turns on the dataset’s native form (raster / vector / point / tabular) and, for hosting, its licence.</p>
 
       <h3>By data type — how a geoselection is summarised</h3>
-      <p class="cap"><b>Table 9 — how a geoselection is summarised, by data type.</b></p>
+      <p class="cap"><b>Table 10 — how a geoselection is summarised, by data type.</b></p>
       <div class="tscroll">
         <table class="skilltbl">
           <thead><tr><th>Data type</th><th>Datasets</th><th>Native form &amp; access</th><th>Geoselection summary → output</th><th>AI-skill route</th></tr></thead>
@@ -750,7 +784,7 @@
     <section id="sk-inventory">
       <h2>Existing skills &amp; their relevance here</h2>
       <p class="sub">The eight skills in the library on 2026-07-07, and how each bears on the GCF Preparation Facility.</p>
-      <p class="cap"><b>Table 10 — the CDH skills library vs this use-case.</b></p>
+      <p class="cap"><b>Table 11 — the CDH skills library vs this use-case.</b></p>
       <div class="tscroll">
         <table class="skilltbl">
           <thead><tr><th>Skill</th><th>What it does</th><th>Relevance to this use-case</th></tr></thead>
@@ -956,7 +990,7 @@
           <tr><td class="sec">Usability &amp; access</td><td>Simpler uncertainty (confidence symbols), CSV/Shapefile/GeoTIFF/<strong>API</strong> downloads, <strong>AI-assisted workflows</strong>, multilingual (French, Portuguese, Swahili, Yoruba — French gaps flagged for Rep Congo, Burkina). Embed <em>beyond</em> preparation into IFI implementation &amp; M&amp;E.</td><td><span class="pill p-keep">Yes</span> — AI-skill / federation</td></tr>
         </tbody>
       </table></div>
-      <p class="cap"><b>Table 11 — GCA / IFI feedback themes and their overlap with this use-case.</b> Sourced from the GCA feedback documents (2025–2026); summarised here, with links to the originals on CDH SharePoint in the fold below.</p>
+      <p class="cap"><b>Table 12 — GCA / IFI feedback themes and their overlap with this use-case.</b> Sourced from the GCA feedback documents (2025–2026); summarised here, with links to the originals on CDH SharePoint in the fold below.</p>
       <details class="src"><summary>Source documents — originals on CDH SharePoint (CGIAR sign-in)</summary><div class="srcbody">
         <p>The GCA feedback and scoping material this tab summarises. Files live on the CDH SharePoint under <code>Climate_data_hub/</code> and open with a CGIAR sign-in. <em>Share links to be added by the coordinator — marked _TBC_.</em></p>
         <ul>
@@ -983,7 +1017,7 @@
           <tr><td class="sec">AI-ready, traceable data</td><td>“Authoritative and traceable, not AI slop” — curated data commons</td><td>The proposed GCF-proposal skill + the CDH federation model</td></tr>
         </tbody>
       </table></div>
-      <p class="cap"><b>Table 12 — the shared spine.</b> Same people and assets serve both: Peter Steward (coordinator), Lucy Njuguna / Adaptation Insights (hazard→solutions evidence + co-benefits), the Togo SAT reference, and the Climate Data Hub itself.</p>
+      <p class="cap"><b>Table 13 — the shared spine.</b> Same people and assets serve both: Peter Steward (coordinator), Lucy Njuguna / Adaptation Insights (hazard→solutions evidence + co-benefits), the Togo SAT reference, and the Climate Data Hub itself.</p>
       <div class="callout"><b>The implication.</b> The Hub (CACC2) is the common backbone: it feeds the GCF portfolio capability (CACC1) <em>and</em> the IFI/MDB technical-assistance capability (CACC4). Building the hazard→solutions link, the finance-returns outputs, and the AI-ready traceable datasets once serves both — the strongest argument for prioritising them in the Climate Data Hub roadmap.</div>
       <details class="cmts" data-term="GCF Prep GCA — Overlap"><summary>💬 Comment / discuss “Overlap with this use-case”</summary><div class="giscus-slot"></div></details>
     </section>
