@@ -148,3 +148,40 @@ Pulled from the reference page — reuse for visual consistency across use-cases
 - **Don't reach into OneDrive** from the repo. Link sensitive material; host only what the champion
   confirms is public.
 - Commit/PR style follows the repo (`.github/PULL_REQUEST_TEMPLATE.md`); reference the use-case.
+
+## 11. Patterns & gotchas (from the GCF Preparation Facility build + B4T v1.1, 2026-07)
+
+Reusable structure and hard-won gotchas beyond the B4T reference page:
+
+### Page structure
+
+- **Tabs per audience/topic**, and a cross-cutting **"alignment" tab** to a sibling use-case (GCF page has a *GCA alignment* tab: the parallel IFI/MDB use-case + an overlap table — build once, serve both).
+- **Three-source dataset model**: tag every dataset **Present** (already in the Hub/notebook) · **requested** (the champion's / memo's list) · **additional** (this review's own deep research). Show it as a three-box summary panel per theme **and** a `Source` column in the detail table. Keeps "what they asked for" vs "what we found" legible.
+- **Per-dataset unpacking for the ingestion/tech team** — one detail table per theme, columns: dataset · what it is · native format & resolution/geometry · transformation to admin0/1/2 · IP/licence · **CDH integration route**. The route is one of **mirror-host** (open raw) / **federate** (live API) / **derive-then-host** (compute a product — for bulk-only or non-commercial data).
+- **Priority rubric** per recommended dataset (`P1/P2/P3` = value to proposals × ease of integration [open + API = easiest] × coverage × non-redundancy), rendered as a pill. Then a **consolidated "ingestion shortlist"** near the top — every P1 across themes in one do-first list, quick-wins (open + API/cloud) split from resolve-first (NC / unclear licence / derive step). The scattered per-theme priorities aren't actionable for the data team on their own.
+- **Framing lead per section**: one plain sub-paragraph stating the proposal need the theme serves + the question the datasets must answer. Fold it into the "Serves …" line — **not everything needs a box.** Number every table (`Table N —`) with a caption that carries the source + priority key. Give cryptic status chips (`IN CR`, etc.) `title` tooltips.
+
+### Licence gate (decides what the Hub can host)
+
+- **Open** → mirror-host the raw data. **Non-commercial** → federate/link the raw data, *don't copy it* — but for non-commercial research use you can nearly always **compute and publish derived admin-level products** (that's the whole notebook). **Unclear** → resolve before cataloguing.
+- Three catches on derived products: **ShareAlike cascade** (CC BY-NC-SA derivatives inherit the licence; a combined export can conflict), **transformative rule** (e.g. ACLED — aggregates must not be reverse-engineerable), and **publish-stats-not-raw** (WDPA/IUCN/DHS/MICS: expose the computed number, keep the raw with the provider). Verify each licence **live + adversarially**; log in the evidence file.
+
+### Feedback loop & versioning
+
+- When reviewers answer the open questions (giscus), fold each answer inline as an **"✅ Answered — <name>, <date>"** note in the relevant card (so the resolution shows without opening the thread), update the evidence log, and **version**: a page footer stamp + a foldable *version history* (`v1.1 = feedback incorporated …`), and bump the brief's `updated:` + a progress note. (B4T went to v1.1 this way after Bert's answers.)
+
+### giscus image gotcha (corrects a wrong assumption)
+
+- The giscus comment box is a **plain Markdown textarea — it does NOT support drag-and-drop image upload** (GitHub's uploader isn't wired into the embed; see giscus issue #197). For a screenshot, tell reviewers to **paste a hosted image URL**, attach on github.com directly, or use the **no-account form** (which takes file uploads). Don't claim drag-drop works.
+
+### Internal source docs
+
+- Linking **CDH SharePoint** originals is fine for public-safe pages (SharePoint is CGIAR-auth-gated). Use a foldable **"Source documents"** annex; use the **real share links** the coordinator supplies (right-click → Share) — don't fabricate URLs. `cgiar.sharepoint.com` is already in the lychee exclude list.
+
+### Repo CI traps for use-case markdown
+
+- A use-case **`.md`** (brief, evidence log) triggers **markdownlint** and **lychee link-check**; standalone HTML in `public/` is exempt. markdownlint fires **MD034 (no-bare-urls)** on URL-dense evidence logs — either a file-scoped `<!-- markdownlint-disable MD034 -->` or wrap URLs in code-spans / `[text](url)`. lychee 403s on WAF/bot-blocked or cert-flaky hosts (IUCN, OECD, IMF, IPC, MICS, IFAD, ACLED, Climate Watch, …) — add them to the `--exclude` list in `linkcheck.yml` (same pattern as the existing entries).
+
+### Branch discipline (this repo merges fast + auto-deletes branches)
+
+- Cut a **fresh branch off `origin/main` before each push**, and **check the PR's merge state first** — pushing a follow-up commit after a PR merged (its branch auto-deleted) lands the commit orphaned on a re-created branch. Verified the hard way several times this session.
