@@ -133,6 +133,16 @@ Per the CDH team (July 2026). Recommendations build on these ready-to-adopt prod
 
 ## D-02 — Failed season (cropping reliability)
 
+### CIAT RTBMaps — "Failed Season drought probability" (the actual production source)
+
+- Page: RTBMaps data-availability <http://gisweb.ciat.cgiar.org/RTBmaps/DataAvailability_RTBMaps.html> · download <http://gisweb.ciat.cgiar.org/RTBMaps/download/FailedSeason/failedSeason_grid.zip>
+- **Located & downloaded 2026-07-16**, confirming B4T's 2026-07-13 answer (source = CIAT RTBMaps; Hyman et al. 2008). File `failedSeason_grid.zip` — **16 MB, dated 2014-10-17**. Contents: `failedseason.asc` (ESRI ASCII grid) + `.prj` (WGS84 geographic).
+- **Grid spec (read from the header, not the doc):** global, **43229 × 21624** cells, **cellsize 0.00833333° = 30 arc-sec ≈ 1 km**, extent −180…180 / −89.997…90, WGS84. Integer values **0–100 = failed-season probability (%)** (NODATA −9999) — matches the CRI's "standardised index of cropping reliability, reported as percentages." (Doc's "100 years" refers to the simulation length, not resolution.)
+- **Method:** Failed Season Algorithm (FSA) — water balance + **MarkSim** simulated daily rainfall. A season "fails" when water is insufficient to meet crop requirements.
+- **References on the RTBMaps page:** **Hyman, G., S. Fujisaka, P. Jones, S. Wood, C. de Vicente, J. Dixon. 2008.** *Agricultural Systems* 98:50–61 (matches Bert's citation exactly; the CRI doc's "Hyman et al. 2025" was a mis-cite); Jones & Thornton 2000 (MarkSim, *Agron. J.* 93:445–453); Keig & McAlpine 1974 (soil-moisture regime system, CSIRO Tech. Memo 74/4).
+- **Access note:** the RTBMaps server returns **HTTP 403** to a default curl User-Agent (custom error page); a browser User-Agent returns 200. The 16 MB zip streams slowly — use `-C -` (resume) with a long timeout.
+- **Assessment:** vintage 2014 climatology (CMIP-era), so a **modernization candidate**; the WRSI route below remains the recommended modern analogue if the layer is retained. Open Phase-2 question: overlap vs the LGP-flip and drought layers (double-count).
+
 ### WRSI — Water Requirement Satisfaction Index (FAO / USGS FEWS NET / CHC GeoWRSI)
 
 - Pages: USGS FEWS <https://earlywarning.usgs.gov/fews/product/899/> · CHC GeoWRSI <https://www.chc.ucsb.edu/tools/geowrsi> · IDMP <https://www.droughtmanagement.info/water-requirement-satisfaction-index-wrsi-and-geo-wrsi/>
@@ -176,7 +186,7 @@ From the B4T notebook PDF (Bert's emails 2026-04-29/30, relaying Philip Thornton
 
 Answers to the review's open questions, posted in the giscus threads and folded into the review page as inline "Answered" notes. New / confirmed facts:
 
-- **Failed season (D-02):** source is **CIAT RTBMaps** (`gisweb.ciat.cgiar.org/RTBMaps`), still in production; uses a different LGP definition from Philip's layer. Ref: **Hyman, G. et al. 2008**, *Agricultural Systems* 98:50–61.
+- **Failed season (D-02):** source is **CIAT RTBMaps** (`gisweb.ciat.cgiar.org/RTBMaps`), still in production; uses a different LGP definition from Philip's layer. Ref: **Hyman, G. et al. 2008**, *Agricultural Systems* 98:50–61. **Dataset located & downloaded 2026-07-16** — `failedSeason_grid.zip`, ESRI ASCII grid, global ~1 km, 0–100 % probability (FSA + MarkSim); full spec in the D-02 section above.
 - **Aqueduct Flood (F-02/03; and the D-03/04/05 water thread):** the flood layer used is **CMIP5-era, not Aqueduct 4.0** (which is CMIP6). Product = **Aqueduct Floods Hazard Maps — inundation depth (m), coastal + riverine, Version 2 (20 Oct 2020)**; **10-year** return period. Confirms the vintage flag; cross-hazard future-horizon harmonisation still open.
 - **LGP (T-02 / R-01):** Philip's LGP = mean days/yr with Tavg > 6 °C AND actual/potential evapotranspiration > 0.35. Non-production-corrected hazards masked by the share of land under crop production. **The LGP definition was accidentally pasted into T-03 and R-01** (a documentation slip — not the same layer). Rainfall uses two LGP lengths; temperature has LGP-corrected + uncorrected versions (both used). Coarser GAEZ (~9 km) acceptable.
 - **Rainfall CV (R-03):** combine historic + projected; weighting open (currently 50–50).
