@@ -69,6 +69,8 @@
   .side-meta b{color:var(--ink);font-weight:700;display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
   .side-links{margin-top:12px;display:flex;flex-direction:column;gap:7px;font-size:13px}
   .side-links a{color:var(--brand);font-weight:700}
+  .side-links a.q-done{color:var(--muted);font-weight:500}
+  .side-links a.q-done .tick{color:#2e7d32;font-weight:700}
   .side-note{margin-top:8px;font-size:11.5px;line-height:1.45;color:var(--muted);font-style:italic}
   .side-links-2{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 
@@ -150,6 +152,7 @@
   .recrow .code{color:var(--brand-dark)}
   .recrow .rec,.recrow .var{color:var(--brand-dark);font-weight:700}
   .cell-pending{color:#9aa9b0;font-style:italic}
+  .cell-done{color:#2e7d32;font-weight:700}
   .na{color:#b9c4cc}
   .rec{color:var(--brand-dark);font-weight:700;font-family:var(--sans)}
   .proptbl{min-width:0}
@@ -198,18 +201,18 @@
     </ul>
     <div class="side-meta">
       <div><b>B4T — where to comment</b></div>
-      <div class="side-note">Each question has its own comment box — expand “💬 Answer / discuss this question” under it (GitHub sign-in).</div>
+      <div class="side-note">Bert Lenaerts (B4T) answered 9 of the 10 open questions on 2026-07-13 (v1.1) — ✓ marks answered items; each has an “✅ Answered” note inline. Discussion stays open under each question (GitHub sign-in).</div>
       <div class="side-links">
-        <a href="#q-drought" data-jump="data:q-drought">→ Drought (D-01)</a>
-        <a href="#q-failed" data-jump="data:q-failed">→ Failed season (D-02)</a>
-        <a href="#q-aqueduct" data-jump="data:q-aqueduct">→ Aqueduct water (D-03/04/05)</a>
-        <a href="#q-flood-proxy" data-jump="data:q-flood-proxy">→ Flooding — proxy (F-01)</a>
-        <a href="#q-flood-rp" data-jump="data:q-flood-rp">→ Flooding — return period (F-02/03)</a>
-        <a href="#q-lgp" data-jump="data:q-lgp">→ LGP (T-02 / R-01)</a>
-        <a href="#q-cv" data-jump="data:q-cv">→ Rainfall CV (R-03)</a>
-        <a href="#q-heat" data-jump="data:q-heat">→ Heat window (T-01)</a>
-        <a href="#q-heatgs" data-jump="data:q-heatgs">→ Heat growing season (T-03)</a>
-        <a href="#q-soil" data-jump="data:q-soil">→ Salinity / soil water (S, W)</a>
+        <a class="q-done" href="#q-drought" data-jump="data:q-drought"><span class="tick">✓</span> Drought (D-01)</a>
+        <a class="q-done" href="#q-failed" data-jump="data:q-failed"><span class="tick">✓</span> Failed season (D-02)</a>
+        <a class="q-done" href="#q-aqueduct" data-jump="data:q-aqueduct"><span class="tick">✓</span> Aqueduct water (D-03/04/05)</a>
+        <a class="q-done" href="#q-flood-proxy" data-jump="data:q-flood-proxy"><span class="tick">✓</span> Flooding — proxy (F-01)</a>
+        <a class="q-done" href="#q-flood-rp" data-jump="data:q-flood-rp"><span class="tick">✓</span> Flooding — return period (F-02/03)</a>
+        <a class="q-done" href="#q-lgp" data-jump="data:q-lgp"><span class="tick">✓</span> LGP (T-02 / R-01)</a>
+        <a class="q-done" href="#q-cv" data-jump="data:q-cv"><span class="tick">✓</span> Rainfall CV (R-03)</a>
+        <a href="#q-heat" data-jump="data:q-heat">→ Heat window (T-01) — still open</a>
+        <a class="q-done" href="#q-heatgs" data-jump="data:q-heatgs"><span class="tick">✓</span> Heat growing season (T-03)</a>
+        <a class="q-done" href="#q-soil" data-jump="data:q-soil"><span class="tick">✓</span> Salinity / soil water (S, W)</a>
       </div>
       <div class="side-links side-links-2">
         <a href="#m-clarify" data-jump="methods:m-clarify">→ All clarifications + method (§10)</a>
@@ -255,7 +258,7 @@
           <thead><tr><th class="sortable">Code</th><th class="sortable">Variable</th><th class="sortable">Hazard</th><th class="sortable">How used</th><th class="sortable">Verdict</th><th class="sortable">CDH action</th><th class="sortable">Effort</th></tr></thead>
           <tbody>
             <tr data-hazard="Drought"><td class="code"><a href="#row-d01">D-01</a></td><td class="var" title="Drought-event frequency: count of drought events (≥3 consecutive months with ≤50% of normal precipitation).">SPI/WASP (drought-event frequency)</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-mod">Adopt SPEI — extend CDH global</span></td><td>Re-run CDH SPEI pipeline globally; ASI complementary</td><td class="num">Low–med</td></tr>
-            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-clarify">Clarify — confirm source &amp; role</span></td><td>Confirm w/ B4T; WRSI if retained</td><td>—</td></tr>
+            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season</td><td>Drought</td><td><div class="tcell"><span class="tchip base">Baseline</span></div></td><td><span class="pill p-clarify">Source located — confirm role</span></td><td>RTBMaps FSA grid (~1 km); confirm overlap vs LGP/drought</td><td>—</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-03</a></td><td class="var" title="Renewable surface + groundwater available (WRI Aqueduct).">Available blue water</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-04</a></td><td class="var" title="Total sectoral water demand / net consumption (WRI Aqueduct).">Gross water demand / net consumption</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-05</a></td><td class="var" title="Ratio of water withdrawals to available renewable supply — water stress (WRI Aqueduct).">Baseline water stress</td><td>Drought</td><td><div class="tcell"><span class="tchip fut">Future</span></div></td><td><span class="pill p-keep">Keep — Aqueduct 4.0 (CMIP6)</span></td><td>Catalogue-as-is; confirm version + slice</td><td class="num">Low</td></tr>
@@ -303,7 +306,7 @@
           </tr></thead>
           <tbody>
             <tr data-hazard="Drought"><td class="code"><a href="#row-d01">D-01</a></td><td>Drought</td><td class="var" title="Drought-event frequency: count of drought events (≥3 consecutive months with ≤50% of normal precipitation).">SPI/WASP (event freq.)<br><span class="tchip base">Baseline</span></td><td>2.5° → 0.05°</td><td>WASP (IRI); Dilley 2005 — <span class="cell-pending">doc: SPI/Ericksen</span></td><td class="num">1980–2000 <span class="cell-pending">(doc 1974–2004)</span></td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
-            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td>Drought</td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season<br><span class="tchip base">Baseline</span></td><td class="cell-pending">not stated</td><td>Hyman et al. 2025 <span class="cell-pending">(mis-cite)</span></td><td class="num">100 years</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="cell-pending">not stated</td><td class="na">N/A</td></tr>
+            <tr data-hazard="Drought"><td class="code"><a href="#row-d02">D-02</a></td><td>Drought</td><td class="var" title="Probability of a failed growing season (rain to establish, then fewer than 50 growing days).">Failed season<br><span class="tchip base">Baseline</span></td><td>30 arc-sec (~1 km)</td><td>RTBMaps FSA grid — Hyman et al. 2008 <span class="cell-pending">(doc mis-cited “2025”)</span></td><td class="num">100 years</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td>historic (2014 grid)</td><td class="na">N/A</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-03</a></td><td>Drought</td><td class="var" title="Renewable surface + groundwater available (WRI Aqueduct).">Available blue water<br><span class="tchip fut">Future</span></td><td>sub-basin</td><td>PCR-GLOBWB 2 (obs-forced)</td><td class="num">1960–2014 (GCM hist)</td><td>Aqueduct 4.0 (CMIP6)</td><td class="num">2030 (·2050·2080)</td><td>SSP1-2.6 / 3-7.0 / 5-8.5 <span class="cell-pending">(B4T slice TBC)</span></td><td>CMIP6 <span class="cell-pending">(confirm v4.0)</span></td><td>bias-corrected to obs</td><td>5 GCMs (GFDL-ESM4, IPSL-CM6A-LR, MPI-ESM1-2-HR, MRI-ESM2-0, UKESM1-0-LL)</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-04</a></td><td>Drought</td><td class="var" title="Total sectoral water demand / net consumption (WRI Aqueduct).">Gross water demand<br><span class="tchip fut">Future</span></td><td>sub-basin</td><td>PCR-GLOBWB 2 (obs-forced)</td><td class="num">1960–2014 (GCM hist)</td><td>Aqueduct 4.0 (CMIP6)</td><td class="num">2030 (·2050·2080)</td><td>SSP1-2.6 / 3-7.0 / 5-8.5 <span class="cell-pending">(B4T slice TBC)</span></td><td>CMIP6 <span class="cell-pending">(confirm v4.0)</span></td><td>bias-corrected to obs</td><td>5 GCMs (GFDL-ESM4, IPSL-CM6A-LR, MPI-ESM1-2-HR, MRI-ESM2-0, UKESM1-0-LL)</td></tr>
             <tr data-hazard="Drought"><td class="code"><a href="#row-aqueduct">D-05</a></td><td>Drought</td><td class="var" title="Ratio of water withdrawals to available renewable supply — water stress (WRI Aqueduct).">Baseline water stress<br><span class="tchip fut">Future</span></td><td>sub-basin</td><td>PCR-GLOBWB 2 (obs-forced)</td><td class="num">1960–2014 (GCM hist)</td><td>Aqueduct 4.0 (CMIP6)</td><td class="num">2030 (·2050·2080)</td><td>SSP1-2.6 / 3-7.0 / 5-8.5 <span class="cell-pending">(B4T slice TBC)</span></td><td>CMIP6 <span class="cell-pending">(confirm v4.0)</span></td><td>bias-corrected to obs</td><td>5 GCMs (GFDL-ESM4, IPSL-CM6A-LR, MPI-ESM1-2-HR, MRI-ESM2-0, UKESM1-0-LL)</td></tr>
@@ -488,20 +491,20 @@
       <div class="card" id="row-d02" style="margin-top:18px">
         <h3 style="margin-top:0">D-02 — Failed season (cropping reliability)</h3>
         <details class="src apx" open><summary>📘 CRI Appendix Table 1 — verbatim definition</summary><div class="srcbody"><div class="apxrow"><div class="apxhd"><span class="apxcode">D-02</span> <b>Failed season</b></div><blockquote class="srcquote">The failed season method was developed to assess and map drought risk by estimating the probability of a failed growing season. It is conservatively defined as one with sufficient rainfall at the start for germination and establishment, fewer than 50 growing days, and a clearly defined end. Thus, the failed season approach depends upon the use of a reliable means to assess the water-and temperature-constrained length of the growing period. The model can be used as a standardised index of cropping reliability, reported as percentages.</blockquote><div class="apxmeta"><a href="docs/cri-documentation-v1.pdf#page=9" target="_blank" rel="noopener">CRI doc p.9</a></div></div></div></details>
-        <p><span class="pill p-clarify">Verdict: Clarify — confirm source &amp; role with B4T</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">can’t finalise until the mis-cited source and production status are confirmed; a clear modern route exists if retained.</span></p>
+        <p><span class="pill p-clarify">Verdict: Source located — confirm role &amp; overlap</span> &nbsp;<span style="color:var(--muted);font-size:13.5px">source now identified (CIAT RTBMaps FSA grid, ~1 km global) &amp; production-active per B4T; open question is its role vs the LGP/drought layers (double-count) and whether to modernize the 2014 climatology.</span></p>
 
         <p class="measures"><strong>Measures:</strong> probability of a failed growing season — germination/establishment, then fewer than 50 growing days before season end. Reported as % cropping reliability; production-specific (a season “fails” when production cost exceeds harvest value).</p>
         <div class="spec">
           <div class="spec-col present">
             <div class="spec-h">Present — what the CRI uses now</div>
             <dl>
-              <dt>Dataset</dt><dd><strong>Unverifiable</strong> — cited “Hyman et al. 2025” is a mis-citation (arXiv 2503.17293 is a fisheries paper); likely intended Glenn Hyman (Alliance/CIAT), paper not locatable</dd>
-              <dt>Resolution</dt><dd>unknown</dd>
-              <dt>Temporal</dt><dd>“100 years” (per doc) · historic</dd>
+              <dt>Dataset</dt><dd><strong>CIAT RTBMaps “Failed Season drought probability”</strong> — located &amp; downloaded 2026-07-16. Failed Season Algorithm (FSA): water balance + MarkSim simulated daily rainfall. <span class="cell-pending">Doc's “Hyman et al. 2025” was a mis-cite; correct ref = <strong>Hyman et al. 2008</strong>, Agric. Systems 98:50–61</span></dd>
+              <dt>Resolution</dt><dd><strong>30 arc-sec (~1 km)</strong>, global (43229×21624), WGS84 · <em>not previously known</em></dd>
+              <dt>Temporal</dt><dd>historic climatology (grid dated 2014-10-17); doc says “100 years”</dd>
               <dt>Scenario · CMIP</dt><dd>N/A (observational)</dd>
               <dt>GCM ensemble</dt><dd>N/A</dd>
-              <dt>Access</dt><dd>unknown</dd>
-              <dt>Status</dt><dd>conflicted — source &amp; production status unconfirmed</dd>
+              <dt>Access</dt><dd><a href="http://gisweb.ciat.cgiar.org/RTBMaps/download/FailedSeason/failedSeason_grid.zip" target="_blank" rel="noopener">RTBMaps download</a> (ESRI ASCII grid, 16 MB; values 0–100 = % probability)</dd>
+              <dt>Status</dt><dd>source located &amp; verified · production-active (per B4T) · role/overlap still open</dd>
             </dl>
           </div>
           <div class="spec-col rec">
@@ -518,7 +521,7 @@
             </dl>
           </div>
         </div>
-        <details class="src prov"><summary>📄 Provenance, licence &amp; sources</summary><div class="srcbody"><ul style="margin:0;padding-left:18px"><li style="margin:3px 0"><strong>WRSI</strong> (FAO / USGS FEWS NET / CHC GeoWRSI), verified 2026-07-02: WRSI = seasonal AETc/PETc; <strong>WRSI &lt; 50 = crop failure</strong> — a direct operational analogue of “failed season.”</li><li style="margin:3px 0"><strong>L-WRSI</strong> (landscape): global GeoTIFF, dekadal, 1982–present, CC0 — landscape-level, not crop-specific.</li><li style="margin:3px 0"><strong>Crop-WRSI</strong> (CHIRPS-Croplands): crop-specific, 0.1°, dekadal, 2001–present — but regional only (E/S/W Africa, C. America, Caribbean). Global crop-specific = run GeoWRSI on CHIRPS (a derivation, same stack as the D-01 SPEI route).</li><li style="margin:3px 0"><strong>FAO GAEZ v4</strong>, verified 2026-07-02: water-balance LGP, dry/rain days, ET deficit, reliability; ~9 km (5 arc-min); historical 1961–2010 + future 2011–2040/41–70/70–99; CMIP5-era (v5 is the CMIP6 successor).</li></ul><p style="margin:9px 0 0"><a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">Full evidence log ↗</a></p></div></details>
+        <details class="src prov"><summary>📄 Provenance, licence &amp; sources</summary><div class="srcbody"><ul style="margin:0;padding-left:18px"><li style="margin:3px 0"><strong>CIAT RTBMaps “Failed Season drought probability”</strong>, located &amp; downloaded 2026-07-16 (confirms B4T's answer): <a href="http://gisweb.ciat.cgiar.org/RTBMaps/download/FailedSeason/failedSeason_grid.zip" target="_blank" rel="noopener">failedSeason_grid.zip</a> (16 MB, dated 2014-10-17). ESRI ASCII grid, WGS84, <strong>global 30 arc-sec (~1 km)</strong> (43229×21624, cellsize 0.008333°); integer values <strong>0–100 = % failed-season probability</strong> (NODATA −9999). Method = Failed Season Algorithm (FSA): water balance + MarkSim daily-rainfall simulation. Refs on the RTBMaps page: <strong>Hyman et al. 2008</strong> (Agric. Systems 98:50–61); Jones &amp; Thornton 2000 (MarkSim); Keig &amp; McAlpine 1974 (soil-moisture). <em>Access note: server 403s a default curl UA — needs a browser User-Agent.</em> Vintage (2014, CMIP-era climatology) makes it a modernization candidate.</li><li style="margin:3px 0"><strong>WRSI</strong> (FAO / USGS FEWS NET / CHC GeoWRSI), verified 2026-07-02: WRSI = seasonal AETc/PETc; <strong>WRSI &lt; 50 = crop failure</strong> — a direct operational analogue of “failed season.”</li><li style="margin:3px 0"><strong>L-WRSI</strong> (landscape): global GeoTIFF, dekadal, 1982–present, CC0 — landscape-level, not crop-specific.</li><li style="margin:3px 0"><strong>Crop-WRSI</strong> (CHIRPS-Croplands): crop-specific, 0.1°, dekadal, 2001–present — but regional only (E/S/W Africa, C. America, Caribbean). Global crop-specific = run GeoWRSI on CHIRPS (a derivation, same stack as the D-01 SPEI route).</li><li style="margin:3px 0"><strong>FAO GAEZ v4</strong>, verified 2026-07-02: water-balance LGP, dry/rain days, ET deficit, reliability; ~9 km (5 arc-min); historical 1961–2010 + future 2011–2040/41–70/70–99; CMIP5-era (v5 is the CMIP6 successor).</li></ul><p style="margin:9px 0 0"><a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/b4t/methods/evidence/sources.md">Full evidence log ↗</a></p></div></details>
         <p><strong>Alternatives:</strong> FAO GAEZ growing-period / reliability (open, ~9–10 km, historical + future); CDH internal <strong>water-balance v2</strong> (NDWS/NDWL). <strong>Overlap (Phase 2):</strong> failed-season overlaps the LGP-flip rows and drought — confirm it is a distinct, needed input (double-count risk). Keep the production cost-vs-value test as a B4T economic assumption, separate from the climate layer.</p>
 
         <details class="cmts" data-term="B4T CRI Data — Failed season (D-02)"><summary>💬 Comments on “Failed season (D-02)”</summary><div class="giscus-slot"></div></details>
@@ -1005,7 +1008,7 @@
         <p class="measures">A single index of every open question. Six are the same questions raised on the dataset cards; two (Method) are method-only. <strong>Answer each in its own comment box</strong> (GitHub sign-in) via the links — dataset questions on the <em>Data</em> tab, method questions in the sections above. No separate thread here, so answers stay in one place per question.</p>
         <ul class="clarindex">
           <li><strong>Drought (D-01):</strong> Is the current layer WASP (2.5°, 1980–2000) or the doc's “SPI 1974–2004”? Is temperature-aware SPEI acceptable to replace precip-only WASP (does it overlap the heat hazard)? What covers the non-Africa footprint? <a href="#q-drought" data-jump="data:q-drought">💬 answer (Data)</a></li>
-          <li><strong>Failed season (D-02):</strong> The cited “Hyman et al. 2025” is a mis-citation — what is the correct source? Is it active in the production CRI, and how does it relate to the LGP and drought layers? <a href="#q-failed" data-jump="data:q-failed">💬 answer (Data)</a></li>
+          <li><strong>Failed season (D-02):</strong> <span class="cell-done">Resolved</span> — source = CIAT RTBMaps “Failed Season drought probability” grid (FSA; Hyman et al. 2008; the doc's “2025” was a mis-cite), located &amp; downloaded (~1 km global, % probability). Still open: its role vs the LGP/drought layers (double-count) and whether to modernize the 2014 climatology. <a href="#q-failed" data-jump="data:q-failed">💬 discuss (Data)</a></li>
           <li><strong>Aqueduct water (D-03/04/05, R-04/05, F-02/03):</strong> Which version — 4.0 (CMIP6) or a CMIP5-era one? Which scenario + period, and is the 5-GCM ensemble used or a single model? And is the <em>future 2030</em> projection used (How-used = Future) or Aqueduct's present “baseline” indicator (Baseline)? <a href="#q-aqueduct" data-jump="data:q-aqueduct">💬 answer (Data)</a> · <a href="#q-flood-rp" data-jump="data:q-flood-rp">F-02/03 flooding</a></li>
           <li><strong>Flooding:</strong> Which return period (1-in-10)? Priority — CMIP6 currency (GIRI) vs multi-model breadth (Aqueduct Floods)? <a href="#q-flood-proxy" data-jump="data:q-flood-proxy">💬 answer: proxy (F-01)</a> · <a href="#q-flood-rp" data-jump="data:q-flood-rp">return period (F-02/03)</a></li>
           <li><strong>LGP / temperature (R-01/02, T-02, T-03):</strong> Confirm the LGP + growing-season definitions and thresholds in production. Is T-03 the same layer as R-01 (duplicate)? Is coarser GAEZ v5 (~10 km) acceptable, or derive finer from NEX-GDDP v2? <a href="#q-lgp" data-jump="data:q-lgp">💬 answer: LGP (T-02/R-01)</a> · <a href="#q-heatgs" data-jump="data:q-heatgs">T-03 heat growing-season</a></li>
