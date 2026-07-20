@@ -10,7 +10,7 @@ Briefs render to a static site at <https://cgiar-climate-data-hub.github.io/use-
 | --- | --- | --- | --- |
 | [GCF Preparation Facility](./gcf-preparation-facility/BRIEF.md) | Cesare Scartozzi | Active development | Climate Rationale notebook auto-generating evidence-based climate risk narratives and hazard-exposure tables for GCF proposal writers |
 | [AgWise](./agwise/BRIEF.md) | _TBC_ | Active development | Integrating historical + forecast climate data into the AgWise fertilization module for process-based crop modelling across Africa |
-| [B4T — Crop Risk Index (CRI)](./b4t/BRIEF.md) | Bert Lenaerts (IRRI) | Brief | Review and update of the Climate and Environmental Crop Risk Index to use CMIP6 inputs and harmonized future time horizons |
+| [B4T — Crop Risk Index (CRI)](./b4t/BRIEF.md) | Bert Lenaerts (IRRI) | Active development | Review and update of the Climate and Environmental Crop Risk Index to use CMIP6 inputs and harmonized future time horizons |
 | [Tier 2 Livestock Uncertainty](./tier2-livestock-uncertainty/BRIEF.md) | Ciniro Costa Junior (Alliance) | Idea | Applying a CGIAR emissions uncertainty calculator to Tier 2 livestock GHG inventories in Colombia and Nigeria |
 | [iCLEANED](./icleaned/BRIEF.md) | Emmanuel Mwema (Alliance) | Idea | CDH climate/environmental data support for the iCLEANED livestock environmental-footprint decision-support tool |
 | [MELIAF — Adaptation Activator](./meliaf/BRIEF.md) | Andreea Nowak (Alliance) | Idea | Exploring CDH support for CGIAR's MELIAF Climate Adaptation Activator (adaptation tracking and MRV) |
