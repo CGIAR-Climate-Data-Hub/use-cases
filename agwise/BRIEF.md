@@ -76,8 +76,8 @@ The CDH team will support storage and data integration.
 
 ### Background materials
 
-- [ag-cube-cm GitHub repository](https://github.com/anaguilarar/ag-cube-cm) — Python package for spatial crop model orchestration
-- [spatial-crop-modeler skill](https://github.com/anaguilarar/ag-cube-cm/blob/master/.claude/commands/spatial-crop-modeler.md) — MCP skill for AI-assisted crop modelling workflows
+- [ag-cube-cm GitHub repository](https://github.com/CGIAR-Climate-Data-Hub/ag-cube-cm) — Python package for spatial crop model orchestration (NetCDF/Zarr processing, DSSAT pixel-level orchestration)
+- [spatial-crop-modeler skill](https://github.com/CGIAR-Climate-Data-Hub/skills/tree/main/.agents/skills/spatial-crop-modeler) — AI agent skill for end-to-end spatial crop model workflows: environment check, parameter collection, YAML config generation, simulation execution, quality gate, and result interpretation
 
 ## Go / No Go
 
@@ -118,9 +118,10 @@ The CDH team will support storage and data integration.
 
 ### Skills & tools
 
-- ag-cube-cm Python package (NetCDF/Zarr processing, DSSAT orchestration)
-- `/spatial-crop-modeler` MCP skill (AI-assisted workflow orchestration)
-- Climate API
+- **ag-cube-cm** Python package — spatial NetCDF/Zarr datacube processing and pixel-level DSSAT orchestration; supports `full_pipeline` (download → build → simulate) and `with_cubes` (simulate from existing cubes) modes
+- **aggeodata** Python package — climate and soil data download and datacube assembly; integrates CHIRPS, CHIRTS, AgERA5, NASA POWER, GEE, and SoilGrids
+- **`/spatial-crop-modeler`** AI agent skill ([CGIAR CDH skills repo](https://github.com/CGIAR-Climate-Data-Hub/skills/tree/main/.agents/skills/spatial-crop-modeler)) — end-to-end orchestration: environment check, YAML config generation, simulation execution, quality gate (ok/failed/no-data pixel audit), and HWAM result interpretation
+- Climate API (Jemal) — seasonal forecast inputs; to be integrated into the pipeline
 
 ### Delivery mechanism
 
