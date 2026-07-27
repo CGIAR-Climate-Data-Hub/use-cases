@@ -106,10 +106,11 @@ The CDH team will support storage and data integration.
 
 | Dataset | Hub status | Hub catalog | Feasibility (1=easy, 5=hard) | Serves | Notes |
 | ------- | ---------- | ----------- | ---------------------------- | ------ | ----- |
-| ERA5 | scoped | _pending_ | 2 | Weather inputs for DSSAT | Historical climate timeseries |
-| CHIRPS | scoped | _pending_ | 1 | Rainfall inputs for DSSAT | Daily precipitation; already cloud-hosted |
+| CHIRPS | scoped | _pending_ | 1 | Precipitation (RAIN) for DSSAT | Daily precipitation; 0.05° resolution; no auth required |
+| CHIRTS | scoped | _pending_ | 1 | Temperature (TMAX, TMIN) for DSSAT | Daily Tmax/Tmin; 0.05° resolution; no auth required; values in K, converted to °C |
+| AgERA5 | scoped | _pending_ | 2 | SRAD, TMAX, TMIN, wind speed, ETr for DSSAT | 0.1° resolution; Copernicus CDS API key required; SRAD in J m⁻² d⁻¹ (→ MJ), temperatures in K (→ °C) |
 | SoilGrids |  |  |  | Soil inputs for DSSAT |  |
-| Climate API |  |  |  |  | Developed by Jemal |
+| Climate API |  |  |  | Seasonal forecast inputs | Developed by Jemal |
 
 ### Methodological guidance needed
 
