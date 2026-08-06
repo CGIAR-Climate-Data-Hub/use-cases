@@ -33,6 +33,18 @@ updated: 2026-08-06
 
 > Review and support refinement of the Climate and Environmental Crop Risk Index (CRI), including its current hazard formulation, source datasets, and role in B4T crop-country-market prioritization.
 
+## 🔎 Key output — CRI dataset review & CDH recommendations
+
+**→ [B4T CRI review — Data + Methods (live, interactive)](https://cgiar-climate-data-hub.github.io/use-cases/b4t/cri-review.html)**
+
+A dataset-by-dataset audit of all **23** CRI hazard and vulnerability inputs. Each shows its current lineage next to a modern, **openly-licensed** replacement the Hub can host — on the same twelve axes so old and new line up — plus verbatim source definitions, provenance links, and per-section comment boxes. Nine of ten open questions have been answered by B4T (Bert Lenaerts, 2026-07-13); the D-02 failed-season source has been located and grid-verified.
+
+**Companion documents:**
+
+- [Dataset review & CDH recommendations](./methods/dataset-review.md) — the 23-input audit with the CDH integration + **licence** plan
+- [Current CRI method reconstruction](./methods/cri-formulation.md) — the workflow, corrected against B4T's emails
+- [Evidence & source log](./methods/evidence/sources.md) — every source verified live, with licences
+
 ## Brief
 
 ### Background & rationale
