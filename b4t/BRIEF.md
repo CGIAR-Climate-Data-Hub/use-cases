@@ -28,7 +28,7 @@ ca_os_packages: []
 
 # === Metadata ===
 tags: [crop-risk-index, climate-hazard, breeding]
-updated: 2026-07-14
+updated: 2026-08-06
 ---
 
 > Review and support refinement of the Climate and Environmental Crop Risk Index (CRI), including its current hazard formulation, source datasets, and role in B4T crop-country-market prioritization.
@@ -69,6 +69,8 @@ HII methodology also needs careful handling. Current methods note says LLMs were
 
 The `Crop x region priority- 2025.xlsx` workbook shows why this matters operationally. Climate risk is already one of three country prioritization indicators (`Population affected by Climate change`), and value propositions include `Farmer - Less Loss & Risk - CC relevant stress`. CRI therefore sits not only as background analysis, but as potential input to B4T prioritization and breeding-segmentation decisions.
 
+The B4T 2027 call for Packages of Deliverables (circulated August 2026) makes this concrete: five of its headline Development Indicators — reported through the Harmonized Crop Report to crop teams, leaders, funders and reviewers — are the number of people in cropping areas facing changing season length, drought, flooding, high growing-season temperature, and rainfall variability. These correspond one-to-one to the CRI hazards audited here. The quality and currency of the CRI hazard inputs therefore feed directly into B4T's reported climate KPIs, strengthening the case for the modern-open-dataset upgrades identified in the review.
+
 CDH role for now is not to redesign CRI from scratch. Near-term job is to reconstruct current formulation precisely, identify what is defensible, isolate what is outdated or weakly evidenced, and propose practical upgrade options.
 
 ### Objectives
@@ -98,6 +100,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 | 2026-05-08 | CDH outreach email circulated to reviewers with request for critique of CRI method and data choices. |
 | 2026-05-15 | Expert review feedback deadline (Peter Steward outreach round) |
 | 2026-07-13 | Bert Lenaerts (B4T) answered 9 of the review's open questions via giscus; incorporated into the review page (v1.1) on 2026-07-14 |
+| 2026-08 | B4T 2027 PODs call circulated; its climate Development Indicators (people facing changing season length, drought, flooding, high growing-season temperature, rainfall variability) map one-to-one to the CRI hazards — linking the review directly to B4T's reported KPIs. |
 | TBD | CDH and B4T confirm current CRI processing chain against working files / scripts. |
 | TBD | CDH proposes hazard-by-hazard update and harmonization options. |
 | TBD | CDH and B4T agree whether to revise only inputs, or also selected scoring / aggregation rules. |
@@ -144,6 +147,7 @@ What was done: reconstructed the current method (hazard processing, HII, CCC, yi
 - [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — _partly documented (cri-formulation "Where it feeds"); confirm with B4T_
 - [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — _done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)_
 - [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — _pending scope agreement + Go/No-Go_
+- [ ] Position CDH as the supplier of the modern, open climate-hazard layers behind B4T's reported climate indicators (people facing changing season length / drought / flooding / high growing-season temperature / rainfall variability) — CDH + B4T — _tied to the B4T 2027 planning cycle_
 
 ### Data assets for the hub
 
@@ -192,6 +196,7 @@ Updated methods note, revised source inventory, and reproducible processing guid
 - **Risk / open question:** HII matrix contains many extrapolated entries and AI-assisted drafting history, so confidence is uneven across hazard combinations. **Owner:** B4T + CDH **Status:** Open
 - **Risk / open question:** Current CCC scoring is crop-level and may be too coarse for varietal or market-segment decisions. **Owner:** B4T **Status:** Open
 - **Risk / open question:** Yield-response step currently averages expert and LLM estimates; suitability for operational decision support is not yet established. **Owner:** B4T + CDH **Status:** Open
+- **Risk / open question:** B4T's reported climate indicators (Harmonized Crop Report f–j) are currently computed from legacy, mostly 2000–2020-vintage / CMIP5-era inputs; the modern-open replacement path is scoped but not yet adopted. **Owner:** B4T + CDH **Status:** Open
 
 ## Outputs
 
