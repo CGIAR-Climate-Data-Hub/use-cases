@@ -83,6 +83,8 @@ The `Crop x region priority- 2025.xlsx` workbook shows why this matters operatio
 
 The B4T 2027 call for Packages of Deliverables (circulated August 2026) makes this concrete: five of its headline Development Indicators — reported through the Harmonized Crop Report to crop teams, leaders, funders and reviewers — are the number of people in cropping areas facing changing season length, drought, flooding, high growing-season temperature, and rainfall variability. These correspond one-to-one to the CRI hazards audited here. The quality and currency of the CRI hazard inputs therefore feed directly into B4T's reported climate KPIs, strengthening the case for the modern-open-dataset upgrades identified in the review.
 
+These indicators live in the **GloMIP Impact Opportunities Portal & Investor Dashboard** ([glomip.cgiar.org/impact-opportunities](https://glomip.cgiar.org/impact-opportunities)) — CGIAR's breeding prioritization / investor tool, used to set resource-allocation priorities and justify resource mobilisation. Its *IO Reference Manual* (GloMIP, 2025) confirms the portal and the CRI share one spatial backbone (0.05° / 3 arc-min, WGS84, CROPGRIDS crop mask) and that the climate indicators trace to the same legacy layers this review audits. The CRI review therefore doubles as a review of the portal's climate indicators — so the modernization reaches beyond B4T to the wider CGIAR prioritization portal.
+
 CDH role for now is not to redesign CRI from scratch. Near-term job is to reconstruct current formulation precisely, identify what is defensible, isolate what is outdated or weakly evidenced, and propose practical upgrade options.
 
 ### Objectives
@@ -113,6 +115,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 | 2026-05-15 | Expert review feedback deadline (Peter Steward outreach round) |
 | 2026-07-13 | Bert Lenaerts (B4T) answered 9 of the review's open questions via giscus; incorporated into the review page (v1.1) on 2026-07-14 |
 | 2026-08 | B4T 2027 PODs call circulated; its climate Development Indicators (people facing changing season length, drought, flooding, high growing-season temperature, rainfall variability) map one-to-one to the CRI hazards — linking the review directly to B4T's reported KPIs. |
+| 2026-08-06 | GloMIP IO Reference Manual + Indicator Catalogue received; confirm the CRI hazards feed the GloMIP Impact Opportunities Portal on a shared spatial backbone, and that the portal's climate indicators use the same legacy sources audited here. |
 | TBD | CDH and B4T confirm current CRI processing chain against working files / scripts. |
 | TBD | CDH proposes hazard-by-hazard update and harmonization options. |
 | TBD | CDH and B4T agree whether to revise only inputs, or also selected scoring / aggregation rules. |
@@ -125,6 +128,8 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 - [Ericksen 2011 CCAFS report (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/ccafsreport5-climate_hotspots_final.pdf?csf=1&web=1&e=KVBdit) — Mapping hotspots of climate change and food insecurity in the global tropics
 - [HII scoring matrix (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/HII-scoring%20matrix.pdf?csf=1&web=1&e=rGr7fr) — Hazard Intensity and Interactions scoring matrix
 - Crop x region priority- 2025.xlsx — B4T working prioritization workbook linking country, crop, and value-proposition relevance; shareable link _TBC_
+- [GloMIP Impact Opportunities Portal & Investor Dashboard](https://glomip.cgiar.org/impact-opportunities) — the live CGIAR breeding-prioritization tool the CRI climate indicators feed into
+- GloMIP IO Reference Manual (GloMIP, 2025) and IO Indicator Catalogue (244 indicators) — method + data-source documentation for the portal; B4T 2027-planning materials (OneDrive), received 2026-08-06
 - [Dataset review & CDH recommendations](./methods/dataset-review.md) — 23-input audit (current vs recommended), CDH integration + licences
 - [Current CRI formulation note](./methods/cri-formulation.md) — public-safe reconstruction of the current CRI method
 - [Methods folder](./methods/README.md) — backing CSVs (current-state lineage, recommended options), evidence log, feedback loop
