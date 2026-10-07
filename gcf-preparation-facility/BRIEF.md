@@ -38,7 +38,7 @@ tags:
   - hazard-exposure
   - climate-finance
 
-updated: 2026-07-09
+updated: 2026-10-07
 ---
 
 > A Climate Rationale notebook that auto-generates evidence-based climate risk narratives, hazard-exposure tables, and statistical summaries to support Green Climate Fund (GCF) proposal writers. Existing CAP bilateral asset being showcased through the CGIAR Climate Data Hub.
@@ -122,14 +122,23 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 - [ ] Use Cesare's dataset as first non-geospatial pilot of the CDH metadata standard — Brayden Youngberg — agreed 2026-04-29
 - [ ] Mitigation data needs: engage L2 focal point (Augusto Castro — name garbled in transcript, _TBC_) — Cesare Scartozzi — from 2026-04-29 meeting
 - [ ] Connect with Adaptation Insights on hazard ↔ solutions mapping — Peter Steward — from 2026-04-29 meeting
-- [ ] Meet Cesare on notebook next steps — Peter Steward — Cesare requested "first half of July" (2026-06-17 email); due now
+- [ ] Meet Cesare on notebook next steps — Peter Steward — Cesare requested "first half of July" (2026-06-17 email); chased 2026-09-23 ("i can look into it tomorrow/friday"), no reply since
+- [x] Queue the recommended datasets in the CDH ingestion tracker — Peter Steward + Claude — `GCF use-case` sheet added to `asset_mapping/CDH_data-ingestion v2.xlsx` (31 rows) and mirrored in [`data/ingestion-queue.csv`](./data/ingestion-queue.csv), 2026-10-07
+- [x] Adversarial rescreen of every queued dataset (live endpoint, licence, alternatives) — Claude — results in the [evidence log](./methods/evidence/sources.md#rescreen-2026-10-07--queued-datasets-adversarial-re-check); GMIA v5 → GMIA-NEXT swap, EX-ACT route change, 2026-10-07
+- [ ] Theme 2 extreme-events request to the Atlas hazards pipeline — Peter Steward — questions block in [`methods/ingestion-notes.md` §2](./methods/ingestion-notes.md); relay to the hazards session, then finalise the request
+- [ ] Message Cesare (review comments, final dataset, extraction method, DOI, champion role) and MFL/Mosaic (host/federate Theme 8 layers) — Peter Steward — drafts in `outputs/` (not committed)
+- [ ] Author CDH metadata records for the P1 rows — Brayden Youngberg + Peter Steward — **after `cdh-metadata-standard` v0.4.0 lands** (open PR #35); order in `ingestion-notes.md` → Follow-ons
+- [ ] `climate-rationale` skill — _TBC_ — issue text drafted (`outputs/skills-issue-climate-rationale.md`); build after ≥1 theme is catalogued
 
 ### Data assets for the hub
 
 The full per-dataset audit — all ~40 datasets behind the nine notebook sections, with verified source URLs, **licences** (open → mirror-hostable vs non-commercial → federate/link only), and how each can be **summarised under a geoselector** or **reached by an AI skill** (federate vs rehost) — lives in the review page and evidence log, not here:
 
 - **[Review page — Data tab](https://cgiar-climate-data-hub.github.io/use-cases/gcf-preparation-facility/gcf-prep-review.html)** — dataset detail per notebook section + the "Delivering the data" delivery-route analysis.
-- **[Evidence log](./methods/evidence/sources.md)** — one entry per dataset: URL, licence, verification date, derived-products guidance.
+- **[Evidence log](./methods/evidence/sources.md)** — one entry per dataset: URL, licence, verification date, derived-products guidance; **Rescreen 2026-10-07** table at the end.
+- **[Ingestion queue](./data/ingestion-queue.csv)** — the 31 rows queued on 2026-10-07 (Pete's per-theme P1/P2 calls), mirrored as the `GCF use-case` sheet of the CDH ingestion tracker; route, licence, complexity, rescreen verdict, proposed lead per row.
+- **[Ingestion notes](./methods/ingestion-notes.md)** — the decision record and per-theme working notes: Theme 2 hazards request, spatial-vs-method split, Theme 5 document-registry spec, EX-ACT / WorldCover designs, the OECD/Data360 client, the safeguards licence split.
+- **[Rationale map](./data/rationale-map.yaml)** — machine-readable GCF section → theme → dataset → Hub route/status index for AI agents and the planned `climate-rationale` skill.
 
 Section-level summary (memo status: **IN CR** = already in the Climate Rationale notebook; **PARTIAL** = partly present, needs additions; **NEW** = not yet built; **DEPRIORITISED** = in the memo but since parked). All sections are currently at Hub status `scoped`.
 
@@ -173,6 +182,8 @@ Quarto + Observable JS notebook served at <https://notebooks-climaterationale.ad
 
 | Date | Attendees | Summary | Decisions | Recording / transcript |
 | --- | --- | --- | --- | --- |
+| 2026-10-07 | Peter Steward (coordinator decision; champion unresponsive) | Proceed on the review's recommended datasets without further champion input. Per theme: 1 in hand · 2 technical note + request to the Atlas hazards pipeline · 3 split spatial data vs method notes (GLEAM-X, iCLEANED) · 4 P1 + P2, not P3 · 5 test Climate Watch, spec a document-registry parquet, chase Cesare's extraction dataset · 6 EX-ACT as engine, WorldCover derived product, EDGAR P1, P2s parked · 7 with 5, P1 only · 8 P1 + promote LandMark, KBA, FAO SDG 5.a.x; ask MFL/Mosaic · 9 P1 | Queue 31 rows in the ingestion tracker; rescreen each; metadata after v0.4.0; `climate-rationale` skill spec'd not built | [`methods/ingestion-notes.md`](./methods/ingestion-notes.md) |
+| 2026-09-17 | Cesare Scartozzi, Peter Steward, Bia Carneiro | "Climate Data Hub (input from CACC1)" — resume CACC1 contributions to the Hub (30 min, Cesare's invite) | _TBC_ — no transcript available | Teams meeting; Cesare posted the CR notebook link in the meeting chat |
 | 2026-06-17 | Cesare Scartozzi → Peter Steward, Brayden Youngberg (email) | Partial multilateral-climate-funds dataset delivered (CSV, 5,115 projects); notebook concept: "allow users to select one or multiple countries to see past and ongoing investment pipelines, so that they can identify gaps, complementary projects, or examples for project development" | Share incomplete dataset now, final sub-classifiers end June; meet first half of July | `use_cases/gcf-preparation-facility/example dataset/` |
 | 2026-04-29 | Peter Steward, Cesare Scartozzi, Brayden Youngberg | Implementation scope: get a usable v1 by August; federated S3 + STAC catalog + use-case wiki as MVP. Cesare demoed the MCF SQL dataset (~2,100 projects, 15k documents); agreed to turn it into an Atlas-style interactive notebook (Cesare Jupyter → Brayden Quarto). NAP/NDC automation withdrawn by Cesare | Federate rather than mirror NEX-GDDP-CMIP6; Brayden owns the metadata standard; dataset = first non-geospatial metadata pilot; DOI via CGSpace/Dataverse | `Climate_data_hub/meetings/2026.04.29 - CDH GCF Use-case.docx` |
 | 2026-03-17 | Peter Steward, Cesare Scartozzi, Bia Carneiro, Brayden Youngberg | CACC1 × CACC2 integration — repurpose the Atlas Climate Rationale notebook for the GCF pipeline | Short concept memo to follow from Cesare | `Climate_data_hub/meetings/2026.03.17 - GCF Use-case - CACC1 & CACC2 integration.docx` |
@@ -181,6 +192,7 @@ _Source of truth for transcripts: `Climate_data_hub/meetings/` in OneDrive._
 
 ## Risks & open questions
 
+- **Champion responsiveness** — no comments on the review page (shared 2026-07-14, chased 2026-09-23); MCF dataset sub-classifiers, extraction method and DOI outstanding since June; Cesare moved from the climate-security team to ImpactSF (2026-09-09) — confirm he remains champion or add a CACC1 co-champion. **Owner:** Peter Steward **Status:** open — message drafted 2026-10-07
 - **Geographic coverage** — crop-exposure pipeline is Sub-Saharan Africa only (MapSPAM SSA); Cesare calls this "the biggest limitation" — target is all non-Annex-I countries; active GCF pipeline includes Syria, Iraq, Sri Lanka, Egypt. **Owner:** _TBC_ **Status:** open
 - **Hazard ↔ solutions mapping gap** — Cesare: what would be "super useful… that we don't have" is a mapping of CGIAR-deliverable climate solutions to hazards/vulnerability; a prior GPT-generated attempt fabricated references. Route via Adaptation Insights. **Owner:** Peter Steward **Status:** open
 - **HSH-max interpretation** — Brayden Youngberg — what does the current implementation actually compute vs what was intended?

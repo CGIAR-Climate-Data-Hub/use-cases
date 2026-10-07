@@ -1,0 +1,136 @@
+# Climate-rationale map — GCF Preparation Facility
+#
+# Machine-readable index an agent can read to (1) find the structure of a climate rationale
+# as GCF proposals need it, (2) see which datasets serve each section, (3) learn where each
+# dataset lives (Hub record, federated endpoint, or not yet available) and how it may be used.
+#
+# Sources: review page Tables 1-10 (public/gcf-preparation-facility/gcf-prep-review.html),
+# Cesare Scartozzi's GCF data-requirements memo (2026-01-31), Pete's per-theme decisions
+# 2026-10-07. Dataset `queue_id` values match the `Dataset` column of data/ingestion-queue.csv;
+# `hub_record` is the CDH catalog id once a record exists (https://cgiar-climate-data-hub.github.io/catalog/<id>/).
+# Status vocabulary: held | published | queued | deferred | parked.
+version: "2026-10-07"
+hub:
+  llms_txt: https://cgiar-climate-data-hub.github.io/llms.txt
+  catalog_json: https://cgiar-climate-data-hub.github.io/catalog.json
+  record_url: "https://cgiar-climate-data-hub.github.io/catalog/{id}/"
+  metadata_standard: https://github.com/CGIAR-Climate-Data-Hub/cdh-metadata-standard
+templates:
+  gcf_concept_note: "GCF Concept Note template v3.1"
+  gcf_funding_proposal: "GCF Funding Proposal template"
+  reference_output: "Togo SAT rapid climate-risk assessment (GCA + Alliance, April 2025), Table 5 / Figure 5"
+boundaries:
+  dataset: World Bank Admin Boundaries (GAUL 2024 codes used by the CR notebook)
+  status: queued   # 'in-progress' on the tracker's Priority Data sheet
+  levels: [adm0, adm1, adm2]
+
+sections:
+  - id: 1
+    theme: Climate trends & projections
+    serves: {cn: [C.1], fp: [B.1]}
+    question: What is the temperature and rainfall baseline and trajectory here, by season and scenario?
+    status: held
+    fragment_types: [baseline_value, trend_description, projection_value, warming_stripes]
+    datasets:
+      - {queue_id: null, title: CHIRPS v3 daily precipitation, hub_record: chirps-v3-daily, route: federate, licence: CC0, admin: [adm0, adm1], status: published}
+      - {queue_id: null, title: CHIRTS-ERA5 daily temperature, hub_record: chirts-era5-daily, route: federate, licence: CC BY 4.0, admin: [adm0, adm1], status: published}
+      - {queue_id: null, title: NEX-GDDP-CMIP6 (18-GCM ensemble, 4 SSPs), hub_record: null, route: federate, licence: CC0, admin: [adm1], status: held, note: served Africa-only via the CR notebook parquet}
+  - id: 2
+    theme: Extreme events
+    serves: {cn: [C.1], fp: [B.1, D.1]}
+    question: How often do unusual / extreme events hit, historically vs projected, and is the frequency climbing?
+    status: held
+    fragment_types: [event_frequency, zscore_class, scenario_comparison]
+    datasets:
+      - {queue_id: null, title: Extreme-event z-score classification (derived from Section 1, ensemble-mean, in-notebook), hub_record: null, route: derive-then-host, licence: CC0 (derived), admin: [adm1], status: held}
+      - {queue_id: null, title: extreme_events_frequency (per-GCM, hist vs projected) — requested from the Atlas hazards pipeline, hub_record: null, route: derive-then-host, licence: CC0 (derived), admin: [adm0, adm1], status: queued, note: see methods/ingestion-notes.md section 2}
+  - id: 3
+    theme: Crop & livestock hazard exposure
+    serves: {cn: [C.1, C.2], fp: [B.1, D.1]}
+    question: How much crop and livestock production value is exposed to compound hazards, where, under which scenario?
+    status: partial
+    fragment_types: [exposure_table, exposed_value_usd, exposed_area_ha]
+    datasets:
+      - {queue_id: null, title: MapSPAM 2020, hub_record: spam2020, route: mirror, licence: CC BY-SA 4.0, admin: [adm1], status: published, note: SSA run only in the CR notebook}
+      - {queue_id: null, title: GLW4 gridded livestock 2020, hub_record: glw4-2020, route: mirror, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: published}
+      - {queue_id: null, title: WRI Aqueduct 4.0 (bws, bwd), hub_record: null, route: mirror | derive-then-host, licence: CC BY 4.0, admin: [adm0, adm1], status: queued, note: on the tracker's Priority Data sheet (B4T row) — add GCF to its Use Case}
+      - {queue_id: AQUASTAT GMIA v5, title: Irrigated area — GMIA-NEXT (30 m, 2023/24) replacing GMIA v5, hub_record: null, route: derive-then-host, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: FAO FishStat - aquaculture value, title: FAO FishStat aquaculture value, hub_record: null, route: derive-then-host, licence: CC BY-NC-SA 3.0 IGO, admin: [adm0], status: queued}
+      - {queue_id: FAO GLEAM / GLEAM-X (method), title: FAO GLEAM (method note), hub_record: null, route: tool, licence: AGPL-3 (code); data verify, admin: [], status: queued, repo: https://github.com/un-fao/GLEAM, portal: https://www.fao.org/gleam/dashboard/en/}
+      - {queue_id: iCLEANED (method), title: iCLEANED / CLEANED livestock decision-support tool (method note), hub_record: null, route: tool, licence: MIT (code); app terms TBC, admin: [], status: queued, repo: https://github.com/CIAT/cleaned, portal: https://alliancebioversityciat.org/tools-innovations/cleaned}
+  - id: 4
+    theme: Vulnerability & socioeconomic context
+    serves: {cn: [Exec Summary], fp: [D.4]}
+    question: How vulnerable are the people in the project area, on composite indices and sectoral measures?
+    status: partial
+    fragment_types: [index_value, prevalence, ranking_sentence]
+    datasets:
+      - {queue_id: null, title: World Bank WDI (poverty, GDP by sector), hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: held}
+      - {queue_id: null, title: WorldPop population, hub_record: null, route: mirror, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: INFORM Risk (global), title: INFORM Risk, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued, endpoint: https://drmkc.jrc.ec.europa.eu/Inform-Index/API/InformAPI/}
+      - {queue_id: FEWS NET, title: FEWS NET acute food insecurity + livelihood zones, hub_record: null, route: federate, licence: open (USAID), admin: [adm0, adm1, adm2], status: queued, endpoint: https://fdw.fews.net/api/}
+      - {queue_id: DHS Program (aggregate indicators), title: DHS Indicator API (subnational aggregates), hub_record: null, route: federate, licence: open aggregate API, admin: [adm0, adm1], status: queued, endpoint: https://api.dhsprogram.com/rest/dhs/}
+      - {queue_id: Meta Relative Wealth Index, title: Meta Relative Wealth Index (admin table), hub_record: null, route: derive-then-host, licence: CC0, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: GDL Subnational HDI / Area Database, title: GDL Subnational HDI, hub_record: null, route: derive-then-host, licence: NC, admin: [adm1], status: queued}
+      - {queue_id: IPC / Cadre Harmonise, title: IPC / Cadre Harmonisé phases, hub_record: null, route: federate, licence: CC BY-NC-SA 3.0 IGO, admin: [adm1, adm2], status: queued}
+      - {queue_id: ND-GAIN Country Index, title: ND-GAIN, hub_record: null, route: mirror, licence: unclear, admin: [adm0], status: queued}
+      - {queue_id: INFORM Subnational, title: INFORM Subnational (selected regions), hub_record: null, route: mirror, licence: CC BY 4.0, admin: [adm1, adm2], status: queued}
+      - {queue_id: WHO/UNICEF JMP (WASH), title: WHO/UNICEF JMP WASH, hub_record: null, route: federate, licence: CC BY-NC-SA 3.0 IGO (reports), admin: [adm0], status: queued, endpoint: https://sdmx.data.unicef.org/ws/public/sdmxapi/rest/}
+      - {queue_id: UNDP HDI, title: UNDP HDI, hub_record: null, route: mirror, licence: CC BY 3.0 IGO, admin: [adm0], status: queued}
+  - id: 5
+    theme: NDC & NAP alignment
+    serves: {cn: [A.16], fp: [D.5]}
+    question: What has the country pledged for agriculture, land use and water, and does this project deliver on it?
+    status: deprioritised
+    fragment_types: [ndc_sector_coverage, target_statement, document_link]
+    datasets:
+      - {queue_id: Climate Watch (NDC content), title: Climate Watch NDC content, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued, endpoint: https://www.climatewatchdata.org/api/v1/ndcs/}
+      - {queue_id: Climate policy document registry (derived), title: NDC / NAP / GCF country-programme document registry, hub_record: null, route: derive-then-host, licence: link + cite, admin: [adm0], status: deferred}
+  - id: 6
+    theme: Impact potential & beneficiary estimates
+    serves: {cn: [A.6, A.7], fp: [D.1, E.3]}
+    question: How many people benefit, and what is the tCO2e mitigation impact?
+    status: new
+    fragment_types: [beneficiary_count, activity_data_table, tco2e_estimate]
+    datasets:
+      - {queue_id: null, title: GLW4 (livestock activity data), hub_record: glw4-2020, route: mirror, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: published}
+      - {queue_id: EDGAR / FAOSTAT emissions, title: EDGAR / FAOSTAT baseline emissions, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued}
+      - {queue_id: ESA WorldCover (admin-summary product), title: WorldCover admin class areas + change, hub_record: null, route: derive-then-host, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: queued, federated_source: s3://esa-worldcover/}
+      - {queue_id: IPCC Emission Factor Database (EFDB), title: IPCC EFDB Tier-1 factors, hub_record: null, route: derive-then-host, licence: unclear, admin: [], status: queued}
+      - {queue_id: FAO EX-ACT (tool), title: FAO EX-ACT (computation engine), hub_record: null, route: tool, licence: AGPL-3.0 (code), admin: [], status: queued, repo: https://github.com/un-fao/exact-django-webapp}
+      - {queue_id: null, title: GYGA / WOCAT / national census, hub_record: null, route: null, licence: NC / varies, admin: [], status: parked}
+  - id: 7
+    theme: Theory of change & GCF portfolio evidence
+    serves: {cn: [], fp: [B.2, D.2]}
+    question: What interventions are shown to work here, and what comparable food / land / water projects have the funds already financed?
+    status: new
+    fragment_types: [comparable_projects, evaluation_rating, evidence_citation]
+    datasets:
+      - {queue_id: null, title: CACC1 multilateral-climate-funds dataset (5,115 projects), hub_record: null, route: derive-then-host, licence: TBD, admin: [adm0], status: held, note: partial CSV 2026-06-17; final version pending champion}
+      - {queue_id: World Bank IEG evaluations, title: World Bank IEG, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued}
+      - {queue_id: OECD CRDF (Rio markers), title: OECD CRDF, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued, endpoint: https://sdmx.oecd.org/public/rest/}
+      - {queue_id: IATI Registry / Datastore, title: IATI Datastore, hub_record: null, route: federate, licence: open (per publisher), admin: [adm0], status: queued, endpoint: https://api.iatistandard.org/datastore/, note: subscription key required}
+  - id: 8
+    theme: Safeguards & gender screening
+    serves: {cn: [C.4], fp: [G.1, G.2]}
+    question: What environmental, social and gender risks does the project zone carry?
+    status: new
+    fragment_types: [overlay_statistic, risk_tier, index_value]
+    datasets:
+      - {queue_id: WDPA / Protected Planet (overlay stat), title: WDPA overlay statistic, hub_record: null, route: derive-then-host, licence: NC no-redistribute, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: CSPD / CSPDxCF (Climate Security Programming Dashboard), title: CSPD country risk tier, hub_record: null, route: federate, licence: CC BY-NC 4.0, admin: [adm0], status: queued}
+      - {queue_id: Global Forest Watch, title: GFW tree-cover loss zonal stats, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: queued, endpoint: https://data-api.globalforestwatch.org/}
+      - {queue_id: LandMark (Indigenous & community lands), title: LandMark overlay flag, hub_record: null, route: derive-then-host, licence: CC BY-SA 4.0, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: Key Biodiversity Areas, title: KBA overlay statistic, hub_record: null, route: derive-then-host, licence: NC by request, admin: [adm0, adm1, adm2], status: queued}
+      - {queue_id: FAO SDG 5.a.1 / 5.a.2 + Land Portal, title: Gender land-tenure indicators, hub_record: null, route: federate, licence: FAO open terms, admin: [adm0], status: queued}
+  - id: 9
+    theme: Financial context & justification
+    serves: {cn: [D.1, D.2, D.3, D.4], fp: [B.5, C.1]}
+    question: Why is GCF finance needed and additional, and what do comparable approved projects cost?
+    status: new
+    fragment_types: [finance_flow_total, fiscal_indicator, benchmark_sentence]
+    datasets:
+      - {queue_id: OECD DAC CRS, title: OECD DAC CRS, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued, endpoint: https://sdmx.oecd.org/public/rest/}
+      - {queue_id: OECD CRDF (Rio markers), title: OECD CRDF, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: queued}
+      - {queue_id: IMF fiscal (Fiscal Monitor / GFS) via WB Data360, title: IMF Fiscal Monitor via Data360, hub_record: null, route: federate, licence: CC BY 4.0 via Data360, admin: [adm0], status: queued, endpoint: https://data360api.worldbank.org/data360/}
+      - {queue_id: null, title: World Bank IDS (debt) via Data360, hub_record: null, route: federate, licence: CC BY 4.0, admin: [adm0], status: parked, note: P2}

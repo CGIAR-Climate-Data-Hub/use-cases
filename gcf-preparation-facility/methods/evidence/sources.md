@@ -183,3 +183,54 @@ IUCN Red List, IPC, UNICEF MICS, OECD SIGI, OECD DAC CRS, IMF Fiscal Monitor,
 World Bank IEG, IFAD IOE, CPI (report-PDF grant), ACLED (returns HTTP 415 to
 link-checkers), Climate Watch (its TLS certificate had **expired** at the
 2026-07-09 check — provider-side, should renew; confirm in a browser).
+
+---
+
+## Rescreen 2026-10-07 — queued datasets (adversarial re-check)
+
+Every dataset queued for ingestion on 2026-10-07 (see
+[`../../data/ingestion-queue.csv`](../../data/ingestion-queue.csv) and
+[`../ingestion-notes.md`](../ingestion-notes.md)) was re-tested from this machine with `curl`
+(browser UA, 25 s timeout) against the live access route, and screened for a stronger open
+alternative — including entries added to the CDH `climate-assets` catalogue since July. Rows new
+to this log carry the licence as read on the day.
+
+| Dataset | Access route tested | HTTP | Licence (2026-10-07) | Verdict |
+| --- | --- | --- | --- | --- |
+| **GMIA-NEXT** *(new)* | https://zenodo.org/records/17627111 (API) | 200 | **CC BY 4.0** (Zenodo record); 30 m, 2023/24 season, v0; 5.2 GB binary + continental probability GeoTIFFs | **Supersedes AQUASTAT GMIA v5** for irrigated extent — derive admin shares, don't mirror 30 m |
+| AQUASTAT GMIA v5 | https://www.fao.org/aquastat/en/geospatial-information/global-maps-irrigated-areas/ | 200 | open (cite-as) | legacy "% equipped" only |
+| FAO FishStat | https://www.fao.org/fishery/en/fishstat | 200 | CC BY-NC-SA 3.0 IGO | keep P2 |
+| INFORM Risk | https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Risk/API (endpoint `…/Inform-Index/API/InformAPI/countries/Scores/?WorkflowId=…&CountryIso3Codes=TGO&IndicatorId=INFORM`) | 200 (JSON, ~2 MB all countries) | CC BY 4.0 (EC reuse policy) | keep P1; confirm filter params |
+| INFORM Subnational *(new)* | https://drmkc.jrc.ec.europa.eu/inform-index/INFORM-Subnational-Risk | 200 | CC BY 4.0 | P2, regional coverage |
+| **FEWS NET FDW** *(new)* | https://fdw.fews.net/api/ipcphase/?country_code=TG | 200 (JSON, no key) | open — US Government / USAID, attribution | keep P1 |
+| DHS Indicator API | https://api.dhsprogram.com/rest/dhs/data?countryIds=TG&breakdown=subnational | 200 (JSON) | aggregate API open; microdata restricted | keep P1; DHS now ships an MCP server |
+| **Meta RWI** *(new)* | https://data.humdata.org/api/3/action/package_search?q=relative%20wealth%20index | 200 | CC0 | keep P1 |
+| **GDL SHDI** *(new)* | https://globaldatalab.org/shdi/ | 200 | non-commercial + attribution | keep P1 derive-then-host |
+| IPC / Cadre Harmonisé | https://api.ipcinfo.org/ (docs path 404) | 200 / 404 | CC BY-NC-SA 3.0 IGO | keep P1; key-gated |
+| ND-GAIN | https://gain.nd.edu/our-work/country-index/download-data/ | 200 | **no licence text on page** | P2; still verify |
+| WHO/UNICEF JMP | https://sdmx.data.unicef.org/ws/public/sdmxapi/rest/dataflow/UNICEF/WASH_HOUSEHOLDS/ (data query `…/rest/data/UNICEF,WASH_HOUSEHOLDS,1.0/TGO.WS_PPL_W-ALB.?format=csv`) | 200 (CSV) | CC BY-NC-SA 3.0 IGO (reports) | P2 federate SDMX |
+| UNDP HDI | https://hdr.undp.org/data-center/documentation-and-downloads | 200 | CC BY 3.0 IGO | P2 |
+| Climate Watch | /api/v1/ndcs/TGO/text · /ndcs/TGO/content_overview · /ndcs?filter=sectoral | 200 / 200 / 200 | CC BY 4.0 | works; `location` ignored on list endpoint |
+| EDGAR | https://edgar.jrc.ec.europa.eu/dataset_ghg2024 | 200 | CC BY 4.0 | keep P1 |
+| FAOSTAT emissions | bulk https://bulks-faostat.fao.org/production/Emissions_Totals_E_All_Data.zip · REST | 200 (14 MB) · 401/timeout | CC BY 4.0 | bulk for Hub copy |
+| **ESA WorldCover** *(new)* | https://registry.opendata.aws/esa-worldcover-vito/ · s3://esa-worldcover/ (no-sign) | 200 · 200 | **CC BY 4.0**; STAC endpoint | derive admin product; federate 10 m |
+| IPCC EFDB | https://www.ipcc-nggip.iges.or.jp/EFDB/main.php | 200 | none stated; IPCC © | on hold — DB being rebuilt ("early 2026") |
+| World Bank IEG | https://ieg.worldbankgroup.org/data · DDH API | 403 · 429 | CC BY 4.0 (logged) | verify in browser |
+| **OECD CRDF** *(new)* | https://sdmx.oecd.org/public/rest/dataflow/all | 200 (SDMX 2.1) | CC BY 4.0 (from Jul 2024) | keep P1; same client as CRS |
+| OECD DAC CRS | https://sdmx.oecd.org/public/rest/dataflow/OECD.DCD.FSD/DSD_CRS@DF_CRS/ | 200 | CC BY 4.0 (from Jul 2024) | keep P1 |
+| **IATI Datastore** *(new)* | https://developer.iatistandard.org/ (endpoint `api.iatistandard.org/datastore/activity/select`) | **401** without key — subscription required | open (per publisher) | keep P1; register a Hub key |
+| WDPA / Protected Planet | https://api.protectedplanet.net/documentation | 200; token via request form | NC, no-redistribute | derive overlay stat only |
+| **CSPD / CSO** *(new)* | https://cso.cgiar.org/ | 200 | CC BY-NC 4.0 | federate link; coordinate with CSO |
+| **Global Forest Watch** *(new)* | https://data-api.globalforestwatch.org/dataset/umd_tree_cover_loss | 200 | **CC BY 4.0** (dataset metadata; v1.9.1) | keep P1 |
+| **LandMark** *(new)* | https://www.landmarkmap.org/data-methods/access-data | 200 | **CC BY-SA 4.0** (June 2026) + LandMark ToS; form-gated | promoted P1; ShareAlike on derivatives |
+| **Key Biodiversity Areas** *(new)* | https://www.keybiodiversityareas.org/en/request-gis-data | 200 | non-commercial via request form (5–10 working days); commercial via IBAT | promoted P1; budget lead time |
+| FAO SDG 5.a.2 | https://www.fao.org/sustainable-development-goals-data-portal/data/indicators/5a2-women-s-equal-rights-to-land-ownership/en | 200 | FAO open terms | promoted P1 |
+| Land Portal | `landportal.org` (403 to automated fetch — excluded from the link checker) | 403 (bot) | — | verify in browser |
+| **WB Data360 (IMF FM, IDS)** *(new)* | https://data360api.worldbank.org/data360/indicators?datasetId=IMF_FM · data?DATABASE_ID=WB_IDS&REF_AREA=TGO | 200 · 200 | CC BY 4.0 | keep P1 route for IMF |
+| **FAO EX-ACT codebase** *(new)* | https://github.com/un-fao/exact-django-webapp · https://exact.apps.fao.org/api/swagger/ | 200 · 200 (SPA shell, no API) | **AGPL-3.0-or-later** (code); app login | engine via self-host |
+| **GLEAM Data Explorer** *(new)* | https://www.fao.org/gleam/dashboard/en/ → Shiny explorer | 200 → 202 (JS) | catalogue note: CC-BY-4.0 + FAO stats terms — **unverified** | verify in browser; may resolve the GLEAM licence conflict |
+| **Annual gridded livestock 1961–2021** *(candidate)* | https://essd.copernicus.org/preprints/essd-2025-175/ | 200 | open (ESSD) | time-series complement to GLW4; not queued |
+
+Alternatives screened and **not** adopted: satellite foundation-model wealth products (arXiv
+2604.23166 — preprint, licence unconfirmed; RWI CC0 stays), Sea Around Us (NC; only if marine
+sub-national detail is needed), GYGA / WOCAT (parked P2), UNICEF MICS (dropped P3).
