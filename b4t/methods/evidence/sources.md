@@ -8,6 +8,24 @@ Permissive (CDH can host/redistribute): CHIRPS v3 (public domain + CC-BY 4.0); N
 
 One entry per external source consulted, with what it verified and when. Candidate-dataset claims in [../dataset-review.md](../dataset-review.md) must trace to an entry here. Verified live via WebFetch on the date shown.
 
+## Where the CRI feeds — GloMIP Impact Opportunities Portal
+
+The CRI hazard layers are the same inputs behind the climate indicators of the **GloMIP Impact Opportunities Portal & Investor Dashboard** (<https://glomip.cgiar.org/impact-opportunities>) — CGIAR's breeding prioritization / investor tool, used to set resource-allocation priorities and justify resource mobilisation for proposals. Documented in the *IO Reference Manual* (GloMIP, 2025; authors Lenaerts & Demont) and its *IO Indicator Catalogue* (244 indicators). Confirmed 2026-08-06 from those two documents.
+
+Shared spatial backbone (portal Appendix B parser + CRI preprocessing are identical): rasters at **0.05° (3 arc-min), WGS84 EPSG:4326, global −180…180 / −90…90**, climate layers overlaid with **CROPGRIDS** (Tang et al. 2024) area-harvested-per-crop. "# people facing hazard X" = hazard × population × cropland, allocated to national-crop / market-segment level by statistical downscaling. So the CRI review below doubles as a review of the portal's climate indicators.
+
+The portal's climate indicators, their **current** sources (per the catalogue), the CRI hazard they correspond to, and the CDH modern-open replacement recommended in [../dataset-review.md](../dataset-review.md):
+
+| GloMIP climate indicator | Current source (catalogue) | Vintage | CRI hazard | CDH recommended replacement |
+| --- | --- | --- | --- | --- |
+| Population facing drought | Thornton 2023 (unpublished); RTBMaps FailedSeason; Hyman 2008 | 2014 grid | D-01 / D-02 | CDH SPEI (CHIRPS-CHIRTS-ERA5); GeoWRSI-on-CHIRPS |
+| Population facing flooding | Thornton 2023 (unpublished); WRI Aqueduct Floods | 2020, CMIP5-era | F-01/F-02/F-03 | Global Flood Database (Tellman 2021); GIRI (CMIP6, riverine) |
+| Population facing high temperature | Thornton 2023 (unpublished); Tuholske (GEHE) | 1983–2016 | T-01 / T-03 | GEHE updated + NASA NEX-GDDP-CMIP6 v2 |
+| Population facing changing rainfall | Thornton 2023 (unpublished); WRI Aqueduct Water Risk Atlas | 2025 | R-01/R-02/R-03 | CHIRPS v3 rainfall CV; GAEZ v5 LGP (CMIP6); NEX-GDDP |
+| Population facing salinity | ISRIC Global Soil Salinity; FAO Excess Salts (HWSD) | 2016 / 2012 | S-01/S-02 | ISRIC SoilGrids 2.0; FAO GSASmap (licence TBC) |
+
+Every hazard traces to **Thornton 2023, "Climate hazards in agricultural areas" (unpublished, pers. comm.)** — the legacy CCAFS-lineage layer flagged throughout this review. These indicators are shown in an investor-facing dashboard, so their currency is a credibility as well as a technical concern.
+
 ## Internal CDH assets (build on these first)
 
 Per the CDH team (July 2026). Recommendations build on these ready-to-adopt products first.
