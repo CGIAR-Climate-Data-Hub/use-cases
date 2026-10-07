@@ -83,17 +83,88 @@ only place these products can be built. Before specifying anything, ask it what 
 >
 > Please answer with paths and variable names rather than prose where you can.
 
-### Part B — request skeleton (finalise after Part A is answered)
+### Part A — answered (hazards session, 2026-10-07)
 
-| Field | Draft |
+The hazards session answered with a verified inventory
+(`hazards_prototype/HANDOVER_2026-10-07_gcf-theme2-extremes-inventory.md`, untracked there).
+Headline: **a per-GCM frequency-of-extremes table already exists and is public.** The
+re-verification below was run from this machine on 2026-10-07 with `aws s3 ls --no-sign-request`
+and DuckDB over the public HTTPS endpoint, always with `read_parquet(…, hive_partitioning=false)`
+(the `key=value/` path segments otherwise override the stored `timeframe` column and hide the
+period dimension).
+
+| Claim | Verified |
 | --- | --- |
-| Product | `extreme_events_frequency` — per admin unit × hazard × scenario × period: share of years classified *unusual* (≥1σ) and *extreme* (≥2σ) vs the 1995–2014 baseline; one row per GCM plus ensemble median and 17–83 % range |
-| Hazards | PTOT (both tails), TAVG, TMAX, NTx35, NDWS, NDWL0, HSH (match the CR notebook's threshold rows) |
-| Scenarios × periods | SSP1-2.6, 2-4.5, 3-7.0, 5-8.5 × 2021–40, 2041–60, 2061–80, 2081–2100 + historical 1981–2020 observed (CHIRPS v3 / CHIRTS-ERA5) |
-| Admin | adm0 + adm1 (adm2 later), GAUL 2024 codes |
-| Schema | Parquet; columns `adm0_code, adm1_code, hazard, scenario, period, gcm, p_unusual, p_extreme, n_years, baseline, threshold_sd`; keyed so it joins the existing CR projections parquet |
-| Known fix to fold in | Togo SAT labels Z = 1 / Z = 2 inconsistently with its annex — set the threshold labels explicitly in the product metadata so the template cannot inherit the ambiguity |
-| Delivery | S3 under the canonical prefix from Part A Q5; CDH record via the `datacube` extension; notebook reads it in place of the client-side classification |
+| `s3://digital-atlas/domain=climate/type=hazard-indices/source=nex-gddp-cmip6/region=africa/processing=hazard-change/timeframe=annual/variable=haz_freq.parquet` — 5.4 MB, dated 2026-06-24 | ✅ listed (5,439,142 B); companions `haz_freq_ensemble`, `ntx_perc_area_by_model`, `thi_perc_area_by_model`, `ptot_change_by_model`, `ptot_diff_by_model` (+ `_ensemble` twins) present |
+| Schema `iso3, admin0_name, admin1_name, admin2_name, variable, value, scenario, model, timeframe, severity, hazard, crop, hazard_user` | ✅ |
+| 12,467,664 rows; 4,292 distinct adm2; **18 GCMs** | ✅ (ACCESS-CM2 … TaiESM1, list matches the briefing) |
+| `historic/1995-2014` + 4 SSPs × 4 periods = 17 scenario × period combinations, 733,392 rows each | ✅ |
+| `hazard ∈ {NDWS (drought), NDWL0 (wet)}` only; `severity ∈ {severe, extreme}` only; `variable ∈ {frequency (0–1), frequency_n (0–19 years)}` | ✅ |
+| `haz_freq_ensemble.parquet` = `mean, min, max, sd` across GCMs (no `model` column) | ✅ |
+| Defect: `ntx_perc_area_by_model.variable` holds the raw layer name (e.g. `ssp126_EC-Earth3_2041-2060_NTx35-mean-G21_extreme`) instead of `perc_area`; `thi_perc_area_by_model.variable = perc_area` is clean | ✅ |
+| Thresholds (`metadata/haz_classes.csv`): NDWS severe > 20 d, extreme > 25 d; NDWL0 severe > 5 d, extreme > 8 d; every other hazard (NTx35, NTx40, TAVG, PTOT, HSH_max, THI_max, NDD, TAI) already has Moderate / Severe / Extreme thresholds | ✅ |
+| SEC4 (`R/2.2_haz_change.R:633-637`) is `haz_choices <- c("NDWS","NDWL0")`, `sev_classes <- c("Severe","Extreme")` | ✅ |
+| **Prefix discrepancy — the July audit had it backwards.** Canonical hazard-exposure tiers are `domain=hazard_exposure/source=nex-gddp-cmip6/region=ssa/…/variable=vop_nominal-usd21/period=jagermeyr/model=ENSEMBLEmean/severity={severe,moderate,extreme}/int=multi-hazard.parquet` (~63 MB each + `.parquet.json` sidecar), written 2026-10-06 — the path the CR notebook reads. `source=atlas_cmip6/…` is the stale 2025-06 tree | ✅ both prefixes listed |
+| No stored z-score / percentile-class product exists, per GCM or ensemble; only threshold classes | not re-checked here (repo grep by the hazards session) |
+
+Two consequences for Theme 2: the notebook can read `haz_freq.parquet` today for drought and
+waterlogging frequency with full per-GCM spread; and the request is an **extension of SEC4**, not
+a new product. The NEX-GDDP historical run ends 2014, so a WMO 1991–2020 baseline is an
+observational-pipeline question, not part of this ask.
+
+### Part B — the data request (ready to send; paste-ready copy in `outputs/request-hazards-theme2-2026-10-07.md`)
+
+> **Request to the hazards pipeline — extend SEC4 `haz_freq` for GCF Prep Facility Theme 2**
+>
+> **Context.** `haz_freq.parquet` (`processing=hazard-change/timeframe=annual`, 2026-06-24)
+> already gives per-GCM frequency of NDWS / NDWL0 exceedance (severe, extreme) at adm0/1/2 for
+> `historic 1995-2014` and 4 SSPs × 4 periods, 18 GCMs. GCF Theme 2 ("Extreme events", CN C.1 /
+> FP B.1, D.1) needs the same statistic for the other hazards the Climate Rationale notebook
+> reports. All of them already have thresholds in `metadata/haz_classes.csv` and per-GCM frequency
+> COGs on disk from R/2, so this is a SEC4 re-run with a wider choice set — no R/2 re-bake, no
+> NEX-GDDP re-ingest.
+>
+> **Ask.**
+> 1. In `R/2.2_haz_change.R` SEC4, extend `haz_choices` from `c("NDWS","NDWL0")` to add
+>    **NTx35, TAVG, PTOT, HSH_max, THI_max** (and NDD, TAI if cheap — they are in the same table).
+>    PTOT is a *below*-threshold hazard (`direction <`) — keep its class semantics as in
+>    `haz_classes.csv`.
+> 2. Extend `sev_classes` from `c("Severe","Extreme")` to add **"Moderate"**.
+> 3. Fix `ntx_perc_area_by_model.variable` to the constant `perc_area` (currently the raw layer
+>    name); `thi_perc_area_by_model` is already correct and is the pattern.
+> 4. Before launching, read the `SEC4 (haz_freq) — DONE in Xs` line from the last R/2.2 log on the
+>    node and report it, so the extended run can be scoped.
+>
+> **Keep.** Same output path and schema (`variable ∈ {frequency, frequency_n}`, `severity`,
+> `hazard`, `hazard_user`, `crop`, `model`, `scenario`, `timeframe`), same GAUL 2024 adm0/1/2, same
+> 1995–2014 baseline with identical thresholds applied to historic and projected, and the
+> `_ensemble` twin (`mean, min, max, sd`). Add `hazard_user` labels for the new hazards (heat /
+> rainfall-deficit / human-heat / livestock-heat) consistent with the existing `drought` / `wet`.
+> `crop` stays `generic` except THI (`cattle` as in `thi_perc_area_by_model`).
+>
+> **Expectations, stated as invariants (not figures).** Row count scales linearly with
+> `n_hazards × n_severities × 17 × 18 × n_admin_units`; each scenario × period slice has the
+> same row count as every other; `frequency ∈ [0,1]`; `frequency_n ≤ n_years` (19 for 1995–2014,
+> 20 for future periods); every `(hazard, severity)` pair present for all 18 GCMs. SEC4 zonal
+> extraction scales ~linearly with layer count. The s3 uploader has no verify and always
+> overwrites — diff local vs S3 after publish; do not use `s3fs::s3_file_delete()` on this bucket
+> (permanent, all versions).
+>
+> **Not in this request.** Any z-score / σ-based classification. The notebook's "unusual ≥1σ /
+> extreme ≥2σ" statistic is a notebook-method question handled separately.
+>
+> **Consumer.** The GCF review page Theme 2
+> (https://cgiar-climate-data-hub.github.io/use-cases/gcf-preparation-facility/gcf-prep-review.html#s2)
+> and the CR notebook's extreme-events section, which will read `haz_freq.parquet` in place of the
+> client-side classification. A CDH catalog record for `haz_freq` will be authored after the
+> metadata-standard v0.4.0 release.
+
+Parked, outside the request: whether the CR notebook divides anomalies by the published
+across-GCM `sd` (`timeseries_mean_month` → `sd`, "Standard deviation of hazard values across
+GCMs") rather than the interannual baseline SD — inferred by the hazards session from column
+semantics, **not confirmed against notebook source**. Resolve in the notebook repo before
+asserting anything about the z-score method. Also open: whether Theme 2 needs the `jagermeyr`
+(crop-calendar) framing as well as `annual` — `hazard-change` is published for `annual` only.
 
 ---
 

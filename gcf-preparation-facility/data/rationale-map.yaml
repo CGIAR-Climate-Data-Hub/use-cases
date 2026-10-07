@@ -43,7 +43,8 @@ sections:
     fragment_types: [event_frequency, zscore_class, scenario_comparison]
     datasets:
       - {queue_id: null, title: Extreme-event z-score classification (derived from Section 1, ensemble-mean, in-notebook), hub_record: null, route: derive-then-host, licence: CC0 (derived), admin: [adm1], status: held}
-      - {queue_id: null, title: extreme_events_frequency (per-GCM, hist vs projected) — requested from the Atlas hazards pipeline, hub_record: null, route: derive-then-host, licence: CC0 (derived), admin: [adm0, adm1], status: queued, note: see methods/ingestion-notes.md section 2}
+      - {queue_id: null, title: haz_freq — per-GCM frequency of hazard exceedance (NDWS, NDWL0; severe, extreme), hub_record: null, route: mirror (Atlas S3), licence: CC0 (derived from NEX-GDDP-CMIP6), admin: [adm0, adm1, adm2], status: held, endpoint: "s3://digital-atlas/domain=climate/type=hazard-indices/source=nex-gddp-cmip6/region=africa/processing=hazard-change/timeframe=annual/variable=haz_freq.parquet", note: 18 GCMs, historic 1995-2014 + 4 SSPs x 4 periods; read with hive_partitioning=false}
+      - {queue_id: null, title: haz_freq extension — NTx35, TAVG, PTOT, HSH_max, THI_max + Moderate class (SEC4 re-run), hub_record: null, route: mirror (Atlas S3), licence: CC0 (derived), admin: [adm0, adm1, adm2], status: queued, note: request drafted in methods/ingestion-notes.md section 2 Part B}
   - id: 3
     theme: Crop & livestock hazard exposure
     serves: {cn: [C.1, C.2], fp: [B.1, D.1]}

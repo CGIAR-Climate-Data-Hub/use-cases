@@ -32,6 +32,7 @@ content-verified programmatically; **re-check in a browser before external circu
 | AgERA5 | https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators | **CC-BY** (Copernicus) | ✅ live | Daily agrometeorological indicators derived from ERA5. |
 | CHIRPS | https://www.chc.ucsb.edu/data/chirps | **Public domain** (CC0 waiver) | ✅ live | UCSB Climate Hazards Center. Quasi-global 50°S–50°N precipitation, 1981–near-present. |
 | CHIRTS | https://www.chc.ucsb.edu/data/chirtsdaily | **Public domain** (CC0 waiver) | ✅ live | Verified page is CHIRTS-**daily** (0.05°, Tmax/Tmin); monthly CHIRTSmax is a separate CHC page — name which product. |
+| Atlas `haz_freq.parquet` (per-GCM hazard frequency) | `s3://digital-atlas/domain=climate/type=hazard-indices/source=nex-gddp-cmip6/region=africa/processing=hazard-change/timeframe=annual/variable=haz_freq.parquet` (public, anonymous read) | derived from NEX-GDDP-CMIP6 (CC0); Atlas product, licence to be stated in its CDH record | ✅ 2026-10-07 (`aws s3 ls --no-sign-request` + DuckDB) | 12,467,664 rows · 4,292 adm2 · 18 GCMs · historic 1995-2014 + 4 SSPs × 4 periods · NDWS/NDWL0 × severe/extreme · `frequency` (0–1) and `frequency_n`. Read with `hive_partitioning=false`. Extension request: `../ingestion-notes.md` §2. |
 
 ## Section 3 — Crop & livestock hazard exposure
 
