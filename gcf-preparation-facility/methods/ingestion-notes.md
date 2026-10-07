@@ -310,8 +310,21 @@ GAUL 2024 / World Bank boundaries as the zonal units (the `World Bank Admin Boun
 *Priority Data* is the join target). Complexity 3 (a one-off global zonal-stats job).
 
 **Sibling product (AgWise use-case, 2026-10-07).** The AgWise queue carries "ESA WorldCover 2021
-v200 (cropland-fraction grid)" — same source, a second derivative. Run the WorldCover zonal job
-once and emit both products from it; coordinate before either side starts.
+v200 (cropland-fraction grid)" — same source, a second derivative. One zonal job now emits both:
+see below.
+
+**Built 2026-10-07 — [`code/worldcover/worldcover_admin.py`](../code/worldcover/README.md).**
+Reads the 10 m COGs from `s3://esa-worldcover` (anonymous, windowed), rasterises the Atlas GAUL
+2024 adm2 polygons on the WorldCover grid, and writes `worldcover_admin_area` (year × class →
+ha, share), `worldcover_admin_change` (2020→2021 transition matrix) and
+`worldcover_admin_cropland` (class 40 ha + share, the AgWise product) at adm0/1/2 plus a
+provenance sidecar. Togo run: 4 tiles, 213 windows, 148 s; national 2021 total 5.705 Mha
+(Togo ≈ 5.68 Mha land + water — reconciles); cropland 25.7 %, shrubland 27.2 %, tree cover
+24.8 %, grassland 20.4 %; adm1 cropland share from 4.7 % (Maritime) to 72.4 % (Savanes). The
+change table demonstrates the v100→v200 caveat: 334 kha "shrubland → tree cover" and 234 kha
+"shrubland → grassland" in one year are algorithm change, not land-use change — hence
+`not_recommended_for: trend claims` in the sidecar. Any country in the GAUL Africa set runs with
+one command; outputs are not committed (regenerate), only the code is.
 
 **Boundaries — a Hub standardisation decision is pending.** This use-case and the Atlas hazards
 products use GAUL 2024; *Priority Data* lists World Bank Admin Boundaries (in progress); the
