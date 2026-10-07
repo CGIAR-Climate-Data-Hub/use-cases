@@ -309,6 +309,15 @@ v200 (2021), 11 classes, CC BY 4.0. Hosting 10 m globally is out of scope; the H
 GAUL 2024 / World Bank boundaries as the zonal units (the `World Bank Admin Boundaries` row on
 *Priority Data* is the join target). Complexity 3 (a one-off global zonal-stats job).
 
+**Sibling product (AgWise use-case, 2026-10-07).** The AgWise queue carries "ESA WorldCover 2021
+v200 (cropland-fraction grid)" — same source, a second derivative. Run the WorldCover zonal job
+once and emit both products from it; coordinate before either side starts.
+
+**Boundaries — a Hub standardisation decision is pending.** This use-case and the Atlas hazards
+products use GAUL 2024; *Priority Data* lists World Bank Admin Boundaries (in progress); the
+AgWise brief uses geoBoundaries. Every admin-indexed record's `joins.target` depends on this — the
+AgWise brief flags it; resolve it with Brayden before the first metadata records are authored.
+
 ### EDGAR / FAOSTAT
 
 FAOSTAT bulk `Emissions_Totals_E_All_Data.zip` (14 MB) downloads cleanly; the FAOSTAT REST
