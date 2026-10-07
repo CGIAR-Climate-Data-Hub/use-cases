@@ -135,6 +135,16 @@ observational-pipeline question, not part of this ask.
 >    name); `thi_perc_area_by_model` is already correct and is the pattern.
 > 4. Before launching, read the `SEC4 (haz_freq) — DONE in Xs` line from the last R/2.2 log on the
 >    node and report it, so the extended run can be scoped.
+> 5. Run SEC4 for **both** timeframe axes: `annual` (as now) **and `jagermeyr`** (crop-calendar
+>    season) — the GCF rationale needs growing-season extremes more than calendar-year ones.
+>    `R/2.2_haz_change.R:178` already exposes this as `R22_TIMEFRAME` (default `annual`; the
+>    parent dirs carry a `jagermeyr` axis from R/2), so it is a second invocation with
+>    `R22_TIMEFRAME=jagermeyr`, publishing under `processing=hazard-change/timeframe=jagermeyr/`.
+>    Expectation as an invariant: the jagermeyr run yields the same row count per
+>    `(hazard, severity, scenario, period, model)` as the annual run. Note the stored `timeframe`
+>    column holds the *period* (e.g. `2021-2040`) while the path segment `timeframe=jagermeyr` holds
+>    the season axis — consumers must read with `hive_partitioning=false` or the path value
+>    overrides the column. Worth stating in the `.parquet.json` sidecar.
 >
 > **Keep.** Same output path and schema (`variable ∈ {frequency, frequency_n}`, `severity`,
 > `hazard`, `hazard_user`, `crop`, `model`, `scenario`, `timeframe`), same GAUL 2024 adm0/1/2, same
@@ -164,8 +174,8 @@ Parked, outside the request: whether the CR notebook divides anomalies by the pu
 across-GCM `sd` (`timeseries_mean_month` → `sd`, "Standard deviation of hazard values across
 GCMs") rather than the interannual baseline SD — inferred by the hazards session from column
 semantics, **not confirmed against notebook source**. Resolve in the notebook repo before
-asserting anything about the z-score method. Also open: whether Theme 2 needs the `jagermeyr`
-(crop-calendar) framing as well as `annual` — `hazard-change` is published for `annual` only.
+asserting anything about the z-score method. (The `jagermeyr` question is closed — Pete,
+2026-10-07: crop-calendar framing is preferred, so it is ask #5 above.)
 
 ---
 
