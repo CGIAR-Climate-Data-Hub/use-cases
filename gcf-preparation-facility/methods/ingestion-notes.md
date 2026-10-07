@@ -145,6 +145,16 @@ observational-pipeline question, not part of this ask.
 >    column holds the *period* (e.g. `2021-2040`) while the path segment `timeframe=jagermeyr` holds
 >    the season axis — consumers must read with `hive_partitioning=false` or the path value
 >    overrides the column. Worth stating in the `.parquet.json` sidecar.
+> 6. **Defect — historic NDWS frequency is saturated.** In the published `haz_freq.parquet`,
+>    `scenario='historic'` rows for **NDWS** (both `severe` and `extreme`) have `frequency = 1.0`
+>    and `frequency_n = 19` for **every GCM and every African adm0** (1,062 rows each, verified
+>    2026-10-07 with DuckDB, `hive_partitioning=false`); NDWL0 historic values are normal (mean
+>    0.13 severe / 0.04 extreme) and NDWS projections are plausible (ssp245 2021–2040 median 0.87
+>    severe / 0.17 extreme). So the historic NDWS baseline is unusable for a historical-vs-projected
+>    comparison. Suspects: the historic NDWS raster stack read by SEC4 is on a different scale/units
+>    than the projection stacks, or the `>` threshold is applied to a cumulative rather than annual
+>    layer. Please check the historic NDWS inputs to `R/2.2_haz_change.R` SEC4 and re-publish; the
+>    extended run (asks 1–5) should not inherit this.
 >
 > **Keep.** Same output path and schema (`variable ∈ {frequency, frequency_n}`, `severity`,
 > `hazard`, `hazard_user`, `crop`, `model`, `scenario`, `timeframe`), same GAUL 2024 adm0/1/2, same
@@ -391,6 +401,10 @@ closer to WDPA/KBA/LandMark than the Hub's climate team is. Draft message:
   WorldCover admin, WDPA/KBA/LandMark overlays, GMIA-NEXT admin) → tool/method records (EX-ACT,
   GLEAM, iCLEANED).
 - **`climate-rationale` skill** — spec on the review page's Skills tab; issue text drafted in
-  `outputs/skills-issue-climate-rationale.md`; build after one theme's data is in the Hub.
+  `outputs/skills-issue-climate-rationale.md`. **Prototype of the data layer built 2026-10-07:**
+  [`code/rationale/`](../code/rationale/README.md) (`python -m cdh_rationale TGO …`) reads the
+  rationale map + the federated pulls + WorldCover + `haz_freq` and emits labelled, citable
+  fragments per section with explicit gaps; Togo: sections 4, 5, 7, 9 fully data-backed, 6 gaps.
+  The LLM composition step (the skill proper) sits on top of this.
 - **Adaptation Insights** (Njuguna / Muller / Nowak) may hold assets for Themes 5–7 — not contacted
   this round.
