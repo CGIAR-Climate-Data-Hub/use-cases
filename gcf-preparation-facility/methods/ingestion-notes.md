@@ -109,8 +109,8 @@ Pete's call: separate what is **spatial data the Hub can host or federate** from
 | FAO FishStat aquaculture value | tabular, admin0 | derive-then-host ISO3 × year parquet (NC-SA) | FishStat |
 | FAO GLW4 | spatial — raster | **held** (published record `glw4-2020`) | — |
 | Annual gridded livestock 1961–2021 (ESSD 2025, 5 km) | spatial — raster time-series | complement to GLW4 for trend/baseline; log as candidate, not P1 | evidence log |
-| FAO GLEAM / GLEAM-X | **method / model** | record as `resource_type: software` (GLEAM R package, open) + a note pointing to the Data Explorer; GLW4 supplies animal numbers so GLEAM is only the emission-intensity layer | GLEAM (method) |
-| iCLEANED | **method / tool** | metadata case study (`resource_type: software|document`); CDH support still at *idea* — see [`../../icleaned/BRIEF.md`](../../icleaned/BRIEF.md) | iCLEANED (method) |
+| FAO GLEAM / GLEAM-X | **method / model** | record as `resource_type: software` (GLEAM R package `un-fao/GLEAM`, **AGPL-3**, pushed 2026-09-17) + a note pointing to the GLEAM v3 Data Explorer / dashboard (https://www.fao.org/gleam/dashboard/en/); GLW4 supplies animal numbers so GLEAM is only the emission-intensity layer | GLEAM (method) |
+| iCLEANED / CLEANED | **method / tool** | metadata case study (`resource_type` software or document); R package `CIAT/cleaned` (MIT, v0.6.0, pkgdown docs) + the iCLEANED web calculator; CDH support still at *idea* — see [`../../icleaned/BRIEF.md`](../../icleaned/BRIEF.md) | iCLEANED (method) |
 | FAO EX-ACT | **tool / engine** | computation engine, see §6 | EX-ACT (tool) |
 | IPCC EFDB | **lookup / method** | curated Tier-1 emission-factor lookup (licence check first) | EFDB |
 | ESA WorldCover | spatial — raster | derived admin product, see §6 | WorldCover |

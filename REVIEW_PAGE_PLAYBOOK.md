@@ -169,6 +169,7 @@ Reusable structure and hard-won gotchas beyond the B4T reference page:
 ### Feedback loop & versioning
 
 - When reviewers answer the open questions (giscus), fold each answer inline as an **"✅ Answered — <name>, <date>"** note in the relevant card (so the resolution shows without opening the thread), update the evidence log, and **version**: a page footer stamp + a foldable *version history* (`v1.1 = feedback incorporated …`), and bump the brief's `updated:` + a progress note. (B4T went to v1.1 this way after Bert's answers.)
+- **Keep older versions viewable.** Before a substantive revision, freeze the outgoing page as `public/<slug>/versions/v<N>.html` (`git show <commit>:<path>`; rewrite relative asset paths `docs/` → `../docs/`; add an `ARCHIVED v<N> · <date> · current version →` badge in its masthead). In the current page add a `<select class="ver-sel">` in the masthead listing every version (current first; `onchange` navigates), and link each archived copy from the footer's version history. Snapshots are immutable; the live page is the only one that changes. (GCF went to v1.1 this way on 2026-10-07.)
 
 ### giscus image gotcha (corrects a wrong assumption)
 

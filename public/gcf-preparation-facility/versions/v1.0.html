@@ -34,9 +34,6 @@
     gap:16px;padding:14px 28px}
   .word{font-family:var(--display);font-size:21px;color:var(--brand);font-weight:400}
   .word span{color:var(--muted)}
-  .ver-sel{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:11.5px;color:var(--muted)}
-  .ver-sel select{font:inherit;font-size:11.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 6px}
-  @media (max-width:680px){.ver-sel span{display:none}}
   .draft-badge{margin-right:auto;margin-left:12px;background:#b45309;color:#fff;font-size:11px;font-weight:700;letter-spacing:.09em;padding:3px 9px;border-radius:4px;line-height:1.6}
   .mast nav{display:flex;gap:20px;font-size:14px;color:var(--muted)}
   .mast nav a{color:var(--muted)}
@@ -195,11 +192,7 @@
   <div class="mast-in">
     <a class="word" href="#top">CGIAR Climate Data Hub <span>— Use Cases</span></a>
     <span class="draft-badge" title="Draft for review — not final">DRAFT</span>
-    <label class="ver-sel" title="Switch to an archived version of this review"><span>Version</span>
-      <select id="verSelect" aria-label="Review version">
-        <option value="gcf-prep-review.html" selected>v1.1 — 2026-10-07 (current)</option>
-        <option value="versions/v1.0.html">v1.0 — 2026-07-14</option>
-      </select></label>
+    <span class="draft-badge" style="background:#475569" title="Archived snapshot — superseded">ARCHIVED v1.0 · 2026-07-14 · <a href="../gcf-prep-review.html" style="color:#fff;text-decoration:underline">current version →</a></span>
     <nav>
       <a href="https://cgiar-climate-data-hub.github.io/CDH_prototype_v2/">Portfolio</a>
       <a href="https://cgiar-climate-data-hub.github.io/use-cases/use-cases/gcf-preparation-facility/">Use-case brief</a>
@@ -332,7 +325,6 @@
         </tbody>
       </table></div>
       <p class="cap">Reads across the theme tables below; priorities and routes are this review's assessment, open to the team's correction. Start top-down: the quick wins are the fastest path to a populated Hub.</p>
-      <div class="note"><b>Decisions 2026-10-07.</b> The coordinator has queued this shortlist (plus the P2s of Theme 4 and the promoted Theme 8 layers LandMark, KBA and FAO SDG 5.a.x) in the CDH ingestion tracker and re-screened every row against its live endpoint and licence. Two changes from the table above: <b>AQUASTAT GMIA v5 is superseded by GMIA-NEXT</b> (30 m, 2023/24, CC BY 4.0) and <b>FAO EX-ACT</b> has no public API on the hosted app, so it is routed as a self-hosted AGPL engine. Queue, per-theme notes and rescreen results: <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/data/ingestion-queue.csv">ingestion-queue.csv</a> · <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/ingestion-notes.md">ingestion-notes.md</a> · <a href="https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/methods/evidence/sources.md#rescreen-2026-10-07--queued-datasets-adversarial-re-check">evidence log</a>.</div>
       <details class="cmts" data-term="GCF Prep Data — Ingestion shortlist"><summary>💬 Comment / discuss “Ingestion shortlist”</summary><div class="giscus-slot"></div></details>
     </section>
 
@@ -636,7 +628,7 @@
       <h2>Example target output — the Togo SAT hazard-exposure matrix</h2>
       <p>One illustrative example of a target output is the Togo Sustainable Agricultural Transformation rapid climate-risk assessment (Global Center on Adaptation + Alliance Bioversity-CIAT, April 2025) — a <strong>suggestion</strong> of the kind of table Theme 3 could produce, not a prescribed standard. Its <strong>Table 5</strong> shows crop production value exposed to compound hazards, by region × crop × scenario, with the share of regional crop value in parentheses.</p>
       <figure>
-        <img src="docs/img/togo-table5.png" alt="Togo SAT report Table 5 — projected value of crop production exposed to severe climate hazards, by region, crop, and SSP scenario">
+        <img src="../docs/img/togo-table5.png" alt="Togo SAT report Table 5 — projected value of crop production exposed to severe climate hazards, by region, crop, and SSP scenario">
         <figcaption><b>Togo SAT report, Table 5 (p.19).</b> Rows = region × hazard combination (Dry only / Heat only / Dry and Heat); columns = crop (maize / soybean / rice) × scenario (SSP245 / SSP585); cells = exposed value of production in constant 2015 US$ with the % of that region’s crop value in parentheses. Built from MapSPAM (Togo agricultural census 2012–14) crossed with African Adaptation Atlas hazard layers — the exact pipeline the Climate Rationale notebook runs. A companion Table 6 shows the same in harvested hectares. Reproduced from the source report for reference; note the source header typo “SS245” in the rice column.</figcaption>
       </figure>
       <div class="callout"><b>Methods used in the Togo example (Annex 2), for reference.</b> CHIRPS + AgERA5 historical (1981–2022); 5-GCM CMIP6 ensemble (ACCESS-ESM1-5, MPI-ESM1-2-HR, EC-Earth3, INM-CM5-0, MRI-ESM2-0); SSP245 &amp; SSP585; baseline 1995–2014; 0.05° resolution; hazard indices NTx35 (crop heat), NDWS (drought), NDWL0 (waterlogging), HSH (human heat) with the thresholds in the report’s Annex Table A.1.</div>
@@ -743,14 +735,7 @@
     <section id="d-feedback">
       <h2>Feedback</h2>
       <p>Two ways to respond. <strong>With a GitHub account:</strong> expand the “💬 Comment / discuss” box under any section — comments post to GitHub Discussions on the use-cases repo. <strong>Without one:</strong> use the floating <strong>💬 Feedback</strong> button (bottom-right), which opens a short form; submissions become tracked issues the coordinator triages.</p>
-      <div class="foot" id="version">GCF Preparation Facility review · CGIAR Climate Data Hub · <strong>v1.1 — coordinator decisions &amp; rescreen, 2026-10-07</strong> · datasets verified 2026-07-07/08, re-screened 2026-10-07 · draft for task-group review
-        <details class="src" style="margin-top:8px"><summary>Version history</summary><div class="srcbody"><ul style="margin:0;padding-left:18px">
-          <li><strong>v1.1 — 2026-10-07:</strong> coordinator decided to proceed without further champion input; shortlist + Theme 4 P2s + promoted Theme 8 layers queued in the CDH ingestion tracker; every row re-screened against its live endpoint and licence (GMIA v5 → GMIA-NEXT; EX-ACT routed as self-hosted engine; LandMark CC BY-SA 4.0). "Decisions 2026-10-07" note under the ingestion shortlist. Queue, notes and rescreen results live in the use-cases repo.</li>
-          <li><strong>v1.0 — 2026-07-14</strong> (<a href="versions/v1.0.html">archived copy</a>)<strong>:</strong> four-tab review (Data · Skills · Notebook · GCA alignment), P1 ingestion shortlist, per-theme dataset tables with P1/P2/P3 rubric, licensing and delivery-route analysis, GCA source-documents annex. Shared with the champion 2026-07-14.</li>
-        </ul>
-        <p style="margin:8px 0 0;font-size:12px">Each version is a frozen HTML snapshot under <code>versions/</code>; the selector in the header switches between them. Facts sourced from the GCF data-requirements memo, the live Climate Rationale notebook, and dataset providers’ official pages (evidence log linked above). Not for external circulation until the champion confirms it is public-safe.</p></div></details>
-      </div>
-      <script>(function(){var s=document.getElementById('verSelect');if(s){s.addEventListener('change',function(){if(this.value&&this.value!=='gcf-prep-review.html')location.href=this.value;});}})();</script>
+      <p class="foot">Draft for task-group review. Facts sourced from the GCF data-requirements memo, the live Climate Rationale notebook, and dataset providers’ official pages (evidence log linked above). Not for external circulation until the champion confirms it is public-safe.</p>
     </section>
   </main>
 </div>
