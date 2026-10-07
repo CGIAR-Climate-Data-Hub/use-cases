@@ -56,8 +56,8 @@ sections:
       - {queue_id: null, title: WRI Aqueduct 4.0 (bws, bwd), hub_record: null, route: mirror | derive-then-host, licence: CC BY 4.0, admin: [adm0, adm1], status: queued, note: on the tracker's Priority Data sheet (B4T row) — add GCF to its Use Case}
       - {queue_id: AQUASTAT GMIA v5, title: Irrigated area — GMIA-NEXT (30 m, 2023/24) replacing GMIA v5, hub_record: null, route: derive-then-host, licence: CC BY 4.0, admin: [adm0, adm1, adm2], status: queued}
       - {queue_id: FAO FishStat - aquaculture value, title: FAO FishStat aquaculture value, hub_record: null, route: derive-then-host, licence: CC BY-NC-SA 3.0 IGO, admin: [adm0], status: queued}
-      - {queue_id: FAO GLEAM / GLEAM-X (method), title: FAO GLEAM (method note), hub_record: null, route: tool, licence: AGPL-3 (code); data verify, admin: [], status: queued, repo: https://github.com/un-fao/GLEAM, portal: https://www.fao.org/gleam/dashboard/en/}
-      - {queue_id: iCLEANED (method), title: iCLEANED / CLEANED livestock decision-support tool (method note), hub_record: null, route: tool, licence: MIT (code); app terms TBC, admin: [], status: queued, repo: https://github.com/CIAT/cleaned, portal: https://alliancebioversityciat.org/tools-innovations/cleaned}
+      - {queue_id: FAO GLEAM / GLEAM-X (method), title: FAO GLEAM 3 (dashboard data + method), hub_record: null, route: tool | federate, licence: data CC BY 4.0 (GLEAM 3 dashboard ToU); code AGPL-3, admin: [adm0, region], status: queued, repo: https://github.com/un-fao/GLEAM, portal: https://foodandagricultureorganization.shinyapps.io/GLEAMV3_Public/}
+      - {queue_id: iCLEANED (method), title: iCLEANED / CLEANED livestock decision-support tool (method note), hub_record: null, route: tool, licence: MIT (cleaned + icleaned repos), admin: [], status: queued, repo: https://github.com/CIAT/icleaned, portal: https://icleaned.alliance.cgiar.org/}
   - id: 4
     theme: Vulnerability & socioeconomic context
     serves: {cn: [Exec Summary], fp: [D.4]}

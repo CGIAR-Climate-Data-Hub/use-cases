@@ -39,7 +39,7 @@ content-verified programmatically; **re-check in a browser before external circu
 | --- | --- | --- | --- | --- |
 | MapSPAM 2020 | https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SWPENT | **CC BY 4.0** (confirmed via Dataverse API) | ✅ via API | Project home `mapspam.info` returned 403 to automated fetch — Dataverse DOI is the canonical data record. Cite "2020 v2.0 r2". |
 | FAOSTAT | https://www.fao.org/faostat/en/ | **CC BY 4.0** | ✅ live | Licence on FAO Statistical Database Terms of Use, not the FAOSTAT app page. Prescribed citation format; third-party series may carry other terms. |
-| FAO GLEAM | https://www.fao.org/gleam/en/ | **⚠ Unresolved** — FAO blanket terms imply CC BY 4.0, but the FAO data catalog indexes GLEAM under CC-BY-NC-SA-3.0-IGO | ✅ live (page) | Genuine licence conflict. Confirm with info-GLEAM@fao.org before any reuse; treat as NC until resolved. GLEAM-X R package is open source. |
+| FAO GLEAM | https://www.fao.org/gleam/en/ | **CC BY 4.0** for data served through the GLEAM 3 dashboard (its Terms of Use, read 2026-10-07) — supersedes the earlier conflict note (FAO data catalog indexed GLEAM under CC-BY-NC-SA-3.0-IGO) | ✅ live | Dashboard: https://foodandagricultureorganization.shinyapps.io/GLEAMV3_Public/. R package `un-fao/GLEAM` is AGPL-3. See the Rescreen 2026-10-07 table. |
 | WRI Aqueduct 4.0 | https://www.wri.org/data/aqueduct-global-maps-40-data | **CC BY 4.0** (per Aqueduct FAQ) | ✅ live | Data page says only "Creative Commons"; FAQ confirms CC BY 4.0. Distinct from the Water Risk Atlas *tool* page (no licence stated). Methodology on GitHub `wri/Aqueduct40`. |
 
 ## Section 4 — Vulnerability & socioeconomic context
@@ -228,7 +228,8 @@ to this log carry the licence as read on the day.
 | Land Portal | `landportal.org` (403 to automated fetch — excluded from the link checker) | 403 (bot) | — | verify in browser |
 | **WB Data360 (IMF FM, IDS)** *(new)* | https://data360api.worldbank.org/data360/indicators?datasetId=IMF_FM · data?DATABASE_ID=WB_IDS&REF_AREA=TGO | 200 · 200 | CC BY 4.0 | keep P1 route for IMF |
 | **FAO EX-ACT codebase** *(new)* | https://github.com/un-fao/exact-django-webapp · https://exact.apps.fao.org/api/swagger/ | 200 · 200 (SPA shell, no API) | **AGPL-3.0-or-later** (code); app login | engine via self-host |
-| **GLEAM Data Explorer** *(new)* | https://www.fao.org/gleam/dashboard/en/ → Shiny explorer | 200 → 202 (JS) | catalogue note: CC-BY-4.0 + FAO stats terms — **unverified** | verify in browser; may resolve the GLEAM licence conflict |
+| **GLEAM 3 dashboard** *(new)* | https://foodandagricultureorganization.shinyapps.io/GLEAMV3_Public/ (Terms of Use tab) | 200 (Shiny; read in a browser 2026-10-07) | **CC BY 4.0** — "The data provided through the GLEAM Dashboard is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license" + FAO Statistical Database Terms of Use | **resolves the GLEAM licence conflict** — federate dashboard data (animal population, products, emissions, emission intensities); R package `un-fao/GLEAM` AGPL-3 |
+| **iCLEANED** *(new)* | https://icleaned.alliance.cgiar.org/ · https://github.com/CIAT/icleaned · https://github.com/CIAT/cleaned | 200 · 200 · 200 | MIT (both repos) | method / tool case study |
 | **Annual gridded livestock 1961–2021** *(candidate)* | https://essd.copernicus.org/preprints/essd-2025-175/ | 200 | open (ESSD) | time-series complement to GLW4; not queued |
 
 Alternatives screened and **not** adopted: satellite foundation-model wealth products (arXiv
