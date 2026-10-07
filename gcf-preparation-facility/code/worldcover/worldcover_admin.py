@@ -108,7 +108,90 @@ def pixel_area_ha(transform, win) -> np.ndarray:
     return (area_m2 / 10_000.0).astype(np.float64)
 
 
-def run(iso3: str, out: Path, boundaries: Path | None, block: int = 2048) -> None:
+def _snap_grid(bbox, res):
+    """Output grid covering bbox, origin snapped to multiples of `res` from (0, 0)."""
+    x0 = math.floor(bbox[0] / res) * res
+    y1 = math.ceil(bbox[3] / res) * res
+    nx = int(math.ceil((bbox[2] - x0) / res))
+    ny = int(math.ceil((y1 - bbox[1]) / res))
+    return x0, y1, nx, ny
+
+
+def read_mosaic(srcs: dict, bounds, nodata=0) -> np.ndarray:
+    """Read one lat/lon window across the open WorldCover tiles (all share the 1/12000° grid)."""
+    tr0 = next(iter(srcs.values())).transform
+    res = abs(tr0.a)
+    ncol = int(round((bounds[2] - bounds[0]) / res))
+    nrow = int(round((bounds[3] - bounds[1]) / res))
+    out = np.full((nrow, ncol), nodata, dtype=np.uint8)
+    for src in srcs.values():
+        b = src.bounds
+        ix0, iy0 = max(bounds[0], b.left), max(bounds[1], b.bottom)
+        ix1, iy1 = min(bounds[2], b.right), min(bounds[3], b.top)
+        if ix1 <= ix0 or iy1 <= iy0:
+            continue
+        win = windows.from_bounds(ix0, iy0, ix1, iy1, transform=src.transform).round_offsets().round_lengths()
+        data = src.read(1, window=win)
+        c0 = int(round((ix0 - bounds[0]) / res)); r0 = int(round((bounds[3] - iy1) / res))
+        out[r0:r0 + data.shape[0], c0:c0 + data.shape[1]] = data
+    return out
+
+
+def cropland_fraction_grid(iso3: str, out: Path, bbox, tiles: list[str], res: float, year: int = 2021,
+                           lc_class: int = 40, chunk_rows: int = 64) -> dict:
+    """Block-mean cropland fraction (class 40) on a coarse lat/lon grid — the AgWise mask product.
+
+    `res` must be an integer multiple of the WorldCover pixel (1/12000°): 0.00225 (27 px, ~250 m,
+    MODIS-like) and 1/120 (100 px, ~1 km) are the defaults. Fraction = n(class)/n(valid), NaN where
+    the whole block is no-data (sea / outside the map). Written as a COG, EPSG:4326, covering the
+    country bbox (not clipped to the boundary — a mask, not a zonal table).
+    """
+    px = 1.0 / 12000.0
+    f = res / px
+    if abs(f - round(f)) > 1e-6:
+        raise SystemExit(f"grid res {res} is not an integer multiple of the WorldCover pixel {px}")
+    f = int(round(f))
+    x0, y1, nx, ny = _snap_grid(bbox, res)
+    out_tr = rasterio.transform.from_origin(x0, y1, res, res)
+    arr = np.full((ny, nx), np.nan, dtype=np.float32)
+    env = rasterio.Env(AWS_NO_SIGN_REQUEST="YES", GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR",
+                       GDAL_HTTP_MAX_RETRY="5", GDAL_HTTP_RETRY_DELAY="2")
+    t0 = time.time()
+    with env:
+        srcs = {t: rasterio.open(tile_url(year, t)) for t in tiles}
+        try:
+            for r0 in range(0, ny, chunk_rows):
+                r1 = min(ny, r0 + chunk_rows)
+                top = y1 - r0 * res
+                bottom = y1 - r1 * res
+                blk = read_mosaic(srcs, (x0, bottom, x0 + nx * res, top))
+                h, w = blk.shape
+                blk = blk[: (h // f) * f, : (w // f) * f].reshape(h // f, f, w // f, f)
+                valid = (blk != 0).sum(axis=(1, 3))
+                hit = (blk == lc_class).sum(axis=(1, 3))
+                with np.errstate(invalid="ignore", divide="ignore"):
+                    frac = np.where(valid > 0, hit / np.maximum(valid, 1), np.nan).astype(np.float32)
+                arr[r0:r0 + frac.shape[0], : frac.shape[1]] = frac
+        finally:
+            for s in srcs.values():
+                s.close()
+    label = {27: "250m", 100: "1km"}.get(f, f"{int(round(res * 111320))}m")
+    path = out / f"worldcover_cropfrac_{year}_{VERSIONS[year]}_{iso3}_{label}.tif"
+    profile = dict(driver="COG", dtype="float32", count=1, width=nx, height=ny, crs="EPSG:4326",
+                   transform=out_tr, nodata=np.nan, compress="DEFLATE", BLOCKSIZE=512, OVERVIEWS="AUTO")
+    with rasterio.open(path, "w", **profile) as dst:
+        dst.write(arr, 1)
+        dst.update_tags(product="cropland_fraction", source=f"ESA WorldCover {year} {VERSIONS[year]}",
+                        lc_class=str(lc_class), block_factor=str(f), units="fraction 0-1",
+                        licence="CC BY 4.0 (ESA WorldCover)")
+    log.info("grid %s: %dx%d @ %.6f° (factor %d) → %s (%.0fs)", label, nx, ny, res, f, path.name, time.time() - t0)
+    return {"path": path.name, "res_deg": res, "block_factor": f, "width": nx, "height": ny,
+            "origin": [x0, y1], "year": year, "version": VERSIONS[year], "class": lc_class,
+            "valid_fraction_mean": float(np.nanmean(arr)), "seconds": round(time.time() - t0, 1)}
+
+
+def run(iso3: str, out: Path, boundaries: Path | None, block: int = 2048,
+        grid_res: list[float] | None = None, grid_years: tuple[int, ...] = (2021,), skip_admin: bool = False) -> None:
     t0 = time.time()
     adm = load_boundaries(boundaries, iso3)
     geoms = list(adm["geom"])
@@ -118,6 +201,18 @@ def run(iso3: str, out: Path, boundaries: Path | None, block: int = 2048) -> Non
     bbox = (minx, miny, maxx, maxy)
     tiles = tiles_for_bbox(bbox)
     log.info("bbox %s → tiles %s", [round(v, 3) for v in bbox], tiles)
+    out.mkdir(parents=True, exist_ok=True)
+
+    grids = []
+    for res in (grid_res or []):
+        for y in grid_years:
+            grids.append(cropland_fraction_grid(iso3, out, bbox, tiles, res, year=y))
+    if skip_admin:
+        side = {"id": f"worldcover-cropfrac-{iso3.lower()}", "iso3": iso3, "grids": grids,
+                "run_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+                "caveats": ["Only the 2021 v200 map is used for the grid product by default: v100 (2020) and v200 differ in algorithm."]}
+        (out / f"worldcover_cropfrac_{iso3}.json").write_text(json.dumps(side, indent=2))
+        return
 
     # accumulator: (adm_idx, lc2020, lc2021) -> ha
     acc: dict[tuple[int, int, int], float] = {}
@@ -233,6 +328,7 @@ def run(iso3: str, out: Path, boundaries: Path | None, block: int = 2048) -> Non
                     "with method change (ESA WorldCover product note). not_recommended_for: trend claims.",
                     "Centre-pixel assignment at 10 m: boundary pixels are attributed to one unit; areas sum to the "
                     "rasterised country, not to the vector area."],
+        "grids": grids,
         "stats": {"adm2_units": int(len(adm)), "windows": n_win, "cells": len(acc),
                   "country_area_ha_2021": float(area[(area.admin_level == 0) & (area.year == 2021)]["area_ha"].sum()),
                   "seconds": round(time.time() - t0, 1)},
@@ -247,10 +343,20 @@ def main(argv=None):
     ap.add_argument("--out", default="out")
     ap.add_argument("--boundaries", default=None, help="local copy of atlas_gaul24_a2_africa.parquet (downloaded if absent)")
     ap.add_argument("--block", type=int, default=2048)
+    ap.add_argument("--grid", default=None,
+                    help="comma-separated output resolutions in degrees for the cropland-fraction COG(s); "
+                         "'default' = 0.00225 (~250 m, MODIS-like) and 0.0083333 (~1 km). Omit for admin tables only.")
+    ap.add_argument("--grid-years", default="2021", help="comma-separated years for the grid product (default 2021 only)")
+    ap.add_argument("--grid-only", action="store_true", help="write the cropland grid(s) and skip the admin tables")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if a.verbose else logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    run(a.iso3.upper(), Path(a.out), Path(a.boundaries) if a.boundaries else None, a.block)
+    grid_res = None
+    if a.grid:
+        grid_res = [0.00225, 1.0 / 120.0] if a.grid == "default" else [float(x) for x in a.grid.split(",")]
+    years = tuple(int(y) for y in a.grid_years.split(","))
+    run(a.iso3.upper(), Path(a.out), Path(a.boundaries) if a.boundaries else None, a.block,
+        grid_res=grid_res, grid_years=years, skip_admin=a.grid_only)
 
 
 if __name__ == "__main__":

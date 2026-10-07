@@ -10,6 +10,7 @@ emits, for adm0 / adm1 / adm2 (GAUL 2024, the Atlas analysis-ready boundaries):
 | `worldcover_admin_change_<ISO3>` | class-2020 × class-2021 → `area_ha` (transition matrix) | land-use-change baseline — **flag, see caveat** |
 | `worldcover_admin_cropland_<ISO3>` | year → `cropland_ha`, `cropland_share` (class 40) | AgWise cropland fraction (sibling product, same run) |
 | `worldcover_admin_<ISO3>.json` | inputs, method, classes, licences, caveats, run stats | the metadata record's provenance block |
+| `worldcover_cropfrac_2021_v200_<ISO3>_{250m,1km}.tif` (with `--grid`) | per-pixel cropland fraction (class 40), block-mean on a lat/lon grid: 0.00225° = 27 WorldCover px (~250 m, MODIS-like) and 1/120° = 100 px (~1 km); COG, float32, NaN = no data; covers the country **bbox**, not clipped | AgWise crop-model mask (`byliz-ai/data_sourcing` `drivers/worldcover.py`) |
 
 ## Run
 
@@ -17,7 +18,14 @@ emits, for adm0 / adm1 / adm2 (GAUL 2024, the Atlas analysis-ready boundaries):
 python3 -m venv .venv && .venv/bin/pip install rasterio numpy pandas pyarrow shapely
 .venv/bin/python worldcover_admin.py TGO --out out/            # downloads the adm2 parquet (91 MB) once
 .venv/bin/python worldcover_admin.py KEN --out out/ --boundaries gaul24_a2_africa.parquet
+.venv/bin/python worldcover_admin.py TGO --out out/ --grid default --grid-only   # AgWise grids only (250 m + 1 km, 2021)
+.venv/bin/python worldcover_admin.py TGO --out out/ --grid 0.00225 --grid-years 2021,2020
 ```
+
+The grid product uses 2021 v200 only by default (v100/v200 algorithm change). Grid origin is
+snapped to multiples of the resolution from (0°, 0°); exact alignment to a MODIS grid is
+`_TBC_` with the AgWise team — pass `--grid <res>` once decided. Any `res` must be an integer
+multiple of 1/12000°.
 
 Togo (4 tiles, ~5.7 Mha) runs in a few minutes on a laptop over HTTP; larger countries scale
 with area. Reads are anonymous (`AWS_NO_SIGN_REQUEST`), windowed 2048×2048, retried.
