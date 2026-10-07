@@ -125,6 +125,7 @@ observational-pipeline question, not part of this ask.
 > NEX-GDDP re-ingest.
 >
 > **Ask.**
+>
 > 1. In `R/2.2_haz_change.R` SEC4, extend `haz_choices` from `c("NDWS","NDWL0")` to add
 >    **NTx35, TAVG, PTOT, HSH_max, THI_max** (and NDD, TAI if cheap — they are in the same table).
 >    PTOT is a *below*-threshold hazard (`direction <`) — keep its class semantics as in
