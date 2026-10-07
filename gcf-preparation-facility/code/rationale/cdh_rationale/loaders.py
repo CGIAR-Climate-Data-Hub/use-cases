@@ -55,6 +55,20 @@ def load_worldcover(wc_dir: Path | None, iso3: str) -> dict[str, pd.DataFrame]:
     return out
 
 
+def load_rainfall(rain_dir: Path | None, iso3: str) -> dict[str, pd.DataFrame]:
+    out = {}
+    if not rain_dir:
+        return out
+    rain_dir = Path(rain_dir)
+    for key in ("annual", "summary", "monthly_clim"):
+        p = rain_dir / f"chirps_admin_{key}_{iso3}.parquet"
+        if p.exists():
+            out[key] = pd.read_parquet(p)
+    if out:
+        log.info("rainfall: %s", ", ".join(f"{k}={len(v)}" for k, v in out.items()))
+    return out
+
+
 def load_haz_freq(iso3: str, *, remote: bool = True, local: Path | None = None) -> pd.DataFrame:
     """Per-GCM hazard frequency at adm0 and adm1 for one country (Atlas S3, anonymous)."""
     src = str(local) if local else HAZ_FREQ_URL

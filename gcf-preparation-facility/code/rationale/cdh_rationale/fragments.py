@@ -69,11 +69,46 @@ def _q(fed: pd.DataFrame, source: str, **eq) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------- Section 1 — climate trends
+RAIN_URL = "https://huggingface.co/datasets/aaguilar90/chirps-v3-daily-rnl/resolve/main/chirps-v3-daily-rnl.zarr"
+RAIN_LIC = "CC0-1.0 (CHIRPS v3.0, Climate Hazards Center; HF redistribution by A. Aguilar)"
+
+
 def section_1(sec, ctx):
     fr = []
-    fr.append(gap(sec, "observed rainfall / temperature baseline and trend not wired into this prototype",
-                  "Held in the CR notebook parquet (Africa only). Global source now available: Andrés Aguilar's CHIRPS v3 daily "
-                  "Zarr cube on Hugging Face (CC0) — admin aggregation pending (Task A)."))
+    rain = ctx.get("rainfall", {})
+    summ, ann, mclim = rain.get("summary"), rain.get("annual"), rain.get("monthly_clim")
+    if summ is None or summ.empty:
+        fr.append(gap(sec, "observed rainfall baseline and trend not loaded",
+                      "Run code/rainfall/chirps_admin.py <ISO3> (CHIRPS v3 daily from the Hugging Face cube, global 60°S–60°N) and pass --rainfall."))
+    else:
+        cite = {"dataset": "CHIRPS v3.0 daily (rnl) → admin rainfall product (derived)", "source": "chirps_admin", "indicator_id": "ptot_annual",
+                "url": RAIN_URL, "licence": RAIN_LIC, "retrieved_at": ctx["now"]}
+        for lvl in ([0, 1] if ctx["subnational"] else [0]):
+            for r in summ[summ.admin_level == lvl].itertuples():
+                name = r.admin0_name if lvl == 0 else r.admin1_name
+                sig = "statistically significant" if r.mk_p < 0.05 else "not statistically significant"
+                direction = "wetter" if r.last5_mean_anomaly_mm > 0 else "drier"
+                nd = 1 if abs(r.trend_mm_per_decade) < 10 else 0
+                text = (f"{name}: mean annual rainfall {_f(r.baseline_mean_mm, 0)} mm over 1991–2020 (SD {_f(r.baseline_sd_mm, 0)} mm, CHIRPS v3). "
+                        f"Theil–Sen trend {r.trend_mm_per_decade:+.{nd}f} mm/decade over {r.years} (95% CI {r.trend_ci_low:+.{nd}f} to {r.trend_ci_high:+.{nd}f}; "
+                        f"Mann–Kendall p = {r.mk_p:.2f}, {sig}). The last five years averaged {abs(r.last5_mean_anomaly_pct):.0f}% {direction} than the baseline; "
+                        f"wettest year {r.wettest_year}, driest {r.driest_year}.")
+                fr.append(frag(sec, "trend_description", text,
+                               {"baseline_mean_mm": r.baseline_mean_mm, "baseline_sd_mm": r.baseline_sd_mm, "trend_mm_per_decade": r.trend_mm_per_decade,
+                                "trend_ci": [r.trend_ci_low, r.trend_ci_high], "mk_p": r.mk_p, "last5_anomaly_pct": r.last5_mean_anomaly_pct,
+                                "wettest_year": int(r.wettest_year), "driest_year": int(r.driest_year), "years": r.years},
+                               {**cite, "period": r.years}, admin_level=lvl, admin_name=name,
+                               caveats=["CHIRPS rnl flavour (ERA5-disaggregated pentads); station-density drift can masquerade as trend (CHC caveat)",
+                                        "0.05° pixels, area-weighted means over GAUL 2024 units"]))
+        if mclim is not None and not mclim.empty:
+            n = mclim[mclim.admin_level == 0].sort_values("month")
+            if not n.empty:
+                wet = n.nlargest(3, "ptot_mm")["month"].astype(int).tolist()
+                fr.append(frag(sec, "baseline_value", f"{n.iloc[0].admin0_name}: seasonality 1991–2020 — monthly totals peak in months {', '.join(map(str, sorted(wet)))} "
+                               f"({_f(n.ptot_mm.max(), 0)} mm in the wettest month, {_f(n.ptot_mm.min(), 0)} mm in the driest).",
+                               {str(int(r.month)): float(r.ptot_mm) for r in n.itertuples()}, {**cite, "indicator_id": "ptot_monthly_climatology", "period": "1991-2020"}))
+    fr.append(gap(sec, "observed temperature baseline/trend (CHIRTS-ERA5) and NEX-GDDP projections not wired",
+                  "Projections are in the CR notebook parquet (Africa only); CHIRTS-ERA5 daily cube pending (asked Andrés)."))
     return fr
 
 

@@ -46,6 +46,34 @@ evidence log's *Rescreen 2026-10-07* table. Swaps that came out of it:
 
 ---
 
+## §1 — Climate trends: observed rainfall for any country (built 2026-10-07)
+
+Theme 1 was "in hand" for Africa only — the CR notebook's observed rainfall is the Africa CHIRPS
+parquet. The GCF pipeline includes Syria, Iraq, Sri Lanka and Egypt, so the coverage gap was real.
+Andrés Aguilar's **CHIRPS v3.0 daily (`rnl`) Zarr v3 cube on Hugging Face** (global 60°S–60°N,
+0.05°, 1981 → 2026-08, CC0, CDH v0.3.0 record beside it) closes it:
+[`code/rainfall/chirps_admin.py`](../code/rainfall/README.md) reads only the chunks under a
+country's bbox (one year at a time, no dask), rasterises GAUL 2024 adm2 on the 0.05° grid and
+writes adm0/1/2 **annual totals 1981–2025, 1991–2020 baseline and anomalies, Theil–Sen trend with
+Mann–Kendall p, last-5-year anomaly, wettest/driest year, and the monthly climatology**. Boundaries
+for non-African countries come from the Atlas **global** raw GAUL 2024 file (725 MB; filter by
+`iso3_code`). GAUL's disputed territories (e.g. Bir Tawil, Hala'ib for EGY) carry their own
+gaul0 code — adm0 uses the main code, disputed units are flagged.
+
+**Runs 2026-10-07** (1981–2025, 1991–2020 baseline, ~4–5 s per country-year over HTTP):
+
+| Country | adm2 units | Mean annual rainfall 1991–2020 | Theil–Sen trend (95 % CI), MK p | Last 5 yrs vs baseline | adm1 range |
+| --- | --- | --- | --- | --- | --- |
+| Egypt (EGY) | 366 (+2 disputed) | 19 ± 5 mm | −0.1 mm/decade (−1.4 … +1.3), p = 0.89 | −21 % | Luxor 0 → Alexandria 148 mm |
+| Syria (SYR) | 62 | 278 ± 63 mm | **−17.0 mm/decade** (−29.5 … −1.2), p = 0.04 | −21 % | Deir-Ez-Zor 174 → Lattakia 1,217 mm |
+| Sri Lanka (LKA) | 25 | 1,962 ± 223 mm | **+91 mm/decade** (+36 … +150), p < 0.01 | +16 % | Northern 1,288 → Sabaragamuwa 3,259 mm |
+
+Syria and Sri Lanka are outside the Africa product — the first observed-climate numbers the
+rationale can cite for them. `cdh_rationale --rainfall <dir>` now emits Section 1 fragments
+(baseline, trend with significance, last-5-year anomaly, wettest/driest year, seasonality peak
+months) from these tables; Egypt test: 33 fragments, 7 gaps (temperature/CHIRTS and projections
+still gaps outside Africa). Outputs are regenerated, not committed.
+
 ## §2 — Extreme events: technical note and request for the Atlas hazards session
 
 **Where this sits.** Theme 2 is `IN CR` — the Climate Rationale notebook already classifies

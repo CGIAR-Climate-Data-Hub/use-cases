@@ -22,7 +22,7 @@ from pathlib import Path
 import pandas as pd
 
 from . import fragments
-from .loaders import load_federated, load_haz_freq, load_map, load_worldcover
+from .loaders import load_federated, load_haz_freq, load_map, load_rainfall, load_worldcover
 
 log = logging.getLogger("cdh_rationale")
 
@@ -66,6 +66,7 @@ def main(argv=None) -> int:
     ap.add_argument("iso3")
     ap.add_argument("--federated", help="directory with cdh_federated outputs (<source>_<ISO3>.parquet)")
     ap.add_argument("--worldcover", help="directory with worldcover_admin_*_<ISO3>.parquet")
+    ap.add_argument("--rainfall", help="directory with chirps_admin_*_<ISO3>.parquet (code/rainfall)")
     ap.add_argument("--map", help="rationale-map.yaml (default: repo data/rationale-map.yaml)")
     ap.add_argument("--out", default="out")
     ap.add_argument("--no-remote", action="store_true", help="skip the Atlas haz_freq S3 query")
@@ -79,6 +80,7 @@ def main(argv=None) -> int:
     iso3 = a.iso3.upper()
     m = load_map(a.map)
     ctx = {"iso3": iso3, "fed": load_federated(a.federated, iso3), "worldcover": load_worldcover(a.worldcover, iso3),
+           "rainfall": load_rainfall(a.rainfall, iso3),
            "haz_freq": load_haz_freq(iso3, remote=not a.no_remote), "subnational": a.subnational, "year": a.year,
            "all_periods": a.all_periods,
            "now": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()}

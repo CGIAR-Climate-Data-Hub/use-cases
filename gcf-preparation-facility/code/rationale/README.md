@@ -5,8 +5,8 @@ page's Skills tab specifies: Hub-catalogued (or queued) data in, **labelled, cit
 one list per proposal section, gaps stated explicitly, no narrative authored.
 
 ```bash
-# inputs: cdh_federated outputs + worldcover_admin outputs for the same country
-python -m cdh_rationale TGO --federated ../federated/out --worldcover ../worldcover/out --out out --subnational
+# inputs: cdh_federated, worldcover_admin and chirps_admin outputs for the same country (any subset)
+python -m cdh_rationale TGO --federated ../federated/out --worldcover ../worldcover/out --rainfall ../rainfall/out --out out --subnational
 ```
 
 Outputs: `rationale_<ISO3>.json` (every fragment with `values` and `source_citation`),
@@ -18,8 +18,10 @@ Outputs: `rationale_<ISO3>.json` (every fragment with `values` and `source_citat
 1. Reads [`data/rationale-map.yaml`](../../data/rationale-map.yaml) for the section structure
    (theme, question, GCF CN/FP codes, datasets and their status).
 2. Loads whatever inputs exist: `cdh_federated` parquets (INFORM, FEWS NET, DHS, OECD CRS + Rio
-   markers, Data360 IMF/IDS, Climate Watch, UNICEF JMP, GFW), the WorldCover admin products, and
-   the Atlas `haz_freq.parquet` straight from S3 (DuckDB, `hive_partitioning=false`).
+   markers, Data360 IMF/IDS, Climate Watch, UNICEF JMP, GFW), the WorldCover admin products, the
+   `chirps_admin` rainfall tables (Section 1: baseline, Theil–Sen/MK trend, anomalies, seasonality —
+   any country 60°S–60°N), and the Atlas `haz_freq.parquet` straight from S3 (DuckDB,
+   `hive_partitioning=false`).
 3. One builder per section (`fragments.py`) turns rows into fragments: `{section, theme, serves,
    fragment_type, admin_level, admin_name, text, values, source_citation, caveats}`. The citation
    is the row's own request URL — a deterministic query is the citation.
