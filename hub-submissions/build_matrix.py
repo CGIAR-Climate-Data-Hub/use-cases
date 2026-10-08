@@ -74,6 +74,9 @@ ALIASES = {
 EXTRA_USES = {
     "GCF": ["aqueduct-4", "mapspam-2020", "glw4-2020", "worldpop", "wb-boundaries-gad", "cropland-ghg-2020",
             "nex-gddp-cmip6", "chirps-v3-daily", "chirts-era5-daily", "agera5"],
+    # AgWise: agwise-data reads staged AgERA5 / CHIRPS v3; brief + aggeodata use CHIRTS, NASA POWER;
+    # WB boundaries = the Hub standard AgWise's geoBoundaries row must align with (agwise/BRIEF.md).
+    "AgWise": ["agera5", "chirps-v3-daily", "chirts-era5-daily", "nasa-power", "wb-boundaries-gad"],
 }
 STATUS_RANK = {"published": 0, "submitted": 1, "verified": 2, "draft": 3, "in data lake, no record": 4, "in-progress": 5,
                "todo": 6, "queued": 6, "deferred": 7}
