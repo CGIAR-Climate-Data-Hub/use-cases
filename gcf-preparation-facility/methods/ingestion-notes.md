@@ -423,11 +423,34 @@ closer to WDPA/KBA/LandMark than the Hub's climate team is. Draft message:
 
 ## Follow-ons not done in this round
 
-- **Metadata YAMLs** for every federated/hosted row — after v0.4.0; order: open tabular P1s
-  (INFORM, FEWS NET, DHS, OECD CRS/CRDF, Data360/IMF, IDS, Climate Watch) with the
-  `spatial-indexed` template + `joins` to the boundary record → derived products (RWI admin, SHDI,
-  WorldCover admin, WDPA/KBA/LandMark overlays, GMIA-NEXT admin) → tool/method records (EX-ACT,
-  GLEAM, iCLEANED).
+- **Metadata YAMLs** — **unblocked 2026-10-07/08:** `cdh-metadata-standard` **v0.4.0 and v0.4.1**
+  released (PR #35/#36), the `cdh-metadata` skill bumped to 0.4.1 overnight. What changed for us:
+  `structures[]` replaces record-level dimensions/variables (datacube extension folded into core);
+  `joins` → `foreign_keys` (Frictionless shape, `reference.resource` = catalog record id);
+  `spatial.resolution` removed (grid spacing is an `xy` dimension; tables declare a
+  `type: location` dimension + `foreign_keys` to a boundary record); `version`, `created`,
+  `updated` and a `maintainer` contact are required; `citation.authors` are objects;
+  `data[].nodata` → `variables[].nodata`; API-served data is a `data[]` entry with
+  `service-desc`/`service-doc` links; `file_index` (`cdh-inventory` CSV) for file sets;
+  `attribution`, `update_frequency`, `parent`, `derived_from[].id`. Templates dir is gone — use
+  `examples/kitchen-sink/admin2/` as the shape for admin-indexed tables and
+  `scripts/validate-yaml.js` to validate. Catalog records themselves are still v0.3.0.
+  Submission route: the [CDH Metadata Generator](https://anaguilarar.github.io/CDH-metadata-app/)
+  → `cdh-catalog` "Submit metadata record" issue → bot opens the PR → CDH review. Order for us:
+  derived products first (WorldCover admin + cropfrac grid, CHIRPS admin rainfall, `haz_freq`
+  extension when fixed) as children/derivations with `processing[].derived_from`; then the
+  federated API sources (INFORM, FEWS NET, DHS, OECD CRS/CRDF, Data360, Climate Watch, UNICEF JMP)
+  as API-endpoint records; then tool/method records (EX-ACT, GLEAM, iCLEANED).
+- **Hosting route is now explicit** — `cdh-data-pipeline` (pushed 2026-10-07): one recipe per
+  dataset (`recipes/<id>.py` calling `write_parquet` / `write_cog` / `write_zarr`), outputs under
+  `s3://digital-atlas/cdh/data/<dataset-id>/` (lowercase kebab ids, `cog/` inside the prefix,
+  upstream version in the id, no `latest/`). Our WorldCover and CHIRPS-admin jobs should become
+  recipes there rather than ad-hoc uploads.
+- **Boundaries decision — effectively made by the pipeline:** `recipes/wb_boundaries.py` publishes
+  World Bank GAD v2 (adm0/1/2 GeoParquet + attribute tables carrying HASC / **GAUL** / P-code
+  crosswalks) to `cdh/data/wb-boundaries-gad/`. Our products are on GAUL 2024; the crosswalk makes
+  a `foreign_keys` join possible without re-running, but new products should be cut on WB GAD once
+  its catalog record exists. Confirm with Brayden; AgWise (geoBoundaries) is affected more.
 - **`climate-rationale` skill** — spec on the review page's Skills tab; issue text drafted in
   `outputs/skills-issue-climate-rationale.md`. **Prototype of the data layer built 2026-10-07:**
   [`code/rationale/`](../code/rationale/README.md) (`python -m cdh_rationale TGO …`) reads the

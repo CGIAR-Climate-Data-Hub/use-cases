@@ -127,7 +127,9 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 - [x] Adversarial rescreen of every queued dataset (live endpoint, licence, alternatives) — Claude — results in the [evidence log](./methods/evidence/sources.md#rescreen-2026-10-07--queued-datasets-adversarial-re-check); GMIA v5 → GMIA-NEXT swap, EX-ACT route change, 2026-10-07
 - [ ] Theme 2 extreme-events request to the Atlas hazards pipeline — Peter Steward — questions block in [`methods/ingestion-notes.md` §2](./methods/ingestion-notes.md); relay to the hazards session, then finalise the request
 - [ ] Message Cesare (review comments, final dataset, extraction method, DOI, champion role) and MFL/Mosaic (host/federate Theme 8 layers) — Peter Steward — drafts in `outputs/` (not committed)
-- [ ] Author CDH metadata records for the P1 rows — Brayden Youngberg + Peter Steward — **after `cdh-metadata-standard` v0.4.0 lands** (open PR #35); order in `ingestion-notes.md` → Follow-ons
+- [ ] Author CDH metadata records (v0.4.1) for the derived products and P1 federated sources — Peter Steward + Claude, review Brayden Youngberg — standard v0.4.0/0.4.1 released 2026-10-07; order + submission route in `ingestion-notes.md` → Follow-ons
+- [ ] Turn the WorldCover and CHIRPS-admin jobs into `cdh-data-pipeline` recipes (`s3://digital-atlas/cdh/data/<id>/`) — Peter Steward + Brayden Youngberg — hosting route defined 2026-10-07
+- [ ] Confirm boundary standard (pipeline publishes World Bank GAD v2 with a GAUL crosswalk; our products are GAUL 2024) — Brayden Youngberg
 - [ ] `climate-rationale` skill — _TBC_ — issue text drafted (`outputs/skills-issue-climate-rationale.md`); build after ≥1 theme is catalogued
 
 ### Data assets for the hub
