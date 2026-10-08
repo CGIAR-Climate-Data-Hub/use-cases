@@ -441,6 +441,17 @@ closer to WDPA/KBA/LandMark than the Hub's climate team is. Draft message:
   extension when fixed) as children/derivations with `processing[].derived_from`; then the
   federated API sources (INFORM, FEWS NET, DHS, OECD CRS/CRDF, Data360, Climate Watch, UNICEF JMP)
   as API-endpoint records; then tool/method records (EX-ACT, GLEAM, iCLEANED).
+- **Adversarial metadata verification — built 2026-10-08** as a Hub skill (`cdh-metadata-verify`,
+  draft PR on `CGIAR-Climate-Data-Hub/skills`). `verify_record.py` opens every asset a record
+  points at and diffs it against the record (bbox/CRS/step, variables, dtypes, fill values,
+  dimension values, categories, time axis, sizes, template expansions), resolves every URL, checks
+  DOI vs Crossref, licence vs SPDX + provider page, vocab ids and catalog cross-references; the
+  SKILL adds the hostile-reviewer pass. First run on the six live catalog records: mapspam's
+  template token order is reversed (all expansions 404) and its S3/HTTPS ids differ; glw4 declares
+  one umbrella variable where the store has six per-species arrays; CHIRPS/CHIRTS cite a dead CHC
+  path and claim CC-BY-4.0 where the provider says CC0/public domain. Report in
+  `outputs/cdh-catalog-review-2026-10-08.md` (not committed). Our own records will be run through
+  it before submission.
 - **Hosting route is now explicit** — `cdh-data-pipeline` (pushed 2026-10-07): one recipe per
   dataset (`recipes/<id>.py` calling `write_parquet` / `write_cog` / `write_zarr`), outputs under
   `s3://digital-atlas/cdh/data/<dataset-id>/` (lowercase kebab ids, `cog/` inside the prefix,
