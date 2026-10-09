@@ -435,7 +435,7 @@ closer to WDPA/KBA/LandMark than the Hub's climate team is. Draft message:
   `attribution`, `update_frequency`, `parent`, `derived_from[].id`. Templates dir is gone — use
   `examples/kitchen-sink/admin2/` as the shape for admin-indexed tables and
   `scripts/validate-yaml.js` to validate. Catalog records themselves are still v0.3.0.
-  Submission route: the [CDH Metadata Generator](https://anaguilarar.github.io/CDH-metadata-app/)
+  Submission route: the [CDH Metadata Generator](https://cgiar-climate-data-hub.github.io/CDH-metadata-app/)
   → `cdh-catalog` "Submit metadata record" issue → bot opens the PR → CDH review. Order for us:
   derived products first (WorldCover admin + cropfrac grid, CHIRPS admin rainfall, `haz_freq`
   extension when fixed) as children/derivations with `processing[].derived_from`; then the
