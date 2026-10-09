@@ -28,6 +28,11 @@ pnpm-debug.log*
 # OS
 Thumbs.db
 *.swp
+
+# Python
+__pycache__/
+*.pyc
+gcf-preparation-facility/code/federated/out/
 *.swo
 
 # Coverage

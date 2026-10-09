@@ -32,7 +32,7 @@ sections:
     status: held
     fragment_types: [baseline_value, trend_description, projection_value, warming_stripes]
     datasets:
-      - {queue_id: null, title: CHIRPS v3 daily precipitation, hub_record: chirps-v3-daily, route: federate, licence: CC0, admin: [adm0, adm1], status: published}
+      - {queue_id: null, title: CHIRPS v3 daily precipitation, hub_record: chirps-v3-daily, route: federate, licence: CC0, admin: [adm0, adm1], status: published, federated_source: "https://huggingface.co/datasets/aaguilar90/chirps-v3-daily-rnl/resolve/main/chirps-v3-daily-rnl.zarr", note: "global 60S-60N Zarr v3 cube (rnl flavour, 1981-2026-08, CC0) published 2026-10-06 by Andrés Aguilar with a CDH v0.3.0 record beside it; needs zarr-python>=3; Hub record still lists CC-BY-4.0 + GeoTIFF dir only"}
       - {queue_id: null, title: CHIRTS-ERA5 daily temperature, hub_record: chirts-era5-daily, route: federate, licence: CC BY 4.0, admin: [adm0, adm1], status: published}
       - {queue_id: null, title: NEX-GDDP-CMIP6 (18-GCM ensemble, 4 SSPs), hub_record: null, route: federate, licence: CC0, admin: [adm1], status: held, note: served Africa-only via the CR notebook parquet}
   - id: 2

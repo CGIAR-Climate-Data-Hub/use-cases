@@ -139,6 +139,7 @@ The full per-dataset audit — all ~40 datasets behind the nine notebook section
 - **[Ingestion queue](./data/ingestion-queue.csv)** — the 31 rows queued on 2026-10-07 (Pete's per-theme P1/P2 calls), mirrored as the `GCF use-case` sheet of the CDH ingestion tracker; route, licence, complexity, rescreen verdict, proposed lead per row.
 - **[Ingestion notes](./methods/ingestion-notes.md)** — the decision record and per-theme working notes: Theme 2 hazards request, spatial-vs-method split, Theme 5 document-registry spec, EX-ACT / WorldCover designs, the OECD/Data360 client, the safeguards licence split.
 - **[Rationale map](./data/rationale-map.yaml)** — machine-readable GCF section → theme → dataset → Hub route/status index for AI agents and the planned `climate-rationale` skill.
+- **[Federated clients](./code/federated/README.md)** — `python -m cdh_federated TGO` pulls the open-API P1 datasets (INFORM, FEWS NET, DHS, OECD CRS + Rio markers, Data360 IMF/IDS, Climate Watch, UNICEF JMP, GFW with key) into one tidy admin0/1 schema with per-row request URLs; verified for TGO and KEN on 2026-10-07.
 
 Section-level summary (memo status: **IN CR** = already in the Climate Rationale notebook; **PARTIAL** = partly present, needs additions; **NEW** = not yet built; **DEPRIORITISED** = in the memo but since parked). All sections are currently at Hub status `scoped`.
 
