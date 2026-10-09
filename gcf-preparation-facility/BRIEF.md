@@ -127,7 +127,9 @@ Canonical materials live in OneDrive at `Climate_data_hub/use_cases/gcf-preparat
 - [x] Adversarial rescreen of every queued dataset (live endpoint, licence, alternatives) — Claude — results in the [evidence log](./methods/evidence/sources.md#rescreen-2026-10-07--queued-datasets-adversarial-re-check); GMIA v5 → GMIA-NEXT swap, EX-ACT route change, 2026-10-07
 - [ ] Theme 2 extreme-events request to the Atlas hazards pipeline — Peter Steward — questions block in [`methods/ingestion-notes.md` §2](./methods/ingestion-notes.md); relay to the hazards session, then finalise the request
 - [ ] Message Cesare (review comments, final dataset, extraction method, DOI, champion role) and MFL/Mosaic (host/federate Theme 8 layers) — Peter Steward — drafts in `outputs/` (not committed)
-- [ ] Author CDH metadata records for the P1 rows — Brayden Youngberg + Peter Steward — **after `cdh-metadata-standard` v0.4.0 lands** (open PR #35); order in `ingestion-notes.md` → Follow-ons
+- [ ] Author CDH metadata records (v0.4.1) for the derived products and P1 federated sources — Peter Steward + Claude, review Brayden Youngberg — standard v0.4.0/0.4.1 released 2026-10-07; order + submission route in `ingestion-notes.md` → Follow-ons
+- [ ] Turn the WorldCover and CHIRPS-admin jobs into `cdh-data-pipeline` recipes (`s3://digital-atlas/cdh/data/<id>/`) — Peter Steward + Brayden Youngberg — hosting route defined 2026-10-07
+- [ ] Confirm boundary standard (pipeline publishes World Bank GAD v2 with a GAUL crosswalk; our products are GAUL 2024) — Brayden Youngberg
 - [ ] `climate-rationale` skill — _TBC_ — issue text drafted (`outputs/skills-issue-climate-rationale.md`); build after ≥1 theme is catalogued
 
 ### Data assets for the hub
@@ -139,6 +141,8 @@ The full per-dataset audit — all ~40 datasets behind the nine notebook section
 - **[Ingestion queue](./data/ingestion-queue.csv)** — the 31 rows queued on 2026-10-07 (Pete's per-theme P1/P2 calls), mirrored as the `GCF use-case` sheet of the CDH ingestion tracker; route, licence, complexity, rescreen verdict, proposed lead per row.
 - **[Ingestion notes](./methods/ingestion-notes.md)** — the decision record and per-theme working notes: Theme 2 hazards request, spatial-vs-method split, Theme 5 document-registry spec, EX-ACT / WorldCover designs, the OECD/Data360 client, the safeguards licence split.
 - **[Rationale map](./data/rationale-map.yaml)** — machine-readable GCF section → theme → dataset → Hub route/status index for AI agents and the planned `climate-rationale` skill.
+- **[Rainfall product](./code/rainfall/README.md)** — `chirps_admin.py <ISO3>` reads Andrés Aguilar's global CHIRPS v3 daily cube (Hugging Face, CC0) and writes adm0/1/2 annual totals, 1991–2020 baseline/anomalies, Theil–Sen + Mann–Kendall trend and monthly climatology — Theme 1 for any country 60°S–60°N (Egypt, Syria, Sri Lanka run 2026-10-07).
+- **[Rationale prototype](./code/rationale/README.md)** — `python -m cdh_rationale TGO` turns the federated pulls, WorldCover products and Atlas `haz_freq` into labelled, citable fragments per GCF section (JSON + Markdown + coverage table), gaps explicit; surfaced a saturated historic-NDWS defect in `haz_freq` (Theme 2 request ask #6).
 - **[Federated clients](./code/federated/README.md)** — `python -m cdh_federated TGO` pulls the open-API P1 datasets (INFORM, FEWS NET, DHS, OECD CRS + Rio markers, Data360 IMF/IDS, Climate Watch, UNICEF JMP, GFW with key) into one tidy admin0/1 schema with per-row request URLs; verified for TGO and KEN on 2026-10-07.
 
 Section-level summary (memo status: **IN CR** = already in the Climate Rationale notebook; **PARTIAL** = partly present, needs additions; **NEW** = not yet built; **DEPRIORITISED** = in the memo but since parked). All sections are currently at Hub status `scoped`.
@@ -194,7 +198,7 @@ _Source of truth for transcripts: `Climate_data_hub/meetings/` in OneDrive._
 ## Risks & open questions
 
 - **Champion responsiveness** — no comments on the review page (shared 2026-07-14, chased 2026-09-23); MCF dataset sub-classifiers, extraction method and DOI outstanding since June; Cesare moved from the climate-security team to ImpactSF (2026-09-09) — confirm he remains champion or add a CACC1 co-champion. **Owner:** Peter Steward **Status:** open — message drafted 2026-10-07
-- **Geographic coverage** — crop-exposure pipeline is Sub-Saharan Africa only (MapSPAM SSA); Cesare calls this "the biggest limitation" — target is all non-Annex-I countries; active GCF pipeline includes Syria, Iraq, Sri Lanka, Egypt. **Owner:** _TBC_ **Status:** open
+- **Geographic coverage** — crop-exposure pipeline is Sub-Saharan Africa only (MapSPAM SSA); Cesare calls this "the biggest limitation" — target is all non-Annex-I countries; active GCF pipeline includes Syria, Iraq, Sri Lanka, Egypt. **Owner:** _TBC_ **Status:** partly addressed 2026-10-07 — observed rainfall (Theme 1) now global via the CHIRPS v3 HF cube (`code/rainfall/`); projections, temperature and the exposure matrix remain Africa-only
 - **Hazard ↔ solutions mapping gap** — Cesare: what would be "super useful… that we don't have" is a mapping of CGIAR-deliverable climate solutions to hazards/vulnerability; a prior GPT-generated attempt fabricated references. Route via Adaptation Insights. **Owner:** Peter Steward **Status:** open
 - **HSH-max interpretation** — Brayden Youngberg — what does the current implementation actually compute vs what was intended?
 - **Parquet inventory** — Brayden Youngberg — which derived parquet files are canonical inputs vs legacy artefacts?

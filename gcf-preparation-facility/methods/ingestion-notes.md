@@ -46,6 +46,34 @@ evidence log's *Rescreen 2026-10-07* table. Swaps that came out of it:
 
 ---
 
+## §1 — Climate trends: observed rainfall for any country (built 2026-10-07)
+
+Theme 1 was "in hand" for Africa only — the CR notebook's observed rainfall is the Africa CHIRPS
+parquet. The GCF pipeline includes Syria, Iraq, Sri Lanka and Egypt, so the coverage gap was real.
+Andrés Aguilar's **CHIRPS v3.0 daily (`rnl`) Zarr v3 cube on Hugging Face** (global 60°S–60°N,
+0.05°, 1981 → 2026-08, CC0, CDH v0.3.0 record beside it) closes it:
+[`code/rainfall/chirps_admin.py`](../code/rainfall/README.md) reads only the chunks under a
+country's bbox (one year at a time, no dask), rasterises GAUL 2024 adm2 on the 0.05° grid and
+writes adm0/1/2 **annual totals 1981–2025, 1991–2020 baseline and anomalies, Theil–Sen trend with
+Mann–Kendall p, last-5-year anomaly, wettest/driest year, and the monthly climatology**. Boundaries
+for non-African countries come from the Atlas **global** raw GAUL 2024 file (725 MB; filter by
+`iso3_code`). GAUL's disputed territories (e.g. Bir Tawil, Hala'ib for EGY) carry their own
+gaul0 code — adm0 uses the main code, disputed units are flagged.
+
+**Runs 2026-10-07** (1981–2025, 1991–2020 baseline, ~4–5 s per country-year over HTTP):
+
+| Country | adm2 units | Mean annual rainfall 1991–2020 | Theil–Sen trend (95 % CI), MK p | Last 5 yrs vs baseline | adm1 range |
+| --- | --- | --- | --- | --- | --- |
+| Egypt (EGY) | 366 (+2 disputed) | 19 ± 5 mm | −0.1 mm/decade (−1.4 … +1.3), p = 0.89 | −21 % | Luxor 0 → Alexandria 148 mm |
+| Syria (SYR) | 62 | 278 ± 63 mm | **−17.0 mm/decade** (−29.5 … −1.2), p = 0.04 | −21 % | Deir-Ez-Zor 174 → Lattakia 1,217 mm |
+| Sri Lanka (LKA) | 25 | 1,962 ± 223 mm | **+91 mm/decade** (+36 … +150), p < 0.01 | +16 % | Northern 1,288 → Sabaragamuwa 3,259 mm |
+
+Syria and Sri Lanka are outside the Africa product — the first observed-climate numbers the
+rationale can cite for them. `cdh_rationale --rainfall <dir>` now emits Section 1 fragments
+(baseline, trend with significance, last-5-year anomaly, wettest/driest year, seasonality peak
+months) from these tables; Egypt test: 33 fragments, 7 gaps (temperature/CHIRTS and projections
+still gaps outside Africa). Outputs are regenerated, not committed.
+
 ## §2 — Extreme events: technical note and request for the Atlas hazards session
 
 **Where this sits.** Theme 2 is `IN CR` — the Climate Rationale notebook already classifies
@@ -145,6 +173,16 @@ observational-pipeline question, not part of this ask.
 >    column holds the *period* (e.g. `2021-2040`) while the path segment `timeframe=jagermeyr` holds
 >    the season axis — consumers must read with `hive_partitioning=false` or the path value
 >    overrides the column. Worth stating in the `.parquet.json` sidecar.
+> 6. **Defect — historic NDWS frequency is saturated.** In the published `haz_freq.parquet`,
+>    `scenario='historic'` rows for **NDWS** (both `severe` and `extreme`) have `frequency = 1.0`
+>    and `frequency_n = 19` for **every GCM and every African adm0** (1,062 rows each, verified
+>    2026-10-07 with DuckDB, `hive_partitioning=false`); NDWL0 historic values are normal (mean
+>    0.13 severe / 0.04 extreme) and NDWS projections are plausible (ssp245 2021–2040 median 0.87
+>    severe / 0.17 extreme). So the historic NDWS baseline is unusable for a historical-vs-projected
+>    comparison. Suspects: the historic NDWS raster stack read by SEC4 is on a different scale/units
+>    than the projection stacks, or the `>` threshold is applied to a cumulative rather than annual
+>    layer. Please check the historic NDWS inputs to `R/2.2_haz_change.R` SEC4 and re-publish; the
+>    extended run (asks 1–5) should not inherit this.
 >
 > **Keep.** Same output path and schema (`variable ∈ {frequency, frequency_n}`, `severity`,
 > `hazard`, `hazard_user`, `crop`, `model`, `scenario`, `timeframe`), same GAUL 2024 adm0/1/2, same
@@ -385,12 +423,50 @@ closer to WDPA/KBA/LandMark than the Hub's climate team is. Draft message:
 
 ## Follow-ons not done in this round
 
-- **Metadata YAMLs** for every federated/hosted row — after v0.4.0; order: open tabular P1s
-  (INFORM, FEWS NET, DHS, OECD CRS/CRDF, Data360/IMF, IDS, Climate Watch) with the
-  `spatial-indexed` template + `joins` to the boundary record → derived products (RWI admin, SHDI,
-  WorldCover admin, WDPA/KBA/LandMark overlays, GMIA-NEXT admin) → tool/method records (EX-ACT,
-  GLEAM, iCLEANED).
+- **Metadata YAMLs** — **unblocked 2026-10-07/08:** `cdh-metadata-standard` **v0.4.0 and v0.4.1**
+  released (PR #35/#36), the `cdh-metadata` skill bumped to 0.4.1 overnight. What changed for us:
+  `structures[]` replaces record-level dimensions/variables (datacube extension folded into core);
+  `joins` → `foreign_keys` (Frictionless shape, `reference.resource` = catalog record id);
+  `spatial.resolution` removed (grid spacing is an `xy` dimension; tables declare a
+  `type: location` dimension + `foreign_keys` to a boundary record); `version`, `created`,
+  `updated` and a `maintainer` contact are required; `citation.authors` are objects;
+  `data[].nodata` → `variables[].nodata`; API-served data is a `data[]` entry with
+  `service-desc`/`service-doc` links; `file_index` (`cdh-inventory` CSV) for file sets;
+  `attribution`, `update_frequency`, `parent`, `derived_from[].id`. Templates dir is gone — use
+  `examples/kitchen-sink/admin2/` as the shape for admin-indexed tables and
+  `scripts/validate-yaml.js` to validate. Catalog records themselves are still v0.3.0.
+  Submission route: the [CDH Metadata Generator](https://cgiar-climate-data-hub.github.io/CDH-metadata-app/)
+  → `cdh-catalog` "Submit metadata record" issue → bot opens the PR → CDH review. Order for us:
+  derived products first (WorldCover admin + cropfrac grid, CHIRPS admin rainfall, `haz_freq`
+  extension when fixed) as children/derivations with `processing[].derived_from`; then the
+  federated API sources (INFORM, FEWS NET, DHS, OECD CRS/CRDF, Data360, Climate Watch, UNICEF JMP)
+  as API-endpoint records; then tool/method records (EX-ACT, GLEAM, iCLEANED).
+- **Adversarial metadata verification — built 2026-10-08** as a Hub skill (`cdh-metadata-verify`,
+  draft PR on `CGIAR-Climate-Data-Hub/skills`). `verify_record.py` opens every asset a record
+  points at and diffs it against the record (bbox/CRS/step, variables, dtypes, fill values,
+  dimension values, categories, time axis, sizes, template expansions), resolves every URL, checks
+  DOI vs Crossref, licence vs SPDX + provider page, vocab ids and catalog cross-references; the
+  SKILL adds the hostile-reviewer pass. First run on the six live catalog records: mapspam's
+  template token order is reversed (all expansions 404) and its S3/HTTPS ids differ; glw4 declares
+  one umbrella variable where the store has six per-species arrays; CHIRPS/CHIRTS cite a dead CHC
+  path and claim CC-BY-4.0 where the provider says CC0/public domain. Report in
+  `outputs/cdh-catalog-review-2026-10-08.md` (not committed). Our own records will be run through
+  it before submission.
+- **Hosting route is now explicit** — `cdh-data-pipeline` (pushed 2026-10-07): one recipe per
+  dataset (`recipes/<id>.py` calling `write_parquet` / `write_cog` / `write_zarr`), outputs under
+  `s3://digital-atlas/cdh/data/<dataset-id>/` (lowercase kebab ids, `cog/` inside the prefix,
+  upstream version in the id, no `latest/`). Our WorldCover and CHIRPS-admin jobs should become
+  recipes there rather than ad-hoc uploads.
+- **Boundaries decision — effectively made by the pipeline:** `recipes/wb_boundaries.py` publishes
+  World Bank GAD v2 (adm0/1/2 GeoParquet + attribute tables carrying HASC / **GAUL** / P-code
+  crosswalks) to `cdh/data/wb-boundaries-gad/`. Our products are on GAUL 2024; the crosswalk makes
+  a `foreign_keys` join possible without re-running, but new products should be cut on WB GAD once
+  its catalog record exists. Confirm with Brayden; AgWise (geoBoundaries) is affected more.
 - **`climate-rationale` skill** — spec on the review page's Skills tab; issue text drafted in
-  `outputs/skills-issue-climate-rationale.md`; build after one theme's data is in the Hub.
+  `outputs/skills-issue-climate-rationale.md`. **Prototype of the data layer built 2026-10-07:**
+  [`code/rationale/`](../code/rationale/README.md) (`python -m cdh_rationale TGO …`) reads the
+  rationale map + the federated pulls + WorldCover + `haz_freq` and emits labelled, citable
+  fragments per section with explicit gaps; Togo: sections 4, 5, 7, 9 fully data-backed, 6 gaps.
+  The LLM composition step (the skill proper) sits on top of this.
 - **Adaptation Insights** (Njuguna / Muller / Nowak) may hold assets for Themes 5–7 — not contacted
   this round.
