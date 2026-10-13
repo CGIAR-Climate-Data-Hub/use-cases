@@ -78,6 +78,28 @@ EXTRA_USES = {
     # WB boundaries = the Hub standard AgWise's geoBoundaries row must align with (agwise/BRIEF.md).
     "AgWise": ["agera5", "chirps-v3-daily", "chirts-era5-daily", "nasa-power", "wb-boundaries-gad"],
 }
+# B4T has no ingestion-queue.csv: its needs are the Climate Risk Index rebuild inputs and their verdicts
+# from the B4T CRI review page (public/b4t/cri-review.html, summary table, v1.1 2026-07-14).
+# key → (label, verdict, effort). Verdicts are quoted from the review; they are not P-levels.
+B4T_NEEDS = {
+    "spei": ("SPEI (global drought index)", "Adopt SPEI — extend CDH global (replaces SPI/WASP, D-01)", "Low–med"),
+    "aqueduct-4": ("WRI Aqueduct 4.0", "Keep — Aqueduct 4.0 CMIP6 (D-03/04/05, R-04/05)", "Low"),
+    "global-flood-database": ("Global Flood Database", "Replace — replaces Dartmouth flood frequency (F-01)", "Low"),
+    "giri-riverine-flood": ("GIRI riverine flood hazard (CMIP6)", "Modernize — river flood hazard (F-02)", "Med"),
+    "gaez-v5": ("GAEZ v5", "Modernize — LGP flips 90/120 days, CMIP6 (R-01/02)", "Med"),
+    "chirps-v3-daily": ("CHIRPS v3 daily", "Re-derive annual rainfall CV on CHIRPS v3 (R-03)", "Low"),
+    "gehe-humid-heat": ("GEHE extreme humid heat", "Keep — modern, open (T-01)", "Low"),
+    "nex-gddp-cmip6": ("NEX-GDDP-CMIP6", "Modernize — growing-season Tmax flip 30 °C (T-02)", "Med"),
+    "fao-gsasmap": ("FAO GSASmap (salt-affected soils)", "Keep (S-01)", "Low"),
+    "isric-soil-salinity": ("ISRIC global soil salinity", "Keep (S-02)", "Low"),
+    "soilgrids-2": ("SoilGrids 2.0", "Keep — water retention 1500 kPa, AWC (W-01/02)", "Low"),
+    "stocker-2023-rzws": ("Rooting-zone water storage (Stocker 2023)", "Keep (W-03)", "Low"),
+    "gupta-2023-paw": ("Plant-available soil water (Gupta 2023)", "Keep (W-04)", "Low"),
+    "mehta-2024-irrigation": ("Area equipped for irrigation (Mehta 2024)", "Keep (I-01)", "Low"),
+}
+# PRISM (Platform-Ready Inputs for Spatial Modeling, CIAT Dakar, prismpy) — placeholder column until its
+# data needs are listed; see agwise/BRIEF.md (PRISM coordination). Add keys here as they are confirmed.
+PRISM_NEEDS: dict[str, str] = {}
 STATUS_RANK = {"published": 0, "submitted": 1, "verified": 2, "draft": 3, "in data lake, no record": 4, "in-progress": 5,
                "todo": 6, "queued": 6, "deferred": 7}
 
@@ -233,6 +255,16 @@ def build(tracker: Path | None) -> list[dict]:
         for k in keys:
             if k in rows:
                 rows[k]["uses"].add(uc)
+    for k, (label, verdict, effort) in B4T_NEEDS.items():
+        x = row(k)
+        x["dataset"] = x["dataset"] or label
+        x["uses"].add("B4T")
+        x["priority"].append(f"B4T:needed — {verdict} [effort {effort}]")
+        x["sources"].append("b4t CRI review (public/b4t/cri-review.html)")
+    for k, note in PRISM_NEEDS.items():
+        x = row(k)
+        x["uses"].add("PRISM")
+        x["priority"].append(f"PRISM:{note}")
 
     out = []
     for k, x in rows.items():
@@ -315,6 +347,96 @@ def write_tracker(rows: list[dict], tracker: Path, replace_tabs: tuple[str, ...]
     print(f"tracker: wrote 'Use-case matrix' ({len(rows)} rows), removed {replace_tabs}; backup {bak.name}; other sheets unchanged")
 
 
+PRIO_UCS = ("GCF", "AgWise", "B4T", "PRISM")
+PRIO_RANK = {"P1": 0, "P2": 1, "needed": 2, "held": 3, "P3": 4, "": 9}
+PRIO_COLS = ["dataset", "overall_priority", "GCF", "AgWise", "B4T", "PRISM", "n_use_cases", "hub_status", "hub_record_url",
+             "lake_prefix", "route", "products", "licence", "proposed_lead", "key"]
+
+
+def prioritise(rows: list[dict]) -> tuple[list[dict], int]:
+    """Prioritised view: one row per dataset that any use-case rates P1/P2, B4T needs, or the Hub already holds.
+    Cell = that use-case's rating (P1/P2/P3, 'needed — verdict' for B4T, 'held' for already-held inputs, '_TBC_' for PRISM)."""
+    out, dropped = [], 0
+    for r in rows:
+        cells = {u: "" for u in PRIO_UCS}
+        for part in [p.strip() for p in r["priority"].split(";") if p.strip()]:
+            uc, _, val = part.partition(":")
+            uc = {"agwise": "AgWise", "gcf": "GCF", "b4t": "B4T", "prism": "PRISM"}.get(uc.strip().lower(), uc.strip())
+            if uc in cells:
+                v = val.strip()
+                v = re.sub(r"\s*\((tool|method)\)", "", v)
+                cells[uc] = v if not cells[uc] else cells[uc]
+        for uc in ("GCF", "AgWise", "B4T"):
+            if r.get(uc) == "x" and not cells[uc]:
+                # an input the use-case already relies on: 'held' if the Hub has it, else 'needed'
+                cells[uc] = "held" if r["hub_status"] in ("published", "in data lake, no record") else "needed"
+        cells["PRISM"] = cells["PRISM"] or "_TBC_"
+        levels = [("needed" if c.startswith("needed") else c.split()[0] if c else "") for u, c in cells.items() if u != "PRISM"]
+        best = min(levels, key=lambda c: PRIO_RANK.get(c, 9)) if levels else ""
+        keep = best in ("P1", "P2", "needed") or r["hub_status"] in ("published", "in data lake, no record")
+        if not keep:
+            dropped += 1
+            continue
+        out.append({"dataset": r["dataset"], "overall_priority": best or "held", **cells,
+                    "n_use_cases": sum(1 for u in ("GCF", "AgWise", "B4T") if cells[u]),
+                    **{k: r.get(k, "") for k in ("hub_status", "hub_record_url", "lake_prefix", "route", "products", "licence", "proposed_lead", "key")}})
+    out.sort(key=lambda r: (PRIO_RANK.get(r["overall_priority"], 9), -r["n_use_cases"], STATUS_RANK.get(r["hub_status"], 9), r["dataset"].lower()))
+    return out, dropped
+
+
+def write_priority(prio: list[dict], dropped: int, tracker: Path | None):
+    p = OUT.with_name("priority-matrix.csv")
+    with open(p, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=PRIO_COLS, lineterminator="\n")
+        w.writeheader(); w.writerows(prio)
+    print(f"priority-matrix.csv: {len(prio)} rows ({dropped} unprioritised datasets left out) → {p}")
+    if not tracker:
+        return
+    import openpyxl  # noqa: PLC0415
+    from openpyxl.styles import Alignment, Font, PatternFill  # noqa: PLC0415
+    name = "Priority matrix"
+    wb = openpyxl.load_workbook(tracker)
+    before = {n: [[c.value for c in r] for r in wb[n].iter_rows()] for n in wb.sheetnames if n != name}
+    if name in wb.sheetnames:
+        del wb[name]
+    ws = wb.create_sheet(name, index=1)
+    ws.append(PRIO_COLS)
+    for c in ws[1]:
+        c.font = Font(bold=True); c.alignment = Alignment(wrap_text=True, vertical="top")
+    fills = {"P1": "C6EFCE", "P2": "FFEB9C", "needed": "BDD7EE", "held": "E7E6E6", "P3": "F2F2F2", "published": "C6EFCE"}
+    for r in prio:
+        ws.append([r[c] for c in PRIO_COLS])
+        rr = ws.max_row
+        for col in ("overall_priority", *PRIO_UCS):
+            v = str(r[col]); lvl = "needed" if v.startswith("needed") else (v.split()[0] if v else "")
+            if lvl in fills:
+                ws.cell(rr, PRIO_COLS.index(col) + 1).fill = PatternFill("solid", fgColor=fills[lvl])
+        if r["hub_status"] == "published":
+            ws.cell(rr, PRIO_COLS.index("hub_status") + 1).fill = PatternFill("solid", fgColor=fills["published"])
+        if r["hub_record_url"]:
+            cell = ws.cell(rr, PRIO_COLS.index("hub_record_url") + 1); cell.hyperlink = r["hub_record_url"]; cell.style = "Hyperlink"
+        for col in (*PRIO_UCS,):
+            ws.cell(rr, PRIO_COLS.index(col) + 1).alignment = Alignment(wrap_text=True, vertical="top")
+    ws.append([])
+    for line in (
+        f"Generated {dt.datetime.now():%Y-%m-%d %H:%M} by hub-submissions/build_matrix.py — canonical copy {REPO_URL}/hub-submissions/priority-matrix.csv. Do not hand-edit.",
+        "Rows: datasets rated P1/P2 by GCF or AgWise, needed by the B4T CRI rebuild, or already held by the Hub. "
+        f"{dropped} datasets with only P3/unrated/deferred entries are left out (see 'Use-case matrix').",
+        "GCF/AgWise = the use-case queue's review priority (P1 do first · P2 next · P3 later); for inputs a use-case already relies on: 'held' = the Hub has it, 'needed' = not yet in the Hub.",
+        "B4T = 'needed — <verdict>' from the CRI review page summary table (Keep / Replace / Modernize / Adopt / Re-derive), with effort; B4T has no P-levels yet.",
+        "PRISM = placeholder (Platform-Ready Inputs for Spatial Modeling, CIAT Dakar, prismpy) — _TBC_ until its data needs are listed (PRISM_NEEDS in the script).",
+        "overall_priority = best rating across GCF/AgWise/B4T (P1 > P2 > needed > held > P3).",
+    ):
+        ws.append([line])
+    for k, v in {"A": 40, "B": 10, "C": 14, "D": 14, "E": 46, "F": 10, "G": 6, "H": 22, "I": 44, "J": 34, "K": 18, "L": 44, "M": 30, "N": 22, "O": 24}.items():
+        ws.column_dimensions[k].width = v
+    ws.freeze_panes = "B2"
+    wb.save(tracker)
+    after = {n: [[c.value for c in r] for r in openpyxl.load_workbook(tracker)[n].iter_rows()] for n in before}
+    assert before == after, "a sheet other than 'Priority matrix' changed — restore from backup"
+    print(f"tracker: wrote '{name}' ({len(prio)} rows); other sheets unchanged")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--tracker", help="path to CDH_data-ingestion v2.xlsx (read Priority Data; written with --write-tracker)")
@@ -323,8 +445,12 @@ def main(argv=None):
     tracker = Path(a.tracker) if a.tracker else None
     rows = build(tracker)
     write_csv(rows)
+    prio, dropped = prioritise(rows)
     if a.write_tracker and tracker:
         write_tracker(rows, tracker)
+        write_priority(prio, dropped, tracker)
+    else:
+        write_priority(prio, dropped, None)
 
 
 if __name__ == "__main__":

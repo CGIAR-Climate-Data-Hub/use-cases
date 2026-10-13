@@ -45,7 +45,12 @@ admin summaries + AgWise cropland-fraction grid). Columns: `GCF | AgWise | B4T |
 `verify_report`, `submission_issue`, per-use-case `queue_status` and `priority`, licence, lead,
 locations.
 
-The tracker's **Use-case matrix** tab is this table with hyperlinks; it replaced the per-use-case
+`priority-matrix.csv` (tracker tab **Priority matrix**) is the prioritised view: datasets rated P1/P2 by GCF or
+AgWise, needed by the B4T CRI rebuild (verdicts from `public/b4t/cri-review.html`), or already held by the Hub;
+columns `GCF | AgWise | B4T | PRISM` carry each use-case's rating, colour-coded, plus an overall priority and the
+Hub link. PRISM is a placeholder column (`PRISM_NEEDS` in the script) until its data needs are listed.
+
+The tracker's **Use-case matrix** tab is the full table with hyperlinks; it replaced the per-use-case
 tabs on 2026-10-08. Per-use-case detail (rescreen verdicts, serves codes, workflow columns) stays
 in each `<slug>/data/ingestion-queue.csv`.
 

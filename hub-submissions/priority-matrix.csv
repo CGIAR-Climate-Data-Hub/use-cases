@@ -1,0 +1,63 @@
+dataset,overall_priority,GCF,AgWise,B4T,PRISM,n_use_cases,hub_status,hub_record_url,lake_prefix,route,products,licence,proposed_lead,key
+ESA WorldCover 2021 v200,P1,P1,P2,,_TBC_,2,queued,,,derive-then-host,AgWise: ESA WorldCover 2021 v200 (cropland-fraction grid); GCF: ESA WorldCover (admin-summary product),CC BY 4.0,CDH Core,esa-worldcover-2021
+SoilGrids 2.0,P1,,P1,"needed — Keep — water retention 1500 kPa, AWC (W-01/02) [effort Low]",_TBC_,2,queued,,,federate,,CC BY 4.0,Alliance (AgWise) / CDH Core,soilgrids-2
+AQUASTAT GMIA v5,P1,P1,,,_TBC_,1,queued,,,mirror,,"open (cite-as, Siebert et al. 2013)",IWMI,aquastat-gmia-v5
+CHIRPS v2.0 daily,P1,,P1,,_TBC_,1,queued,,,federate,,"public domain (CC0, CHC)",CDH Core,chirps-v2-daily
+Copernicus DEM GLO-30,P1,,P1,,_TBC_,1,queued,,,federate,,Copernicus DEM licence (free; attribution ESA / Airbus / DLR),CDH Core,copernicus-dem-glo-30
+CSPD / CSPDxCF (Climate Security Programming Dashboard),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY-NC 4.0,Alliance (CSO),cspd-cspdxcf
+DHS Program (aggregate indicators),P1,P1,,,_TBC_,1,queued,,,federate,,aggregate API open; microdata restricted,IFPRI / CDH Core,dhs-program
+ECMWF SEAS5 (system 51) seasonal forecast,P1,,P1,,_TBC_,1,queued,,,federate,,Copernicus / C3S licence - verify on CDS dataset page,Alliance (AgWise) / CDH Core,ecmwf-seas5-seasonal-forecast
+EDGAR / FAOSTAT emissions,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0,Alliance / CDH Core,edgar-faostat-emissions
+FAO EX-ACT (tool),P1,P1,,,_TBC_,1,queued,,,tool,,AGPL-3.0 (code); app login,Alliance / CDH Core,fao-ex-act
+FAO SDG 5.a.1 / 5.a.2 + Land Portal,P1,P1,,,_TBC_,1,queued,,,federate,,FAO open terms,CDH Core,fao-sdg-5-a-1-5-a-2-land-portal
+FEWS NET,P1,P1,,,_TBC_,1,queued,,,federate,,open (USAID; attribution),IFPRI / CDH Core,fews-net
+GDL Subnational HDI / Area Database,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,NC (non-commercial + attribution),CDH Core,gdl-subnational-hdi-area-database
+Global Forest Watch,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0,Alliance / CDH Core,global-forest-watch
+IATI Registry / Datastore,P1,P1,,,_TBC_,1,queued,,,federate,,open (per publisher),CDH Core,iati-registry-datastore
+IMF fiscal (Fiscal Monitor / GFS) via WB Data360,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 via WB Data360,CDH Core,imf-fiscal-via-wb-data360
+INFORM Risk (global),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (EC Decision 2011/833/EU),CDH Core,inform-risk
+IPC / Cadre Harmonise,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY-NC-SA 3.0 IGO,IFPRI / CDH Core,ipc-cadre-harmonise
+IPCC Emission Factor Database (EFDB),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,unclear - IPCC copyright,Alliance / CDH Core,ipcc-emission-factor-database
+Key Biodiversity Areas,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,"request-gated, NC",MFL / Mosaic (ask),key-biodiversity-areas
+LandMark (Indigenous & community lands),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,attribution + FPIC conditions,MFL / Mosaic (ask),landmark
+Meta Relative Wealth Index,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,CC0,IFPRI / CDH Core,meta-relative-wealth-index
+OECD CRDF (Rio markers),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-crdf
+OECD DAC CRS,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-dac-crs
+WDPA / Protected Planet (overlay stat),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,"NC, no-redistribute",CDH Core (ask MFL/Mosaic),wdpa-protected-planet
+World Bank IEG evaluations,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (+ WB attribution terms),CDH Core,world-bank-ieg-evaluations
+AgWise Climate API (Jemal) (tool),P1,,P1,,_TBC_,1,deferred,,,tool,,TBC,Alliance (AgWise),agwise-climate-api
+agwise-data / byliz-ai data_sourcing (tool),P2,,P2,,_TBC_,1,queued,,,tool,,MIT,Alliance (AgWise),agwise-data-byliz-ai-data-sourcing
+Climate Watch (NDC content),P2,P2,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (Climate Watch data),CDH Core,climate-watch
+FAO FishStat - aquaculture value,P2,P2,,,_TBC_,1,queued,,,derive-then-host,,CC BY-NC-SA 3.0 IGO,WorldFish,fao-fishstat-aquaculture-value
+geoBoundaries (gbOpen),P2,,P2,,_TBC_,1,queued,,,federate,,CC BY 4.0 (database); per-layer varies (e.g. CC BY-SA 2.0),CDH Core,geoboundaries
+INFORM Subnational,P2,P2,,,_TBC_,1,queued,,,mirror,,CC BY 4.0,CDH Core,inform-subnational
+iSDAsoil v0.13 (Africa),P2,,P2,,_TBC_,1,queued,,,mirror,,CC BY 4.0 (per workflow catalog; confirm on provider / Zenodo page),Alliance (AgWise),isdasoil-v0-13
+"MODIS MOD13Q1 / MYD13Q1 v061 (NDVI, EVI)",P2,,P2,,_TBC_,1,queued,,,federate,,no restrictions (LP DAAC),CDH Core,modis-mod13q1-myd13q1-v061
+ND-GAIN Country Index,P2,P2,,,_TBC_,1,queued,,,mirror,,unclear - verify,CDH Core,nd-gain-country-index
+UNDP HDI,P2,P2,,,_TBC_,1,queued,,,mirror,,CC BY 3.0 IGO,CDH Core,undp-hdi
+WHO/UNICEF JMP (WASH),P2,P2,,,_TBC_,1,queued,,,federate,,CC BY-NC-SA 3.0 IGO (reports); data unstated,CDH Core,who-unicef-jmp
+PRISM / prismpy (tool),P2,,P2,,_TBC_,1,deferred,,,tool,,MIT (per paper); LICENSE file absent in repo - verify,Alliance (AgWise) / CDH Core,prism-prismpy
+CHIRPS v3 Daily Precipitation,needed,held,held,needed — Re-derive annual rainfall CV on CHIRPS v3 (R-03) [effort Low],_TBC_,3,published,https://cgiar-climate-data-hub.github.io/catalog/chirps-v3-daily/,,,,,Andrés,chirps-v3-daily
+Aqueduct 4.0,needed,needed,,"needed — Keep — Aqueduct 4.0 CMIP6 (D-03/04/05, R-04/05) [effort Low]",_TBC_,2,queued,,,,,,Brayden,aqueduct-4
+NexGDDP CMIP6,needed,needed,,needed — Modernize — growing-season Tmax flip 30 °C (T-02) [effort Med],_TBC_,2,queued,,,,,,,nex-gddp-cmip6
+Area equipped for irrigation (Mehta 2024),needed,,,needed — Keep (I-01) [effort Low],_TBC_,1,queued,,,,,,,mehta-2024-irrigation
+Cropland GHG Emissions,needed,needed,,,_TBC_,1,queued,,,,,,,cropland-ghg-2020
+FAO GSASmap (salt-affected soils),needed,,,needed — Keep (S-01) [effort Low],_TBC_,1,queued,,,,,,,fao-gsasmap
+GAEZ v5,needed,,,"needed — Modernize — LGP flips 90/120 days, CMIP6 (R-01/02) [effort Med]",_TBC_,1,queued,,,,,,,gaez-v5
+GEHE extreme humid heat,needed,,,"needed — Keep — modern, open (T-01) [effort Low]",_TBC_,1,queued,,,,,,,gehe-humid-heat
+GIRI riverine flood hazard (CMIP6),needed,,,needed — Modernize — river flood hazard (F-02) [effort Med],_TBC_,1,queued,,,,,,,giri-riverine-flood
+Global Flood Database,needed,,,needed — Replace — replaces Dartmouth flood frequency (F-01) [effort Low],_TBC_,1,queued,,,,,,,global-flood-database
+ISRIC global soil salinity,needed,,,needed — Keep (S-02) [effort Low],_TBC_,1,queued,,,,,,,isric-soil-salinity
+NASA POWER ,needed,,needed,,_TBC_,1,queued,,,,,,,nasa-power
+Plant-available soil water (Gupta 2023),needed,,,needed — Keep (W-04) [effort Low],_TBC_,1,queued,,,,,,,gupta-2023-paw
+Rooting-zone water storage (Stocker 2023),needed,,,needed — Keep (W-03) [effort Low],_TBC_,1,queued,,,,,,,stocker-2023-rzws
+SPEI (global drought index),needed,,,"needed — Adopt SPEI — extend CDH global (replaces SPI/WASP, D-01) [effort Low–med]",_TBC_,1,queued,,,,,,,spei
+WorldPop Population,needed,needed,,,_TBC_,1,queued,,,,,,Brayden,worldpop
+CHIRTS-ERA5 Daily,held,held,held,held,_TBC_,3,published,https://cgiar-climate-data-hub.github.io/catalog/chirts-era5-daily/,,,,,Andrés,chirts-era5-daily
+AgERA5 daily agrometeorological indicators,held,held,held,,_TBC_,2,published,https://cgiar-climate-data-hub.github.io/catalog/agera5/,,,,,Brayden,agera5
+World Bank Admin Boundaries,held,held,held,,_TBC_,2,"in data lake, no record",,s3://digital-atlas/cdh/data/wb-boundaries-gad/,,,,Brayden,wb-boundaries-gad
+CROPGRIDS crop and harvested area for 2020 (FAO),held,,,held,_TBC_,1,published,https://cgiar-climate-data-hub.github.io/catalog/cropgrids/,,,,,,cropgrids
+Gridded livestock density for 2020 (GLW4),held,held,,,_TBC_,1,published,https://cgiar-climate-data-hub.github.io/catalog/glw4-2020/,s3://digital-atlas/cdh/data/glw4-2020/,,,,Brayden,glw4-2020
+MAPSPAM 2020,held,held,,,_TBC_,1,published,https://cgiar-climate-data-hub.github.io/catalog/spam2020/,s3://digital-atlas/cdh/data/mapspam2020-v2r2/,,,,Brayden,mapspam-2020
+EcoCrop Thresholds,held,,,,_TBC_,0,published,,,,,,Brayden,ecocrop-thresholds
+JRC global river flood hazard maps (CEMS-GloFAS),held,,,,_TBC_,0,published,https://cgiar-climate-data-hub.github.io/catalog/jrc-glofas/,s3://digital-atlas/cdh/data/jrc-glofas-v2.1.2/,,,,"Brayden,Pete",jrc-glofas
