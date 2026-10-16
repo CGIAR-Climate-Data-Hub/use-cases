@@ -48,7 +48,7 @@ locations.
 `priority-matrix.csv` (tracker tab **Priority matrix**) is the prioritised view: datasets rated P1/P2 by GCF or
 AgWise, needed by the B4T CRI rebuild (verdicts from `public/b4t/cri-review.html`), or already held by the Hub;
 columns `GCF | AgWise | B4T | PRISM` carry each use-case's rating, colour-coded, plus an overall priority and the
-Hub link. PRISM is a placeholder column (`PRISM_NEEDS` in the script) until its data needs are listed.
+Hub link. PRISM (CIAT Dakar `prismpy`) needs are read from its code — `PRISM_NEEDS` in the script, 13 inputs across its CRAFT, PYTHIA, ACEA and SARRA-Py pipelines.
 
 The tracker's **Use-case matrix** tab is the full table with hyperlinks; it replaced the per-use-case
 tabs on 2026-10-08. Per-use-case detail (rescreen verdicts, serves codes, workflow columns) stays

@@ -97,9 +97,27 @@ B4T_NEEDS = {
     "gupta-2023-paw": ("Plant-available soil water (Gupta 2023)", "Keep (W-04)", "Low"),
     "mehta-2024-irrigation": ("Area equipped for irrigation (Mehta 2024)", "Keep (I-01)", "Low"),
 }
-# PRISM (Platform-Ready Inputs for Spatial Modeling, CIAT Dakar, prismpy) — placeholder column until its
-# data needs are listed; see agwise/BRIEF.md (PRISM coordination). Add keys here as they are confirmed.
-PRISM_NEEDS: dict[str, str] = {}
+# PRISM (Platform-Ready Inputs for Spatial Modeling, CIAT Dakar; prismpy, Tonle et al. 2026 CEA 254:112223).
+# Data needs read from the prismpy code (github.com/izuku-franck1555/prismpy @5b281c4, 2026-10-12): the
+# sources/ retrievers, the platform DOMEs (CRAFT, PYTHIA, ACEA, SARRA-Py) and the standards pins.
+# key → (label, how PRISM uses it / access route today). No P-levels: PRISM has not prioritised; every
+# entry is an input one of its four platform pipelines reads. "local file" = user downloads and points
+# a config path at it — the cases where a Hub-hosted copy saves each PRISM user a manual step.
+PRISM_NEEDS: dict[str, tuple[str, str]] = {
+    "nasa-power": ("NASA POWER daily", "climate for CRAFT, PYTHIA, ACEA — POWER point API, gap-filled in prismpy"),
+    "agera5": ("AgERA5 daily agrometeorological indicators", "temperature/radiation/ET0 for SARRA-Py — CDS API (cdsapi key)"),
+    "tamsat-rfe": ("TAMSAT daily rainfall (Africa, 4 km)", "rainfall for SARRA-Py — JASMIN public HTTP download"),
+    "isimip3b": ("ISIMIP3b bias-adjusted climate (5 GCMs, 0.5°)", "projection climate (ssp245/ssp585; GFDL-ESM4, IPSL, MPI-HR, MRI, UKESM; ISIMIP3BASD v2.5) — ISIMIP API"),
+    "hwsd-v2": ("HWSD v2.0 soil database", "soil properties for CRAFT and ACEA — local file (BIL + MDB)"),
+    "eghr-soil": ("eGHR / GGCMI harmonised soil profiles", "DSSAT soil profile IDs for PYTHIA — local file (raster + GHR.db)"),
+    "isdasoil-v0-13": ("iSDAsoil (Africa, 30 m)", "root-zone depth and soil properties for SARRA-Py — iSDA S3"),
+    "mapspam-2020": ("MapSPAM 2020", "crop presence / crop mask for all four platforms — local file (per-crop raster)"),
+    "gadm-4-1": ("GADM v4.1 boundaries", "region definition and schema admin levels for all platforms — local file per country"),
+    "gaez-v4": ("GAEZ v4 crop suitability / potential yield", "ACEA suitability rasters — FAO Esri ImageServer res02 (v4, not v5)"),
+    "koppen-geiger-beck-2023": ("Köppen-Geiger 1 km (Beck et al. 2023)", "climate-zone stratification — bundled raster (1991-2020)"),
+    "ecocrop-thresholds": ("EcoCrop thresholds", "crop parameter envelopes — FAO EcoCrop"),
+    "co2-concentration-ar6": ("Atmospheric CO2 by scenario (AR6 / NOAA)", "CO2 ppm per scenario x period for projection runs — pinned table in prismpy"),
+}
 STATUS_RANK = {"published": 0, "submitted": 1, "verified": 2, "draft": 3, "in data lake, no record": 4, "in-progress": 5,
                "todo": 6, "queued": 6, "deferred": 7}
 
@@ -261,10 +279,12 @@ def build(tracker: Path | None) -> list[dict]:
         x["uses"].add("B4T")
         x["priority"].append(f"B4T:needed — {verdict} [effort {effort}]")
         x["sources"].append("b4t CRI review (public/b4t/cri-review.html)")
-    for k, note in PRISM_NEEDS.items():
+    for k, (label, note) in PRISM_NEEDS.items():
         x = row(k)
+        x["dataset"] = x["dataset"] or label
         x["uses"].add("PRISM")
-        x["priority"].append(f"PRISM:{note}")
+        x["priority"].append(f"PRISM:needed — {note}")
+        x["sources"].append("prismpy (github.com/izuku-franck1555/prismpy)")
 
     out = []
     for k, x in rows.items():
@@ -371,14 +391,14 @@ def prioritise(rows: list[dict]) -> tuple[list[dict], int]:
                 # an input the use-case already relies on: 'held' if the Hub has it, else 'needed'
                 cells[uc] = "held" if r["hub_status"] in ("published", "in data lake, no record") else "needed"
         cells["PRISM"] = cells["PRISM"] or "_TBC_"
-        levels = [("needed" if c.startswith("needed") else c.split()[0] if c else "") for u, c in cells.items() if u != "PRISM"]
+        levels = [("needed" if c.startswith("needed") else c.split()[0] if c else "") for u, c in cells.items() if c != "_TBC_"]
         best = min(levels, key=lambda c: PRIO_RANK.get(c, 9)) if levels else ""
         keep = best in ("P1", "P2", "needed") or r["hub_status"] in ("published", "in data lake, no record")
         if not keep:
             dropped += 1
             continue
         out.append({"dataset": r["dataset"], "overall_priority": best or "held", **cells,
-                    "n_use_cases": sum(1 for u in ("GCF", "AgWise", "B4T") if cells[u]),
+                    "n_use_cases": sum(1 for u in PRIO_UCS if cells[u] and cells[u] != "_TBC_"),
                     **{k: r.get(k, "") for k in ("hub_status", "hub_record_url", "lake_prefix", "route", "products", "licence", "proposed_lead", "key")}})
     out.sort(key=lambda r: (PRIO_RANK.get(r["overall_priority"], 9), -r["n_use_cases"], STATUS_RANK.get(r["hub_status"], 9), r["dataset"].lower()))
     return out, dropped
@@ -424,8 +444,8 @@ def write_priority(prio: list[dict], dropped: int, tracker: Path | None):
         f"{dropped} datasets with only P3/unrated/deferred entries are left out (see 'Use-case matrix').",
         "GCF/AgWise = the use-case queue's review priority (P1 do first · P2 next · P3 later); for inputs a use-case already relies on: 'held' = the Hub has it, 'needed' = not yet in the Hub.",
         "B4T = 'needed — <verdict>' from the CRI review page summary table (Keep / Replace / Modernize / Adopt / Re-derive), with effort; B4T has no P-levels yet.",
-        "PRISM = placeholder (Platform-Ready Inputs for Spatial Modeling, CIAT Dakar, prismpy) — _TBC_ until its data needs are listed (PRISM_NEEDS in the script).",
-        "overall_priority = best rating across GCF/AgWise/B4T (P1 > P2 > needed > held > P3).",
+        "PRISM = 'needed — <how used / access route>' read from the prismpy code (CRAFT, PYTHIA, ACEA, SARRA-Py pipelines); PRISM has no P-levels. _TBC_ = not used by PRISM.",
+        "overall_priority = best rating across GCF/AgWise/B4T/PRISM (P1 > P2 > needed > held > P3).",
     ):
         ws.append([line])
     for k, v in {"A": 40, "B": 10, "C": 14, "D": 14, "E": 46, "F": 10, "G": 6, "H": 22, "I": 44, "J": 34, "K": 18, "L": 44, "M": 30, "N": 22, "O": 24}.items():
