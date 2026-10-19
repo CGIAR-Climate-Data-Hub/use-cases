@@ -1,0 +1,175 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live OECD SDMX
+# endpoint and gcf-preparation-facility/code/federated/cdh_federated/oecd.py; NOT YET REVIEWED by a person.
+# FEDERATED record - the Hub points at the OECD API and does not host the data.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: oecd-dac-crs
+title: OECD DAC Creditor Reporting System (CRS) - development finance flows
+version: "1.6"
+description: >
+  Activity-level official development assistance (ODA) and other official flows reported by OECD
+  Development Assistance Committee (DAC) members and other providers, aggregated by provider,
+  recipient country, sector (CRS purpose code), flow type and year. The canonical record of who
+  funded what, where. Served by the OECD SDMX REST API as dataflow DSD_CRS@DF_CRS version 1.6;
+  values are in millions of US dollars.
+resource_type: dataset
+license: CC-BY-4.0
+keywords:
+  [official development assistance, ODA, development finance, aid flows, climate finance, SDMX]
+
+note: >
+  The dataflow is an external reference on sdmx.oecd.org/public; data and structures must be
+  requested from https://sdmx.oecd.org/dcd-public/rest/. SDMX 3.0 component filters
+  (c[RECIPIENT]=) are ignored by the server and return the whole cube (over 1 GB), so use positional
+  keys: DONOR.RECIPIENT.SECTOR.MEASURE.CHANNEL.MODALITY.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE.
+  The all-DAC donor aggregate is DAC. OBS_VALUE is in USD millions (UNIT_MULT 6). Figures are revised
+  as providers resubmit; record the retrieval date. The OECD CC BY 4.0 grant covers OECD content
+  published from 1 July 2024; third-party material inside is excluded.
+
+access: public
+
+contact:
+  - organization: OECD Development Co-operation Directorate
+    url: https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html
+    roles: [licensor, producer]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: "CRS: Creditor Reporting System (flows)"
+  authors:
+    - organization: OECD
+  date: "2026"
+  publisher: OECD
+  url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
+
+attribution: "Source: OECD Creditor Reporting System (CRS), licensed under CC BY 4.0."
+
+created: "2026-10-19"
+updated: "2026-10-19"
+
+spatial:
+  bbox: [-180.0, -90.0, 180.0, 90.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2002"
+  end_date: "2024"
+  update_frequency: annual
+
+structures:
+  - name: crs
+    dimensions:
+      - name: DONOR
+        type: provider
+        description: Reporting provider (country, multilateral agency or aggregate such as DAC).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
+      - name: RECIPIENT
+        type: location
+        description: Recipient country or region (ISO 3166-1 alpha-3 for countries, OECD codes for regions).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
+      - name: SECTOR
+        type: sector
+        description: CRS purpose code (5 digits) or sector aggregate (3-4 digits; 1000 = all sectors).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_DAC_SECTOR/1.3
+      - name: MEASURE
+        type: measure
+        description: Flow measure.
+        data_type: string
+        categories:
+          - { value: "100", label: Official Development Assistance }
+          - { value: "11", label: ODA grants }
+          - { value: "13", label: ODA loans }
+          - { value: "14", label: Other official flows (non export credit) }
+          - { value: "19", label: Equity investment }
+          - { value: "30", label: Private development finance }
+          - { value: "60", label: Private sector instruments }
+      - name: FLOW_TYPE
+        type: flow
+        description: Commitments or disbursements.
+        data_type: string
+        categories:
+          - { value: C, label: Commitments }
+          - { value: D, label: Disbursements }
+      - name: PRICE_BASE
+        type: price
+        description: Price base of the values.
+        data_type: string
+        categories:
+          - { value: V, label: Current prices }
+          - { value: Q, label: Constant prices }
+      - name: TIME_PERIOD
+        type: temporal
+        description: Reporting year.
+        data_type: string
+        step: P1Y
+    variables:
+      - name: OBS_VALUE
+        description: >
+          Flow amount for the provider, recipient, sector, measure, flow type and year, in millions
+          of US dollars at the stated price base.
+        data_type: number
+        unit: "1e6 USD"
+
+data:
+  - name: sdmx-csv
+    structures: [crs]
+    description: >
+      OECD SDMX REST data endpoint for dataflow DSD_CRS@DF_CRS 1.6. Append a positional key and
+      ?format=csvfilewithlabels for CSV with labels; without format the server returns SDMX-ML
+      (generic data XML). See the example.
+    locations:
+      - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_CRS@DF_CRS,1.6/
+        title: OECD SDMX REST (dcd-public)
+    media_type: application/vnd.sdmx.genericdata+xml
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: ODA disbursements from all DAC members to one recipient, by CRS sector, 2015 to latest.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: Creditor Reporting System (OECD Data Explorer)
+    rel: about
+    url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
+    description: Interactive browser for the CRS dataflow.
+  - title: OECD Data API documentation
+    rel: service-doc
+    url: https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf
+  - title: OECD DAC Rio markers
+    rel: related
+    id: oecd-rio-markers
+    description: Climate-tagged view of the same reporting system (adaptation and mitigation markers).
+
+cdh:
+  domain: [socioeconomic, adaptation]
+  usage:
+    intended_uses:
+      - development and climate finance context for a country (e.g. GCF concept note section D)
+      - identifying which providers and sectors already fund a country or theme
+    not_recommended_for:
+      - use: Summing 3-4 digit sector aggregates together with 5-digit purpose codes.
+        reason: Aggregates already contain their purpose codes, so the total double-counts.
+        use_instead: One sector level at a time (5-digit purpose codes, or the 1000 all-sector total).
+      - use: Treating OBS_VALUE as US dollars.
+        reason: Values are in millions of US dollars (UNIT_MULT 6).
+        use_instead: Multiply by 1e6 or label the unit as USD millions.
+
+processing:
+  - id: source
+    description: Provider reporting compiled by the OECD Development Co-operation Directorate.
+    derived_from:
+      - title: OECD DAC and CRS statistical reporting by providers
+        url: https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html

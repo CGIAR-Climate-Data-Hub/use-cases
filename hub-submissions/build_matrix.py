@@ -59,6 +59,10 @@ ALIASES = {
     "mapspam-2020": ["mapspam2020", "mapspam 2020", "spam2020", "mapspam2020-v2r2"],
     "glw4-2020": ["glw4", "glw4-2020", "gridded livestock density for 2020 (glw4)"],
     "worldpop": ["worldpop population", "worldpop"],
+    "fews-net-ipc-phase": ["fews net", "fews-net", "fews-net-ipc-phase"],
+    "imf-fiscal-monitor": ["imf fiscal (fiscal monitor / gfs) via wb data360", "imf-fiscal-via-wb-data360", "imf-fiscal-monitor"],
+    # the draft covers the bilateral Rio-marker dataflow, the bilateral part of CRDF
+    "oecd-rio-markers": ["oecd crdf (rio markers)", "oecd-crdf", "oecd-rio-markers"],
     "esa-worldcover-2021": ["esa worldcover (admin-summary product)", "esa worldcover 2021 v200 (cropland-fraction grid)", "esa worldcover"],
     "wb-boundaries-gad": ["world bank admin boundaries", "wb-boundaries-gad"],
     "geoboundaries": ["geoboundaries (gbopen)"],
@@ -212,7 +216,11 @@ def load_drafts() -> dict[str, dict]:
         issue = None
         if rep.exists():
             txt = rep.read_text()
-            status = "verified" if re.search(r"\*\*HIGH 0\*\*|HIGH 0 ", txt) and "HIGH" in txt else "draft"
+            high0 = re.search(r"\*\*HIGH 0\*\*|HIGH 0 ", txt) and "HIGH" in txt
+            # README: `verified` also needs a person's sign-off in the YAML header comment
+            header = "".join(ln for ln in y.read_text().splitlines(keepends=True)[:6] if ln.startswith("#"))
+            reviewed = re.search(r"reviewed by [A-Z]", header) and "NOT YET REVIEWED" not in header
+            status = "verified" if high0 and reviewed else "draft"
         meta = d / "SUBMISSION.md"
         if meta.exists():
             m = re.search(r"issue:\s*(\S+)", meta.read_text())
@@ -333,8 +341,10 @@ def write_csv(rows: list[dict]):
 def write_tracker(rows: list[dict], tracker: Path, replace_tabs: tuple[str, ...] = ("GCF use-case", "AgWise use-case")):
     import openpyxl  # noqa: PLC0415
     from openpyxl.styles import Alignment, Font  # noqa: PLC0415
+    # first run of the day keeps the pre-run state; later same-day runs only rewrite generated tabs
     bak = tracker.with_name(f"{tracker.stem}.bak-{dt.date.today().isoformat()}-matrix{tracker.suffix}")
-    shutil.copy2(tracker, bak)
+    if not bak.exists():
+        shutil.copy2(tracker, bak)
     wb = openpyxl.load_workbook(tracker)
     before = {n: [[c.value for c in r] for r in wb[n].iter_rows()] for n in wb.sheetnames if n not in replace_tabs and n != "Use-case matrix"}
     for t in replace_tabs + ("Use-case matrix",):

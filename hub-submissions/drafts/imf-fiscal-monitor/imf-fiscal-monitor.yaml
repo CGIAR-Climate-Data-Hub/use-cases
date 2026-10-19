@@ -1,0 +1,142 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live World Bank
+# Data360 API and gcf-preparation-facility/code/federated/cdh_federated/data360.py; NOT YET REVIEWED.
+# FEDERATED record - the Hub points at the World Bank Data360 API and does not host the data.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: imf-fiscal-monitor
+title: IMF Fiscal Monitor - general government fiscal indicators (via World Bank Data360)
+version: "data360-IMF_FM"
+description: >
+  General government gross debt, revenue, expenditure, net lending/borrowing and primary balance as a
+  percentage of GDP, by country and year, including IMF projections five years ahead, from the IMF
+  Fiscal Monitor as redistributed by the World Bank Data360 platform (dataset IMF_FM). Fiscal-space
+  evidence for financing proposals.
+resource_type: dataset
+license: CC-BY-4.0
+keywords:
+  [fiscal space, public debt, government revenue, IMF Fiscal Monitor, World Bank Data360]
+
+note: >
+  Years after the latest actual are IMF projections: each April and October Fiscal Monitor revises
+  them, so record the retrieval date. Data360 serves the IMF series under its own indicator ids
+  (e.g. IMF_FM_G_XWDG_G01_GDP_PT = gross debt, % of GDP), not the IMF's codes; list them with
+  /data360/indicators?datasetId=IMF_FM. Results page by skip (1000 rows per call). Routing IMF data
+  through Data360 avoids the IMF's own bulk download, whose terms restrict automated retrieval.
+  The licence shown is Data360's for this redistribution; cite the IMF Fiscal Monitor as the source.
+
+access: public
+
+contact:
+  - organization: International Monetary Fund
+    url: https://www.imf.org/en/Publications/FM
+    roles: [producer]
+  - organization: World Bank
+    url: https://data360.worldbank.org/
+    roles: [licensor, processor]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: Fiscal Monitor
+  authors:
+    - organization: International Monetary Fund
+  date: "2026"
+  publisher: International Monetary Fund (via World Bank Data360)
+  url: https://data360.worldbank.org/en/dataset/IMF_FM
+
+attribution: "Source: IMF Fiscal Monitor, via World Bank Data360."
+
+created: "2026-10-19"
+updated: "2026-10-19"
+
+spatial:
+  bbox: [-180.0, -90.0, 180.0, 90.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "1991"
+  end_date: "2029"
+  update_frequency: semiannual
+
+structures:
+  - name: imf-fm
+    dimensions:
+      - name: REF_AREA
+        type: location
+        description: Country (ISO 3166-1 alpha-3).
+        data_type: string
+        reference_system: https://www.iso.org/iso-3166-country-codes.html
+      - name: INDICATOR
+        type: indicator
+        description: Data360 indicator id for the IMF Fiscal Monitor series.
+        data_type: string
+        categories:
+          - { value: IMF_FM_G_XWDG_G01_GDP_PT, label: General government gross debt (% of GDP) }
+          - { value: IMF_FM_G_X_G01_GDP_PT, label: General government total expenditure (% of GDP) }
+          - { value: IMF_FM_GGR_G01_GDP_PT, label: General government revenue (% of GDP) }
+          - { value: IMF_FM_GGXCNL_G01_GDP_PT, label: General government net lending/borrowing (% of GDP) }
+          - { value: IMF_FM_GGXONLB_G01_GDP_PT, label: General government primary net lending/borrowing (% of GDP) }
+      - name: TIME_PERIOD
+        type: temporal
+        description: Year (actuals, then IMF projections).
+        data_type: string
+        step: P1Y
+    variables:
+      - name: OBS_VALUE
+        description: Indicator value as a percentage of GDP (UNIT_MEASURE PT_GDP); negative balances are deficits.
+        data_type: string
+        unit: "%"
+        note: Served as a string by the API; cast to number.
+
+data:
+  - name: data360-api
+    structures: [imf-fm]
+    description: >
+      World Bank Data360 data endpoint; query with DATABASE_ID=IMF_FM, REF_AREA and optionally INDICATOR,
+      paging with skip; returns JSON {count, value:[...]}. See the example.
+    locations:
+      - url: https://data360api.worldbank.org/data360/data
+        title: Data360 REST API
+    media_type: application/json
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: All five Fiscal Monitor series for one country, pivoted by year.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: IMF Fiscal Monitor on Data360
+    rel: about
+    url: https://data360.worldbank.org/en/dataset/IMF_FM
+  - title: Data360 API documentation
+    rel: service-doc
+    url: https://data360.worldbank.org/en/api
+  - title: IMF Fiscal Monitor
+    rel: related
+    url: https://www.imf.org/en/Publications/FM
+
+cdh:
+  domain: [socioeconomic]
+  usage:
+    intended_uses:
+      - fiscal-space context for climate finance proposals (e.g. GCF concept note section D)
+    not_recommended_for:
+      - use: Quoting a projected year as an observed value.
+        reason: Years after the latest actual are IMF projections and are revised twice a year.
+        use_instead: State the vintage (Fiscal Monitor month and year) and mark projections.
+
+processing:
+  - id: source
+    description: IMF Fiscal Monitor series redistributed by the World Bank Data360 platform.
+    derived_from:
+      - title: IMF Fiscal Monitor
+        url: https://www.imf.org/en/Publications/FM
