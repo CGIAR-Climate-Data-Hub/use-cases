@@ -1,10 +1,11 @@
 # Verification — `oecd-dac-crs` (v1.6, schema v0.5.0)
 
-File `oecd-dac-crs/oecd-dac-crs.yaml` · 3 URLs probed · 0 assets opened · **HIGH 1** · MED 1 · LOW 2 · INFO 2
+File `oecd-dac-crs/oecd-dac-crs.yaml` · 3 URLs probed · 0 assets opened · **HIGH 1** · MED 2 · LOW 2 · INFO 2
 
 | Sev | Path | Check | Finding | Record says | Observed | Hint |
 |---|---|---|---|---|---|---|
 | HIGH | `/processing/0/derived_from/0/url` | link | URL unreachable (403) | https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
+| MED | `/` | authored | authored fields were machine-drafted and no person has reviewed them yet | # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/… |  | a person must confirm title, description, note, usage and every cdh field (REVIEW.md) |
 | MED | `/data/0/locations/0` | asset-prefix | prefix location without href_template or file_index — cannot verify contents | https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_CRS@DF_CRS,1.6/ |  |  |
 | LOW | `/contact/0/url` | link | URL unreachable (403) | https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
 | LOW | `/processing/0/derived_from/0/version` | provenance | source version not pinned | OECD DAC and CRS statistical reporting by providers |  |  |
@@ -12,7 +13,6 @@ File `oecd-dac-crs/oecd-dac-crs.yaml` · 3 URLs probed · 0 assets opened · **H
 | INFO | `/data/0` | inspect | no inspector for media_type 'application/vnd.sdmx.genericdata+xml' — contents not verified | https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_CRS@DF_CRS,1.6/ |  |  |
 
 Rule (standard §4.6): nothing above is auto-fixed; an authored value wins until a person decides which side is wrong.
-
 
 ## Triage (2026-10-19, before human review)
 

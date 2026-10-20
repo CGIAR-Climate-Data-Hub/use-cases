@@ -1,19 +1,19 @@
 # Verification — `imf-fiscal-monitor` (vdata360-IMF_FM, schema v0.5.0)
 
-File `imf-fiscal-monitor/imf-fiscal-monitor.yaml` · 6 URLs probed · 0 assets opened · **HIGH 3** · MED 2 · LOW 1 · INFO 1
+File `imf-fiscal-monitor/imf-fiscal-monitor.yaml` · 6 URLs probed · 0 assets opened · **HIGH 3** · MED 3 · LOW 1 · INFO 1
 
 | Sev | Path | Check | Finding | Record says | Observed | Hint |
 |---|---|---|---|---|---|---|
 | HIGH | `/data/0/locations/0` | asset-url | primary data location unreachable (404) | https://data360api.worldbank.org/data360/data |  |  |
 | HIGH | `/data/0/locations/0/url` | link | URL unreachable (404) | https://data360api.worldbank.org/data360/data |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
 | HIGH | `/processing/0/derived_from/0/url` | link | URL unreachable (404) | https://www.imf.org/en/Publications/FM |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
+| MED | `/` | authored | authored fields were machine-drafted and no person has reviewed them yet | # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/… |  | a person must confirm title, description, note, usage and every cdh field (REVIEW.md) |
 | MED | `/additional_links/2/url` | link | URL unreachable (404) | https://www.imf.org/en/Publications/FM |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
 | MED | `/contact/0/url` | link | URL unreachable (404) | https://www.imf.org/en/Publications/FM |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
 | LOW | `/processing/0/derived_from/0/version` | provenance | source version not pinned | IMF Fiscal Monitor |  |  |
 | INFO | `/` | schema | validate-yaml.js (v0.5.0): ok |  |  |  |
 
 Rule (standard §4.6): nothing above is auto-fixed; an authored value wins until a person decides which side is wrong.
-
 
 ## Triage (2026-10-19, before human review)
 

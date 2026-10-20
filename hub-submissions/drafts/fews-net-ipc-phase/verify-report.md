@@ -1,15 +1,15 @@
 # Verification — `fews-net-ipc-phase` (vfdw-api, schema v0.5.0)
 
-File `fews-net-ipc-phase/fews-net-ipc-phase.yaml` · 5 URLs probed · 0 assets opened · HIGH 0 · MED 2 · LOW 0 · INFO 1
+File `fews-net-ipc-phase/fews-net-ipc-phase.yaml` · 5 URLs probed · 1 assets opened · **HIGH 1** · MED 2 · LOW 0 · INFO 1
 
 | Sev | Path | Check | Finding | Record says | Observed | Hint |
 |---|---|---|---|---|---|---|
-| MED | `/data/0` | inspect | could not open asset: ReadTimeout: HTTPSConnectionPool(host='fdw.fews.net', port=443): Read timed out. (read timeout=40) | https://fdw.fews.net/api/ipcphase/ |  |  |
+| HIGH | `/data/0/locations/0` | api | endpoint returned 500 | https://fdw.fews.net/api/ipcphase/ |  |  |
+| MED | `/` | authored | authored fields were machine-drafted and no person has reviewed them yet | # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/… |  | a person must confirm title, description, note, usage and every cdh field (REVIEW.md) |
 | MED | `/data/0/locations/0` | asset-prefix | prefix location without href_template or file_index — cannot verify contents | https://fdw.fews.net/api/ipcphase/ |  |  |
 | INFO | `/` | schema | validate-yaml.js (v0.5.0): ok |  |  |  |
 
 Rule (standard §4.6): nothing above is auto-fixed; an authored value wins until a person decides which side is wrong.
-
 
 ## Triage (2026-10-19, before human review)
 

@@ -1,15 +1,15 @@
 # Verification — `dhs-indicator-api` (v8.1, schema v0.5.0)
 
-File `dhs-indicator-api/dhs-indicator-api.yaml` · 8 URLs probed · 0 assets opened · **HIGH 2** · MED 0 · LOW 0 · INFO 1
+File `dhs-indicator-api/dhs-indicator-api.yaml` · 8 URLs probed · 0 assets opened · **HIGH 2** · MED 1 · LOW 0 · INFO 1
 
 | Sev | Path | Check | Finding | Record says | Observed | Hint |
 |---|---|---|---|---|---|---|
 | HIGH | `/data/0/locations/0` | asset-url | primary data location unreachable (404) | https://api.dhsprogram.com/rest/dhs/data |  |  |
 | HIGH | `/data/0/locations/0/url` | link | URL unreachable (404) | https://api.dhsprogram.com/rest/dhs/data |  | bot-blocked hosts (403) need a browser check; drop URLs you cannot source |
+| MED | `/` | authored | authored fields were machine-drafted and no person has reviewed them yet | # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/… |  | a person must confirm title, description, note, usage and every cdh field (REVIEW.md) |
 | INFO | `/` | schema | validate-yaml.js (v0.5.0): ok |  |  |  |
 
 Rule (standard §4.6): nothing above is auto-fixed; an authored value wins until a person decides which side is wrong.
-
 
 ## Triage (2026-10-20, before human review)
 
