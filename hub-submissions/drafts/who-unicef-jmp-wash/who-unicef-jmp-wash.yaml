@@ -1,0 +1,160 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-20 from the live UNICEF SDMX API
+# and gcf-preparation-facility/code/federated/cdh_federated/unicef_jmp.py; NOT YET REVIEWED.
+# FEDERATED record - the Hub points at the UNICEF SDMX API and does not host the data (UNICEF terms restrict republishing).
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: who-unicef-jmp-wash
+title: WHO/UNICEF JMP household drinking water, sanitation and hygiene estimates
+version: "1.0"
+description: >
+  National estimates from the WHO/UNICEF Joint Monitoring Programme (JMP) of the share of the
+  population using each rung of the drinking water, sanitation and hygiene service ladders (safely
+  managed, at least basic, limited, unimproved, surface water / open defecation, no facility), by
+  urban, rural and total residence, for countries and regional aggregates, 2000-2024. Served without
+  a key by the UNICEF SDMX API as dataflow UNICEF,WASH_HOUSEHOLDS,1.0.
+resource_type: dataset
+license: LicenseRef-UNICEF-Terms-of-Use
+keywords:
+  [WASH, drinking water, sanitation, hygiene, SDG 6, JMP, service ladders]
+
+note: >
+  National level only (admin0); REF_AREA also holds regional and income-group aggregates (about 290
+  areas in total). Positional key REF_AREA.INDICATOR.SERVICE_TYPE.WEALTH_QUINTILE.RESIDENCE, empty
+  positions are wildcards, e.g. TGO.... for one country. OBS_VALUE is a percentage of the population
+  (UNIT_MEASURE PCNT). The wealth-quintile breakdown is not populated for country rows checked (Togo:
+  _T only). Licence: no data licence is stated on washdata.org; JMP reports are CC BY-NC-SA 3.0 IGO,
+  and the UNICEF legal page asks for permission before material is mirrored, reproduced or
+  republished. Federate only: do not re-host the table; attribute WHO/UNICEF JMP. Confirm terms with
+  JMP before any derived product is published (_TBC_).
+
+access: public
+
+contact:
+  - organization: WHO/UNICEF Joint Monitoring Programme for Water Supply, Sanitation and Hygiene (JMP)
+    url: https://washdata.org/
+    roles: [producer]
+  - organization: UNICEF
+    url: https://sdmx.data.unicef.org/
+    roles: [licensor]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: WHO/UNICEF Joint Monitoring Programme for Water Supply, Sanitation and Hygiene - household data
+  authors:
+    - organization: WHO/UNICEF Joint Monitoring Programme (JMP)
+  date: "2026"
+  publisher: WHO and UNICEF
+  url: https://washdata.org/data
+
+attribution: "Source: WHO/UNICEF Joint Monitoring Programme for Water Supply, Sanitation and Hygiene (JMP)."
+
+created: "2026-10-20"
+updated: "2026-10-20"
+
+spatial:
+  bbox: [-180.0, -90.0, 180.0, 90.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2000"
+  end_date: "2024"
+  update_frequency: irregular
+
+structures:
+  - name: wash-households
+    dimensions:
+      - name: REF_AREA
+        type: location
+        description: Country (ISO 3166-1 alpha-3) or UNICEF/SDG regional aggregate code.
+        data_type: string
+      - name: INDICATOR
+        type: indicator
+        description: >
+          JMP ladder indicator, WS_PPL_<service>-<rung>; e.g. WS_PPL_W-SM safely managed drinking water,
+          WS_PPL_W-ALB at least basic drinking water, WS_PPL_S-SM safely managed sanitation,
+          WS_PPL_S-ALB at least basic sanitation, WS_PPL_S-OD open defecation, WS_PPL_H-B basic hygiene.
+        data_type: string
+      - name: SERVICE_TYPE
+        type: service
+        description: WASH service.
+        data_type: string
+        categories:
+          - { value: WAT, label: Drinking water }
+          - { value: SAN, label: Sanitation }
+          - { value: HYG, label: Hygiene }
+      - name: RESIDENCE
+        type: residence
+        description: Area of residence.
+        data_type: string
+        categories:
+          - { value: _T, label: Total }
+          - { value: U, label: Urban }
+          - { value: R, label: Rural }
+      - name: TIME_PERIOD
+        type: temporal
+        description: Estimate year.
+        data_type: string
+        step: P1Y
+    variables:
+      - name: OBS_VALUE
+        description: Share of the population using the service level.
+        data_type: number
+        unit: "%"
+      - name: DATA_SOURCE
+        description: Source label (WHO/UNICEF Joint Monitoring Programme).
+        data_type: string
+
+data:
+  - name: unicef-sdmx-csv
+    structures: [wash-households]
+    description: >
+      UNICEF SDMX REST data endpoint for UNICEF,WASH_HOUSEHOLDS,1.0. Append a positional key and
+      ?format=csv (optionally startPeriod or lastNObservations). See the example.
+    locations:
+      - url: https://sdmx.data.unicef.org/ws/public/sdmxapi/rest/data/UNICEF,WASH_HOUSEHOLDS,1.0/
+        title: UNICEF SDMX REST
+    media_type: application/xml
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: Headline drinking water, sanitation and hygiene ladder for one country, urban vs rural, latest year.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: UNICEF legal information and terms of use
+    rel: license
+    url: https://www.unicef.org/legal
+  - title: JMP data (washdata.org)
+    rel: about
+    url: https://washdata.org/data
+  - title: UNICEF SDMX API
+    rel: service-doc
+    url: https://sdmx.data.unicef.org/
+
+cdh:
+  domain: [socioeconomic]
+  usage:
+    intended_uses:
+      - national water and sanitation access as vulnerability context for climate finance proposals
+      - urban/rural gaps in basic services
+    not_recommended_for:
+      - use: Re-hosting the table or publishing a derived layer in the Hub.
+        reason: UNICEF asks for permission before republishing; the data licence is unstated and JMP reports are NC-SA.
+        use_instead: Query the API at use time and cite JMP; seek JMP permission before hosting anything derived.
+      - use: Subnational analysis.
+        reason: Estimates are national (with urban/rural splits) only.
+        use_instead: DHS survey indicators (record dhs-indicator-api) for regional water and sanitation figures.
+
+processing:
+  - id: source
+    description: JMP national estimates modelled from household surveys and censuses, distributed through the UNICEF SDMX data warehouse.

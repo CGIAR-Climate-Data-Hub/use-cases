@@ -1,0 +1,167 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-20 from the live DHS Program
+# Indicator Data API and gcf-preparation-facility/code/federated/cdh_federated/dhs.py; NOT YET REVIEWED.
+# FEDERATED record - the Hub points at the DHS API and does not host the data. Aggregate indicators only, never microdata.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: dhs-indicator-api
+title: DHS Program Indicator Data API - national and subnational survey indicators
+version: "8.1"
+description: >
+  Published population, health and nutrition indicators from Demographic and Health Surveys (DHS) and
+  related surveys (MIS, AIS), as point estimates by survey, country and survey region, with
+  denominators and, for some indicators, confidence intervals. About 4,650 indicators from surveys in
+  92 countries, 1985-2025. Served without a key by the DHS Program Indicator Data API (version 8.1).
+  Aggregate tables only: no household or individual microdata.
+resource_type: dataset
+license: LicenseRef-DHS-Indicator-API-Terms
+keywords:
+  [Demographic and Health Surveys, DHS, child nutrition, stunting, wealth, mortality, subnational indicators, survey data]
+
+note: >
+  Subnational rows are survey regions (CharacteristicCategory Region), whose boundaries change between
+  surveys. Join on RegionId with the matching boundaries from the DHS Spatial Data Repository, not on
+  names: labels carry leading dots ("..Maritime") that mark the hierarchy level. Each survey is a
+  snapshot, so years differ by country; pick the latest per indicator and region rather than assuming a
+  common year. Precision is the number of decimal places, not a unit; the unit comes from the indicator
+  metadata (MeasurementType: Percent, Number, Rate, Median, Mean, Ratio). Use breakdown=subnational for regional rows and
+  drop IsTotal = 1. The API's only stated condition is the citation; the microdata terms (registration,
+  no redistribution) do not apply to these published aggregates but do apply to anything derived from
+  microdata.
+
+access: public
+
+contact:
+  - organization: The DHS Program (ICF)
+    url: https://dhsprogram.com/
+    roles: [licensor, producer]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: The DHS Program Indicator Data API
+  authors:
+    - organization: The Demographic and Health Surveys (DHS) Program, ICF
+  date: "2026"
+  publisher: ICF
+  url: https://api.dhsprogram.com/
+
+attribution: >
+  The DHS Program Indicator Data API, The Demographic and Health Surveys (DHS) Program. ICF. Originally
+  funded by the United States Agency for International Development (USAID). Available from
+  api.dhsprogram.com. [Accessed <date>]
+
+created: "2026-10-20"
+updated: "2026-10-20"
+
+spatial:
+  bbox: [-180.0, -60.0, 180.0, 60.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "1985"
+  end_date: "2025"
+  update_frequency: irregular
+
+structures:
+  - name: indicator-data
+    dimensions:
+      - name: DHS_CountryCode
+        type: location
+        description: DHS two-letter country code (not always ISO 3166-1 alpha-2, e.g. NI = Niger, BU = Burundi).
+        data_type: string
+        reference_system: https://api.dhsprogram.com/rest/dhs/countries?f=json
+      - name: RegionId
+        type: location
+        description: Survey-specific region id; empty for national rows.
+        data_type: string
+        reference_system: https://spatialdata.dhsprogram.com/boundaries/
+      - name: SurveyId
+        type: survey
+        description: Survey id (country, year, survey type), e.g. TG1998DHS.
+        data_type: string
+      - name: IndicatorId
+        type: indicator
+        description: DHS indicator id, e.g. CN_NUTS_C_HA2 (children stunted).
+        data_type: string
+        reference_system: https://api.dhsprogram.com/rest/dhs/indicators?f=json
+      - name: SurveyYear
+        type: temporal
+        description: Survey year.
+        data_type: integer
+    variables:
+      - name: Value
+        description: Indicator estimate; unit per indicator (MeasurementType in the indicator metadata).
+        data_type: number
+      - name: CILow
+        description: Lower confidence bound, where published (empty otherwise).
+        data_type: string
+      - name: CIHigh
+        description: Upper confidence bound, where published (empty otherwise).
+        data_type: string
+      - name: DenominatorWeighted
+        description: Weighted denominator for the estimate.
+        data_type: number
+      - name: DenominatorUnweighted
+        description: Unweighted sample size behind the estimate.
+        data_type: number
+      - name: CharacteristicLabel
+        description: Region or breakdown label; leading dots mark the hierarchy level.
+        data_type: string
+
+data:
+  - name: dhs-data-api
+    structures: [indicator-data]
+    description: >
+      DHS Indicator Data endpoint; filter with countryIds, indicatorIds, surveyYearStart and
+      breakdown=national|subnational, f=json, perpage up to 5000. See the example.
+    locations:
+      - url: https://api.dhsprogram.com/rest/dhs/data
+        title: DHS Program Indicator Data API
+    media_type: application/json
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: Latest subnational value of eight vulnerability indicators for one country, with units.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: DHS API terms and conditions (citation)
+    rel: license
+    url: https://api.dhsprogram.com/#/terms.cfm
+  - title: DHS API documentation
+    rel: service-doc
+    url: https://api.dhsprogram.com/#/index.html
+  - title: DHS Spatial Data Repository boundaries
+    rel: related
+    url: https://spatialdata.dhsprogram.com/boundaries/
+    description: Survey-region boundaries to join subnational rows on RegionId.
+  - title: STATcompiler
+    rel: about
+    url: https://www.statcompiler.com/
+
+cdh:
+  domain: [socioeconomic]
+  usage:
+    intended_uses:
+      - subnational vulnerability context (nutrition, wealth, water, mortality) for climate finance proposals
+      - targeting regions by published survey indicators
+    not_recommended_for:
+      - use: Comparing regions or countries as if values shared a year.
+        reason: Each value is from one survey; survey years differ by country and region boundaries change.
+        use_instead: Report the survey id and year with every value.
+      - use: Joining regional rows to an admin boundary set by name.
+        reason: DHS survey regions are survey-specific and do not always match administrative units.
+        use_instead: Join on RegionId with the DHS Spatial Data Repository boundaries for that survey.
+
+processing:
+  - id: source
+    description: Indicators tabulated by The DHS Program from its survey microdata and published through the Indicator Data API.

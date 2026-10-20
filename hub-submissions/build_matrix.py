@@ -63,6 +63,9 @@ ALIASES = {
     "imf-fiscal-monitor": ["imf fiscal (fiscal monitor / gfs) via wb data360", "imf-fiscal-via-wb-data360", "imf-fiscal-monitor"],
     # the draft covers the bilateral Rio-marker dataflow, the bilateral part of CRDF
     "oecd-rio-markers": ["oecd crdf (rio markers)", "oecd-crdf", "oecd-rio-markers"],
+    "dhs-indicator-api": ["dhs program (aggregate indicators)", "dhs-program", "dhs-indicator-api"],
+    "climate-watch-ndc-content": ["climate watch (ndc content)", "climate-watch", "climate-watch-ndc-content"],
+    "who-unicef-jmp-wash": ["who/unicef jmp (wash)", "who-unicef-jmp", "who-unicef-jmp-wash"],
     "esa-worldcover-2021": ["esa worldcover (admin-summary product)", "esa worldcover 2021 v200 (cropland-fraction grid)", "esa worldcover"],
     "wb-boundaries-gad": ["world bank admin boundaries", "wb-boundaries-gad"],
     "geoboundaries": ["geoboundaries (gbopen)"],
