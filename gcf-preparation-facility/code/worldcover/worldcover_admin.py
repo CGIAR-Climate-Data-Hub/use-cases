@@ -307,6 +307,11 @@ def run(iso3: str, out: Path, boundaries: Path | None, block: int = 2048,
     area = area[order + ["year", "version", "lc_class", "lc_label", "area_ha", "share"]].sort_values(order + ["year", "lc_class"])
     change = change[order + ["lc2020", "lc2020_label", "lc2021", "lc2021_label", "area_ha"]].sort_values(order + ["lc2020", "lc2021"])
 
+    # lower-level codes are empty on higher-level rows: keep them integer (nullable), not float
+    for df in (area, change, crop):
+        for c in ("gaul1_code", "gaul2_code"):
+            df[c] = df[c].astype("Int64")
+
     out.mkdir(parents=True, exist_ok=True)
     for name, df in (("worldcover_admin_area", area), ("worldcover_admin_change", change), ("worldcover_admin_cropland", crop)):
         df.to_parquet(out / f"{name}_{iso3}.parquet", index=False)

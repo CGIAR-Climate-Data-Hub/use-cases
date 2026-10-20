@@ -66,7 +66,7 @@ ALIASES = {
     "dhs-indicator-api": ["dhs program (aggregate indicators)", "dhs-program", "dhs-indicator-api"],
     "climate-watch-ndc-content": ["climate watch (ndc content)", "climate-watch", "climate-watch-ndc-content"],
     "who-unicef-jmp-wash": ["who/unicef jmp (wash)", "who-unicef-jmp", "who-unicef-jmp-wash"],
-    "esa-worldcover-2021": ["esa worldcover (admin-summary product)", "esa worldcover 2021 v200 (cropland-fraction grid)", "esa worldcover"],
+    "esa-worldcover-2021": ["worldcover-admin", "esa worldcover (admin-summary product)", "esa worldcover 2021 v200 (cropland-fraction grid)", "esa worldcover"],
     "wb-boundaries-gad": ["world bank admin boundaries", "wb-boundaries-gad"],
     "geoboundaries": ["geoboundaries (gbopen)"],
     "jrc-glofas": ["glofas flood risk", "jrc-glofas-v2.1.2"],
