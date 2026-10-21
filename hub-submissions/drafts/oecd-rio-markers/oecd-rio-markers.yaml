@@ -1,0 +1,175 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live OECD SDMX
+# endpoint and gcf-preparation-facility/code/federated/cdh_federated/oecd.py; NOT YET REVIEWED by a person.
+# FEDERATED record - the Hub points at the OECD API and does not host the data.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: oecd-rio-markers
+title: OECD DAC Rio markers - ODA targeting climate adaptation, mitigation and the environment
+version: "1.6"
+description: >
+  Bilateral allocable official development assistance (ODA) commitments from DAC members, tagged
+  with the Rio markers for climate change adaptation, climate change mitigation, biodiversity,
+  desertification and environment, by provider, recipient, sector, marker score and year. The
+  climate-tagged view of the Creditor Reporting System. Served by the OECD SDMX REST API as
+  dataflow DSD_RIOMRKR@DF_RIOMARKERS version 1.6; values are in millions of US dollars.
+resource_type: dataset
+license: CC-BY-4.0
+keywords:
+  [Rio markers, climate finance, adaptation finance, mitigation finance, official development assistance, SDMX]
+
+note: >
+  Only commitments (FLOW_TYPE C) and bilateral allocable ODA (ALLOCABLE 2) are published. A marker
+  score of 2 (principal) or 1 (significant) records the provider's stated intent, not climate
+  outcomes; the same activity can carry adaptation and mitigation markers, so summing the two
+  double-counts. Query through https://sdmx.oecd.org/dcd-public/rest/ with a positional key
+  (DONOR.RECIPIENT.SECTOR.MEASURE.ALLOCABLE.MARKER.SCORE.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE);
+  component filters are ignored. The all-DAC aggregate donor code here is DAC_EC (it is DAC in the CRS
+  dataflow). OBS_VALUE is in USD millions.
+
+access: public
+
+contact:
+  - organization: OECD Development Co-operation Directorate
+    url: https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html
+    roles: [licensor, producer]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: "RioMarkers: Aid (ODA) activities targeting global environmental objectives"
+  authors:
+    - organization: OECD
+  date: "2026"
+  publisher: OECD
+  url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_RIOMRKR@DF_RIOMARKERS&df%5Bag%5D=OECD.DCD.FSD"
+
+attribution: "Source: OECD DAC Rio markers (CRS), licensed under CC BY 4.0."
+
+created: "2026-10-19"
+updated: "2026-10-19"
+
+spatial:
+  bbox: [-180.0, -90.0, 180.0, 90.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2002"
+  end_date: "2024"
+  update_frequency: annual
+
+structures:
+  - name: rio-markers
+    dimensions:
+      - name: DONOR
+        type: provider
+        description: Reporting DAC member or aggregate (DAC_EC = all DAC members).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
+      - name: RECIPIENT
+        type: location
+        description: Recipient country or region (ISO 3166-1 alpha-3 for countries, OECD codes for regions).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
+      - name: SECTOR
+        type: sector
+        description: CRS purpose code or sector aggregate (1000 = all sectors).
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_DAC_SECTOR/1.3
+      - name: MARKER
+        type: marker
+        description: Rio marker. Codes from the shared CL_CRS_MARKER 1.1 list; only these five occur in this dataflow (checked 2026-10-19).
+        data_type: string
+        categories:
+          - { value: "10", label: Biodiversity }
+          - { value: "20", label: Climate change mitigation }
+          - { value: "30", label: Climate change adaptation }
+          - { value: "40", label: Desertification }
+          - { value: "50", label: Environment }
+      - name: SCORE
+        type: score
+        description: Marker score assigned by the provider (codes observed in the data; CL_CRS_SCORE also lists others).
+        data_type: string
+        categories:
+          - { value: "2", label: Principal }
+          - { value: "1", label: Significant }
+          - { value: "0", label: "Screened, not targeted" }
+          - { value: "99", label: Not screened }
+      - name: PRICE_BASE
+        type: price
+        description: Price base of the values.
+        data_type: string
+        categories:
+          - { value: V, label: Current prices }
+          - { value: Q, label: Constant prices }
+      - name: TIME_PERIOD
+        type: temporal
+        description: Commitment year.
+        data_type: string
+        step: P1Y
+    variables:
+      - name: OBS_VALUE
+        description: >
+          ODA commitments for the provider, recipient, sector, marker, score and year, in millions of
+          US dollars at the stated price base.
+        data_type: number
+        unit: "1e6 USD"
+
+data:
+  - name: sdmx-csv
+    structures: [rio-markers]
+    description: >
+      OECD SDMX REST data endpoint for dataflow DSD_RIOMRKR@DF_RIOMARKERS 1.6. Append a positional key
+      and ?format=csvfilewithlabels for CSV; without format the server returns SDMX-ML (generic data
+      XML). See the example.
+    locations:
+      - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_RIOMRKR@DF_RIOMARKERS,1.6/
+        title: OECD SDMX REST (dcd-public)
+    media_type: application/vnd.sdmx.genericdata+xml
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: Adaptation- and mitigation-marked ODA commitments to one recipient, principal + significant, 2015 to latest.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: OECD Data Explorer
+    rel: about
+    url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_RIOMRKR@DF_RIOMARKERS&df%5Bag%5D=OECD.DCD.FSD"
+  - title: OECD Data API documentation
+    rel: service-doc
+    url: https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf
+  - title: OECD DAC Creditor Reporting System
+    rel: related
+    id: oecd-dac-crs
+    description: The full reporting system the Rio markers tag.
+
+cdh:
+  domain: [socioeconomic, adaptation, mitigation]
+  usage:
+    intended_uses:
+      - adaptation and mitigation finance a country already receives (e.g. GCF financing justification)
+      - comparing providers' climate-tagged portfolios by sector
+    not_recommended_for:
+      - use: Adding adaptation and mitigation amounts to get total climate finance.
+        reason: One activity can carry both markers, so the sum double-counts.
+        use_instead: Report each marker separately; this dataflow serves aggregates only (MD_DIM _T), so it cannot deduplicate.
+      - use: Reading a marked amount as money spent on climate outcomes.
+        reason: Markers record the provider's declared objective at commitment, not disbursement or impact.
+        use_instead: State "ODA committed with a climate objective" and cite the score used.
+
+processing:
+  - id: source
+    description: Provider reporting of Rio markers in the CRS, compiled by the OECD Development Co-operation Directorate.
+    derived_from:
+      - title: "CRS: Creditor Reporting System (flows)"
+        url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
+        version: "1.6"

@@ -35,5 +35,6 @@ jobs:
             --exclude 'climatewatchdata\.org'
             --exclude-path 'BRIEF_TEMPLATE.md'
             --exclude-path 'b4t/archive'
+            --exclude-path 'hub-submissions/drafts/.*/verify-report\.md'
             '**/*.md'
           fail: true

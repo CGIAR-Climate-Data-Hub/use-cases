@@ -8,8 +8,10 @@ hub-submissions/
   matrix.csv                     dataset × use-case × route × Hub status (+ links) — generated
   build_matrix.py                generator; also writes the tracker's 'Use-case matrix' tab
   drafts/<record-id>/
-    <record-id>.yaml             the CDH v0.4.x record (drafted by a person or an agent)
-    verify-report.md             output of the cdh-metadata-verify skill — must show HIGH 0 before submission
+    <record-id>.yaml             the CDH v0.5.x record (drafted by a person or an agent)
+    example.py                   runnable example against the live source (federated records)
+    verify-report.md             output of the cdh-metadata-verify skill (+ a hand-written '## Triage' section, kept on rerun)
+    REVIEW.md                    human checklist for the authored fields (written once by the skill; the reviewer ticks it)
     SUBMISSION.md                written when submitted: `issue: <url>` of the cdh-catalog issue, then the PR / record URL
 ```
 
@@ -19,13 +21,36 @@ hub-submissions/
 | --- | --- | --- |
 | `queued` | in a use-case queue (`<slug>/data/ingestion-queue.csv`), no record yet | use-case coordinator |
 | `draft` | `drafts/<id>/<id>.yaml` exists; header comment says who/what drafted it and from which evidence | author (person or agent) |
-| `verified` | `verify-report.md` present with **HIGH 0** and every MED either fixed or accepted with a reason | reviewer (Pete / Brayden / Andrés) |
+| `verified` | `verify-report.md` with **HIGH 0** (or each HIGH triaged), every MED fixed or accepted with a reason, `REVIEW.md` ticked, and the YAML header says `reviewed by <name> <date>` | reviewer (Pete / Brayden / Andrés) |
 | `submitted` | `SUBMISSION.md` carries the cdh-catalog issue URL; the bot opens the PR | author |
 | `published` | record is live in `cdh-catalog` → the matrix links the catalog page | CDH review |
 | `in data lake, no record` | data under `s3://digital-atlas/cdh/data/<id>/` but no catalog record yet | CDH team |
 
 A draft is a draft: nothing here is authoritative for the Hub. The catalog is. AI-drafted records
 say so in the first comment line of the YAML (`# drafted by <agent> on <date> from <inputs>; reviewed by <person> <date>`).
+That header only lives here: the catalog keeps no AI marker in the metadata (agreed in
+[cdh-catalog#74](https://github.com/CGIAR-Climate-Data-Hub/cdh-catalog/issues/74)). Instead, **every catalog PR
+starts with an AI usage disclosure**: the level of AI help (AI-drafted / AI-assisted / none) and whether the
+human author has reviewed it. `REVIEW.md` ends with a block to paste.
+
+### Authored fields need a person
+
+The standard lists some fields as *authored* — "a person, always": `title`, `description`, `note`,
+`keywords`, `license`, `contact`, `citation`, units, caveats and every `cdh` field. A verifier can check
+links, schema and data against the record, but not whether these are *right*. The ones that most need
+a human with domain knowledge:
+
+- **`cdh.usage.intended_uses`** — specific tasks at a stated scale, not "research" or "decision-making".
+- **`cdh.usage.not_recommended_for`** — the misuses that would actually happen, each with a true `reason`
+  and a `use_instead` that exists.
+- **Limitations** — record-level `note`: coverage gaps, resolution or aggregation, artefacts, revisions,
+  licence traps. The standard has no separate limitations field.
+- **Assumptions** — `processing[].description` and `note`: modelled vs observed, thresholds, weighting,
+  projections.
+
+`REVIEW.md` lists each of these with the question to answer. The verifier's `authored` check flags an
+AI-drafted record that nobody has reviewed, vague intended uses, not-recommended uses with no reason
+or alternative, and a missing `note`.
 
 ## The matrix
 

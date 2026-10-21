@@ -19,4 +19,5 @@ jobs:
           globs: |
             **/*.md
             !**/archive/**
+            !hub-submissions/drafts/**/verify-report.md
           config: '.markdownlint.json'

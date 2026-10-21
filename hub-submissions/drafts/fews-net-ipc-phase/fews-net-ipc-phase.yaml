@@ -1,0 +1,171 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live FEWS NET
+# Data Warehouse API and gcf-preparation-facility/code/federated/cdh_federated/fews.py; NOT YET REVIEWED.
+# FEDERATED record - the Hub points at the FEWS NET API and does not host the data.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: fews-net-ipc-phase
+title: FEWS NET acute food insecurity classifications (IPC-compatible)
+version: "fdw-api"
+description: >
+  Acute food insecurity classifications from the Famine Early Warning Systems Network (FEWS NET):
+  the IPC-compatible phase (1 Minimal to 5 Famine) for each country and each sub-national
+  classification unit (administrative area crossed with livelihood zone), for the current situation
+  and near- and medium-term projections, with the share of population in phases 3-5 where reported.
+  Served without a key by the FEWS NET Data Warehouse (FDW) REST API.
+resource_type: dataset
+license: LicenseRef-US-Government-FEWS-NET
+keywords:
+  [food security, IPC, acute food insecurity, early warning, livelihood zones, FEWS NET]
+
+note: >
+  Rows are classification episodes: one per unit, scenario (Current Situation, Near Term Projection,
+  Medium Term Projection, Most Likely) and projection window. Some scenario names carry a trailing
+  space in the API. Sub-national units are not plain admin units: unit_type fsc_admin_lhz is an
+  administrative area crossed with a livelihood zone, fsc_rm_admin a remote-monitoring admin unit;
+  join on fnid, not on names. FEWS NET coverage is a fixed set of food-insecure countries, not
+  global. Phases are expert classifications, revised as new reports are issued.
+
+access: public
+
+contact:
+  - organization: Famine Early Warning Systems Network (FEWS NET)
+    url: https://fews.net/
+    roles: [licensor, producer]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: FEWS NET Data Warehouse - IPC-compatible acute food insecurity classifications
+  authors:
+    - organization: Famine Early Warning Systems Network (FEWS NET)
+  date: "2026"
+  publisher: FEWS NET
+  url: https://fdw.fews.net/
+
+attribution: "Source: Famine Early Warning Systems Network (FEWS NET)."
+
+created: "2026-10-19"
+updated: "2026-10-19"
+
+spatial:
+  bbox: [-180.0, -60.0, 180.0, 60.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2024-04-01"
+  end_date: null
+  update_frequency: monthly
+
+structures:
+  - name: ipcphase
+    dimensions:
+      - name: fnid
+        type: location
+        description: FEWS NET geographic unit id (country = ISO 3166-1 alpha-2 for admin0 rows).
+        data_type: string
+        reference_system: https://fews.net/data/geographic-boundaries
+      - name: unit_type
+        type: unit
+        description: Kind of geographic unit.
+        data_type: string
+        categories:
+          - { value: admin0, label: Country }
+          - { value: fsc_admin_lhz, label: Administrative area x livelihood zone (food security classification unit) }
+          - { value: fsc_rm_admin, label: Remote-monitoring administrative unit }
+      - name: scenario_name
+        type: scenario
+        description: Classification scenario (current situation or a projection); may carry a trailing space.
+        data_type: string
+      - name: projection_start
+        type: temporal
+        description: First day of the classification window.
+        data_type: date
+      - name: projection_end
+        type: temporal
+        description: Last day of the classification window.
+        data_type: date
+    variables:
+      - name: value
+        description: IPC-compatible acute food insecurity phase of the unit for the window.
+        data_type: number
+        categories:
+          - { value: 1, label: Minimal }
+          - { value: 2, label: Stressed }
+          - { value: 3, label: Crisis }
+          - { value: 4, label: Emergency }
+          - { value: 5, label: Famine }
+      - name: description
+        description: Phase label as text (Minimal ... Famine).
+        data_type: string
+      - name: pct_phase3
+        description: Share of the unit's population in phase 3 (Crisis), where reported.
+        data_type: number
+        unit: "%"
+      - name: pct_phase4
+        description: Share of the unit's population in phase 4 (Emergency), where reported.
+        data_type: number
+        unit: "%"
+      - name: pct_phase5
+        description: Share of the unit's population in phase 5 (Famine), where reported.
+        data_type: number
+        unit: "%"
+      - name: geographic_unit_full_name
+        description: Full unit name (livelihood zone, admin area, country).
+        data_type: string
+
+data:
+  - name: fdw-ipcphase-api
+    structures: [ipcphase]
+    description: >
+      FEWS NET Data Warehouse ipcphase endpoint; filter with country_code (ISO alpha-2) and format=json
+      or format=csv; see the example.
+    locations:
+      - url: https://fdw.fews.net/api/ipcphase/
+        title: FDW REST API
+    media_type: application/json
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: Latest current-situation phase for every classification unit of one country.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: FEWS NET (reuse terms _TBC_)
+    rel: license
+    url: https://fews.net/about
+    description: >
+      _TBC_ - no published terms-of-use page found (fews.net/terms-use 404s, 2026-10-19). Treated as
+      open US Government work with attribution; confirm with FEWS NET before submission.
+  - title: FEWS NET Data Explorer
+    rel: about
+    url: https://fdw.fews.net/data-explorer/visualizations
+  - title: FDW API root
+    rel: service-doc
+    url: https://fdw.fews.net/api/
+
+cdh:
+  domain: [socioeconomic]
+  usage:
+    intended_uses:
+      - food-security context for a country or sub-national area (e.g. GCF vulnerability section)
+      - identifying areas in IPC phase 3 or worse for targeting
+    not_recommended_for:
+      - use: Joining sub-national rows to an admin boundary set by name.
+        reason: Most sub-national units are admin x livelihood-zone units with FEWS NET's own ids.
+        use_instead: Join on fnid with the FEWS NET geographic boundaries.
+      - use: Treating the country list as global coverage.
+        reason: FEWS NET monitors a fixed set of food-insecure countries.
+        use_instead: IPC / Cadre Harmonise for countries FEWS NET does not cover.
+
+processing:
+  - id: source
+    description: FEWS NET analysts' IPC-compatible classifications, published through the FEWS NET Data Warehouse.

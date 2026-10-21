@@ -1,0 +1,155 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-20 from the live Climate Watch
+# API and gcf-preparation-facility/code/federated/cdh_federated/climatewatch.py; NOT YET REVIEWED.
+# FEDERATED record - the Hub points at the Climate Watch API and does not host the data.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: climate-watch-ndc-content
+title: Climate Watch NDC Content - coded content of national climate pledges
+version: "api-v1"
+description: >
+  Structured content of countries' Nationally Determined Contributions (NDCs) and related UNFCCC
+  submissions, coded by Climate Watch (WRI) and partners into about 650 indicators: Paris Agreement
+  status, mitigation targets and their type, adaptation commitments, sectors and sub-sectors covered,
+  conditionality and finance needs. One text value per country, indicator and coded entry, served
+  without a key by the Climate Watch API (about 384,000 rows, all countries).
+resource_type: dataset
+license: LicenseRef-Climate-Watch-Mixed
+keywords:
+  [NDC, Nationally Determined Contributions, Paris Agreement, adaptation commitments, mitigation targets, climate policy, Climate Watch]
+
+note: >
+  Mixed sources: each row's `source` says who coded it. For Togo (2026-10-20) 1,786 of 2,434 rows are
+  from the World Bank NDC database ("WB"), 584 from Climate Watch, 46 from UNICEF and 18 from Pledges.
+  Climate Watch's CC BY 4.0 covers only rows it produced; other sources keep their own licences, so
+  check `source` before reuse. Values are text (Yes, dates, target descriptions), not numbers. Rows
+  carry no document id: one indicator can have several rows per country (e.g. for successive NDCs)
+  that this endpoint does not tell apart; use /api/v1/ndcs/<ISO3>/content_overview (document_slug) or
+  /api/v1/ndcs/<ISO3>/text for document-level detail. Results are paged (Per-Page header, default 50,
+  per_page up to 500 tested; Total header gives the row count). Filter with countries[]=ISO3 and
+  indicator_ids[]=<numeric id from /api/v1/data/ndc_content/indicators>.
+
+access: public
+
+contact:
+  - organization: World Resources Institute (Climate Watch)
+    url: https://www.climatewatchdata.org/
+    roles: [licensor, producer]
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [point-of-contact, maintainer]
+
+citation:
+  title: Climate Watch
+  authors:
+    - organization: World Resources Institute
+  date: "2026"
+  publisher: World Resources Institute
+  url: https://www.climatewatchdata.org/
+
+attribution: >
+  Climate Watch. 2026. Washington, DC: World Resources Institute. Available online at:
+  https://www.climatewatchdata.org. Cite the original source of rows not produced by Climate Watch.
+
+created: "2026-10-20"
+updated: "2026-10-20"
+
+spatial:
+  bbox: [-180.0, -90.0, 180.0, 90.0]
+  geography: [world]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2015"
+  end_date: null
+  update_frequency: irregular
+
+structures:
+  - name: ndc-content
+    dimensions:
+      - name: iso_code3
+        type: location
+        description: Party (ISO 3166-1 alpha-3; EUU for the European Union).
+        data_type: string
+      - name: indicator_id
+        type: indicator
+        description: Indicator slug, e.g. adaptation, ghg_target_type, ndce_revised.
+        data_type: string
+        reference_system: https://www.climatewatchdata.org/api/v1/data/ndc_content/indicators
+      - name: source
+        type: source
+        description: Who coded the row (Climate Watch, WB, UNICEF, Pledges, ...); decides the licence.
+        data_type: string
+    variables:
+      - name: value
+        description: Coded content as text (Yes/No, dates, target type, free-text summary).
+        data_type: string
+      - name: indicator_name
+        description: Indicator label.
+        data_type: string
+      - name: global_category
+        description: Top-level grouping (Overview, Mitigation, Adaptation, Sectoral Information, or empty).
+        data_type: string
+      - name: overview_category
+        description: Sub-grouping within the category, where set.
+        data_type: string
+      - name: sector
+        description: Sector the row refers to, where set.
+        data_type: string
+      - name: subsector
+        description: Sub-sector the row refers to, where set.
+        data_type: string
+
+data:
+  - name: ndc-content-api
+    structures: [ndc-content]
+    description: >
+      Climate Watch NDC Content data endpoint; filter with countries[]=ISO3 and indicator_ids[]=<id>,
+      page with page and per_page. Returns JSON {data:[...], meta}. See the example.
+    locations:
+      - url: https://www.climatewatchdata.org/api/v1/data/ndc_content
+        title: Climate Watch API v1
+    media_type: application/json
+
+additional_assets:
+  - name: example
+    roles: [example]
+    media_type: text/x-python
+    description: All NDC content rows for one country, split by source, with the adaptation and sector rows shown.
+    locations:
+      - url: ./example.py
+
+additional_links:
+  - title: Climate Watch permissions and licensing
+    rel: license
+    url: https://www.climatewatchdata.org/about/permissions
+  - title: Climate Watch Data Explorer - NDC Content (links the API endpoints)
+    rel: service-doc
+    url: https://www.climatewatchdata.org/data-explorer/ndc-content
+  - title: Climate Watch source code (MIT)
+    rel: related
+    url: https://github.com/ClimateWatch-Vizzuality/climate-watch
+
+cdh:
+  domain: [adaptation, mitigation]
+  usage:
+    intended_uses:
+      - what a country has committed to in its NDC (adaptation priorities, sectors, targets) for a climate rationale
+      - checking alignment of a proposal with national commitments (e.g. GCF country ownership)
+    not_recommended_for:
+      - use: Republishing all rows under CC BY 4.0.
+        reason: Most rows for many countries come from other coders (e.g. World Bank) with their own terms.
+        use_instead: Filter on source, or cite and license each source separately.
+      - use: Quoting a row as the content of the latest NDC.
+        reason: Rows carry no document id and several NDC versions can coexist for one indicator.
+        use_instead: Check the document with content_overview (document_slug) or the NDC text itself.
+
+processing:
+  - id: source
+    description: NDC and UNFCCC submissions coded into indicators by Climate Watch (WRI) and partner organisations.
+    derived_from:
+      - title: UNFCCC NDC Registry
+        url: https://unfccc.int/NDCREG

@@ -1,41 +1,41 @@
 dataset,overall_priority,GCF,AgWise,B4T,PRISM,n_use_cases,hub_status,hub_record_url,lake_prefix,route,products,licence,proposed_lead,key
-ESA WorldCover 2021 v200,P1,P1,P2,,_TBC_,2,queued,,,derive-then-host,AgWise: ESA WorldCover 2021 v200 (cropland-fraction grid); GCF: ESA WorldCover (admin-summary product),CC BY 4.0,CDH Core,esa-worldcover-2021
+ESA WorldCover 2021 global land cover at 10 m,P1,P1,P2,,_TBC_,2,published,https://cgiar-climate-data-hub.github.io/catalog/esa-worldcover-2021/,,derive-then-host,AgWise: ESA WorldCover 2021 v200 (cropland-fraction grid); GCF: ESA WorldCover (admin-summary product),CC BY 4.0,CDH Core,esa-worldcover-2021
 SoilGrids 2.0,P1,,P1,"needed — Keep — water retention 1500 kPa, AWC (W-01/02) [effort Low]",_TBC_,2,queued,,,federate,,CC BY 4.0,Alliance (AgWise) / CDH Core; Brayden,soilgrids-2
+DHS Program (aggregate indicators),P1,P1,,,_TBC_,1,draft,,,federate,,aggregate API open; microdata restricted,IFPRI / CDH Core,dhs-indicator-api
+FEWS NET,P1,P1,,,_TBC_,1,draft,,,federate,,open (USAID; attribution),IFPRI / CDH Core,fews-net-ipc-phase
+IMF fiscal (Fiscal Monitor / GFS) via WB Data360,P1,P1,,,_TBC_,1,draft,,,federate,,CC BY 4.0 via WB Data360,CDH Core,imf-fiscal-monitor
+OECD CRDF (Rio markers),P1,P1,,,_TBC_,1,draft,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-rio-markers
+OECD DAC CRS,P1,P1,,,_TBC_,1,draft,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-dac-crs
 AQUASTAT GMIA v5,P1,P1,,,_TBC_,1,queued,,,mirror,,"open (cite-as, Siebert et al. 2013)",IWMI,aquastat-gmia-v5
 CHIRPS v2.0 daily,P1,,P1,,_TBC_,1,queued,,,federate,,"public domain (CC0, CHC)",CDH Core,chirps-v2-daily
 Copernicus DEM GLO-30,P1,,P1,,_TBC_,1,queued,,,federate,,Copernicus DEM licence (free; attribution ESA / Airbus / DLR),Brayden; CDH Core,copernicus-dem-glo-30
 CSPD / CSPDxCF (Climate Security Programming Dashboard),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY-NC 4.0,Alliance (CSO),cspd-cspdxcf
-DHS Program (aggregate indicators),P1,P1,,,_TBC_,1,queued,,,federate,,aggregate API open; microdata restricted,IFPRI / CDH Core,dhs-program
 ECMWF SEAS5 (system 51) seasonal forecast,P1,,P1,,_TBC_,1,queued,,,federate,,Copernicus / C3S licence - verify on CDS dataset page,Alliance (AgWise) / CDH Core,ecmwf-seas5-seasonal-forecast
 EDGAR / FAOSTAT emissions,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0,Alliance / CDH Core,edgar-faostat-emissions
 FAO EX-ACT (tool),P1,P1,,,_TBC_,1,queued,,,tool,,AGPL-3.0 (code); app login,Alliance / CDH Core,fao-ex-act
 FAO SDG 5.a.1 / 5.a.2 + Land Portal,P1,P1,,,_TBC_,1,queued,,,federate,,FAO open terms,CDH Core,fao-sdg-5-a-1-5-a-2-land-portal
-FEWS NET,P1,P1,,,_TBC_,1,queued,,,federate,,open (USAID; attribution),IFPRI / CDH Core,fews-net
 GDL Subnational HDI / Area Database,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,NC (non-commercial + attribution),CDH Core,gdl-subnational-hdi-area-database
 Global Forest Watch,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0,Alliance / CDH Core,global-forest-watch
 IATI Registry / Datastore,P1,P1,,,_TBC_,1,queued,,,federate,,open (per publisher),CDH Core,iati-registry-datastore
-IMF fiscal (Fiscal Monitor / GFS) via WB Data360,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 via WB Data360,CDH Core,imf-fiscal-via-wb-data360
 INFORM Risk (global),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (EC Decision 2011/833/EU),CDH Core,inform-risk
 IPC / Cadre Harmonise,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY-NC-SA 3.0 IGO,IFPRI / CDH Core,ipc-cadre-harmonise
 IPCC Emission Factor Database (EFDB),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,unclear - IPCC copyright,Alliance / CDH Core,ipcc-emission-factor-database
 Key Biodiversity Areas,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,"request-gated, NC",MFL / Mosaic (ask),key-biodiversity-areas
 LandMark (Indigenous & community lands),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,attribution + FPIC conditions,MFL / Mosaic (ask),landmark
 Meta Relative Wealth Index,P1,P1,,,_TBC_,1,queued,,,derive-then-host,,CC0,IFPRI / CDH Core,meta-relative-wealth-index
-OECD CRDF (Rio markers),P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-crdf
-OECD DAC CRS,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (from Jul 2024),CDH Core,oecd-dac-crs
 WDPA / Protected Planet (overlay stat),P1,P1,,,_TBC_,1,queued,,,derive-then-host,,"NC, no-redistribute",CDH Core (ask MFL/Mosaic),wdpa-protected-planet
 World Bank IEG evaluations,P1,P1,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (+ WB attribution terms),CDH Core,world-bank-ieg-evaluations
 AgWise Climate API (Jemal) (tool),P1,,P1,,_TBC_,1,deferred,,,tool,,TBC,Alliance (AgWise),agwise-climate-api
 iSDAsoil v0.13 (Africa),P2,,P2,,needed — root-zone depth and soil properties for SARRA-Py — iSDA S3,2,queued,,,mirror,,CC BY 4.0 (per workflow catalog; confirm on provider / Zenodo page),Alliance (AgWise),isdasoil-v0-13
+Climate Watch (NDC content),P2,P2,,,_TBC_,1,draft,,,federate,,CC BY 4.0 (Climate Watch data),CDH Core,climate-watch-ndc-content
+WHO/UNICEF JMP (WASH),P2,P2,,,_TBC_,1,draft,,,federate,,CC BY-NC-SA 3.0 IGO (reports); data unstated,CDH Core,who-unicef-jmp-wash
 agwise-data / byliz-ai data_sourcing (tool),P2,,P2,,_TBC_,1,queued,,,tool,,MIT,Alliance (AgWise),agwise-data-byliz-ai-data-sourcing
-Climate Watch (NDC content),P2,P2,,,_TBC_,1,queued,,,federate,,CC BY 4.0 (Climate Watch data),CDH Core,climate-watch
 FAO FishStat - aquaculture value,P2,P2,,,_TBC_,1,queued,,,derive-then-host,,CC BY-NC-SA 3.0 IGO,WorldFish,fao-fishstat-aquaculture-value
 geoBoundaries (gbOpen),P2,,P2,,_TBC_,1,queued,,,federate,,CC BY 4.0 (database); per-layer varies (e.g. CC BY-SA 2.0),CDH Core,geoboundaries
 INFORM Subnational,P2,P2,,,_TBC_,1,queued,,,mirror,,CC BY 4.0,CDH Core,inform-subnational
 "MODIS MOD13Q1 / MYD13Q1 v061 (NDVI, EVI)",P2,,P2,,_TBC_,1,queued,,,federate,,no restrictions (LP DAAC),CDH Core,modis-mod13q1-myd13q1-v061
 ND-GAIN Country Index,P2,P2,,,_TBC_,1,queued,,,mirror,,unclear - verify,CDH Core,nd-gain-country-index
 UNDP HDI,P2,P2,,,_TBC_,1,queued,,,mirror,,CC BY 3.0 IGO,CDH Core,undp-hdi
-WHO/UNICEF JMP (WASH),P2,P2,,,_TBC_,1,queued,,,federate,,CC BY-NC-SA 3.0 IGO (reports); data unstated,CDH Core,who-unicef-jmp
 PRISM / prismpy (tool),P2,,P2,,_TBC_,1,deferred,,,tool,,MIT (per paper); LICENSE file absent in repo - verify,Alliance (AgWise) / CDH Core,prism-prismpy
 AgERA5 daily agrometeorological indicators,needed,held,held,,needed — temperature/radiation/ET0 for SARRA-Py — CDS API (cdsapi key),3,published,https://cgiar-climate-data-hub.github.io/catalog/agera5/,,,,,Brayden,agera5
 CHIRPS v3 Daily Precipitation,needed,held,held,needed — Re-derive annual rainfall CV on CHIRPS v3 (R-03) [effort Low],_TBC_,3,published,https://cgiar-climate-data-hub.github.io/catalog/chirps-v3-daily/,,,,,Andrés,chirps-v3-daily

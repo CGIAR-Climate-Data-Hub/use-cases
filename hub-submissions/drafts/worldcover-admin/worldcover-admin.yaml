@@ -1,0 +1,257 @@
+# yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
+# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-20 from
+# gcf-preparation-facility/code/worldcover/worldcover_admin.py and a Togo test run; NOT YET REVIEWED.
+# HOSTED (derived) record - data NOT YET UPLOADED: the CDH bucket is pending (cdh-catalog#74); locations are the planned path.
+cdh_schema_version: v0.5.0
+extensions:
+  - https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/extensions/cdh/schema.json
+
+id: worldcover-admin
+title: ESA WorldCover land-cover and cropland area by administrative unit (GAUL 2024, Africa)
+version: "1"
+description: >
+  Area in hectares and share of each ESA WorldCover land-cover class, and of cropland, for every
+  GAUL 2024 administrative unit at levels 0, 1 and 2, computed from the 10 m WorldCover maps for 2021
+  (v200) and 2020 (v100). Pixels are assigned to the unit containing their centre and weighted by
+  their true area on the sphere. One set of Parquet tables per country, for African countries.
+resource_type: dataset
+license: CC-BY-4.0
+keywords:
+  [land cover, cropland area, ESA WorldCover, administrative units, zonal statistics, GAUL]
+
+note: >
+  Areas sum to the rasterised unit (centre-pixel rule at 10 m), not to the vector polygon area;
+  differences are small for large units and larger for small or narrow ones. The 2020 (v100) and
+  2021 (v200) maps were made with different algorithms, so the two years are not a change series;
+  the 2020 to 2021 transition table the script can also write is deliberately not published here.
+  Class 40 (cropland) is annual herbaceous crops only: tree crops fall under tree cover and pasture
+  under grassland, so cropland_ha undercounts agricultural land. Class 0 rows are no-data or outside
+  the WorldCover footprint. Unit codes and names are GAUL 2024; disputed territories carry their own
+  gaul0_code. Countries are produced on demand: the data folder lists which are available.
+
+access: public
+
+contact:
+  - name: Peter Steward
+    organization: Alliance of Bioversity International and CIAT
+    email: p.steward@cgiar.org
+    roles: [producer, point-of-contact, maintainer]
+  - organization: European Space Agency (ESA WorldCover consortium)
+    url: https://esa-worldcover.org/en
+    roles: [licensor]
+
+citation:
+  title: ESA WorldCover land-cover and cropland area by administrative unit (GAUL 2024, Africa)
+  authors:
+    - family: Steward
+      given: Peter
+  date: "2026"
+  publisher: CGIAR Climate Data Hub
+
+attribution: >
+  Contains ESA WorldCover data: Zanaga, D. et al. (2022) ESA WorldCover 10 m 2021 v200,
+  doi:10.5281/zenodo.7254221, and Zanaga, D. et al. (2021) ESA WorldCover 10 m 2020 v100,
+  doi:10.5281/zenodo.5571936, CC BY 4.0. Boundaries: FAO GAUL 2024, CC BY 4.0.
+
+created: "2026-10-20"
+updated: "2026-10-20"
+
+spatial:
+  bbox: [-25.37, -34.84, 63.51, 37.56]
+  geography: [africa]
+  crs: EPSG:4326
+
+temporal:
+  start_date: "2020"
+  end_date: "2021"
+  update_frequency: irregular
+
+structures:
+  - name: area
+    dimensions:
+      - name: iso3
+        type: location
+        description: ISO 3166-1 alpha-3 of the country run; one file per value. Lists the countries produced so far.
+        data_type: string
+        values: [TGO]
+      - name: gaul0_code
+        type: location
+        description: GAUL 2024 country code.
+        data_type: int64
+      - name: admin_level
+        type: level
+        description: Administrative level of the row.
+        data_type: int64
+        categories:
+          - { value: 0, label: Country }
+          - { value: 1, label: First-level unit }
+          - { value: 2, label: Second-level unit }
+      - name: gaul1_code
+        type: location
+        description: GAUL 2024 first-level code (empty on admin_level 0 rows).
+        data_type: int64
+      - name: gaul2_code
+        type: location
+        description: GAUL 2024 second-level code (empty on admin_level 0 and 1 rows).
+        data_type: int64
+      - name: year
+        type: temporal
+        description: WorldCover map year (2020 = v100, 2021 = v200).
+        data_type: int64
+      - name: lc_class
+        type: class
+        description: WorldCover class code (0 = no data / outside).
+        data_type: int64
+        categories:
+          - { value: 10, label: Tree cover }
+          - { value: 20, label: Shrubland }
+          - { value: 30, label: Grassland }
+          - { value: 40, label: Cropland }
+          - { value: 50, label: Built-up }
+          - { value: 60, label: Bare / sparse vegetation }
+          - { value: 70, label: Snow and ice }
+          - { value: 80, label: Permanent water bodies }
+          - { value: 90, label: Herbaceous wetland }
+          - { value: 95, label: Mangroves }
+          - { value: 100, label: Moss and lichen }
+          - { value: 0, label: No data / outside }
+    variables:
+      - name: area_ha
+        description: Area of the class in the unit, summed from 10 m pixel areas on the sphere.
+        data_type: float64
+        unit: ha
+      - name: share
+        description: Fraction of the unit's rasterised area in this class (0-1, including class 0).
+        data_type: float64
+        unit: "1"
+      - name: admin0_name
+        description: GAUL 2024 country name.
+        data_type: string
+      - name: admin1_name
+        description: GAUL 2024 first-level name.
+        data_type: string
+      - name: admin2_name
+        description: GAUL 2024 second-level name.
+        data_type: string
+      - name: version
+        description: WorldCover product version for the year (v100, v200).
+        data_type: string
+      - name: lc_label
+        description: Class label.
+        data_type: string
+  - name: cropland
+    dimensions:
+      - name: iso3
+        type: location
+        description: ISO 3166-1 alpha-3 of the country run; one file per value. Lists the countries produced so far.
+        data_type: string
+        values: [TGO]
+      - name: gaul0_code
+        type: location
+        description: GAUL 2024 country code.
+        data_type: int64
+      - name: admin_level
+        type: level
+        description: Administrative level of the row (0, 1, 2).
+        data_type: int64
+      - name: gaul1_code
+        type: location
+        description: GAUL 2024 first-level code (empty on admin_level 0 rows).
+        data_type: int64
+      - name: gaul2_code
+        type: location
+        description: GAUL 2024 second-level code (empty on admin_level 0 and 1 rows).
+        data_type: int64
+      - name: year
+        type: temporal
+        description: WorldCover map year.
+        data_type: int64
+    variables:
+      - name: cropland_ha
+        description: Area of WorldCover class 40 (annual herbaceous cropland) in the unit.
+        data_type: float64
+        unit: ha
+      - name: cropland_share
+        description: Fraction of the unit's rasterised area that is class 40.
+        data_type: float64
+        unit: "1"
+      - name: admin0_name
+        description: GAUL 2024 country name.
+        data_type: string
+      - name: admin1_name
+        description: GAUL 2024 first-level name.
+        data_type: string
+      - name: admin2_name
+        description: GAUL 2024 second-level name.
+        data_type: string
+
+data:
+  - name: area
+    structures: [area]
+    description: Class area and share per unit and year; one file per country (planned location, not yet uploaded).
+    locations:
+      - url: https://digital-atlas.s3.amazonaws.com/cdh/data/worldcover-admin/v1/
+        title: HTTPS (planned)
+      - url: s3://digital-atlas/cdh/data/worldcover-admin/v1/
+        title: S3 (planned)
+    href_template: "worldcover_admin_area_{iso3}.parquet"
+    media_type: application/vnd.apache.parquet
+    processing_steps: [source, zonal]
+  - name: cropland
+    structures: [cropland]
+    description: Cropland (class 40) area and share per unit and year; one file per country (planned location, not yet uploaded).
+    locations:
+      - url: https://digital-atlas.s3.amazonaws.com/cdh/data/worldcover-admin/v1/
+        title: HTTPS (planned)
+      - url: s3://digital-atlas/cdh/data/worldcover-admin/v1/
+        title: S3 (planned)
+    href_template: "worldcover_admin_cropland_{iso3}.parquet"
+    media_type: application/vnd.apache.parquet
+    processing_steps: [source, zonal]
+
+additional_links:
+  - title: ESA WorldCover 2021 (CDH record)
+    rel: related
+    id: esa-worldcover-2021
+    description: The 10 m source map, federated in the Hub.
+
+cdh:
+  domain: [land, agricultural-production]
+  usage:
+    intended_uses:
+      - land-cover context per district for climate finance proposals (e.g. GCF beneficiary and impact sections)
+      - cropland area per admin unit as activity data for emissions tools such as EX-ACT
+      - district-level cropland share to weight or mask other admin-level indicators
+    not_recommended_for:
+      - use: Land-cover change from the 2020 and 2021 rows.
+        reason: The two maps use different algorithms, so differences mix real and methodological change.
+        use_instead: A consistent multi-year land-cover series, or one year only.
+      - use: Total agricultural or farm area.
+        reason: Cropland is annual herbaceous crops only; tree crops and pasture fall in other classes.
+        use_instead: Add tree-crop and pasture estimates from crop statistics or MapSPAM / CROPGRIDS.
+      - use: Areas for small units as exact figures.
+        reason: The centre-pixel rule at 10 m assigns boundary pixels to one unit only.
+        use_instead: Treat small-unit areas as estimates, or compute with the polygon overlay for the unit.
+
+processing:
+  - id: source
+    description: >
+      ESA WorldCover 10 m maps for 2020 (v100) and 2021 (v200), read as COGs from the public AWS
+      bucket, and FAO GAUL 2024 level-2 polygons (Africa) from the Adaptation Atlas analysis-ready store.
+    derived_from:
+      - id: esa-worldcover-2021
+        version: v200
+      - title: ESA WorldCover 10 m 2020 v100
+        url: https://doi.org/10.5281/zenodo.5571936
+        version: v100
+      - title: FAO GAUL 2024 level 2 (Adaptation Atlas analysis-ready, Africa)
+        url: https://digital-atlas.s3.amazonaws.com/domain=boundaries/type=admin/source=gaul2024/region=africa/processing=analysis-ready/level=adm2/atlas_gaul24_a2_africa.parquet
+        version: "2024"
+  - id: zonal
+    description: >
+      Level-2 polygons rasterised on the WorldCover 1/12000 degree grid window by window
+      (all_touched false, so each pixel goes to the polygon containing its centre). Pixel area =
+      R^2 x dlat x dlon x cos(lat) with R = 6,371,008.8 m, in hectares. Class areas summed per
+      level-2 unit, then aggregated to levels 1 and 0 by GAUL code. No-data kept as class 0.
+    code:
+      url: https://github.com/CGIAR-Climate-Data-Hub/use-cases/blob/main/gcf-preparation-facility/code/worldcover/worldcover_admin.py

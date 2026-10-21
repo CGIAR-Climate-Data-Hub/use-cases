@@ -41,6 +41,10 @@ def fetch(iso3: str, *, dhs_code: str | None = None, indicators: list[str] | Non
     if not cc:
         raise ValueError(f"need the DHS country code for {iso3} (pass dhs_code=)")
     inds = indicators or DEFAULT_INDICATORS
+    # Precision is decimal places, not a unit: take the unit from the indicator metadata
+    meta = get(s, "https://api.dhsprogram.com/rest/dhs/indicators",
+               params={"indicatorIds": ",".join(inds), "f": "json"}, timeout=120).json().get("Data", [])
+    units = {m["IndicatorId"]: (m.get("MeasurementType") or "").lower() for m in meta}
     rows, urls = [], []
     for level, breakdown in ((0, "national"), (1, "subnational")):
         params = {"countryIds": cc, "indicatorIds": ",".join(inds), "breakdown": breakdown,
@@ -63,7 +67,7 @@ def fetch(iso3: str, *, dhs_code: str | None = None, indicators: list[str] | Non
                 "admin_name": x.get("CountryName") if level == 0 else x.get("CharacteristicLabel"),
                 "admin_code": iso3 if level == 0 else x.get("RegionId"),
                 "indicator_id": x["IndicatorId"], "indicator": x.get("Indicator"),
-                "value": to_float(x.get("Value")), "unit": "percent" if x.get("Precision") in (1, "1") else "",
+                "value": to_float(x.get("Value")), "unit": units.get(x["IndicatorId"], ""),
                 "period": str(x.get("SurveyYear")),
                 "qualifiers": {"survey_id": x.get("SurveyId"), "survey_type": x.get("SurveyType"),
                                "ci_low": x.get("CILow"), "ci_high": x.get("CIHigh"),
