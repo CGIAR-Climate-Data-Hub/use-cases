@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
-# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live OECD SDMX
-# endpoint and gcf-preparation-facility/code/federated/cdh_federated/oecd.py; NOT YET REVIEWED by a person.
+# DRAFT round 2 — drafted by Claude (Claude Code) on 2026-10-19, revised 2026-10-23 after Peter Steward's round-1
+# review (licence, limitations, methods, uses). Sources: OECD Data API, OECD Terms & Conditions, OECD ODA FAQ and
+# development-finance reporting resources pages. NOT YET REVIEWED (round 2).
 # FEDERATED record - the Hub points at the OECD API and does not host the data.
 cdh_schema_version: v0.5.0
 extensions:
@@ -10,24 +11,42 @@ id: oecd-dac-crs
 title: OECD DAC Creditor Reporting System (CRS) - development finance flows
 version: "1.6"
 description: >
-  Activity-level official development assistance (ODA) and other official flows reported by OECD
-  Development Assistance Committee (DAC) members and other providers, aggregated by provider,
-  recipient country, sector (CRS purpose code), flow type and year. The canonical record of who
-  funded what, where. Served by the OECD SDMX REST API as dataflow DSD_CRS@DF_CRS version 1.6;
-  values are in millions of US dollars.
+  Official development assistance (ODA) and other development finance reported to the OECD by its
+  Development Assistance Committee (DAC) members, other reporting countries, multilateral
+  organisations and the largest private foundations, by provider, recipient country, sector, type
+  of flow and year. It is the main international record of who funds what, where, in development
+  co-operation. The Hub serves the aggregated CRS dataflow (DSD_CRS@DF_CRS version 1.6) through the
+  OECD API; values are in millions of US dollars.
 resource_type: dataset
-license: CC-BY-4.0
+license: LicenseRef-OECD-Data-Terms
 keywords:
-  [official development assistance, ODA, development finance, aid flows, climate finance, SDMX]
+  [official development assistance, ODA, development finance, aid flows, climate finance, donors, SDMX]
 
 note: >
-  The dataflow is an external reference on sdmx.oecd.org/public; data and structures must be
-  requested from https://sdmx.oecd.org/dcd-public/rest/. SDMX 3.0 component filters
-  (c[RECIPIENT]=) are ignored by the server and return the whole cube (over 1 GB), so use positional
-  keys: DONOR.RECIPIENT.SECTOR.MEASURE.CHANNEL.MODALITY.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE.
-  The all-DAC donor aggregate is DAC. OBS_VALUE is in USD millions (UNIT_MULT 6). Figures are revised
-  as providers resubmit; record the retrieval date. The OECD CC BY 4.0 grant covers OECD content
-  published from 1 July 2024; third-party material inside is excluded.
+  What the data cover and miss. Only providers that report to the OECD are included: DAC members,
+  other countries that choose to report, multilateral organisations and some large foundations.
+  Finance from providers that do not report, private investment, remittances and domestic budgets
+  are absent, so this is not the total external finance a country receives. Recipients are limited
+  to countries and territories on the DAC list of ODA recipients.
+  Commitments and disbursements are different things. A commitment is recorded in full in the year
+  it is signed, even when it is spent over several years; a disbursement is money actually paid in
+  that year. Commitments jump from year to year; disbursements in a year do not match the same
+  year's commitments because they pay out earlier ones.
+  Sectors and purposes are assigned by each provider when it reports an activity, using the OECD
+  code lists. Practice varies between providers, so sector totals reflect how providers label their
+  work as well as what they fund.
+  Coverage and timing. Detailed data appear once a year, in December, for the previous year; figures
+  for recent years are revised as providers resubmit. Disbursements are available from 2002 and
+  commitments from 1995; earlier years have gaps for some providers. Net flows can be negative where
+  loan repayments exceed new lending. Since 2018 the headline ODA measure counts loans at their grant
+  equivalent, while this dataflow reports cash flows, so totals differ from headline ODA figures.
+  Location. The data are national: there is no sub-national location (county, district) in this
+  dataflow.
+  Recipient totals count the outflows of multilateral organisations to the country, not donors'
+  core contributions to those organisations, so provider and recipient views do not add up the
+  same way.
+  Licence: OECD data terms (any use, including commercial, with OECD's citation passed on to anyone
+  you share with); not CC BY. Third-party content in OECD data keeps its own terms.
 
 access: public
 
@@ -48,10 +67,12 @@ citation:
   publisher: OECD
   url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
 
-attribution: "Source: OECD Creditor Reporting System (CRS), licensed under CC BY 4.0."
+attribution: >
+  OECD (2026), CRS: Creditor Reporting System (flows), OECD Data Explorer, https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD
+  (accessed on <date>). Required by the OECD data terms, and must be passed on in any sub-licence.
 
 created: "2026-10-19"
-updated: "2026-10-19"
+updated: "2026-10-23"
 
 spatial:
   bbox: [-180.0, -90.0, 180.0, 90.0]
@@ -68,7 +89,13 @@ structures:
     dimensions:
       - name: DONOR
         type: provider
-        description: Reporting provider (country, multilateral agency or aggregate such as DAC).
+        description: >
+          Reporting provider. Mixes single providers with groups that already contain them: ALLD (all
+          official providers, countries and multilaterals: use this for "everything a country received"),
+          DAC (DAC member countries only), DAC_EC (DAC countries plus EU Institutions), ALLM (all
+          multilateral organisations), DACEU / DACEU_EC, G7, and nested multilateral groups such as
+          5WBG0 World Bank Group > 5WB0 World Bank > 5WB002 IDA. Never add groups to their members. The
+          example script shows how to keep single providers only.
         data_type: string
         reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
       - name: RECIPIENT
@@ -95,7 +122,9 @@ structures:
           - { value: "60", label: Private sector instruments }
       - name: FLOW_TYPE
         type: flow
-        description: Commitments or disbursements.
+        description: >
+          Commitments (C) or disbursements (D). The OECD code list does not say whether D is gross or net
+          of loan repayments (separate codes 1120 gross and 1140 net exist) - _TBC_ with the OECD.
         data_type: string
         categories:
           - { value: C, label: Commitments }
@@ -107,6 +136,31 @@ structures:
         categories:
           - { value: V, label: Current prices }
           - { value: Q, label: Constant prices }
+      - name: CHANNEL
+        type: channel
+        description: Channel of delivery (public sector, NGOs, multilateral organisations ...); _T = all channels.
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_CRS_CHANNEL
+      - name: MODALITY
+        type: modality
+        description: Type of aid (budget support, projects, core contributions ...); _T = all modalities.
+        data_type: string
+        reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_CRS_MODALITY
+      - name: MD_DIM
+        type: level
+        description: Aggregation level. Use _T (aggregate); project/programme rows (DD) are not served by this API dataflow.
+        data_type: string
+        categories:
+          - { value: _T, label: Aggregate }
+          - { value: DD, label: Project/programme (not served here) }
+      - name: MD_ID
+        type: identifier
+        description: Activity identifier; 0 on aggregate rows.
+        data_type: string
+      - name: UNIT_MEASURE
+        type: unit
+        description: Currency unit; USD.
+        data_type: string
       - name: TIME_PERIOD
         type: temporal
         description: Reporting year.
@@ -124,9 +178,16 @@ data:
   - name: sdmx-csv
     structures: [crs]
     description: >
-      OECD SDMX REST data endpoint for dataflow DSD_CRS@DF_CRS 1.6. Append a positional key and
-      ?format=csvfilewithlabels for CSV with labels; without format the server returns SDMX-ML
-      (generic data XML). See the example.
+      OECD SDMX REST data endpoint for dataflow DSD_CRS@DF_CRS 1.6. Build the query as a positional
+      key, DONOR.RECIPIENT.SECTOR.MEASURE.CHANNEL.MODALITY.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE,
+      where an empty position means all values (e.g. ALLD.KEN..100._T._T.D.V._T.0.USD = all official
+      providers, Kenya, every sector, ODA, disbursements, current prices). The structure also lists
+      project-level columns (PROJECT_TITLE, descriptions, CLIMATE_ADAPTATION and other markers); they
+      are empty in this API dataflow. Always fix the recipient: the server
+      ignores SDMX 3.0 component filters (c[RECIPIENT]=...) and an unfiltered query returns the whole
+      cube (over 1 GB). Add ?format=csvfilewithlabels for CSV with labels; without it the server
+      returns SDMX-ML. The all-DAC provider aggregate is DAC. Requests must go to sdmx.oecd.org/dcd-public
+      (the dataflow is only referenced from sdmx.oecd.org/public). See the example script.
     locations:
       - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_CRS@DF_CRS,1.6/
         title: OECD SDMX REST (dcd-public)
@@ -136,15 +197,34 @@ additional_assets:
   - name: example
     roles: [example]
     media_type: text/x-python
-    description: ODA disbursements from all DAC members to one recipient, by CRS sector, 2015 to latest.
+    description: >
+      ODA disbursements to one recipient (Kenya by default) from all DAC members, by year, with the
+      agriculture, water and environment sectors split out, plus the top providers in the latest year.
     locations:
       - url: ./example.py
 
 additional_links:
-  - title: Creditor Reporting System (OECD Data Explorer)
+  - title: OECD Terms and Conditions (section 3, Data)
+    rel: license
+    url: https://www.oecd.org/en/about/terms-conditions.html
+  - title: CRS dataset in the OECD Data Explorer (browse, and bulk activity-level downloads under Related files)
     rel: about
     url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
-    description: Interactive browser for the CRS dataflow.
+  - title: ODA frequently asked questions (commitments vs disbursements, coverage, data releases)
+    rel: describedby
+    url: https://www.oecd.org/en/data/insights/data-explainers/2024/07/frequently-asked-questions-on-official-development-assistance-oda.html
+  - title: Development finance statistics - methodology and resources for reporting
+    rel: describedby
+    url: https://www.oecd.org/content/oecd/en/data/insights/data-explainers/2024/10/resources-for-reporting-development-finance-statistics.html
+  - title: Converged Statistical Reporting Directives (the reporting rule book, PDF)
+    rel: describedby
+    url: "https://one.oecd.org/document/DCD/DAC(2026)14/FINAL/en/pdf"
+  - title: Glossary of statistical terms and concepts of development finance
+    rel: describedby
+    url: https://www.oecd.org/en/topics/sub-issues/oda-standards/glossary-of-statistical-terms-and-concepts-of-development-finance.html
+  - title: DAC and CRS code lists (sectors, providers, recipients)
+    rel: describedby
+    url: https://development-finance-codelists.oecd.org/CodesList.aspx
   - title: OECD Data API documentation
     rel: service-doc
     url: https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf
@@ -157,19 +237,68 @@ cdh:
   domain: [socioeconomic, adaptation]
   usage:
     intended_uses:
-      - development and climate finance context for a country (e.g. GCF concept note section D)
-      - identifying which providers and sectors already fund a country or theme
+      - >
+        Describe the development finance a country already receives, for the context or baseline
+        section of a funding proposal (e.g. a GCF concept note): total ODA disbursed per year over the
+        last 5-10 years from all official providers (ALLD), the main single providers, and the amounts
+        going to agriculture, water and environment. The example script produces these tables for
+        Kenya (2024: USD 3,652 million from all official providers, of which USD 1,544 million from DAC
+        member countries).
+      - >
+        Show where a proposed project fits among existing funders: list which providers already fund
+        a sector in the country (e.g. agriculture, purpose codes 311xx) and how much, so the proposal
+        can argue complementarity rather than duplication. Change the sector position of the key in
+        the example script to the purpose code you need.
+      - >
+        Track trends in support to a sector over time, using disbursements at constant prices
+        (PRICE_BASE Q) so that years are comparable after inflation and exchange-rate changes.
     not_recommended_for:
-      - use: Summing 3-4 digit sector aggregates together with 5-digit purpose codes.
-        reason: Aggregates already contain their purpose codes, so the total double-counts.
-        use_instead: One sector level at a time (5-digit purpose codes, or the 1000 all-sector total).
-      - use: Treating OBS_VALUE as US dollars.
-        reason: Values are in millions of US dollars (UNIT_MULT 6).
-        use_instead: Multiply by 1e6 or label the unit as USD millions.
+      - use: Treating the totals as all the external finance a country receives.
+        reason: >
+          Only providers that report to the OECD are included; private investment, remittances and
+          non-reporting providers are missing.
+        use_instead: >
+          Say "development finance reported to the OECD", and add other sources (e.g. national aid
+          records, remittance data) when a complete picture is needed.
+      - use: Reading commitments as money spent, or comparing one year's commitments with the same year's disbursements.
+        reason: >
+          A multi-year commitment is recorded in full in the year it is signed, while disbursements in
+          any year pay out commitments made in earlier years.
+        use_instead: Use disbursements for money actually spent, and multi-year averages for commitments.
+      - use: Targeting or reporting finance at county or district level (e.g. Homa Bay County).
+        reason: Country is the finest geography; there is no sub-national location, and project text is not served by this API.
+        use_instead: >
+          The OECD's bulk activity-level CRS files (Data Explorer, Related files) include project titles
+          and descriptions that can be screened for place names; the providers' own project records hold
+          locations.
+      - use: Adding up providers that include each other (e.g. DAC + United States, or World Bank Group + IDA).
+        reason: Provider codes include groups that already contain their members, so sums count the same money twice.
+        use_instead: Use ALLD for a recipient total, or single providers only (the example shows how to select them).
+      - use: Climate-tagged finance (adaptation or mitigation) from this dataflow.
+        reason: The climate marker columns are empty in this API dataflow.
+        use_instead: The oecd-rio-markers record, which serves the Rio marker tables.
+      - use: Adding sector aggregates (3- or 4-digit codes) to 5-digit purpose codes.
+        reason: Aggregates already include their purpose codes, so the sum counts the same money twice.
+        use_instead: Use one sector level at a time (5-digit purpose codes, or the 1000 all-sector total).
+      - use: Quoting values as US dollars.
+        reason: Values are in millions of US dollars.
+        use_instead: Multiply by 1,000,000, or label the unit as "USD million".
 
 processing:
   - id: source
-    description: Provider reporting compiled by the OECD Development Co-operation Directorate.
+    description: >
+      Providers report every activity (project, programme or contribution) to the OECD in a single
+      Creditor Reporting System format, following the DAC Converged Statistical Reporting Directives:
+      what was funded, where, for what purpose (sector code), with which instrument, and any policy
+      markers. Reporting happens once a year for the previous year; an earlier, aggregate-only
+      questionnaire gives preliminary totals in April. The OECD Development Co-operation Directorate
+      checks the activity-level reports against the aggregate totals providers also report, then
+      compiles them into the aggregated tables served here. Assumptions users should know: the data
+      record the provider's view (what it reports and how it classifies it), recipient totals are
+      built from multilateral organisations' outflows rather than donors' core contributions, and
+      values are converted to US dollars at each year's exchange rate (current prices) or with the
+      DAC deflators (constant prices). Full rules are in the reporting directives and resources
+      linked from this record.
     derived_from:
-      - title: OECD DAC and CRS statistical reporting by providers
-        url: https://www.oecd.org/en/about/directorates/development-co-operation-directorate.html
+      - title: Provider activity reports to the OECD (DAC Converged Statistical Reporting Directives)
+        url: https://www.oecd.org/content/oecd/en/data/insights/data-explainers/2024/10/resources-for-reporting-development-finance-statistics.html
