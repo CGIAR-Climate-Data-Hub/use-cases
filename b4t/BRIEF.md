@@ -217,7 +217,7 @@ Updated methods note, revised source inventory, and reproducible processing guid
 
 ## Outputs
 
-> _Section fills in once status reaches `piloting` or beyond._
+> *Section fills in once status reaches `piloting` or beyond.*
 
 - **Deliverables:** *TBD*
 - **Adoption signals:** *TBD*
