@@ -129,7 +129,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 - [HII scoring matrix (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/HII-scoring%20matrix.pdf?csf=1&web=1&e=rGr7fr) — Hazard Intensity and Interactions scoring matrix
 - Crop x region priority- 2025.xlsx — B4T working prioritization workbook linking country, crop, and value-proposition relevance; shareable link _TBC_
 - [GloMIP Impact Opportunities Portal & Investor Dashboard](https://glomip.cgiar.org/impact-opportunities) — the live CGIAR breeding-prioritization tool the CRI climate indicators feed into
-- GloMIP IO Reference Manual (GloMIP, 2025) and IO Indicator Catalogue (244 indicators) — method + data-source documentation for the portal; B4T 2027-planning materials (OneDrive), received 2026-08-06
+- [GloMIP IO Reference Manual](../public/b4t/docs/glomip-io-reference-manual-2025.pdf) (GloMIP, 2025; in-repo copy, served at `/use-cases/b4t/docs/`) and IO Indicator Catalogue (244 indicators; OneDrive) — method + data-source documentation for the portal; B4T 2027-planning materials, received 2026-08-06
 - [Dataset review & CDH recommendations](./methods/dataset-review.md) — 23-input audit (current vs recommended), CDH integration + licences
 - [Current CRI formulation note](./methods/cri-formulation.md) — public-safe reconstruction of the current CRI method
 - [Methods folder](./methods/README.md) — backing CSVs (current-state lineage, recommended options), evidence log, feedback loop
