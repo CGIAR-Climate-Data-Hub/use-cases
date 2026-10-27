@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://cgiar-climate-data-hub.github.io/cdh-metadata-standard/v0.5.0/schemas/profiles/cdh.schema.bundled.json
-# DRAFT — drafted by Claude (Claude Code, cdh-metadata skill v0.5.0) on 2026-10-19 from the live OECD SDMX
-# endpoint and gcf-preparation-facility/code/federated/cdh_federated/oecd.py; NOT YET REVIEWED by a person.
+# DRAFT — drafted by Claude (Claude Code) on 2026-10-19, rewritten 2026-10-27 to the lessons from the oecd-dac-crs
+# reviews (licence, plain-language limitations, coverage with links, method with inline links, worked uses).
+# Sources: OECD Data API (dataflow 1.7), OECD Terms & Conditions, ODA FAQ, reporting resources page. NOT YET REVIEWED.
 # FEDERATED record - the Hub points at the OECD API and does not host the data.
 cdh_schema_version: v0.5.0
 extensions:
@@ -8,26 +9,44 @@ extensions:
 
 id: oecd-rio-markers
 title: OECD DAC Rio markers - ODA targeting climate adaptation, mitigation and the environment
-version: "1.6"
+version: "1.7"
 description: >
-  Bilateral allocable official development assistance (ODA) commitments from DAC members, tagged
-  with the Rio markers for climate change adaptation, climate change mitigation, biodiversity,
-  desertification and environment, by provider, recipient, sector, marker score and year. The
-  climate-tagged view of the Creditor Reporting System. Served by the OECD SDMX REST API as
-  dataflow DSD_RIOMRKR@DF_RIOMARKERS version 1.6; values are in millions of US dollars.
+  Development aid committed by bilateral providers (DAC members, EU Institutions and some other
+  reporting countries) that they have tagged as targeting the Rio Conventions: climate change
+  adaptation, climate change mitigation, biodiversity, desertification, and the environment in
+  general. For each provider, recipient country, sector, marker and year it gives the amount of
+  official development assistance (ODA) committed, split by how central the objective is to the
+  activity: principal (the main objective), significant (a secondary objective), screened but not
+  targeted, or not screened. Values are in millions of US dollars, at current or constant prices.
+  It is the main source for climate-tagged aid by country. The Hub serves the OECD dataflow
+  RioMarkers (DSD_RIOMRKR@DF_RIOMARKERS, version 1.7) through the OECD API.
 resource_type: dataset
-license: CC-BY-4.0
+license: LicenseRef-OECD-Data-Terms
 keywords:
-  [Rio markers, climate finance, adaptation finance, mitigation finance, official development assistance, SDMX]
+  [Rio markers, climate finance, adaptation finance, mitigation finance, official development assistance, policy markers, SDMX]
 
 note: >
-  Only commitments (FLOW_TYPE C) and bilateral allocable ODA (ALLOCABLE 2) are published. A marker
-  score of 2 (principal) or 1 (significant) records the provider's stated intent, not climate
-  outcomes; the same activity can carry adaptation and mitigation markers, so summing the two
-  double-counts. Query through https://sdmx.oecd.org/dcd-public/rest/ with a positional key
-  (DONOR.RECIPIENT.SECTOR.MEASURE.ALLOCABLE.MARKER.SCORE.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE);
-  component filters are ignored. The all-DAC aggregate donor code here is DAC_EC (it is DAC in the CRS
-  dataflow). OBS_VALUE is in USD millions.
+  Limitations (assumptions are under processing; incorrect uses under cdh.usage).
+  Which providers. Only bilateral providers that report Rio markers to the OECD: DAC members, EU
+  Institutions and some other reporting countries. Multilateral organisations are not in this
+  dataset, so climate finance from the World Bank, the regional development banks and the
+  climate funds is missing; for many countries these are the largest climate funders. Providers
+  that do not report to the OECD are absent too.
+  Which recipients. Countries and territories on the DAC List of ODA Recipients (https://www.oecd.org/en/topics/oda-eligibility-and-conditions/dac-list-of-oda-recipients.html),
+  plus regional and "unspecified" entries for aid not allocated to one country.
+  What is counted. Commitments only (money promised in the year an agreement is signed), not
+  disbursements, and only bilateral aid that can be allocated to a recipient (ALLOCABLE 2). A marker
+  records the provider's declared objective when it commits the money, not what was spent or
+  achieved. Each provider applies the marker definitions itself, so practice differs between
+  providers. One activity can carry several markers (e.g. adaptation and mitigation).
+  Time coverage. Mitigation and the environmental markers start in 2002 and adaptation in 2007
+  (2010 for Kenya, for example). The latest year is incomplete: in October 2026 the 2025 values were
+  a tiny fraction of 2024 (Kenya, adaptation principal: USD 0.1 million against 87.9 million),
+  because detailed data are published in December for the previous year. Recent years are revised
+  as providers resubmit.
+  Location. The data are national: there is no sub-national location (county, district).
+  Other policy markers, including disaster risk reduction (DRR), are in a separate OECD dataflow,
+  OtherMarkers (DSD_OTHMRKR@DF_OTHERMARKERS), not here.
 
 access: public
 
@@ -48,10 +67,13 @@ citation:
   publisher: OECD
   url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_RIOMRKR@DF_RIOMARKERS&df%5Bag%5D=OECD.DCD.FSD"
 
-attribution: "Source: OECD DAC Rio markers (CRS), licensed under CC BY 4.0."
+attribution: >
+  OECD (2026), RioMarkers: Aid (ODA) activities targeting global environmental objectives, OECD
+  Data Explorer, https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_RIOMRKR@DF_RIOMARKERS&df%5Bag%5D=OECD.DCD.FSD (accessed on <date>). Required by the OECD data terms, and must be passed on
+  in any sub-licence.
 
 created: "2026-10-19"
-updated: "2026-10-19"
+updated: "2026-10-27"
 
 spatial:
   bbox: [-180.0, -90.0, 180.0, 90.0]
@@ -60,7 +82,7 @@ spatial:
 
 temporal:
   start_date: "2002"
-  end_date: "2024"
+  end_date: null
   update_frequency: annual
 
 structures:
@@ -68,22 +90,39 @@ structures:
     dimensions:
       - name: DONOR
         type: provider
-        description: Reporting DAC member or aggregate (DAC_EC = all DAC members).
+        description: >
+          Reporting provider. Single providers (country codes such as USA, DEU; 4EU001 EU Institutions)
+          plus the total DAC_EC (all DAC members and EU Institutions). Do not add DAC_EC to its members.
         data_type: string
         reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
       - name: RECIPIENT
         type: location
-        description: Recipient country or region (ISO 3166-1 alpha-3 for countries, OECD codes for regions).
+        description: Recipient country (ISO 3166-1 alpha-3) or a regional / unspecified entry.
         data_type: string
         reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
       - name: SECTOR
         type: sector
-        description: CRS purpose code or sector aggregate (1000 = all sectors).
+        description: >
+          Sector of the activity. Codes are nested several levels deep: 1000 all sectors > 450 sector
+          allocable > 100 social infrastructure and services > 140 water supply & sanitation; or 300
+          production sectors > 310 agriculture, forestry, fishing > 311 agriculture > 31120 agricultural
+          development. Three-digit codes are not all at the same level. Pick codes from one level (the
+          code list gives each code's parent; the example uses the sectors directly above the 5-digit
+          purpose codes, which do not overlap). Leaving the position empty returns every level at
+          once, which double-counts and can time out.
         data_type: string
         reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_DAC_SECTOR/1.3
+      - name: MEASURE
+        type: measure
+        description: Flow measure; always 100 (ODA) in this dataset.
+        data_type: string
+      - name: ALLOCABLE
+        type: allocable
+        description: Always 2 (bilateral aid allocable to a recipient) in this dataset.
+        data_type: string
       - name: MARKER
         type: marker
-        description: Rio marker. Codes from the shared CL_CRS_MARKER 1.1 list; only these five occur in this dataflow (checked 2026-10-19).
+        description: Rio marker. Codes from the shared CL_CRS_MARKER list; only these five occur in this dataset.
         data_type: string
         categories:
           - { value: "10", label: Biodiversity }
@@ -93,20 +132,36 @@ structures:
           - { value: "50", label: Environment }
       - name: SCORE
         type: score
-        description: Marker score assigned by the provider (codes observed in the data; CL_CRS_SCORE also lists others).
+        description: How central the objective is to the activity, as scored by the provider.
         data_type: string
         categories:
-          - { value: "2", label: Principal }
-          - { value: "1", label: Significant }
+          - { value: "2", label: Principal (the main objective) }
+          - { value: "1", label: Significant (a secondary objective) }
           - { value: "0", label: "Screened, not targeted" }
           - { value: "99", label: Not screened }
+      - name: FLOW_TYPE
+        type: flow
+        description: Always C (commitments) in this dataset.
+        data_type: string
       - name: PRICE_BASE
         type: price
-        description: Price base of the values.
+        description: Price base.
         data_type: string
         categories:
           - { value: V, label: Current prices }
-          - { value: Q, label: Constant prices }
+          - { value: Q, label: "Constant prices (DAC deflators, base year in the BASE_PER column; 2024 in October 2026)" }
+      - name: MD_DIM
+        type: level
+        description: Aggregation level; use _T (aggregate).
+        data_type: string
+      - name: MD_ID
+        type: identifier
+        description: Activity identifier; 0 on aggregate rows.
+        data_type: string
+      - name: UNIT_MEASURE
+        type: unit
+        description: Currency unit; USD.
+        data_type: string
       - name: TIME_PERIOD
         type: temporal
         description: Commitment year.
@@ -115,8 +170,8 @@ structures:
     variables:
       - name: OBS_VALUE
         description: >
-          ODA commitments for the provider, recipient, sector, marker, score and year, in millions of
-          US dollars at the stated price base.
+          ODA committed by the provider to the recipient in the sector and year, for activities given
+          this score on this marker, in millions of US dollars at the stated price base.
         data_type: number
         unit: "1e6 USD"
 
@@ -124,52 +179,115 @@ data:
   - name: sdmx-csv
     structures: [rio-markers]
     description: >
-      OECD SDMX REST data endpoint for dataflow DSD_RIOMRKR@DF_RIOMARKERS 1.6. Append a positional key
-      and ?format=csvfilewithlabels for CSV; without format the server returns SDMX-ML (generic data
-      XML). See the example.
+      OECD SDMX REST data endpoint for the RioMarkers dataflow. Leave the version out of the URL to get
+      the latest (1.7 in October 2026, which added 2025); a version can be pinned by appending ",1.7".
+      Build the query as a positional key,
+      DONOR.RECIPIENT.SECTOR.MEASURE.ALLOCABLE.MARKER.SCORE.FLOW_TYPE.PRICE_BASE.MD_DIM.MD_ID.UNIT_MEASURE,
+      where an empty position means all values (e.g. DAC_EC.KEN.1000.100.2.30..C.V._T.0.USD = all DAC
+      members and EU Institutions, Kenya, all sectors, adaptation, every score, commitments, current
+      prices). Positions with one possible value in this dataset: MEASURE 100, ALLOCABLE 2, FLOW_TYPE C,
+      MD_DIM _T, MD_ID 0, UNIT_MEASURE USD. Always fix SECTOR to one level (see the structure). Always fix the recipient: component filters (c[RECIPIENT]=...) are ignored and an
+      unfiltered query returns the whole dataset. Add ?format=csvfilewithlabels for CSV with labels;
+      without it the server returns SDMX-ML. See the example script.
     locations:
-      - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_RIOMRKR@DF_RIOMARKERS,1.6/
-        title: OECD SDMX REST (dcd-public)
+      - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_RIOMRKR@DF_RIOMARKERS/
+        title: OECD SDMX REST (dcd-public), latest version
     media_type: application/vnd.sdmx.genericdata+xml
 
 additional_assets:
   - name: example
     roles: [example]
     media_type: text/x-python
-    description: Adaptation- and mitigation-marked ODA commitments to one recipient, principal + significant, 2015 to latest.
+    description: >
+      Adaptation and mitigation commitments to one recipient (Kenya by default), principal and
+      significant shown separately, by year; the top providers and sectors for adaptation over the
+      last complete years.
     locations:
       - url: ./example.py
 
 additional_links:
-  - title: OECD Data Explorer
+  - title: OECD Terms and Conditions (section 3, Data)
+    rel: license
+    url: https://www.oecd.org/en/about/terms-conditions.html
+  - title: RioMarkers dataset in the OECD Data Explorer
     rel: about
     url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_RIOMRKR@DF_RIOMARKERS&df%5Bag%5D=OECD.DCD.FSD"
+  - title: Rio markers handbook - definitions, scoring and eligibility criteria (PDF)
+    rel: describedby
+    url: "https://one.oecd.org/document/DCD/DAC/STAT(2025)50/REV2/en/pdf"
+  - title: Rio markers indicative tables - examples of activities by score (xlsx)
+    rel: describedby
+    url: https://webfs.oecd.org/climate/Rio_markers_indicative_tables_approved.xlsx
+  - title: ODA frequently asked questions (markers, commitments vs disbursements, data releases)
+    rel: describedby
+    url: https://www.oecd.org/en/data/insights/data-explainers/2024/07/frequently-asked-questions-on-official-development-assistance-oda.html
+  - title: Development finance statistics - methodology and resources for reporting
+    rel: describedby
+    url: https://www.oecd.org/content/oecd/en/data/insights/data-explainers/2024/10/resources-for-reporting-development-finance-statistics.html
+  - title: DAC List of ODA Recipients (which countries can appear as recipients)
+    rel: describedby
+    url: https://www.oecd.org/en/topics/oda-eligibility-and-conditions/dac-list-of-oda-recipients.html
   - title: OECD Data API documentation
     rel: service-doc
     url: https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf
-  - title: OECD DAC Creditor Reporting System
+  - title: OECD DAC Creditor Reporting System (all development finance, including multilaterals)
     rel: related
     id: oecd-dac-crs
-    description: The full reporting system the Rio markers tag.
+    description: The full reporting system the Rio markers are part of.
 
 cdh:
   domain: [socioeconomic, adaptation, mitigation]
   usage:
     intended_uses:
-      - adaptation and mitigation finance a country already receives (e.g. GCF financing justification)
-      - comparing providers' climate-tagged portfolios by sector
+      - >
+        Show how much climate-tagged aid a country already receives from bilateral providers, for the
+        climate rationale or baseline of a funding proposal (e.g. a GCF concept note): adaptation and
+        mitigation commitments per year over the last complete 5-10 years, principal and significant
+        reported separately. The example script produces this table for Kenya.
+      - >
+        Identify which bilateral providers and sectors already fund adaptation in a country, to argue
+        how a proposal complements them (e.g. which donors fund agriculture-related adaptation). The
+        example script lists the top providers and sectors.
+      - >
+        Compare the weight given to adaptation versus mitigation in a country's bilateral aid over
+        time, using constant prices (PRICE_BASE Q) and multi-year averages to smooth commitment spikes.
     not_recommended_for:
-      - use: Adding adaptation and mitigation amounts to get total climate finance.
-        reason: One activity can carry both markers, so the sum double-counts.
-        use_instead: Report each marker separately; this dataflow serves aggregates only (MD_DIM _T), so it cannot deduplicate.
-      - use: Reading a marked amount as money spent on climate outcomes.
-        reason: Markers record the provider's declared objective at commitment, not disbursement or impact.
-        use_instead: State "ODA committed with a climate objective" and cite the score used.
+      - use: Adding adaptation and mitigation amounts together to get total climate finance.
+        reason: One activity can carry both markers, so the same money is counted twice.
+        use_instead: Report adaptation and mitigation separately, and say that they overlap.
+      - use: Reading marked amounts as money spent on, or achieving, climate objectives.
+        reason: Markers record the provider's declared objective when the money is committed, not disbursement or results.
+        use_instead: Describe them as "ODA committed with a climate objective" and state the score used.
+      - use: Treating the totals as all climate finance a country receives.
+        reason: Multilateral organisations (World Bank, development banks, climate funds) and non-reporting providers are not in this dataset.
+        use_instead: Add multilateral climate finance from the providers' own reports, and label this dataset as bilateral.
+      - use: Adding principal and significant amounts without saying so.
+        reason: Significant means climate is a secondary objective of the activity; how much of its value relates to climate is not stated here (_TBC_ against the Rio markers handbook).
+        use_instead: Report principal and significant separately, or state clearly that both are included.
+      - use: Reporting the latest year as a full year.
+        reason: The latest year is published incomplete (2025 in October 2026) and filled in when detailed data appear in December.
+        use_instead: Use the last complete year, and check for a later release.
+      - use: Adding sector codes from different levels together (e.g. 310 and 311, or 100 and 140).
+        reason: Higher-level sector codes already include the codes below them, so the sum counts the same money twice.
+        use_instead: Use one sector level at a time.
+      - use: Targeting or reporting climate aid at county or district level (e.g. Homa Bay County).
+        reason: Country is the finest geography; there is no sub-national location.
+        use_instead: The providers' own project records, or the OECD's bulk activity-level CRS files (project titles and descriptions).
 
 processing:
   - id: source
-    description: Provider reporting of Rio markers in the CRS, compiled by the OECD Development Co-operation Directorate.
+    description: >
+      Bilateral providers report every aid activity to the OECD's Creditor Reporting System and, for
+      each one, score it against each Rio marker: 2 if the objective is principal, 1 if significant,
+      0 if the activity was screened but does not target it. They apply the eligibility criteria and
+      definitions in the DAC Rio markers handbook (https://one.oecd.org/document/DCD/DAC/STAT(2025)50/REV2/en/pdf), helped by the indicative tables of
+      example activities (https://webfs.oecd.org/climate/Rio_markers_indicative_tables_approved.xlsx). The OECD Development Co-operation Directorate compiles the scored
+      activities into the commitment totals served here, by provider, recipient, sector, marker and
+      score. Assumptions users should know: the score is the provider's own judgement; values are
+      commitments in US dollars at each year's exchange rate (current prices) or deflated with the DAC
+      deflators (constant prices); and whether the full value of a "significant" activity is counted
+      against the marker is not stated in the sources read for this record (_TBC_ against the
+      handbook). Reporting rules and the other policy markers: https://www.oecd.org/content/oecd/en/data/insights/data-explainers/2024/10/resources-for-reporting-development-finance-statistics.html
     derived_from:
       - title: "CRS: Creditor Reporting System (flows)"
         url: "https://data-explorer.oecd.org/vis?lc=en&df%5Bds%5D=DcdDisseminateFinalDMZ&df%5Bid%5D=DSD_CRS@DF_CRS&df%5Bag%5D=OECD.DCD.FSD"
-        version: "1.6"
