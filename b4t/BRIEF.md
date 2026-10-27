@@ -127,7 +127,7 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 - [Crop Risk Index documentation v1 (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/Crop%20Risk%20Index-documentation%20v1.pdf?csf=1&web=1&e=JQkPsr) — Full methodology documentation
 - [Ericksen 2011 CCAFS report (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/ccafsreport5-climate_hotspots_final.pdf?csf=1&web=1&e=KVBdit) — Mapping hotspots of climate change and food insecurity in the global tropics
 - [HII scoring matrix (SharePoint)](https://cgiar.sharepoint.com/:b:/r/sites/CGIARClimate_data_hub/Shared%20Documents/use_cases/B4T/HII-scoring%20matrix.pdf?csf=1&web=1&e=rGr7fr) — Hazard Intensity and Interactions scoring matrix
-- Crop x region priority- 2025.xlsx — B4T working prioritization workbook linking country, crop, and value-proposition relevance; shareable link _TBC_
+- Crop x region priority- 2025.xlsx — B4T working prioritization workbook linking country, crop, and value-proposition relevance; shareable link *TBC*
 - [GloMIP Impact Opportunities Portal & Investor Dashboard](https://glomip.cgiar.org/impact-opportunities) — the live CGIAR breeding-prioritization tool the CRI climate indicators feed into
 - [GloMIP IO Reference Manual](../public/b4t/docs/glomip-io-reference-manual-2025.pdf) (GloMIP, 2025; in-repo copy, served at `/use-cases/b4t/docs/`) and IO Indicator Catalogue (244 indicators; OneDrive) — method + data-source documentation for the portal; B4T 2027-planning materials, received 2026-08-06
 - [Dataset review & CDH recommendations](./methods/dataset-review.md) — 23-input audit (current vs recommended), CDH integration + licences
@@ -136,10 +136,10 @@ CDH role for now is not to redesign CRI from scratch. Near-term job is to recons
 
 ## Go / No Go
 
-> _Filled in by the CDH Core Team after the brief is developed._
+> *Filled in by the CDH Core Team after the brief is developed.*
 
 - **Decision:** Pending
-- **Date:** _TBD_
+- **Date:** *TBD*
 - **Decided by:** CDH Core Team
 - **Notes:**
 
@@ -158,24 +158,24 @@ What was done: reconstructed the current method (hazard processing, HII, CCC, yi
 
 ### Actions
 
-- [x] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — _done: [cri-formulation.md](./methods/cri-formulation.md)_
-- [x] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — _done: [dataset-review.md](./methods/dataset-review.md) + backing CSVs_
-- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — _Phase 2 (methodology)_
-- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — _partly documented (cri-formulation "Where it feeds"); confirm with B4T_
-- [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — _done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)_
-- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — _pending scope agreement + Go/No-Go_
-- [ ] Position CDH as the supplier of the modern, open climate-hazard layers behind B4T's reported climate indicators (people facing changing season length / drought / flooding / high growing-season temperature / rainfall variability) — CDH + B4T — _tied to the B4T 2027 planning cycle_
+- [x] Reconstruct current CRI pipeline step-by-step from working documents, matrices, and any underlying scripts/files — CDH + B4T — *done: [cri-formulation.md](./methods/cri-formulation.md)*
+- [x] Build hazard-by-hazard inventory with source, reference period, scenario basis, processing method, and replacement options — CDH — *done: [dataset-review.md](./methods/dataset-review.md) + backing CSVs*
+- [ ] Audit HII matrix entries for literature support, expert adjustment, or unsupported extrapolation — B4T + CDH — *Phase 2 (methodology)*
+- [ ] Trace where CRI outputs enter B4T country/crop/market-segment prioritization workflows — B4T — *partly documented (cri-formulation "Where it feeds"); confirm with B4T*
+- [x] Draft update options note covering horizon harmonization, scenario alignment, and minimum viable improvements versus deeper redesign — CDH — *done: recommendations + "what this doesn't solve" in [dataset-review.md](./methods/dataset-review.md)*
+- [ ] Co-develop revised methods note and implementation plan for agreed changes — CDH + B4T — *pending scope agreement + Go/No-Go*
+- [ ] Position CDH as the supplier of the modern, open climate-hazard layers behind B4T's reported climate indicators (people facing changing season length / drought / flooding / high growing-season temperature / rainfall variability) — CDH + B4T — *tied to the B4T 2027 planning cycle*
 
 ### Data assets for the hub
 
 | Dataset | Hub status | Hub catalog | Feasibility (1=easy, 5=hard) | Serves | Notes |
 | ------- | ---------- | ----------- | ---------------------------- | ------ | ----- |
-| Legacy CCAFS / Thornton hazard layers (SPI, flood frequency, LGP / temperature threshold flips) | scoped | _pending_ | 3 | Current CRI hazard stack | Mix of historic proxies and 2050 threshold layers; provenance partly inherited via older CCAFS workflows |
-| Aqueduct 4.0 water-risk layers | scoped | _pending_ | 2 | Drought / changed-rainfall replacement candidates | Current methods note cites 2030 blue water, gross demand, water stress, and variability layers |
-| Aqueduct Floods river + coastal hazard layers | scoped | _pending_ | 2 | Flood update candidates | Current methods note cites 2030 flood layers forced by `RCP8.5` / ISIMIP-era inputs |
-| CROPGRIDS harvested area | scoped | _pending_ | 1 | Exposure masking and crop weighting | Used with 1% physical pixel cutoff to mask non-crop areas |
-| Ecocrop tolerance variables | scoped | _pending_ | 2 | Crop Coping Capacity | Crop-level tolerances do not represent within-crop varietal differences |
-| HII scoring matrix + supporting references | scoped | _pending_ | 4 | Hazard interaction scoring | Many entries remain extrapolated and need provenance audit |
+| Legacy CCAFS / Thornton hazard layers (SPI, flood frequency, LGP / temperature threshold flips) | scoped | *pending* | 3 | Current CRI hazard stack | Mix of historic proxies and 2050 threshold layers; provenance partly inherited via older CCAFS workflows |
+| Aqueduct 4.0 water-risk layers | scoped | *pending* | 2 | Drought / changed-rainfall replacement candidates | Current methods note cites 2030 blue water, gross demand, water stress, and variability layers |
+| Aqueduct Floods river + coastal hazard layers | scoped | *pending* | 2 | Flood update candidates | Current methods note cites 2030 flood layers forced by `RCP8.5` / ISIMIP-era inputs |
+| CROPGRIDS harvested area | scoped | *pending* | 1 | Exposure masking and crop weighting | Used with 1% physical pixel cutoff to mask non-crop areas |
+| Ecocrop tolerance variables | scoped | *pending* | 2 | Crop Coping Capacity | Crop-level tolerances do not represent within-crop varietal differences |
+| HII scoring matrix + supporting references | scoped | *pending* | 4 | Hazard interaction scoring | Many entries remain extrapolated and need provenance audit |
 
 ### Methodological guidance needed
 
@@ -196,7 +196,7 @@ What was done: reconstructed the current method (hazard processing, HII, CCC, yi
 
 ### Delivery mechanism
 
-Updated methods note, revised source inventory, and reproducible processing guidance for B4T / CDH implementation. Final delivery format beyond brief stage is _TBC_.
+Updated methods note, revised source inventory, and reproducible processing guidance for B4T / CDH implementation. Final delivery format beyond brief stage is *TBC*.
 
 ## Meetings & decisions
 
@@ -219,6 +219,6 @@ Updated methods note, revised source inventory, and reproducible processing guid
 
 > _Section fills in once status reaches `piloting` or beyond._
 
-- **Deliverables:** _TBD_
-- **Adoption signals:** _TBD_
-- **Lessons learned:** _TBD_
+- **Deliverables:** *TBD*
+- **Adoption signals:** *TBD*
+- **Lessons learned:** *TBD*
