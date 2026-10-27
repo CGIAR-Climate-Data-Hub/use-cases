@@ -18,13 +18,13 @@ import requests
 
 BASE = "https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_RIOMRKR@DF_RIOMARKERS"  # no version = latest
 RECIPIENT = "KEN"
-START = 2015
+START, END = 2015, None   # END=None means up to the latest published year
 MARKERS = {"30": "Adaptation", "20": "Mitigation"}
 SCORES = {"2": "principal", "1": "significant"}
 
 
 def get(key: str) -> pd.DataFrame:
-    r = requests.get(f"{BASE}/{key}", params={"startPeriod": START, "format": "csvfilewithlabels"}, timeout=300)
+    r = requests.get(f"{BASE}/{key}", params={"startPeriod": START, **({"endPeriod": END} if END else {}), "format": "csvfilewithlabels"}, timeout=300)
     r.raise_for_status()
     return pd.read_csv(io.StringIO(r.text), dtype=str).assign(OBS_VALUE=lambda d: d["OBS_VALUE"].astype(float))
 

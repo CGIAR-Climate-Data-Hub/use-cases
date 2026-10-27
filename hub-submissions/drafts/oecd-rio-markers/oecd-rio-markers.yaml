@@ -92,7 +92,10 @@ structures:
         type: provider
         description: >
           Reporting provider. Single providers (country codes such as USA, DEU; 4EU001 EU Institutions)
-          plus the total DAC_EC (all DAC members and EU Institutions). Do not add DAC_EC to its members.
+          plus one total, DAC_EC. The API labels DAC_EC "DAC Members", but it is the sum of every single
+          provider in this dataset, including EU Institutions and non-DAC reporting countries such as
+          Romania where they report (checked: Kenya 2023, adaptation principal, 93.17 = 93.17). Do not
+          add DAC_EC to the single providers.
         data_type: string
         reference_system: https://sdmx.oecd.org/dcd-public/rest/codelist/OECD.DCD.FSD/CL_AREA_ORG/1.6
       - name: RECIPIENT
@@ -188,7 +191,9 @@ data:
       prices). Positions with one possible value in this dataset: MEASURE 100, ALLOCABLE 2, FLOW_TYPE C,
       MD_DIM _T, MD_ID 0, UNIT_MEASURE USD. Always fix SECTOR to one level (see the structure). Always fix the recipient: component filters (c[RECIPIENT]=...) are ignored and an
       unfiltered query returns the whole dataset. Add ?format=csvfilewithlabels for CSV with labels;
-      without it the server returns SDMX-ML. See the example script.
+      without it the server returns SDMX-ML. Only aggregate rows (MD_DIM _T) are published: the CSV also
+      carries project-level columns (PROJECT_TITLE, descriptions, donor agency and others) that are
+      always empty here. See the example script.
     locations:
       - url: https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD,DSD_RIOMRKR@DF_RIOMARKERS/
         title: OECD SDMX REST (dcd-public), latest version
@@ -272,7 +277,7 @@ cdh:
         use_instead: Use one sector level at a time.
       - use: Targeting or reporting climate aid at county or district level (e.g. Homa Bay County).
         reason: Country is the finest geography; there is no sub-national location.
-        use_instead: The providers' own project records, or the OECD's bulk activity-level CRS files (project titles and descriptions).
+        use_instead: The providers' own project records, or the OECD's bulk activity-level CRS files (project titles and descriptions), described in the oecd-dac-crs record.
 
 processing:
   - id: source
