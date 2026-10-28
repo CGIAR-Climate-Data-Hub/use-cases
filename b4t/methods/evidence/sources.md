@@ -10,7 +10,7 @@ One entry per external source consulted, with what it verified and when. Candida
 
 ## Where the CRI feeds — GloMIP Impact Opportunities Portal
 
-The CRI hazard layers are the same inputs behind the climate indicators of the **GloMIP Impact Opportunities Portal & Investor Dashboard** (<https://glomip.cgiar.org/impact-opportunities>) — CGIAR's breeding prioritization / investor tool, used to set resource-allocation priorities and justify resource mobilisation for proposals. Documented in the *IO Reference Manual* (GloMIP, 2025; authors Lenaerts & Demont) and its *IO Indicator Catalogue* (244 indicators). Confirmed 2026-08-06 from those two documents.
+The CRI hazard layers are the same inputs behind the climate indicators of the **GloMIP Impact Opportunities Portal & Investor Dashboard** (<https://glomip.cgiar.org/impact-opportunities>) — CGIAR's breeding prioritization / investor tool, used to set resource-allocation priorities and justify resource mobilisation for proposals. Documented in the [*IO Reference Manual*](../../../public/b4t/docs/glomip-io-reference-manual-2025.pdf) (GloMIP, 2025; authors Lenaerts & Demont; in-repo copy under `public/b4t/docs/`) and its *IO Indicator Catalogue* (244 indicators). Confirmed 2026-08-06 from those two documents.
 
 Shared spatial backbone (portal Appendix B parser + CRI preprocessing are identical): rasters at **0.05° (3 arc-min), WGS84 EPSG:4326, global −180…180 / −90…90**, climate layers overlaid with **CROPGRIDS** (Tang et al. 2024) area-harvested-per-crop. "# people facing hazard X" = hazard × population × cropland, allocated to national-crop / market-segment level by statistical downscaling. So the CRI review below doubles as a review of the portal's climate indicators.
 

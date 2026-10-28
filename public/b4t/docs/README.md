@@ -6,6 +6,7 @@ Working copies of the B4T CRI source documents, served alongside the rendered re
 
 - `cri-documentation-v1.pdf` — Crop Risk Index documentation v1 (Lenaerts & Badayos, 2025-12-15)
 - `hii-scoring-matrix.pdf` — Hazard Intensity & Interactions scoring matrix
+- `glomip-io-reference-manual-2025.pdf` — GloMIP Impact Opportunities Portal & Investor Dashboard Reference Manual (GloMIP 2025; Lenaerts, Demont & GloMIP Team; 22 pp; received from B4T 2026-08-06). Recommended citation: GloMIP. 2025. *Impact Opportunities Portal & Investor Dashboard Reference Manual*.
 
 The Methods tab's per-section **📄 Source & references** folds link these in-repo copies.
 
