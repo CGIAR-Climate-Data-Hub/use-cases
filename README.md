@@ -15,6 +15,7 @@ Briefs render to a static site at <https://cgiar-climate-data-hub.github.io/use-
 | [iCLEANED](./icleaned/BRIEF.md) | Emmanuel Mwema (Alliance) | Idea | CDH climate/environmental data support for the iCLEANED livestock environmental-footprint decision-support tool |
 | [MELIAF — Adaptation Activator](./meliaf/BRIEF.md) | Andreea Nowak (Alliance) | Idea | Exploring CDH support for CGIAR's MELIAF Climate Adaptation Activator (adaptation tracking and MRV) |
 | [MFL — Multifunctional Landscapes](./mfl/BRIEF.md) | Chris Kettle | Idea | Exploring CDH climate data support for digital twins, geospatial intelligence, and MRV across MFL living labs |
+| [S4I Zambia Mechanization](./s4i-zambia-mechanization/BRIEF.md) | Shalika Vyas (Alliance) | Brief | Admin2 climate-hazard indicators for Zambia's maize season feeding a climate credit scoring model and service-provider risk profiles under Scaling for Impact |
 
 ## How to use this repo
 
