@@ -66,7 +66,7 @@ Per the CDH team (July 2026). Recommendations build on these ready-to-adopt prod
 
 ### Metric definitions (verified against WMO)
 
-- Standard **SPI** (McKee, Doesken & Kleist 1993; WMO-endorsed, WMO-No. 1090, 2012) = standardized probability transform of precipitation over a chosen timescale; precipitation-only. **SPEI** adds PET (climatic water balance). The CRI's "≥3 consecutive months with <50% of average precipitation" is a fixed-threshold event/run count — a distinct metric, not SPI, not WMO-standard. WMO SPI user guide: <https://www.droughtmanagement.info/literature/WMO_standardized_precipitation_index_user_guide_en_2012.pdf>
+- Standard **SPI** (McKee, Doesken & Kleist 1993; WMO-endorsed, WMO-No. 1090, 2012) = standardized probability transform of precipitation over a chosen timescale; precipitation-only. **SPEI** adds PET (climatic water balance). The CRI's "≥3 consecutive months with <50% of average precipitation" is a fixed-threshold event/run count — a distinct metric, not SPI, not WMO-standard. WMO SPI user guide (WMO-No. 1090): <https://library.wmo.int/records/item/39629-standardized-precipitation-index-user-guide> (IDMP mirror: <https://www.droughtmanagement.info/literature/WMO_standardized_precipitation_index_user_guide_en_2012.pdf>)
 
 ### Other open precipitation baselines (candidate breadth for D-01; reported, not all deep-verified)
 
